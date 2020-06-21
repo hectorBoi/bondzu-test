@@ -19,5 +19,7 @@
   },
   "homepage": "https://github.com/DulioCagg/TESTING#readme",
   "dependencies": {
+    "big-integer": "^1.6.48",
+    "express": "^4.17.1"
   }
 }
