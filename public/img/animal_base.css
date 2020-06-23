@@ -1,0 +1,119 @@
+#feedback {
+      padding: 0px 50px 0;
+      color: #fff;
+      height: 80px;
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 99;
+      transform: translateY(-100px);
+    }
+
+    #feedback.success {
+      transform: translateY(-100px);
+      background: #53bbb4;
+      -webkit-animation: feedback-in .3s ease-in-out forwards, feedback-out .3s ease-in-out 5s forwards;
+      -moz-animation: feedback-in .3s ease-in-out forwards, feedback-out .3s ease-in-out 5s forwards;
+      animation: feedback-in .3s ease-in-out forwards, feedback-out .3s ease-in-out 5s forwards;
+    }
+
+    #feedback.fail {
+      transform: translateY(-100px);
+      background: #e15258;
+      -webkit-animation: feedback-in .3s ease-in-out forwards;
+      -moz-animation: feedback-in .3s ease-in-out forwards;
+      animation: feedback-in .3s ease-in-out forwards;
+    }
+
+    #feedback.dismissed {
+      transform: translateY(0);
+      -webkit-animation: feedback-out .3s ease-in-out forwards;
+      -moz-animation: feedback-out .3s ease-in-out forwards;
+      animation: feedback-out .3s ease-in-out forwards;
+    }
+    /*
+    ANIMATION
+    */
+
+    @-webkit-keyframes feedback-in {
+      0% {
+        transform: translateY(-100px);
+      }
+      80% {
+        transform: translateY(0px);
+        padding-top: 5px;
+      }
+      100% {
+        transform: translateY(0);
+        padding-top: 0;
+      }
+    }
+
+    @-moz-keyframes feedback-in {
+      0% {
+        transform: translateY(-100px);
+      }
+      80% {
+        transform: translateY(0);
+        padding-top: 5px;
+      }
+      100% {
+        transform: translateY(0);
+        padding-top: 0;
+      }
+    }
+
+    @keyframes feedback-in {
+      0% {
+        transform: translateY(-100px);
+      }
+      80% {
+        transform: translateY(0);
+        padding-top: 5px;
+      }
+      100% {
+        transform: translateY(0);
+        padding-top: 0;
+      }
+    }
+    /* out*/
+
+    @-webkit-keyframes feedback-out {
+      0% {
+        transform: translateY(0);
+      }
+      20% {
+        transform: translateY(0px);
+        padding-top: 5px;
+      }
+      100% {
+        transform: translateY(-100px);
+      }
+    }
+
+    @-moz-keyframes feedback-out {
+      0% {
+        transform: translateY(0);
+      }
+      20% {
+        transform: translateY(0px);
+        padding-top: 5px;
+      }
+      100% {
+        transform: translateY(-100px);
+      }
+    }
+
+    @keyframes feedback-out {
+      0% {
+        transform: translateY(0);
+      }
+      20% {
+        transform: translateY(0px);
+        padding-top: 5px;
+      }
+      100% {
+        transform: translateY(-100px);
+      }
+    }

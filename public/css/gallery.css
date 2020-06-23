@@ -1,0 +1,65 @@
+.carrusel{
+	width:1344px;
+	height:450px;
+	border:2px solid orange;
+	margin: -40px;
+	margin-left: 0%;
+	
+    backgroud-size:300% 300%;
+	
+	animation:carrusel 20s infinite;
+}
+
+@keyframes carrusel {
+	0%, 30% {
+		opacity: 1;
+	   background-image: url(../imagenes/6.png) ;
+	   
+	}
+	31%, 34% {
+	   opacity: 0.5;
+	}
+	35%, 45% {
+		opacity: 1;
+		background-image: url(../imagenes/7.png);
+		
+	}
+	46%, 47% {
+		opacity: 0.5;
+	}
+	48%, 58% {
+		opacity: 1;
+		background-image: url(../imagenes/8.png);
+		
+	}
+	59%, 60% {
+		opacity: 0.5;
+	}
+	61%, 71% { 
+	    opacity: 1;		
+		background-image: url(../imagenes/9.png);
+		
+	}
+	72%, 75%{
+		opacity:0.5;		
+	}
+	76%, 100%{ 
+	    opacity: 1;
+	    background-image: url(../imagenes/10.png);
+	}
+
+
+
+
+		
+		
+	
+
+
+
+
+
+
+
+
+

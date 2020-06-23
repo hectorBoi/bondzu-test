@@ -1,0 +1,21 @@
+#tienda h3,h4{
+	text-align:center;
+	color: rgba(242,143,29,0.9);
+	
+}	
+
+#tienda .contenedor{
+	display: flex;
+	justify-content:center;
+	flex-wrap:wrap;
+}
+
+#tienda article {
+	margin: 15px;
+}
+
+#blog img{
+	width:100%;
+	max-width: 280%;
+}
+
