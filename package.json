@@ -19,9 +19,10 @@
   },
   "homepage": "https://github.com/DulioCagg/TESTING#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "big-integer": "^1.6.48",
     "express": "^4.17.1",
-    "parse": "^2.14.0"
+    "jsonwebtoken": "^8.5.1",
+    "parse": "^2.14.0",
+    "redis": "^3.0.2"
   }
 }

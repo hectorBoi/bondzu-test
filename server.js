@@ -6,19 +6,26 @@ Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/pars
 
 const register = require('./controllers/register')
 const signin = require('./controllers/login')
+const profile = require('./controllers/profile')
+const animals = require('./controllers/animals')
 
 
 const app = express();
 app.use(express.json());
 app.use(express.static("public"));
 
-app.post("/login", (req, res) => {
-  signin.handleLogin(req, res, Parse)
-});
+app.post("/login", signin.signinAuth(Parse));
 
 app.post("/register", (req, res) => {
-  register.handleRegister(req, res, Parse)
+  register.handleRegister(req, res, Parse);
 });
 
+app.get("/profile:id", (req, res) => {
+  profile.handleProfile(req, res, Parse);
+});
+
+app.get("/animals", (req, res) => {
+  animals.handleAnimals(req, res, Parse);
+})
 const port = process.env.PORT || 8081;
 app.listen(port, () => console.log(`Listening in port ${port}`));
