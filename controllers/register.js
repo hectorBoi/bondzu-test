@@ -1,3 +1,6 @@
+const jwt = require("jsonwebtoken");
+const redisClient = require('../server').redisClient;
+
 const handleRegister = async (req, res, Parse) => {
   const { name, email, password } = req.body;
 
