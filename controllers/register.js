@@ -1,13 +1,14 @@
 const jwt = require("jsonwebtoken");
 const redisClient = require('../server').redisClient;
 
+// Performs the authentication of the users credential with the DB
 const handleRegister = async (req, res, Parse) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
     return res.status(400).json("Incorrect form submission");
   }
-
+  
   let user = new Parse.User();
   user.set("username", email);
   user.set("password", password);

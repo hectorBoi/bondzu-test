@@ -23,9 +23,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Handlers for all the routes
-app.post("/login", signin.signinAuth(Parse));
+app.post("/login", auth.requireAuth, signin.signinAuth(Parse));
 
-app.post("/register", (req, res) => {
+app.post("/register", auth.requireAuth, (req, res) => {
   register.handleRegister(req, res, Parse);
 });
 
