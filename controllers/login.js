@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const redisClient = require('../server').redisClient;
 
-
 // Performs the authentication of the users credential with the DB
 const handleLogin = (req, res, Parse) => {
   const { email, password } = req.body;
