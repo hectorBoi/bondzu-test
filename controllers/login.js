@@ -23,30 +23,16 @@ const handleLogin = (req, res, Parse) => {
     .catch(err => Promise.reject(err))
 }
 
-// Extracts the value of the token from the header of the request
-const getAuthTokenId = (req, res) => {
-  const { authorization, userType } = req.headers;
-
-  // Checks if the token is already in the redis Database
-  return redisClient.get(authorization, (err, value) => {
-    if (err || !value) {
-      return res.status(400).json("Unauthorized");
-    }
-    return res.json({ user: value, userType: userType })
-  })
-}
-
 // Manages the interaction with the frontend
 const signinAuth = (Parse) => (req, res) => {
-  const { authorization } = req.headers;
-  return authorization ?
-    getAuthTokenId(req) :
-    handleLogin(req, res, Parse)
-      .then(data => {
-        return data ? token.createSession(data) : Promise.reject(data);
-      })
-      .then(session => res.json(session))
-      .catch(err => res.status(400).json(err));
+  // const { authorization } = req.headers;
+  // token.getAuthTokenId(req, res) :
+  return handleLogin(req, res, Parse)
+    .then(data => {
+      return data ? token.createSession(data) : Promise.reject(data);
+    })
+    .then(session => res.json(session))
+    .catch(err => res.status(400).json(err));
 }
 
 module.exports = {

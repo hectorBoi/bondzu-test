@@ -1,14 +1,8 @@
 const token = require("./token")
 
-// Performs the authentication of the users credential with the DB
-const handleRegister = async (req, res, Parse) => {
-  const { name, email, password, userType } = req.body;
-
-  if (!name || !email || !password) {
-    return res.status(400).json("Incorrect form submission");
-  }
-
-  // Creates a new user with the users information
+// Creates "user" with users information
+const createUser = async (data, Parse) => {
+  const { name, email, password, userType } = data;
   let user = new Parse.User();
   user.set("username", email);
   user.set("password", password);
@@ -23,11 +17,23 @@ const handleRegister = async (req, res, Parse) => {
   try {
     const results = await query.find();
     user.set("userType", results[0]);
+    return user
   } catch (error) {
     console.log(error)
   }
+}
 
-  // In case the user doesnt exists, it creates the user and returns the session token
+// Performs the authentication of the users credential with the DB
+const handleRegister = async (req, res, Parse) => {
+  const { name, email, password, userType } = req.body;
+
+  if (!name || !email || !password) {
+    return res.status(400).json("Incorrect form submission");
+  }
+
+  const user = await createUser(req.body, Parse);
+
+  // In case the user doesnt exist, it creates the user in the database and returns the session token
   try {
     await user.signUp();
     const session = await Parse.User.logIn(email, password)

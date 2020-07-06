@@ -12,7 +12,6 @@ const requireAuth = (req, res, next) => {
     if (err || !data) {
       return res.redirect("/");
     }
-    console.log("Its working");
     return next();
   })
 }
