@@ -10,20 +10,29 @@ const handleLogin = (req, res, Parse) => {
 
   // Performs the authentication with the database, returns the result of the query if it has a match, err if not
   return Parse.User.logIn(email, password)
-    .then(user => user.get("username"))
+    .then(user => {
+      // let typeTable = Parse.Object.extend("userType");
+      // let query = new Parse.Query(typeTable);
+      // query.equalTo("objectID");
+      const typeID = user.get("userType");
+      return {
+        user: user.get("username"),
+        userType: typeID.id,
+      }
+    })
     .catch(err => Promise.reject(err))
 }
 
 // Extracts the value of the token from the header of the request
 const getAuthTokenId = (req, res) => {
-  const { authorization } = req.headers;
+  const { authorization, userType } = req.headers;
 
   // Checks if the token is already in the redis Database
   return redisClient.get(authorization, (err, value) => {
     if (err || !value) {
       return res.status(400).json("Unauthorized");
     }
-    return res.json({ username: authorization })
+    return res.json({ user: value, userType: userType })
   })
 }
 

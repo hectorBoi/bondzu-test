@@ -15,10 +15,18 @@ const setToken = (username, token) => {
 }
 
 // Creates the user session and returns the token to the browser, so it can be managed in the frontend
-const createSession = (user) => {
+const createSession = (data) => {
+  const { user, userType } = data;
+  console.log(user, userType);
   const token = signToken(user);
   return setToken(user, token)
-    .then(() => { return { username: user, token: token } })
+    .then(() => {
+      return {
+        username: user,
+        userType: userType,
+        token: token
+      }
+    })
     .catch(console.log)
 }
 

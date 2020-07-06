@@ -8,12 +8,17 @@ const saveTokenSession = (token) => {
 // In case the user already has an existing session, it sends the token to the backend to skip the login process
 const getSessionToken = () => {
   const token = window.localStorage.getItem("token");
+  const userType = window.localStorage.getItem("userType");
+  const language = window.localStorage.getItem("language");
+
   if (token) {
     fetch("http://localhost:8081/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token
+        "Authorization": token,
+        "UserType": userType,
+        "language": language,
       }
     })
       .then(res => res.json())
