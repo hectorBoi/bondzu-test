@@ -30,24 +30,24 @@ app.post("/register", (req, res) => {
   register.handleRegister(req, res, Parse);
 });
 
-app.get("/profile.html", auth.requireAuth, (req, res) => {
-  // profile.handleProfile(req, res, Parse);
+app.get("/profile", auth.requireAuth, (req, res) => {
+  profile.handleProfile(req, res, Parse);
 });
 
 app.post("/profile", (req, res) => {
   profile.handleProfile(req, res, Parse);
 });
 
-app.get("/animals.html", auth.requireAuth, (req, res) => {
-  // animals.handleAnimals(req, res, Parse);
+app.get("/animals", auth.requireAuth, (req, res) => {
+  animals.handleAnimals(req, res, Parse);
 })
 
 app.post("/animals", (req, res) => {
   animals.handleAnimals(req, res, Parse);
 })
 
-app.get("/adoptions.html", auth.requireAuth, (req, res) => {
-  // adoptions.handleAdoptions(req, res, Parse);
+app.get("/adoptions", auth.requireAuth, (req, res) => {
+  adoptions.handleAdoptions(req, res, Parse);
 })
 
 app.post("/adoptions", (req, res) => {

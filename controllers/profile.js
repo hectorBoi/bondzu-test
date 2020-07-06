@@ -27,6 +27,11 @@ const handleProfile = async (req, res, Parse) => {
   }
 }
 
+const hello = (req, res) => {
+  console.log("Hello from profile!")
+}
+
 module.exports = {
   handleProfile: handleProfile,
+  hello: hello,
 }
