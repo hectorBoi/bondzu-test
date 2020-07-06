@@ -30,6 +30,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/profile:id", auth.requireAuth, (req, res) => {
+  res.redirect()
   profile.handleProfile(req, res, Parse);
 });
 

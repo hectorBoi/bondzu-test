@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
 const redisClient = require('../server').redisClient;
+const token = require("./token")
 
 // Performs the authentication of the users credential with the DB
 const handleLogin = (req, res, Parse) => {
@@ -27,27 +27,6 @@ const getAuthTokenId = (req, res) => {
   })
 }
 
-// All the JWT tokens most be signed by the application
-const signToken = (username) => {
-  // Payload is the data to encrypt inside the token
-  const jwtPayload = username;
-
-  return jwt.sign(jwtPayload, process.env.JWTSECRET)
-}
-
-// Saves the users token in the redis database
-const setToken = (username, token) => {
-  return Promise.resolve(redisClient.set(token, username))
-}
-
-// Creates the user session and returns the token to the browser, so it can be managed in the frontend
-const createSession = (user) => {
-  const token = signToken(user);
-  return setToken(user, token)
-    .then(() => { return { username: user, token: token } })
-    .catch(console.log)
-}
-
 // Manages the interaction with the frontend
 const signinAuth = (Parse) => (req, res) => {
   const { authorization } = req.headers;
@@ -55,7 +34,7 @@ const signinAuth = (Parse) => (req, res) => {
     getAuthTokenId(req) :
     handleLogin(req, res, Parse)
       .then(data => {
-        return data ? createSession(data) : Promise.reject(data);
+        return data ? token.createSession(data) : Promise.reject(data);
       })
       .then(session => res.json(session))
       .catch(err => res.status(400).json(err));
