@@ -2,13 +2,13 @@ const redisClient = require('../server').redisClient;
 
 // Checks if the request of the user has the authorization token, if not, redirects the user to the homepage
 const requireAuth = (req, res, next) => {
-  const { authorization } = req.headers;
+  const { token } = req.headers;
 
-  if (!authorization) {
+  if (!token) {
     return res.redirect("/");
   }
 
-  return redisClient.get(authorization, (err, data) => {
+  return redisClient.get(token, (err, data) => {
     if (err || !data) {
       return res.redirect("/");
     }

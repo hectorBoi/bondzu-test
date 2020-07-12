@@ -17,6 +17,7 @@ const profile = require('./controllers/profile');
 const animals = require('./controllers/animals');
 const auth = require('./controllers/authorization');
 const adoptions = require('./controllers/adoptions');
+const logout = require('./controllers/logout');
 
 // Declares the express server and  middlewares
 const app = express();
@@ -29,6 +30,10 @@ app.post("/login", signin.signinAuth(Parse));
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, Parse);
 });
+
+app.post("/logout", (req, res) => {
+  logout.handleLogout(req, res)
+})
 
 app.get("/profile", auth.requireAuth, (req, res) => {
   profile.handleProfile(req, res, Parse);

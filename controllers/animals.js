@@ -36,7 +36,7 @@ const filterAnimals = (userType, animals) => {
 
 // Extracts the animals from the database and filter the results befor sending them to the front end
 const handleAnimals = async (req, res, Parse) => {
-  const { usertype } = req.body; // DEBERIA DE SER HEADER
+  const { usertype } = req.headers; // DEBERIA DE SER HEADER
 
   try {
     let animalTable = Parse.Object.extend("AnimalV2");
@@ -45,7 +45,6 @@ const handleAnimals = async (req, res, Parse) => {
     const activeAnimals = await query.find();
     const animalsInfo = getAnimalInfo(activeAnimals);
     const result = filterAnimals(usertype, animalsInfo)
-
     res.json(result);
   } catch (err) {
     res.json("Didnt work")

@@ -14,27 +14,6 @@ const setToken = (username, token) => {
   return Promise.resolve(redisClient.set(token, username))
 }
 
-// Extracts the value of the token from the header of the request
-// const getAuthTokenId = (req, res) => {
-//   const { authorization, userType } = req.headers;
-
-//   // Checks if the token is already in the redis Database
-//   return redisClient.get(authorization, (err, value) => {
-//     if (err || !value) {
-//       return res.status(400).json("Unauthorized");
-//     }
-//     return res.json(
-//       () => {
-//         return {
-//           username: value,
-//           userType: userType,
-//           token: authorization
-//         }
-//       }
-//     )
-//   })
-// }
-
 // Creates the user session and returns the token to the browser, so it can be managed in the frontend
 const createSession = (data) => {
   const { user, userType } = data;

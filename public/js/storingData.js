@@ -20,7 +20,7 @@ const getSessionToken = () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "authorization": token,
+        "token": token,
         "usertype": userType,
         "language": language,
       }
