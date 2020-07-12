@@ -1,9 +1,29 @@
+const getKeeper = async (id, Parse) => {
+  try {
+    const keepersTable = Parse.Object.extend("Keeper");
+    const queryKeeper = new Parse.Query(keepersTable);
+    const keeperObj = await queryKeeper.get(id);
+    const keeperZoo = keeperObj.get("zoo");
+
+    const zooTable = Parse.Object.extend("Zoo");
+    const queryZoo = new Parse.Query(zooTable);
+    const zoo = await queryZoo.get(keeperZoo.id);
+    const zooName = zoo.get("name");
+    return zooName;
+  } catch (err) {
+    console.log(err)
+    return "Didnt find keeper"
+  }
+}
+
 // Transforms the array of Parse.Objects into Json
-const getAnimalInfo = (array) => {
-  return array.map(animal => {
+const getAnimalInfo = async (array, Parse) => {
+  let animalInfo = await Promise.all(array.map(async animal => {
+    const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
     return animal = {
-      keepers: animal.get("keepers"),
-      profilePhoto: animal.get("profilePhoto"),
+      id: animal.id,
+      keeper: keeper,
+      profilePhoto: animal.get("profilePhoto")._url,
       name: animal.get("name"),
       about: animal.get("about"),
       characteristics: animal.get("characteristics"),
@@ -11,7 +31,9 @@ const getAnimalInfo = (array) => {
       userType: animal.get("animalRequiredPriority").id,
     }
   }
-  )
+  ));
+
+  return animalInfo;
 }
 
 // Filter the array of animals depending on the type of the user
@@ -36,18 +58,18 @@ const filterAnimals = (userType, animals) => {
 
 // Extracts the animals from the database and filter the results befor sending them to the front end
 const handleAnimals = async (req, res, Parse) => {
-  const { usertype } = req.headers; // DEBERIA DE SER HEADER
+  const { usertype } = req.body; // DEBERIA DE SER HEADER
 
   try {
-    let animalTable = Parse.Object.extend("AnimalV2");
-    let query = new Parse.Query(animalTable);
+    const animalTable = Parse.Object.extend("AnimalV2");
+    const query = new Parse.Query(animalTable);
     query.equalTo("isActive", true);
     const activeAnimals = await query.find();
-    const animalsInfo = getAnimalInfo(activeAnimals);
+    const animalsInfo = await getAnimalInfo(activeAnimals, Parse);
     const result = filterAnimals(usertype, animalsInfo)
     res.json(result);
   } catch (err) {
-    res.json("Didnt work")
+    res.json(err)
   }
 }
 
