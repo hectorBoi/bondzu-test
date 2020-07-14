@@ -8,9 +8,6 @@ submit.addEventListener("click", () => {
   const us = email.value;
   const pw = password.value;
 
-  console.log(us)
-  console.log(pw)
-
   fetch("http://localhost:8081/login", {
     method: "post",
     headers: {

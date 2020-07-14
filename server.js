@@ -1,11 +1,6 @@
 const express = require("express");
 const Parse = require('parse/node');
-// Setup for redis
-const redis = require('redis');
-const redisClient = redis.createClient(process.env.REDIS_URI);
-module.exports = {
-  redisClient: redisClient,
-}
+
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I");
 Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/parse";
@@ -18,6 +13,7 @@ const animals = require('./controllers/animals');
 const auth = require('./controllers/authorization');
 const adoptions = require('./controllers/adoptions');
 const logout = require('./controllers/logout');
+const banner = require('./controllers/banner');
 
 // Declares the express server and  middlewares
 const app = express();
@@ -40,15 +36,7 @@ app.get("/profile", auth.requireAuth, (req, res) => {
 });
 
 app.post("/profile", (req, res) => {
-  profile.handleProfile(req, res, Parse);
-});
-
-app.get("/photo", auth.requireAuth, (req, res) => {
-  profile.getPhoto(req, res, Parse);
-});
-
-app.post("/photo", (req, res) => {
-  profile.getPhoto(req, res, Parse);
+  profile.updateProfile(req, res, Parse);
 });
 
 app.get("/animals", auth.requireAuth, (req, res) => {
@@ -60,11 +48,15 @@ app.post("/animals", (req, res) => {
 })
 
 app.get("/adoptions", auth.requireAuth, (req, res) => {
-  adoptions.handleAdoptions(req, res, Parse);
+  adoptions.getAdoptions(req, res, Parse);
 })
 
 app.post("/adoptions", (req, res) => {
-  adoptions.handleAdoptions(req, res, Parse);
+  adoptions.updateAdoptions(req, res, Parse);
+})
+
+app.get("/banner", (req, res) => {
+  banner.getBanner(req, res, Parse);
 })
 
 // Initilizes the server

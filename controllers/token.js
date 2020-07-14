@@ -1,12 +1,11 @@
 const jwt = require("jsonwebtoken");
-const redisClient = require('../server').redisClient;
 
 // All the JWT tokens most be signed by the application
 const signToken = (username) => {
   // Payload is the data to encrypt inside the token
   const jwtPayload = username;
 
-  return jwt.sign(jwtPayload, process.env.JWTSECRET)
+  return jwt.sign(jwtPayload, "bondzu_secret")
 }
 
 // Saves the users token in the redis database
@@ -29,6 +28,6 @@ const createSession = (data) => {
     .catch(console.log)
 }
 
-module.exports = {
+module.exports =
   createSession: createSession,
 }

@@ -6,6 +6,9 @@ if (!window.localStorage.getItem("token")) {
   location.replace("/")
 }
 
+console.log(window.localStorage.getItem("usertype"));
+console.log(window.localStorage.getItem("username"));
+
 fetch("http://localhost:8081/animals", {
   method: "post",
   headers: {

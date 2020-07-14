@@ -10,6 +10,7 @@ const handleLogin = (req, res, Parse) => {
   // Performs the authentication with the database, returns the result of the query if it has a match, err if not
   return Parse.User.logIn(email, password)
     .then(user => {
+      console.log("Login session: ", user.getSessionToken())
       const typeID = user.get("userType");
       return {
         user: user.get("username"),

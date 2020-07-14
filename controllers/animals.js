@@ -22,9 +22,18 @@ const filterAnimals = (userType, animals) => {
 
 // Extracts the animals from the database and filter the results befor sending them to the front end
 const handleAnimals = async (req, res, Parse) => {
-  const { usertype } = req.body; // DEBERIA DE SER HEADER
+  const { usertype, username } = req.headers; // DEBERIA DE SER HEADER
 
+  console.log("username: ", username);
+  console.log("userype: ", usertype);
   try {
+    //TESTING
+    const userTable = Parse.Object.extend("User");
+    const q = new Parse.Query(userTable)
+    q.equalTo("username", username);
+    const user = await q.first();
+    console.log("Animals session: ", user.getSessionToken());
+    //////
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     query.equalTo("isActive", true);

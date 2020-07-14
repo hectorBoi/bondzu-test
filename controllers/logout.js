@@ -1,5 +1,3 @@
-const redisClient = require('../server').redisClient;
-
 // Removes the user key from the redis database
 const handleLogout = (req, res) => {
   const { token } = req.headers;

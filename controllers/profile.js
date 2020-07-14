@@ -64,7 +64,7 @@ const updateProfile = async (req, res, Parse) => {
       user.set("username", Nusername);
     }
 
-    const updatedUser = await user.save();
+    const updatedUser = await user.save(null, { sessionToken: user.getSessionToken() });
     console.log("After: ", updatedUser.get("name"))
     res.json("Saved")
 
