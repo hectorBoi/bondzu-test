@@ -1,4 +1,21 @@
-//TODO 
+//Gets the URL of the photo of the user 
+const getPhoto = async (username, Parse) => {
+  try {
+    const userTable = Parse.Object.extend("User");
+    const query = new Parse.Query(userTable);
+    query.equalTo("username", username)
+    const userArr = await query.find();
+    const user = userArr[0];
+    const photo = user.get("photoFile");
+    if (photo) {
+      return photo._url
+    }
+    return "No photo"
+  } catch (err) {
+    return "Error"
+  }
+}
+
 // Returns the users information
 const handleProfile = async (req, res, Parse) => {
   const { username } = req.body; // DEBERIA DE SER HEADER
@@ -11,14 +28,12 @@ const handleProfile = async (req, res, Parse) => {
 
     const name = user.get("name");
     const email = user.get("email");
-    const birthday = user.get("birthday");
-    const country = user.get("country");
+    const photo = await getPhoto(username, Parse)
 
     const response = {
       name,
       email,
-      birthday,
-      country
+      photo
     }
 
     res.json(response)
@@ -27,11 +42,6 @@ const handleProfile = async (req, res, Parse) => {
   }
 }
 
-const hello = (req, res) => {
-  console.log("Hello from profile!")
-}
-
 module.exports = {
   handleProfile: handleProfile,
-  hello: hello,
 }

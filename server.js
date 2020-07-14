@@ -43,6 +43,14 @@ app.post("/profile", (req, res) => {
   profile.handleProfile(req, res, Parse);
 });
 
+app.get("/photo", auth.requireAuth, (req, res) => {
+  profile.getPhoto(req, res, Parse);
+});
+
+app.post("/photo", (req, res) => {
+  profile.getPhoto(req, res, Parse);
+});
+
 app.get("/animals", auth.requireAuth, (req, res) => {
   animals.handleAnimals(req, res, Parse);
 })
