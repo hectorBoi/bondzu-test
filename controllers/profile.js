@@ -21,8 +21,8 @@ const handleProfile = async (req, res, Parse) => {
   const { username } = req.body; // DEBERIA DE SER HEADER
 
   try {
-    let userTable = Parse.Object.extend("User");
-    let query = new Parse.Query(userTable);
+    const userTable = Parse.Object.extend("User");
+    const query = new Parse.Query(userTable);
     query.equalTo("username", username)
     const user = await query.first();
 
@@ -42,6 +42,39 @@ const handleProfile = async (req, res, Parse) => {
   }
 }
 
+//TODO
+//Updates the user profile with new info
+const updateProfile = async (req, res, Parse) => {
+  const { Nname, Nemail, Nusername, username } = req.body;
+
+  try {
+    const userTable = Parse.Object.extend("User");
+    const query = new Parse.Query(userTable);
+    query.equalTo("username", username)
+    const user = await query.first();
+
+    console.log("Before: ", user.get("name"))
+
+    if (Nname) {
+      user.set("name", Nname);
+    }
+
+    if (Nemail) {
+      user.set("email", Nemail);
+      user.set("username", Nusername);
+    }
+
+    const updatedUser = await user.save();
+    console.log("After: ", updatedUser.get("name"))
+    res.json("Saved")
+
+  } catch (err) {
+    console.log(err)
+    res.json("Not saved")
+  }
+}
+
 module.exports = {
   handleProfile: handleProfile,
+  updateProfile: updateProfile,
 }

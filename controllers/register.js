@@ -27,7 +27,7 @@ const createUser = async (data, Parse) => {
 const handleRegister = async (req, res, Parse) => {
   const { name, email, password, userType } = req.body;
 
-  if (!name || !email || !password) {
+  if (!name || !email || !password || !userType) {
     return res.status(400).json("Incorrect form submission");
   }
 
