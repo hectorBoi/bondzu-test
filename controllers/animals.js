@@ -1,3 +1,4 @@
+// Get the name of the zoo in charge of a specific animal
 const getKeeper = async (id, Parse) => {
   try {
     const keepersTable = Parse.Object.extend("Keeper");
@@ -11,8 +12,22 @@ const getKeeper = async (id, Parse) => {
     const zooName = zoo.get("name");
     return zooName;
   } catch (err) {
-    console.log(err)
     return "Didnt find keeper"
+  }
+}
+
+const getVideo = async (id, Parse) => {
+  try {
+    const videoTable = Parse.Object.extend("Video");
+    const query = new Parse.Query(videoTable);
+    const camera = await query.find();
+    const filter = camera.filter(camara => camara.get("animal_id").id === id)
+    if (filter[0]) {
+      return filter[0].get("youtube_ids")[0]
+    }
+    return "No url"
+  } catch (err) {
+    return err
   }
 }
 
@@ -20,8 +35,10 @@ const getKeeper = async (id, Parse) => {
 const getAnimalInfo = async (array, Parse) => {
   let animalInfo = await Promise.all(array.map(async animal => {
     const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
+    const video = await getVideo(animal.id, Parse);
     return animal = {
       id: animal.id,
+      youtubeID: video,
       keeper: keeper,
       profilePhoto: animal.get("profilePhoto")._url,
       name: animal.get("name"),
