@@ -6,7 +6,7 @@ if (!window.localStorage.getItem("token")) {
   location.replace("/")
 }
 
-fetch("https://bondzu.com/animals", {
+fetch("/animals", {
   method: "post",
   headers: {
     "Content-Type": "application/json",
