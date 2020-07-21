@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
+const redisClient = require('../server').redisClient;
 
 // All the JWT tokens most be signed by the application
 const signToken = (username) => {
   // Payload is the data to encrypt inside the token
   const jwtPayload = username;
 
-  return jwt.sign(jwtPayload, "bondzu_secret")
+  return jwt.sign(jwtPayload, process.env.JWTSECRET)
 }
 
 // Saves the users token in the redis database
@@ -15,19 +16,14 @@ const setToken = (username, token) => {
 
 // Creates the user session and returns the token to the browser, so it can be managed in the frontend
 const createSession = (data) => {
-  const { user, userType } = data;
-  const token = signToken(user);
-  return setToken(user, token)
-    .then(() => {
-      return {
-        username: user,
-        userType: userType,
-        token: token
-      }
-    })
-    .catch(console.log)
+  const { user, userType, sessiontoken } = data;
+  return {
+    token: sessiontoken,
+    username: user,
+    userType: userType,
+  }
 }
 
-module.exports =
+module.exports = {
   createSession: createSession,
 }

@@ -1,6 +1,11 @@
 const express = require("express");
 const Parse = require('parse/node');
-
+// Setup for redis
+const redis = require('redis');
+const redisClient = redis.createClient(process.env.REDIS_URI);
+module.exports = {
+  redisClient: redisClient,
+}
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I");
 Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/parse";

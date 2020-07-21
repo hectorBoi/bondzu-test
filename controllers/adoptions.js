@@ -23,7 +23,7 @@ const getAdoptions = async (req, res, Parse) => {
 
 const updateAdoptions = async (req, res, Parse) => {
   const { username } = req.body; // DEBERIA DE SER HEADER
-  const { animalid, session } = req.body;
+  const { animalid, token } = req.body;
 
   try {
     // USER
@@ -38,10 +38,7 @@ const updateAdoptions = async (req, res, Parse) => {
     const animal = await queryAnimal.get(animalid);
     // // ADD ADOPTION TO RELATION
     adoptions.add(animal);
-    console.log("user: ", user)
-    console.log("user token: ", user.getSessionToken())
-    const test = await user.save(null, { sessionToken: session });
-    console.log(test);
+    const test = await user.save(null, { sessionToken: token });
     res.json("Worked");
   } catch (err) {
     console.log(err)

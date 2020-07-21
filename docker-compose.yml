@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+  # Node server
+  server:
+    container_name: server
+    build: ./
+    command: npm start
+    working_dir: /usr/src/server
+    environment: 
+      JWTSECRET: "bondzu_secret"
+      REDIS_URI: redis://redis:6379
+    ports:
+      - "8081:8081"
+  
+  # Redis
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"

@@ -1,5 +1,4 @@
 const logout = document.getElementById("logout");
-console.log(logout)
 
 logout.addEventListener("click", () => {
 

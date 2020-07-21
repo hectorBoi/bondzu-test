@@ -6,15 +6,13 @@ if (!window.localStorage.getItem("token")) {
   location.replace("/")
 }
 
-console.log(window.localStorage.getItem("usertype"));
-console.log(window.localStorage.getItem("username"));
-
 fetch("http://localhost:8081/animals", {
   method: "post",
   headers: {
     "Content-Type": "application/json",
     "usertype": window.localStorage.getItem("usertype"),
-    "username": window.localStorage.getItem("username")
+    "username": window.localStorage.getItem("username"),
+    "token": window.localStorage.getItem("token"),
   }
 })
   .then(res => res.json())

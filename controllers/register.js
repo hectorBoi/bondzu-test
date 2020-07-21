@@ -23,6 +23,8 @@ const createUser = async (data, Parse) => {
   }
 }
 
+
+
 // Performs the authentication of the users credential with the DB
 const handleRegister = async (req, res, Parse) => {
   const { name, email, password, userType } = req.body;
@@ -39,7 +41,7 @@ const handleRegister = async (req, res, Parse) => {
     const session = await Parse.User.logIn(email, password)
     const username = session.get("username")
     const typeID = session.get("userType")
-    const jwt = await token.createSession({ user: username, userType: typeID.id })
+    const userSession = createSession({ user: username, userType: typeID.id })
     res.json(jwt);
   } catch (error) {
     res.status(400).json(error);

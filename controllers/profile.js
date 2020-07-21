@@ -45,7 +45,7 @@ const handleProfile = async (req, res, Parse) => {
 //TODO
 //Updates the user profile with new info
 const updateProfile = async (req, res, Parse) => {
-  const { Nname, Nemail, Nusername, username } = req.body;
+  const { Nname, Nemail, Nusername, username, token } = req.body;
 
   try {
     const userTable = Parse.Object.extend("User");
@@ -53,7 +53,6 @@ const updateProfile = async (req, res, Parse) => {
     query.equalTo("username", username)
     const user = await query.first();
 
-    console.log("Before: ", user.get("name"))
 
     if (Nname) {
       user.set("name", Nname);
@@ -64,9 +63,12 @@ const updateProfile = async (req, res, Parse) => {
       user.set("username", Nusername);
     }
 
-    const updatedUser = await user.save(null, { sessionToken: user.getSessionToken() });
-    console.log("After: ", updatedUser.get("name"))
-    res.json("Saved")
+    const newUser = user.save(null, { sessionToken: token });
+    res.json({
+      username: newUser.get("username"),
+      email: newUser.get("email"),
+      name: newUser.get("name"),
+    })
 
   } catch (err) {
     console.log(err)
