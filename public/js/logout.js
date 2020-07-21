@@ -2,7 +2,7 @@ const logout = document.getElementById("logout");
 
 logout.addEventListener("click", () => {
 
-  fetch("http://localhost:8081/logout", {
+  fetch("https://bondzu.com/logout", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
