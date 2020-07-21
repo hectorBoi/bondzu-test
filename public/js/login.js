@@ -6,7 +6,7 @@ submit.addEventListener("click", () => {
   const us = email.value;
   const pw = password.value;
 
-  fetch("https://bondzu.com/login", {
+  fetch("bondzu.com/login", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
