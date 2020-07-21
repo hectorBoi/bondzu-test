@@ -1,0 +1,128 @@
+/* General Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    float: left;
+    background-color: #ffa726;
+    width: 80%;
+    height: 10vh;
+    overflow: wrap;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    
+}
+
+header h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    font-size: 3em;
+}
+
+
+/*Profile Styles*/
+
+.username-header {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    font-size: 2em;
+    text-align: center;
+}
+
+.user-profile {
+    background-color: #c77800;
+    float: left;
+    width: 20%;
+    height: 100vh;
+    justify-items: center;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+}
+
+.user-profile img {
+    display: block;
+    margin: 10% auto;
+    height: auto;
+    width: 50%;
+    border-radius: 50%;
+}
+
+
+/* SECTION Navigation Styles */
+
+nav {
+    justify-items: center;
+    text-align: center;
+    margin: 10px 5px;
+}
+
+nav ul {
+    margin-top: 20%;
+    display: flex;
+    flex-flow: column;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 5% auto 0 auto;
+    list-style-type: none;
+    flex: 1 100px;
+    text-overflow: clip;
+}
+
+nav ul li:hover {
+    transform: scale(1.2);
+    transition-duration: 50ms;
+}
+
+
+nav ul li a {
+    color: inherit;
+    text-decoration-style: none;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 2em;
+    
+}
+
+nav ul li:last-child {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+/* !SECTION */
+
+/* Video Layout Styles */
+
+.video-grid {
+    overflow: auto;
+    background-color: #E0E0E0;
+    width: 80%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    height: 90vh;
+}
+
+.video-container {
+    display: inline-block;
+    margin: 5vh 1vw 0 1vw;
+    flex: 1 20vw;
+    height: 30vh;
+    background-color: white;
+}
+
+
+.video-container:hover {
+    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+    transform: scale(1.025);
+    transition-duration: 100ms;
+}

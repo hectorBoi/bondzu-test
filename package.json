@@ -20,6 +20,11 @@
   "homepage": "https://github.com/DulioCagg/TESTING#readme",
   "dependencies": {
     "big-integer": "^1.6.48",
-    "express": "^4.17.1"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "parse": "^2.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
