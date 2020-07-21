@@ -1,15 +1,12 @@
-const redisClient = require('../server').redisClient;
-
-// Removes the user key from the redis database
-const handleLogout = (req, res) => {
+// Removes the user key from the Parse server session table
+const handleLogout = (req, res, Parse) => {
   const { token } = req.headers;
-  redisClient.del(token, (err, response) => {
-    if (response === 1) {
-      res.json(true)
-    } else {
-      console.log("Error:", err)
-    }
-  })
+
+  Parse.User.logOut()
+    .then(() => {
+      res.json("Success?")
+    })
+    .catch(err => console.log(err))
 }
 
 module.exports = {

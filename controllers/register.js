@@ -41,8 +41,8 @@ const handleRegister = async (req, res, Parse) => {
     const session = await Parse.User.logIn(email, password)
     const username = session.get("username")
     const typeID = session.get("userType")
-    const userSession = createSession({ user: username, userType: typeID.id })
-    res.json(jwt);
+    const userSession = createSession({ user: username, userType: typeID.id, sessiontoken: user.getSessionToken() })
+    res.json(userSession);
   } catch (error) {
     res.status(400).json(error);
   }

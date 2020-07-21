@@ -10,7 +10,6 @@ logout.addEventListener("click", () => {
     }
   })
     .then(res => {
-      console.log(res)
       if (res) {
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("usertype")

@@ -25,19 +25,6 @@ const handleAnimals = async (req, res, Parse) => {
   const { usertype, username, token } = req.headers; // DEBERIA DE SER HEADER
 
   try {
-    //TESTING ////
-    const userTable = Parse.Object.extend("User");
-    const q = new Parse.Query(userTable)
-    q.equalTo("username", username);
-    const user = await q.first();
-
-    // VERY VERY IMPORTANT TO MODIFY DB
-    user.set("gender", "machito alfa");
-    user.save(null, { sessionToken: token })
-      .then(user => console.log(user.get("gender")))
-      .catch(err => console.log(err))
-    ////////////
-
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     query.equalTo("isActive", true);

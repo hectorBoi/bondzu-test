@@ -36,8 +36,6 @@ const getAnimalInfo = async (array, Parse) => {
   let animalInfo = await Promise.all(array.map(async animal => {
     const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
     const video = await getVideo(animal.id, Parse);
-    console.log("video id: ", video);
-    console.log("Animal photo: ", animal.get("profilePhoto")._url);
     return animal = {
       id: animal.id,
       youtubeID: video,

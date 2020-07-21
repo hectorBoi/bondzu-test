@@ -2,8 +2,6 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const submit = document.getElementById("submit");
 
-console.log(email, password, submit);
-
 submit.addEventListener("click", () => {
   const us = email.value;
   const pw = password.value;
@@ -21,7 +19,6 @@ submit.addEventListener("click", () => {
     .then(res => res.json())
     .then(res => {
       if (res) {
-        console.log("This is the response");
         if (res.token) {
           const { token, userType, username } = res;
           window.localStorage.setItem("token", token);

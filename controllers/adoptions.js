@@ -41,7 +41,6 @@ const updateAdoptions = async (req, res, Parse) => {
     const test = await user.save(null, { sessionToken: token });
     res.json("Worked");
   } catch (err) {
-    console.log(err)
     res.status(400).json("Adoptions did not worked")
   }
 }

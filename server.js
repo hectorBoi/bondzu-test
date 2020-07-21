@@ -1,11 +1,5 @@
 const express = require("express");
 const Parse = require('parse/node');
-// Setup for redis
-const redis = require('redis');
-const redisClient = redis.createClient(process.env.REDIS_URI);
-module.exports = {
-  redisClient: redisClient,
-}
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I");
 Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/parse";
@@ -15,7 +9,6 @@ const register = require('./controllers/register');
 const signin = require('./controllers/login');
 const profile = require('./controllers/profile');
 const animals = require('./controllers/animals');
-const auth = require('./controllers/authorization');
 const adoptions = require('./controllers/adoptions');
 const logout = require('./controllers/logout');
 const banner = require('./controllers/banner');
@@ -33,10 +26,10 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  logout.handleLogout(req, res)
+  logout.handleLogout(req, res, Parse)
 })
 
-app.get("/profile", auth.requireAuth, (req, res) => {
+app.get("/profile", (req, res) => {
   profile.handleProfile(req, res, Parse);
 });
 
@@ -44,7 +37,7 @@ app.post("/profile", (req, res) => {
   profile.updateProfile(req, res, Parse);
 });
 
-app.get("/animals", auth.requireAuth, (req, res) => {
+app.get("/animals", (req, res) => {
   animals.handleAnimals(req, res, Parse);
 })
 
@@ -52,7 +45,7 @@ app.post("/animals", (req, res) => {
   animals.handleAnimals(req, res, Parse);
 })
 
-app.get("/adoptions", auth.requireAuth, (req, res) => {
+app.get("/adoptions", (req, res) => {
   adoptions.getAdoptions(req, res, Parse);
 })
 
