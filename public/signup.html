@@ -29,75 +29,91 @@
       th {
         font-family: "Open Sans", sans-serif;
       }
+
       body {
         background-color: #fff;
       }
     </style>
   </head>
+
   <body>
     <br />
-    <br />
     <div class="container">
+      <br />
+      <br />
       <div class="card text-center card w-50 container">
         <div class="card-header">
           Únete a Bondzù
         </div>
         <div class="card-body">
-          <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="addon-wrapping">Nombre</span>
+          <form class="was-validated">
+            <div class="input-group is-invalid">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="validatedInputGroupPrepend"
+                  >Nombre</span
+                >
+              </div>
+              <input
+                type="text"
+                class="form-control is-invalid"
+                aria-describedby="validatedInputGroupPrepend"
+                required
+                placeholder="Nombre"
+                aria-label="Nombre"
+              />
             </div>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Nombre"
-              aria-label="Nombre"
-              aria-describedby="addon-wrapping"
-            />
-          </div>
-          <br />
-          <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="addon-wrapping"
-                >Apellidos</span
-              >
+
+            <br />
+            <div class="input-group is-invalid">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="validatedInputGroupPrepend"
+                  >Apellidos</span
+                >
+              </div>
+              <input
+                type="text"
+                class="form-control is-invalid"
+                aria-describedby="validatedInputGroupPrepend"
+                required
+                placeholder="Apellidos"
+                aria-label="Apellidos"
+              />
             </div>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Apellidos"
-              aria-label="Apellidos"
-              aria-describedby="addon-wrapping"
-            />
-          </div>
-          <br />
-          <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="addon-wrapping">Email</span>
+
+            <br />
+            <div class="input-group is-invalid">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="validatedInputGroupPrepend"
+                  >Correo</span
+                >
+              </div>
+              <input
+                type="text"
+                class="form-control is-invalid"
+                aria-describedby="validatedInputGroupPrepend"
+                required
+                placeholder="correo@ejemplo.com"
+                aria-label="Correo"
+              />
             </div>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Email"
-              aria-label="Email"
-              aria-describedby="addon-wrapping"
-            />
-          </div>
-          <br />
-          <div class="input-group flex-nowrap">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="addon-wrapping"
-                >Contraseña</span
-              >
+
+            <br />
+            <div class="input-group is-invalid">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="validatedInputGroupPrepend"
+                  >Contraseña</span
+                >
+              </div>
+              <input
+                type="password"
+                class="form-control is-invalid"
+                aria-describedby="validatedInputGroupPrepend"
+                required
+                placeholder="Contraseña"
+                aria-label="Contraseña"
+              />
             </div>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Contraseña"
-              aria-label="Contraseña"
-              aria-describedby="addon-wrapping"
-            />
-          </div>
+          </form>
         </div>
         <div class="card-footer text-muted">
           <a href="#" class="btn btn-warning">Regístrate</a>
