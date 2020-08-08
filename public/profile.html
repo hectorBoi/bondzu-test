@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/fontello.css" />
     <link rel="stylesheet" href="css/estilos.css" />
     <link rel="stylesheet" href="css/galeria.css" />
+    <link rel="icon" href="img/favicon.png" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -36,6 +37,23 @@
     </style>
   </head>
   <body>
+    <header>
+      <div class="contenedor">
+        <h1 class="header">Bondzù</h1>
+        <input type="checkbox" id="menu-bar" />
+        <label class="icon-menu" for="menu-bar"></label>
+        <nav class="menu">
+          <a href="index.html">Inicio</a>
+          <a href="quienes.html">¿Quiénes Somos?</a>
+          <a href="app.html">Nuestra App</a>
+          <a href="blog.html">Blog</a>
+          <a href="faq.html">FAQ</a>
+          <a href="contacto.html">Contacto</a>
+          <a href="login.html" id="login">Login</a>
+          <a href="animals.html" id="animals">Animals!</a>
+        </nav>
+      </div>
+    </header>
     <br />
     <div class="jumbotron">
       <div class="container">
@@ -43,27 +61,25 @@
           <div class="col-sm-4">
             <img
               src="img/logoBondzu.png"
-              width="175"
+              width="250"
+              height="250"
               class="rounded-circle"
               alt="profilePicture"
             />
             <br />
           </div>
           <div class="col-sm-6">
-            <h2 style="display: inline; margin: 8px;">Andrés</h2>
-            <h2 style="display: inline;">Bedolla R</h2>
+            <h2 style="display: inline; margin: 8px;">Nombre</h2>
+            <h2 style="display: inline;">Apellidos</h2>
             <hr style="clear: both;" />
-            <h5>
-              andres.bedolla@bondzu.com
+            <h5 style="margin: 8px;">
+              ejemplo@correo.com
             </h5>
-            <h5 class="text-muted">
+            <h5 class="text-muted" style="margin: 8px;">
               ***************
             </h5>
             <br />
-            <a
-              href="#"
-              class="badge badge-secondary"
-              style="display: inline-block;"
+            <a href="#" class="badge badge-secondary" style="margin: 8px;"
               >Editar</a
             >
           </div>
