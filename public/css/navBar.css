@@ -1,0 +1,10 @@
+.navBarIcon {
+  position: relative;
+  left: 25rem;
+  align-items: center;
+}
+
+.bar {
+  position: relative;
+  right: 45rem;
+}
