@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bondzù</title>
-    <link rel="stylesheet" href="css/fontello.css" />
-    <link rel="stylesheet" href="css/estilos.css" />
-    <link rel="stylesheet" href="css/galeria.css" />
+    <link rel="stylesheet" href="css/navBarLoggedIn.css" />
     <link rel="icon" href="img/favicon.png" />
     <link
       rel="stylesheet"
@@ -32,23 +30,9 @@
   </head>
   <body>
     <header>
-      <div class="contenedor">
-        <h1 class="header">Bondzù</h1>
-        <input type="checkbox" id="menu-bar" />
-        <label class="icon-menu" for="menu-bar"></label>
-        <nav class="menu">
-          <a href="index.html">Inicio</a>
-          <a href="quienes.html">¿Quiénes Somos?</a>
-          <a href="app.html">Nuestra App</a>
-          <a href="blog.html">Blog</a>
-          <a href="faq.html">FAQ</a>
-          <a href="contacto.html">Contacto</a>
-          <a href="login.html" id="login">Login</a>
-          <a href="animals.html" id="animals">Animals!</a>
-        </nav>
-      </div>
+      <nav id="navBarLog"></nav>
+      <script src="js/navBarLoggedIn.js"></script>
     </header>
-    <br />
     <br />
     <br />
     <div class="row">
@@ -64,7 +48,7 @@
         </div>
       </div>
       <div class="col-4">
-        <div class="container">
+        <div class="container-sm">
           <div class="card" style="width: 28rem;">
             <img
               src="https://images7.alphacoders.com/441/thumb-1920-441761.jpg"
