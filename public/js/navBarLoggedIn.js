@@ -56,7 +56,11 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         <button
           type="button"
           class="btn btn-outline-light"
-          style="margin-left: 18px; margin-right: 18px;"
+          style="
+            margin-left: 
+            18px; margin-right: 
+            18px; margin-bottom: 8px;
+          "
         >
           ¡Animales!
         </button></a
