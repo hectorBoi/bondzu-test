@@ -29,7 +29,6 @@ const createUser = async (data, Parse) => {
 // Performs the authentication of the users credential with the DB
 const handleRegister = async (req, res, Parse) => {
   const { name, email, password, userType, lastname } = req.body;
-  console.log(req.body)
 
   if (!name || !lastname || !email || !password || !userType) {
     return res.status(400).json("Incorrect form submission");
