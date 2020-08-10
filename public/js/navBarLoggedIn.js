@@ -1,7 +1,7 @@
 document.getElementById("navBarLog").innerHTML = ` 
 <nav
 id="navBarNoLog"
-class="navbar navbar-expand-lg navbar-dark"
+class="navbar navbar-expand-xl navbar-dark"
 style="background-color: #f28f1d; border-color: #ffffff;"
 >
 <a class="navbar-brand mr-auto" href="index.html">
