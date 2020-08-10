@@ -36,17 +36,17 @@
     <div class="jumbotron">
       <div class="container-lg">
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-lg-4">
             <img
               src="img/logoBondzu.png"
               width="250"
               height="250"
               class="rounded-circle"
               alt="profilePicture"
+              style="margin-top: 8px; margin-left: 8px; margin-right: 8px;"
             />
-            <br />
           </div>
-          <div class="col-sm-6">
+          <div class="col-lg-6">
             <h2 style="display: inline; margin: 8px;">Nombre</h2>
             <h2 style="display: inline;">Apellidos</h2>
             <hr style="clear: both;" />
@@ -59,7 +59,6 @@
             <h5 class="text-muted" style="margin: 8px;">
               ***************
             </h5>
-            <br />
             <a
               class="badge badge-secondary"
               style="margin: 8px;"
@@ -108,9 +107,22 @@
                 </div>
               </div>
             </div>
+            <br />
+            <br />
+            <button
+              type="button"
+              class="btn btn-success"
+              style="margin-top: 8px; margin-left: 8px; margin-right: 8px;"
+            >
+              Ver tus adopciones
+            </button>
           </div>
         </div>
       </div>
     </div>
+    <div class="alert alert-success" role="alert" style="top: -2rem;">
+      <h4 class="alert-heading text-center">Tus adopciones</h4>
+    </div>
+    <div class="container" id="container"></div>
   </body>
 </html>
