@@ -23,7 +23,7 @@ const createImage = (url) => {
   img.setAttribute("src", url);
   img.className = "card-img img-fluid";
   img.setAttribute("alt", "animal");
-  img.style.width = "500px";
+  //img.style.width = "500px";
   img.style.height = "300px";
   return img;
 };
