@@ -29,7 +29,8 @@ const handleAnimals = async (req, res, Parse) => {
     const query = new Parse.Query(animalTable);
     query.equalTo("isActive", true);
     const activeAnimals = await query.find();
-    const animalsInfo = await animalInfo.getAnimalInfo(activeAnimals, Parse);
+    const animalsInfo = await animalInfo.getAnimals(activeAnimals);
+    console.log(animalsInfo)
     const result = filterAnimals(usertype, animalsInfo)
     res.json(result);
   } catch (err) {
@@ -37,6 +38,22 @@ const handleAnimals = async (req, res, Parse) => {
   }
 }
 
+// Extracts the information of a specific animal from the database
+const handleSingleAnimal = async (req, res, Parse) => {
+  const { usertype, animalID } = req.body; // DEBERIA DE SER HEADER
+
+  try {
+    const animalTable = Parse.Object.extend("AnimalV2");
+    const query = new Parse.Query(animalTable);
+    const animal = await query.get(animalID)
+    const animal_info = await animalInfo.getAnimalInfo(animal, Parse);
+    res.json(animal_info);
+  } catch (err) {
+    res.json(err)
+  }
+}
+
 module.exports = {
   handleAnimals: handleAnimals,
+  handleSingleAnimal, handleSingleAnimal,
 }

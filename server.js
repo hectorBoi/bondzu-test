@@ -45,6 +45,14 @@ app.post("/animals", (req, res) => {
   animals.handleAnimals(req, res, Parse);
 })
 
+app.get("/singleAnimal", (req, res) => {
+  animals.handleSingleAnimal(req, res, Parse);
+})
+
+app.post("/singleAnimal", (req, res) => {
+  animals.handleSingleAnimal(req, res, Parse);
+})
+
 app.get("/adoptions", (req, res) => {
   adoptions.getAdoptions(req, res, Parse);
 })
