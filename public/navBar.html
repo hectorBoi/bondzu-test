@@ -321,6 +321,7 @@
                           >
                         </div>
                         <input
+                          id="nameReg"
                           type="text"
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
@@ -341,6 +342,7 @@
                           >
                         </div>
                         <input
+                          id="lastnameReg"
                           type="text"
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
@@ -358,12 +360,14 @@
                             >Tipo de usuario</span
                           >
                         </div>
-                        <select class="custom-select" required>
+                        <select class="custom-select" 
+                        required 
+                        id="usertypeReg">
                           <option value="">Seleccione una opción...</option>
-                          <option value="1">Basic</option>
-                          <option value="2">Bondzù Fan</option>
-                          <option value="3">Bondzù Hero</option>
-                          <option value="4">Bondzù Lover</option>
+                          <option value="etDcoSci6K">Basic</option>
+                          <option value="jHbSEutegP">Bondzù Fan</option>
+                          <option value="nRXYUkuJJq">Bondzù Lover</option>
+                          <option value="mWm6R6DLFX">Bondzù Hero</option>
                         </select>
                       </div>
                       <br />
@@ -376,6 +380,7 @@
                           >
                         </div>
                         <input
+                          id="emailReg"
                           type="text"
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
@@ -395,6 +400,7 @@
                           >
                         </div>
                         <input
+                          id="passwordReg"
                           type="password"
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
@@ -405,7 +411,7 @@
                       </div>
                     </form>
                   </div>
-                  <div class="modal-footer">
+                  <div class="modal-footer" id="submitReg">
                     <a href="#" class="btn btn-warning btn-lg btn-block"
                       >Regístrate</a
                     >
@@ -432,6 +438,8 @@
         </ul>
       </div>
     </nav>
+
     <script src="./js/login.js"></script>
+    <script src="./js/register.js"></script>
   </body>
 </html>

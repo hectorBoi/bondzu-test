@@ -10,11 +10,12 @@ logout.addEventListener("click", () => {
     }
   })
     .then(res => {
+      console.log(res)
       if (res) {
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("usertype")
         window.localStorage.removeItem("username")
-        location.replace("/")
+        location.replace("/navBar.html")
       }
     })
     .catch(err => {

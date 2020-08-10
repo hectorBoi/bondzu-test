@@ -1,16 +1,17 @@
-const nameElem = document.getElementById("name");
-const lastnameElem = document.getElementById("lastname");
-const emailElem = document.getElementById("email");
-const passwordElem = document.getElementById("password");
-const usertypeElem = document.getElementById("usertype");
-const submit = document.getElementById("submit");
+const nameElem = document.getElementById("nameReg");
+const lastnameElem = document.getElementById("lastnameReg");
+const usertypeElem = document.getElementById("usertypeReg");
+const emailElem = document.getElementById("emailReg");
+const passwordElem = document.getElementById("passwordReg");
+const submitElem = document.getElementById("submitReg");
 
-submit.addEventListener("click", () => {
+submitElem.addEventListener("click", () => {
   const name = nameElem.value;
   const lastname = lastnameElem.value;
+  const usertype = usertypeElem.options[usertypeElem.selectedIndex].value;
   const email = emailElem.value;
   const password = passwordElem.value;
-  const usertype = usertypeElem.value;
+
 
   fetch("/register", {
     method: "post",
@@ -21,7 +22,7 @@ submit.addEventListener("click", () => {
       name: name,
       lastname: lastname,
       email: email,
-      usertype: usertype,
+      userType: usertype,
       password: password,
     })
   })

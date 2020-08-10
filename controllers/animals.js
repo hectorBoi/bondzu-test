@@ -30,7 +30,6 @@ const handleAnimals = async (req, res, Parse) => {
     query.equalTo("isActive", true);
     const activeAnimals = await query.find();
     const animalsInfo = await animalInfo.getAnimals(activeAnimals);
-    console.log(animalsInfo)
     const result = filterAnimals(usertype, animalsInfo)
     res.json(result);
   } catch (err) {
