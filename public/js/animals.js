@@ -1,8 +1,11 @@
 const container = document.getElementById("container");
 
-const createDiv = (className) => {
+const createDiv = (className, id) => {
   let div = document.createElement("div");
   div.className = className;
+  if (id) {
+    div.setAttribute("id", id)
+  }
   return div;
 };
 
@@ -10,10 +13,9 @@ const createButton = (location) => {
   let div = createDiv("card bg-dark text-white");
   div.setAttribute("type", "button");
   div.style.margin = "20px";
-  //div.style.color = "red";
   div.setAttribute(
     "onclick",
-    `window.location.href='singleAnimal/${location}'`
+    `window.location.href='singleAnimal.html'`
   );
   return div;
 };
@@ -48,7 +50,7 @@ const createCard = (object) => {
   col.appendChild(button);
   const img = createImage(object.profilePhoto);
   button.appendChild(img);
-  const div = createDiv("card-img-overlay");
+  const div = createDiv("card-img-overlay", object.id);
   const h5 = createTitle(object.species);
   div.appendChild(h5);
   button.appendChild(div);
@@ -89,3 +91,9 @@ fetch("/animals", {
     console.log(animals);
   })
   .catch("Error in the request");
+
+window.onclick = event => {
+  if (event.target.id) {
+    window.localStorage.setItem("currentAnimal", event.target.id)
+  }
+}

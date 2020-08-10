@@ -18,23 +18,27 @@ const getPhoto = async (username, Parse) => {
 
 // Returns the users information
 const handleProfile = async (req, res, Parse) => {
-  const { username } = req.body; // DEBERIA DE SER HEADER
+  const { username } = req.header; // DEBERIA DE SER HEADER
+
 
   try {
+    console.log("username: ", username)
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)
     const user = await query.first();
 
     const name = user.get("name");
-    const email = user.get("email");
+    const lastname = user.get("lastname");
     const photo = await getPhoto(username, Parse)
 
     const response = {
       name,
-      email,
+      lastname,
       photo
     }
+
+    console.log(response)
 
     res.json(response)
   } catch (err) {
