@@ -24,7 +24,7 @@ submit.addEventListener("click", () => {
           window.localStorage.setItem("token", token);
           window.localStorage.setItem("usertype", userType);
           window.localStorage.setItem("username", username);
-          location.replace("/")
+          location.replace("/navBarLoggedIn.html");
         } else {
           alert(err.message);
         }

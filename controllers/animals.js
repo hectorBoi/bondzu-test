@@ -20,7 +20,7 @@ const filterAnimals = (userType, animals) => {
   return filteredArray;
 }
 
-// Extracts the animals from the database and filter the results befor sending them to the front end
+// Extracts the animals from the database and filter the results before sending them to the front end
 const handleAnimals = async (req, res, Parse) => {
   const { usertype, username, token } = req.headers; // DEBERIA DE SER HEADER
 
