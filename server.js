@@ -45,11 +45,11 @@ app.post("/animals", (req, res) => {
   animals.handleAnimals(req, res, Parse);
 })
 
-app.get("/singleAnimal", (req, res) => {
+app.get("/singleAnimal/:animalID", (req, res) => {
   animals.handleSingleAnimal(req, res, Parse);
 })
 
-app.post("/singleAnimal", (req, res) => {
+app.post("/singleAnimal/:animalID", (req, res) => {
   animals.handleSingleAnimal(req, res, Parse);
 })
 

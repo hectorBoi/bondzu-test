@@ -40,7 +40,8 @@ const handleAnimals = async (req, res, Parse) => {
 
 // Extracts the information of a specific animal from the database
 const handleSingleAnimal = async (req, res, Parse) => {
-  const { usertype, animalID } = req.body; // DEBERIA DE SER HEADER
+  const animalID = req.params.animalID;
+  // const { usertype, animalID } = req.body; // DEBERIA DE SER HEADER
 
   try {
     const animalTable = Parse.Object.extend("AnimalV2");
