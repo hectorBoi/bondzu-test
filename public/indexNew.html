@@ -32,11 +32,11 @@
     <header>
       <div
         data-spy="scroll"
-        data-target="#firstAppImg"
+        data-target="#navBar"
         data-offset="0"
         class="scrollspy-example"
       >
-        <nav id="navBarNoLog"></nav>
+        <nav id="navBar"></nav>
         <script src="./js/navBar.js"></script>
       </div>
     </header>
@@ -57,7 +57,10 @@
               <br />
               <br />
               <br />
-              <a href="https://apps.apple.com/mx/app/bondzu/id991575185">
+              <a
+                href="https://apps.apple.com/mx/app/bondzu/id991575185"
+                target="_blank"
+              >
                 <img
                   src="./img/appStoreIcon.svg"
                   alt="appStoreIcon"
@@ -68,6 +71,7 @@
               <br />
               <a
                 href="https://play.google.com/store/apps/details?id=com.bondzu.bondzuapp&hl=es"
+                target="_blank"
               >
                 <img
                   src="./img/playStoreIcon.png"
@@ -84,7 +88,7 @@
       <div class="row">
         <div class="col">
           <div class="mx-auto text-center">
-            <h2 style="color: #f28f1d;">Bienvenido a Bondzù</h2>
+            <h2 style="color: #f28f1d;">¡Únete a la familia Bondzù!</h2>
             <div class="card">
               <div class="card-body">
                 <div class="modal-body">
@@ -104,233 +108,215 @@
                     >Regístrate</a
                   >
                   <div
-                    data-spy="scroll"
-                    data-target="#loginModal"
-                    data-offset="0"
-                    class="scrollspy-example"
+                    class="modal fade"
+                    id="loginModal"
+                    tabindex="-1"
+                    aria-labelledby="loginModalLabel"
+                    aria-hidden="true"
                   >
-                    <div
-                      class="modal fade"
-                      id="loginModal"
-                      tabindex="-1"
-                      aria-labelledby="loginModalLabel"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5
-                              class="modal-title text-center container"
-                              id="loginModalLabel"
-                            >
-                              Inicia sesión
-                            </h5>
-                            <button
-                              type="button"
-                              class="close"
-                              data-dismiss="modal"
-                              aria-label="Close"
-                            >
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form class="was-validated">
-                              <div class="input-group is-invalid">
-                                <div class="input-group-prepend">
-                                  <span
-                                    class="input-group-text"
-                                    id="validatedInputGroupPrepend"
-                                    >Correo</span
-                                  >
-                                </div>
-                                <input
-                                  id="email"
-                                  type="text"
-                                  class="form-control is-invalid"
-                                  aria-describedby="validatedInputGroupPrepend"
-                                  required
-                                  placeholder="correo@ejemplo.com"
-                                  aria-label="Correo"
-                                  autofocus
-                                />
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5
+                            class="modal-title text-center container"
+                            id="loginModalLabel"
+                          >
+                            Inicia sesión
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="was-validated">
+                            <div class="input-group is-invalid">
+                              <div class="input-group-prepend">
+                                <span
+                                  class="input-group-text"
+                                  id="validatedInputGroupPrepend"
+                                  >Correo</span
+                                >
                               </div>
+                              <input
+                                id="email"
+                                type="text"
+                                class="form-control is-invalid"
+                                aria-describedby="validatedInputGroupPrepend"
+                                required
+                                placeholder="correo@ejemplo.com"
+                                aria-label="Correo"
+                                autofocus
+                              />
+                            </div>
 
-                              <br />
-                              <div class="input-group is-invalid">
-                                <div class="input-group-prepend">
-                                  <span
-                                    class="input-group-text"
-                                    id="validatedInputGroupPrepend"
-                                    >Contraseña</span
-                                  >
-                                </div>
-                                <input
-                                  id="password"
-                                  type="password"
-                                  class="form-control is-invalid"
-                                  aria-describedby="validatedInputGroupPrepend"
-                                  required
-                                  placeholder="Contraseña"
-                                  aria-label="Contraseña"
-                                />
+                            <br />
+                            <div class="input-group is-invalid">
+                              <div class="input-group-prepend">
+                                <span
+                                  class="input-group-text"
+                                  id="validatedInputGroupPrepend"
+                                  >Contraseña</span
+                                >
                               </div>
-                            </form>
-                          </div>
-                          <div class="modal-footer" id="submit">
-                            <a href="#" class="btn btn-success btn-lg btn-block"
-                              >Iniciar sesión</a
-                            >
-                          </div>
+                              <input
+                                id="password"
+                                type="password"
+                                class="form-control is-invalid"
+                                aria-describedby="validatedInputGroupPrepend"
+                                required
+                                placeholder="Contraseña"
+                                aria-label="Contraseña"
+                              />
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer" id="submit">
+                          <a href="#" class="btn btn-success btn-lg btn-block"
+                            >Iniciar sesión</a
+                          >
                         </div>
                       </div>
                     </div>
                   </div>
                   <div
-                    data-spy="scroll"
-                    data-target="#loginModal"
-                    data-offset="0"
-                    class="scrollspy-example"
+                    class="modal fade"
+                    id="signupModal"
+                    tabindex="-1"
+                    aria-labelledby="signupModalLabel"
+                    aria-hidden="true"
                   >
-                    <div
-                      class="modal fade"
-                      id="signupModal"
-                      tabindex="-1"
-                      aria-labelledby="signupModalLabel"
-                      aria-hidden="true"
-                    >
-                      <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5
-                              class="modal-title text-center container"
-                              id="signupModalLabel"
-                            >
-                              Únete a Bondzù
-                            </h5>
-                            <button
-                              type="button"
-                              class="close"
-                              data-dismiss="modal"
-                              aria-label="Close"
-                            >
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            <form class="was-validated">
-                              <div class="input-group is-invalid">
-                                <div class="input-group-prepend">
-                                  <span
-                                    class="input-group-text"
-                                    id="validatedInputGroupPrepend"
-                                    >Nombre</span
-                                  >
-                                </div>
-                                <input
-                                  id="nameReg"
-                                  type="text"
-                                  class="form-control is-invalid"
-                                  aria-describedby="validatedInputGroupPrepend"
-                                  required
-                                  placeholder="Nombre"
-                                  aria-label="Nombre"
-                                  autofocus
-                                />
-                              </div>
-
-                              <br />
-                              <div class="input-group is-invalid">
-                                <div class="input-group-prepend">
-                                  <span
-                                    class="input-group-text"
-                                    id="validatedInputGroupPrepend"
-                                    >Apellidos</span
-                                  >
-                                </div>
-                                <input
-                                  id="lastnameReg"
-                                  type="text"
-                                  class="form-control is-invalid"
-                                  aria-describedby="validatedInputGroupPrepend"
-                                  required
-                                  placeholder="Apellidos"
-                                  aria-label="Apellidos"
-                                />
-                              </div>
-                              <br />
-                              <div class="input-group is-invalid">
-                                <div class="input-group-prepend">
-                                  <span
-                                    class="input-group-text"
-                                    id="validatedInputGroupPrepend"
-                                    >Tipo de usuario</span
-                                  >
-                                </div>
-                                <select
-                                  class="custom-select"
-                                  required
-                                  id="usertypeReg"
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5
+                            class="modal-title text-center container"
+                            id="signupModalLabel"
+                          >
+                            Únete a Bondzù
+                          </h5>
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="was-validated">
+                            <div class="input-group is-invalid">
+                              <div class="input-group-prepend">
+                                <span
+                                  class="input-group-text"
+                                  id="validatedInputGroupPrepend"
+                                  >Nombre</span
                                 >
-                                  <option value=""
-                                    >Seleccione una opción...</option
-                                  >
-                                  <option value="etDcoSci6K">Basic</option>
-                                  <option value="jHbSEutegP">Bondzù Fan</option>
-                                  <option value="nRXYUkuJJq"
-                                    >Bondzù Lover</option
-                                  >
-                                  <option value="mWm6R6DLFX"
-                                    >Bondzù Hero</option
-                                  >
-                                </select>
                               </div>
-                              <br />
-                              <div class="input-group is-invalid">
-                                <div class="input-group-prepend">
-                                  <span
-                                    class="input-group-text"
-                                    id="validatedInputGroupPrepend"
-                                    >Correo</span
-                                  >
-                                </div>
-                                <input
-                                  id="emailReg"
-                                  type="text"
-                                  class="form-control is-invalid"
-                                  aria-describedby="validatedInputGroupPrepend"
-                                  required
-                                  placeholder="correo@ejemplo.com"
-                                  aria-label="Correo"
-                                />
-                              </div>
+                              <input
+                                id="nameReg"
+                                type="text"
+                                class="form-control is-invalid"
+                                aria-describedby="validatedInputGroupPrepend"
+                                required
+                                placeholder="Nombre"
+                                aria-label="Nombre"
+                                autofocus
+                              />
+                            </div>
 
-                              <br />
-                              <div class="input-group is-invalid">
-                                <div class="input-group-prepend">
-                                  <span
-                                    class="input-group-text"
-                                    id="validatedInputGroupPrepend"
-                                    >Contraseña</span
-                                  >
-                                </div>
-                                <input
-                                  id="passwordReg"
-                                  type="password"
-                                  class="form-control is-invalid"
-                                  aria-describedby="validatedInputGroupPrepend"
-                                  required
-                                  placeholder="Contraseña"
-                                  aria-label="Contraseña"
-                                />
+                            <br />
+                            <div class="input-group is-invalid">
+                              <div class="input-group-prepend">
+                                <span
+                                  class="input-group-text"
+                                  id="validatedInputGroupPrepend"
+                                  >Apellidos</span
+                                >
                               </div>
-                            </form>
-                          </div>
-                          <div class="modal-footer" id="submitReg">
-                            <a href="#" class="btn btn-warning btn-lg btn-block"
-                              >Regístrate</a
-                            >
-                          </div>
+                              <input
+                                id="lastnameReg"
+                                type="text"
+                                class="form-control is-invalid"
+                                aria-describedby="validatedInputGroupPrepend"
+                                required
+                                placeholder="Apellidos"
+                                aria-label="Apellidos"
+                              />
+                            </div>
+                            <br />
+                            <div class="input-group is-invalid">
+                              <div class="input-group-prepend">
+                                <span
+                                  class="input-group-text"
+                                  id="validatedInputGroupPrepend"
+                                  >Tipo de usuario</span
+                                >
+                              </div>
+                              <select
+                                class="custom-select"
+                                required
+                                id="usertypeReg"
+                              >
+                                <option value=""
+                                  >Seleccione una opción...</option
+                                >
+                                <option value="etDcoSci6K">Basic</option>
+                                <option value="jHbSEutegP">Bondzù Fan</option>
+                                <option value="nRXYUkuJJq">Bondzù Lover</option>
+                                <option value="mWm6R6DLFX">Bondzù Hero</option>
+                              </select>
+                            </div>
+                            <br />
+                            <div class="input-group is-invalid">
+                              <div class="input-group-prepend">
+                                <span
+                                  class="input-group-text"
+                                  id="validatedInputGroupPrepend"
+                                  >Correo</span
+                                >
+                              </div>
+                              <input
+                                id="emailReg"
+                                type="text"
+                                class="form-control is-invalid"
+                                aria-describedby="validatedInputGroupPrepend"
+                                required
+                                placeholder="correo@ejemplo.com"
+                                aria-label="Correo"
+                              />
+                            </div>
+
+                            <br />
+                            <div class="input-group is-invalid">
+                              <div class="input-group-prepend">
+                                <span
+                                  class="input-group-text"
+                                  id="validatedInputGroupPrepend"
+                                  >Contraseña</span
+                                >
+                              </div>
+                              <input
+                                id="passwordReg"
+                                type="password"
+                                class="form-control is-invalid"
+                                aria-describedby="validatedInputGroupPrepend"
+                                required
+                                placeholder="Contraseña"
+                                aria-label="Contraseña"
+                              />
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer" id="submitReg">
+                          <a href="#" class="btn btn-warning btn-lg btn-block"
+                            >Regístrate</a
+                          >
                         </div>
                       </div>
                     </div>
@@ -339,7 +325,10 @@
               </div>
             </div>
           </div>
+          <br />
+          <br />
         </div>
+
         <div class="col-xl-8">
           <h2 style="color: #f28f1d;" class="text-center">Conócenos</h2>
           <div class="card">
@@ -357,7 +346,7 @@
 
                 <div class="col-xl-4">
                   <div class="mx-auto">
-                    <p style="color: green; text-align: justify;">
+                    <p style="color: #3a8169; text-align: justify;">
                       Bondzù es una iniciativa de educación y concientización
                       utilizando los nuevos medios de comunicación que permite
                       internet. Hace uso intensivo de las redes sociales,
@@ -370,7 +359,7 @@
                     </p>
 
                     <a href="quienes.html" style="text-decoration: none;">
-                      <button type="button" class="btn btn-info btn-sm">
+                      <button type="button" class="btn btn-secondary btn-sm">
                         Conoce más
                       </button>
                     </a>
@@ -384,12 +373,204 @@
     </div>
     <br />
     <br />
+    <div class="container-xl">
+      <div class="jumbotron">
+        <h2 style="color: #f28f1d;" class="text-center">
+          Visítanos en nuestras redes sociales
+        </h2>
+        <br />
+        <div class="row text-center">
+          <div class="col-sm">
+            <a
+              href="https://www.facebook.com/bondzu/"
+              style="text-decoration: none;"
+              target="_blank"
+            >
+              <img src="./img/fbIcon.png" alt="fbIcon" height="75" width="75" />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://twitter.com/BondzuCubs"
+              style="text-decoration: none;"
+              target="_blank"
+            >
+              <img src="./img/twIcon.png" alt="twIcon" height="75" width="75" />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://www.instagram.com/bondzucubs/"
+              style="text-decoration: none;"
+              target="_blank"
+            >
+              <img
+                src="./img/instaIcon.png"
+                alt="igIcon"
+                height="75"
+                width="75"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="jumbotron" style="background: #f28f1d9a !important;">
+      <div class="container text-center">
+        <h2 style="color: #3a8169;">
+          Consulta nuestros videos
+        </h2>
+        <br />
+        <div class="row text-center">
+          <div class="col-sm">
+            <a
+              href="https://www.youtube.com/playlist?list=PLSaWlurIWnBaBrYXYd5mEA3lFbzfe3KMs"
+              style="text-decoration: none;"
+              target="_blank"
+            >
+              <img
+                src="./img/video1.jpg"
+                alt="capsultas"
+                height="200"
+                width="200"
+                class="rounded-circle"
+              />
+              <h4 style="color: #ffffff;">Cápsulas</h4>
+              <br />
+              <br />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://www.youtube.com/playlist?list=PLSaWlurIWnBaBrYXYd5mEA3lFbzfe3KMs"
+              style="text-decoration: none;"
+              target="_blank"
+            >
+              <img
+                src="./img/video2.jpg"
+                alt="capsultas"
+                height="200"
+                width="200"
+                class="rounded-circle"
+              />
+              <h4 style="color: #ffffff;">Bondzù Girls</h4>
+              <br />
+              <br />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://www.youtube.com/playlist?list=PLSaWlurIWnBaBrYXYd5mEA3lFbzfe3KMs"
+              style="text-decoration: none;"
+              target="_blank"
+            >
+              <img
+                src="./img/video3.jpg"
+                alt="capsultas"
+                height="200"
+                width="200"
+                class="rounded-circle"
+              />
+              <h4 style="color: #ffffff;">Bondzù Music</h4>
+              <br />
+              <br />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://www.youtube.com/playlist?list=PLSaWlurIWnBaBrYXYd5mEA3lFbzfe3KMs"
+              style="text-decoration: none;"
+              target="_blank"
+            >
+              <img
+                src="./img/tienda5.jpg"
+                alt="capsultas"
+                height="200"
+                width="200"
+                class="rounded-circle"
+              />
+              <h4 style="color: #ffffff;">Bondzùmania</h4>
+              <br />
+              <br />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="container text-center">
+          <h2 style="color: #f28f1d;" class="text-center">
+            ¡No olvides descargar nuestra app!
+          </h2>
+          <br />
+          <div id="carouselApp" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li
+                data-target="#carouselApp"
+                data-slide-to="0"
+                class="active"
+              ></li>
+              <li data-target="#carouselApp" data-slide-to="1"></li>
+              <li data-target="#carouselApp" data-slide-to="2"></li>
+              <li data-target="#carouselApp" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="./img/app3.png" class="d-block w-100" alt="app3" />
+              </div>
+              <div class="carousel-item">
+                <img src="./img/app8.png" class="d-block w-100" alt="app8" />
+              </div>
+              <div class="carousel-item">
+                <img src="./img/app2.png" class="d-block w-100" alt="app2" />
+              </div>
+              <div class="carousel-item">
+                <img src="./img/app5.png" class="d-block w-100" alt="app5" />
+              </div>
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#carouselApp"
+              role="button"
+              data-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Anterior</span>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#carouselApp"
+              role="button"
+              data-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Siguiente</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
     <div>
-      <a href="#navBarNoLog" style="text-decoration: none;">
+      <a href="#navBar" style="text-decoration: none;">
         <button type="button" class="btn btn-secondary btn-lg btn-block">
-          Volver al principio
+          <h6 style="color: #ffffff;">Volver al principio</h6>
         </button>
       </a>
     </div>
   </body>
+  <script src="./js/index.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/logout.js"></script>
 </html>

@@ -145,7 +145,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
       >
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-success"
           style="
             margin-left: 18px;
             margin-right: 18px;
@@ -419,7 +419,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
     <li class="nav-item" id="loggedIn">
       <div class="dropdown">
         <button
-          class="btn btn-primary dropdown-toggle"
+          class="btn btn-success dropdown-toggle"
           type="button"
           id="dropdownProfile"
           data-toggle="dropdown"
