@@ -45,7 +45,7 @@ const handleRegister = async (req, res, Parse) => {
     const userSession = token.createSession({ user: username, userType: typeID.id, sessiontoken: user.getSessionToken() })
     res.json(userSession);
   } catch (error) {
-    res.status(400).json(error);
+    res.status(400).json("Already registered");
   }
 }
 

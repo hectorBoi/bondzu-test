@@ -28,7 +28,7 @@ const signinAuth = (Parse) => (req, res) => {
       return data ? token.createSession(data) : Promise.reject(data);
     })
     .then(session => res.json(session))
-    .catch(err => res.status(400).json(err));
+    .catch(err => res.status(400).json("Incorrect"));
 }
 
 module.exports = {

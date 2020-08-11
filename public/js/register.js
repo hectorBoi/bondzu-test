@@ -28,16 +28,15 @@ submitElem.addEventListener("click", () => {
   })
     .then(res => res.json())
     .then(res => {
-      if (res) {
-        if (res.token) {
-          const { token, userType, username } = res;
-          window.localStorage.setItem("token", token);
-          window.localStorage.setItem("usertype", userType);
-          window.localStorage.setItem("username", username);
-          location.replace("/navBarLoggedIn.html");
-        } else {
-          alert(err.message);
-        }
+      if (res.token) {
+        const { token, userType, username } = res;
+        window.localStorage.setItem("token", token);
+        window.localStorage.setItem("usertype", userType);
+        window.localStorage.setItem("username", username);
+        location.replace("/navBarLoggedIn.html");
+      }
+      if (res === "Already registered") {
+        alert("Ese usuario ya existe!")
       }
     })
     .catch(err => {
