@@ -18,13 +18,20 @@ const getPhoto = async (username, Parse) => {
 
 // Returns the users information
 const handleProfile = async (req, res, Parse) => {
-  const username = req.params.username; // DEBERIA DE SER HEADER
+  const username = req.params.username;
 
   try {
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)
     const user = await query.first();
+
+    console.log("userid: ", user.get("userType").id)
+    const typeTable = Parse.Object.extend("UserType");
+    const queryType = new Parse.Query(typeTable);
+    const usertype = await queryType.get(user.get("userType").id);
+
+    console.log(usertype)
 
     const name = user.get("name");
     const lastname = user.get("lastname");
@@ -33,7 +40,8 @@ const handleProfile = async (req, res, Parse) => {
     const response = {
       name,
       lastname,
-      photo
+      photo,
+      usertype: usertype.get("name"),
     }
 
     res.json(response)

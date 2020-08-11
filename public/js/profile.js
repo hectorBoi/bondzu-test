@@ -17,7 +17,7 @@ fetch(`/profile/${username}`)
   .then((userInfo) => {
     nameElem.innerText = userInfo.name;
     lastnameElem.innerText = userInfo.lastname;
-    usertypeElem.innerText = "USERTYPE WIP";
+    usertypeElem.innerText = `Tipo: ${userInfo.usertype}`;
     usernameElem.innerText = window.localStorage.getItem("username");
     if (userInfo.photo) {
       profilePhotoElem.setAttribute("src", userInfo.photo)
