@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bondzù</title>
+    <title>Bondzù: Perfil</title>
     <link rel="icon" href="img/favicon.png" />
     <link
       rel="stylesheet"
@@ -52,10 +52,8 @@
             <h2 style="display: inline; margin: 8px;" id="name"></h2>
             <h2 style="display: inline;" id="lastname"></h2>
             <hr style="clear: both;" />
-            <h5 class="text-muted" style="margin: 8px;" id="usertype">
-            </h5>
-            <h5 class="text-muted" style="margin: 8px;" id="username">
-            </h5>
+            <h5 class="text-muted" style="margin: 8px;" id="usertype"></h5>
+            <h5 class="text-muted" style="margin: 8px;" id="username"></h5>
             <h5 class="text-muted" style="margin: 8px;">
               ***************
             </h5>
@@ -104,13 +102,21 @@
                       <br />
                       <form>
                         <div class="form-group row">
-                          <input type="file" class="form-control-file" id="newProfilepic"/>
+                          <input
+                            type="file"
+                            class="form-control-file"
+                            id="newProfilepic"
+                          />
                         </div>
                         <div class="form-group row">
                           <label for="name" class="col-auto col-form-label"
                             >Nombre</label
                           >
-                          <input type="text" class="form-control" id="newName" />
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="newName"
+                          />
                         </div>
                         <div class="form-group row">
                           <label for="lastName" class="col-auto col-form-label"
@@ -153,7 +159,11 @@
                     >
                       Cerrar
                     </button>
-                    <button type="button" class="btn btn-success" id="updateProfile">
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      id="updateProfile"
+                    >
                       Guardar cambios
                     </button>
                   </div>
@@ -174,7 +184,7 @@
         </div>
       </div>
     </div>
-    <div style="display:none" id="adoptionsContainer">
+    <div style="display: none;" id="adoptionsContainer">
       <div class="alert alert-success" role="alert" style="top: -2rem;">
         <h4 class="alert-heading text-center">Tus adopciones</h4>
       </div>
