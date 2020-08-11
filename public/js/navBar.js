@@ -1,4 +1,4 @@
-document.getElementById("navBarNoLog").innerHTML = `<nav
+document.getElementById("navBar").innerHTML = `<nav
 id="navBarNoLog"
 class="navbar navbar-expand-xl navbar-dark"
 style="background-color: #f28f1d; border-color: #ffffff;"
@@ -47,6 +47,29 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         </button></a
       >
     </li>
+
+
+    <li class="nav-item" id="navAnimals">
+      <a
+        href="animalsNew.html"
+        style="text-decoration: none; color: white;"
+      >
+        <button
+          type="button"
+          class="btn btn-outline-light"
+          style="
+            margin-left: 18px;
+            margin-right: 18px;
+            margin-bottom: 8px;
+          "
+        >
+          ¡Animales!
+        </button></a
+      >
+    </li>
+
+
+
     <li class="nav-item">
       <a href="quienes.html" style="text-decoration: none; color: white;">
         <button
@@ -112,12 +135,13 @@ style="background-color: #f28f1d; border-color: #ffffff;"
     </li>
   </ul>
   <ul class="navbar-nav ml-auto justify-content-end">
-    <li class="nav-item">
+    <li class="nav-item" id="guest">
       <a
         class="loginIcon form-inline my-2 my-lg-0 ml-auto"
         type="button"
         data-toggle="modal"
         data-target="#userModal"
+        style="text-decoration: none;"
       >
         <button
           type="button"
@@ -289,6 +313,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     >
                   </div>
                   <input
+                    id="nameReg"
                     type="text"
                     class="form-control is-invalid"
                     aria-describedby="validatedInputGroupPrepend"
@@ -309,6 +334,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     >
                   </div>
                   <input
+                    id="lastnameReg"
                     type="text"
                     class="form-control is-invalid"
                     aria-describedby="validatedInputGroupPrepend"
@@ -326,12 +352,14 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                       >Tipo de usuario</span
                     >
                   </div>
-                  <select class="custom-select" required>
+                  <select class="custom-select" 
+                  required 
+                  id="usertypeReg">
                     <option value="">Seleccione una opción...</option>
-                    <option value="1">Basic</option>
-                    <option value="2">Bondzù Fan</option>
-                    <option value="3">Bondzù Hero</option>
-                    <option value="4">Bondzù Lover</option>
+                    <option value="etDcoSci6K">Basic</option>
+                    <option value="jHbSEutegP">Bondzù Fan</option>
+                    <option value="nRXYUkuJJq">Bondzù Lover</option>
+                    <option value="mWm6R6DLFX">Bondzù Hero</option>
                   </select>
                 </div>
                 <br />
@@ -344,6 +372,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     >
                   </div>
                   <input
+                    id="emailReg"
                     type="text"
                     class="form-control is-invalid"
                     aria-describedby="validatedInputGroupPrepend"
@@ -363,6 +392,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     >
                   </div>
                   <input
+                    id="passwordReg"
                     type="password"
                     class="form-control is-invalid"
                     aria-describedby="validatedInputGroupPrepend"
@@ -373,7 +403,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                 </div>
               </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" id="submitReg">
               <a href="#" class="btn btn-warning btn-lg btn-block"
                 >Regístrate</a
               >
@@ -383,6 +413,39 @@ style="background-color: #f28f1d; border-color: #ffffff;"
       </div>
     </li>
     <li class="nav-item">
+
+
+
+    <li class="nav-item" id="loggedIn">
+      <div class="dropdown">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownProfile"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+          style="
+            margin-left: 18px;
+            margin-right: 18px;
+            margin-bottom: 8px;
+          "
+        >
+          <img
+            src="img/profileIcon.png"
+            alt="profileIcon"
+            height="35"
+            width="35"
+          />
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownProfile">
+          <a class="dropdown-item" href="profile.html">Perfil</a>
+          <a class="dropdown-item" id="logout">Cerrar sesión</a>
+        </div>
+      </div>
+    </li>
+
+
       <a class="faqIcon" href="faq.html">
         <img
           src="img/faqIcon.png"
@@ -399,5 +462,4 @@ style="background-color: #f28f1d; border-color: #ffffff;"
     </li>
   </ul>
 </div>
-</nav>
-<script src="./js/login.js"></script>`;
+</nav>`;

@@ -19,10 +19,16 @@ fetch(`/singleAnimal/${animalID}`, {
     const youtubeURL = `https://www.youtube.com/embed/${animal.youtubeID}`;
     iframeElem.setAttribute("src", youtubeURL);
 
+    let chars = ""
+    for (let key in animal.characteristics) {
+      let temp = `<b>${key}: </b>${animal.characteristics[key]}<br>`
+      chars = chars.concat(temp)
+    }
+
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
     speciesElem.innerText = animal.species;
     aboutElem.innerText = animal.about;
-    characteristicsElem.innerText = animal.characteristics;
+    characteristicsElem.innerHTML = chars;
     keeperElem.innerText = animal.keeper;
 
     if (animal.isAdopted) {

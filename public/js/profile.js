@@ -130,22 +130,28 @@ showAdoptionsElem.addEventListener("click", () => {
   fetch(`/adoptions/${username}`)
     .then((res) => res.json())
     .then((animals) => {
-      let count = 0;
-      let row = createRow();
+      if (animals.length !== 0) {
+        let count = 0;
+        let row = createRow();
 
-      for (animal of animals) {
-        let col = createCard(animal);
-        row.appendChild(col);
-        count++;
-        if (
-          (count > 0 && count % 2 === 0) ||
-          (count === animals.length && animals.length % 2 !== 0)
-        ) {
-          container.appendChild(row);
-          row = createRow();
+        for (animal of animals) {
+          let col = createCard(animal);
+          row.appendChild(col);
+          count++;
+          if (
+            (count > 0 && count % 2 === 0) ||
+            (count === animals.length && animals.length % 2 !== 0)
+          ) {
+            container.appendChild(row);
+            row = createRow();
+          }
         }
+      } else {
+        let h1 = document.createElement("h1");
+        h1.innerText = "No has adoptado aun, ¡adopta!";
+        console.log(h1)
+        container.appendChild(h1);
       }
-      console.log(animals);
     })
     .catch("Error in the request");
 })

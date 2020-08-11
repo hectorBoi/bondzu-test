@@ -26,12 +26,9 @@ const handleProfile = async (req, res, Parse) => {
     query.equalTo("username", username)
     const user = await query.first();
 
-    console.log("userid: ", user.get("userType").id)
     const typeTable = Parse.Object.extend("UserType");
     const queryType = new Parse.Query(typeTable);
     const usertype = await queryType.get(user.get("userType").id);
-
-    console.log(usertype)
 
     const name = user.get("name");
     const lastname = user.get("lastname");
@@ -74,11 +71,7 @@ const updateProfile = async (req, res, Parse) => {
     }
 
     const newUser = await user.save(null, { sessionToken: token });
-    console.log(newUser)
-    res.json({
-      username: newUser.get("name"),
-      email: newUser.get("lastname"),
-    })
+    res.json("Success!")
 
   } catch (err) {
     console.log(err)
