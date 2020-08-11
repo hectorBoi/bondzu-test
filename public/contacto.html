@@ -31,27 +31,61 @@
 
   <body>
     <header>
-      <div
-        data-spy="scroll"
-        data-target="#navBar"
-        data-offset="0"
-        class="scrollspy-example"
-      >
-        <nav id="navBar"></nav>
-        <script src="./js/navBar.js"></script>
-      </div>
+      <nav id="navBar"></nav>
+      <script src="./js/navBar.js"></script>
     </header>
     <br />
     <h1 style="color: #3a8169;" class="text-center">
       Contáctanos
     </h1>
     <br />
-    <div>
-      <a href="#navBar" style="text-decoration: none;">
-        <button type="button" class="btn btn-secondary btn-lg btn-block">
-          <h6 style="color: #ffffff;">Volver al principio</h6>
-        </button>
-      </a>
+
+    <div class="container">
+      <div class="card mx-auto" style="width: 25rem;">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="name">Nombre completo</label>
+              <input
+                type="email"
+                class="form-control"
+                id="name"
+                placeholder="Nombre Apellidos"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="nombre@correo.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="subject">Asunto</label>
+              <input
+                type="subject"
+                class="form-control"
+                id="exampleFormControlInput1"
+                placeholder="Asunto"
+              />
+            </div>
+            <div class="form-group">
+              <label for="message">Mensaje</label>
+              <textarea
+                class="form-control"
+                id="message"
+                rows="3"
+                placeholder="Escriba su mensaje aquí"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer text-muted">
+          <a href="#" class="btn btn-primary btn-lg btn-block">Enviar</a>
+        </div>
+      </div>
     </div>
   </body>
   <script src="./js/index.js"></script>
