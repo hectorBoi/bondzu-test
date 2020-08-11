@@ -27,6 +27,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
+
   <body>
     <header>
       <nav id="navBarLog"></nav>
@@ -89,8 +90,50 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
-                    ...
+                  <div class="modal-body text-center">
+                    <div class="container-sm">
+                      <img
+                        src="img/logoBondzu.png"
+                        width="200"
+                        height="200"
+                        class="rounded-circle"
+                        alt="profilePicture"
+                        style="margin: 10px;"
+                      />
+                      <br />
+                      <br />
+                      <form>
+                        <div class="form-group row">
+                          <input type="file" class="form-control-file" />
+                        </div>
+                        <div class="form-group row">
+                          <label for="name" class="col-auto col-form-label"
+                            >Nombre</label
+                          >
+                          <input type="text" class="form-control" id="name" />
+                        </div>
+                        <div class="form-group row">
+                          <label for="lastName" class="col-auto col-form-label"
+                            >Apellidos</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="lastName"
+                          />
+                        </div>
+                        <div class="form-group row">
+                          <label for="password" class="col-auto col-form-label"
+                            >Contraseña</label
+                          >
+                          <input
+                            type="password"
+                            class="form-control"
+                            id="password"
+                          />
+                        </div>
+                      </form>
+                    </div>
                   </div>
                   <div class="modal-footer" style="align-items: center;">
                     <button
