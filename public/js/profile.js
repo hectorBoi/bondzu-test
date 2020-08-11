@@ -11,6 +11,7 @@ const newProfilepicElem = document.getElementById("newProfilepic");
 const newNameElem = document.getElementById("newName");
 const newLastNameElem = document.getElementById("newLastName");
 const newPasswordElem = document.getElementById("newPassword");
+const newPasswordConfirmElem = document.getElementById("newPasswordConfirm");
 const updateProfileElem = document.getElementById("updateProfile");
 
 fetch(`/profile/${username}`)
@@ -31,6 +32,7 @@ updateProfileElem.addEventListener("click", () => {
   const newName = newNameElem.value;
   const newLastname = newLastNameElem.value;
   const newPassword = newPasswordElem.value;
+  const newPasswordConfirm = newPasswordConfirmElem.value;
   let newProfilePic;
 
   if (newProfilepicElem.files.length > 0) {
@@ -49,23 +51,28 @@ updateProfileElem.addEventListener("click", () => {
 
   console.log(request)
 
-  fetch("/profile", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-      usertype: window.localStorage.getItem("usertype"),
-      username: window.localStorage.getItem("username"),
-      token: window.localStorage.getItem("token"),
-    },
-    body: JSON.stringify(request)
-  })
-    .then((res) => res.json())
-    .then((newUser) => {
-      console.log(newUser);
-      location.reload();
-      return false;
+  if (newPasswordConfirm === newPassword) {
+    fetch("/profile", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        usertype: window.localStorage.getItem("usertype"),
+        username: window.localStorage.getItem("username"),
+        token: window.localStorage.getItem("token"),
+      },
+      body: JSON.stringify(request)
     })
-    .catch("Error in the request");
+      .then((res) => res.json())
+      .then((newUser) => {
+        console.log(newUser);
+        location.reload();
+        return false;
+      })
+      .catch("Error in the request");
+  } else {
+    alert("Las contraseñas no coinciden, intenta de nuevo.")
+  }
+
 })
 
 // To interact with the adoptions

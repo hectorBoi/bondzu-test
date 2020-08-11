@@ -401,6 +401,26 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     aria-label="Contraseña"
                   />
                 </div>
+
+                <br />
+                <div class="input-group is-invalid">
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text"
+                      id="validatedInputGroupPrepend"
+                      >Contraseña</span
+                    >
+                  </div>
+                  <input
+                    id="passwordRegConf"
+                    type="password"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                    placeholder="Contraseña"
+                    aria-label="Contraseña"
+                  />
+                </div>
               </form>
             </div>
             <div class="modal-footer" id="submitReg">
