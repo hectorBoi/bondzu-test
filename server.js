@@ -57,7 +57,11 @@ app.get("/adoptions", (req, res) => {
   adoptions.getAdoptions(req, res, Parse);
 })
 
-app.post("/adoptions", (req, res) => {
+app.post("/adoptions", (req, res) => { // THIS IS TEMPORAL
+  adoptions.getAdoptions(req, res, Parse);
+})
+
+app.post("/adoptions/:animalID", (req, res) => {
   adoptions.updateAdoptions(req, res, Parse);
 })
 
