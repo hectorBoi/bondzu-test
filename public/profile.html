@@ -92,6 +92,7 @@
                   <div class="modal-body text-center">
                     <div class="container-sm">
                       <img
+                        id="profilePhotoMod"
                         src="img/logoBondzu.png"
                         width="200"
                         height="200"
@@ -109,7 +110,7 @@
                           <label for="name" class="col-auto col-form-label"
                             >Nombre</label
                           >
-                          <input type="text" class="form-control" id="name" />
+                          <input type="text" class="form-control" id="newName" />
                         </div>
                         <div class="form-group row">
                           <label for="lastName" class="col-auto col-form-label"
@@ -118,7 +119,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            id="lastName"
+                            id="newLastName"
                           />
                         </div>
                         <div class="form-group row">
@@ -128,7 +129,7 @@
                           <input
                             type="password"
                             class="form-control"
-                            id="password"
+                            id="newPassword"
                           />
                         </div>
                       </form>
@@ -142,7 +143,7 @@
                     >
                       Cerrar
                     </button>
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-success" id="updateProfile">
                       Guardar cambios
                     </button>
                   </div>

@@ -35,7 +35,7 @@ const handleProfile = async (req, res, Parse) => {
       lastname,
       photo
     }
-    
+
     res.json(response)
   } catch (err) {
     res.json("User not found")
@@ -45,7 +45,7 @@ const handleProfile = async (req, res, Parse) => {
 //TODO
 //Updates the user profile with new info
 const updateProfile = async (req, res, Parse) => {
-  const { Nname, Nemail, Nusername, username, token } = req.body;
+  const { Nname, Nlastname, Npassword, username, token } = req.body;
 
   try {
     const userTable = Parse.Object.extend("User");
@@ -54,20 +54,23 @@ const updateProfile = async (req, res, Parse) => {
     const user = await query.first();
 
 
-    if (Nname) {
+    if (Nname !== "") {
       user.set("name", Nname);
     }
 
-    if (Nemail) {
-      user.set("email", Nemail);
-      user.set("username", Nusername);
+    if (Nlastname !== "") {
+      user.set("lastname", Nlastname);
     }
 
-    const newUser = user.save(null, { sessionToken: token });
+    if (Npassword !== "") {
+      user.setPassword(Npassword);
+    }
+
+    const newUser = await user.save(null, { sessionToken: token });
+    console.log(newUser)
     res.json({
-      username: newUser.get("username"),
-      email: newUser.get("email"),
-      name: newUser.get("name"),
+      username: newUser.get("name"),
+      email: newUser.get("lastname"),
     })
 
   } catch (err) {

@@ -26,8 +26,8 @@ fetch(`/singleAnimal/${animalID}`, {
     keeperElem.innerText = animal.keeper;
 
     if (animal.isAdopted) {
-      adoptElem.style.backgroundColor = "red";
-      adoptElem.innerText = "Adios :("
+      adoptElem.innerText = "¡Ya me adoptaste!";
+      adoptElem.disabled = true;
     }
   })
   .catch("Error in the request");
