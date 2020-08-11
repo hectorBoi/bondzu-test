@@ -1,7 +1,7 @@
 const animalInfo = require("./animalInfo");
 
 const getAdoptions = async (req, res, Parse) => {
-  const { username } = req.headers; // DEBERIA DE SER HEADER
+  const username = req.params.userID;
 
   try {
     const userTable = Parse.Object.extend("User");

@@ -42,7 +42,6 @@ const handleProfile = async (req, res, Parse) => {
   }
 }
 
-//TODO
 //Updates the user profile with new info
 const updateProfile = async (req, res, Parse) => {
   const { Nname, Nlastname, Npassword, username, token } = req.body;

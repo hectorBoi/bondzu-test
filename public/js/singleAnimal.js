@@ -45,8 +45,9 @@ adoptElem.addEventListener("click", () => {
     .then((res) => res.json())
     .then(res => {
       if (res === "Worked") {
-        window.localStorage.setItem("isAdopted", true)
-        alert("Success!")
+        alert("Adoptaste a un animal!");
+        adoptElem.innerText = "¡Ya me adoptaste!";
+        adoptElem.disabled = true;
       }
     })
     .catch("Error in the request");
