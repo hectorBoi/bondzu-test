@@ -18,16 +18,15 @@ submit.addEventListener("click", () => {
   })
     .then(res => res.json())
     .then(res => {
-      if (res) {
-        if (res.token) {
-          const { token, userType, username } = res;
-          window.localStorage.setItem("token", token);
-          window.localStorage.setItem("usertype", userType);
-          window.localStorage.setItem("username", username);
-          location.replace("/navBarLoggedIn.html");
-        } else {
-          alert(err.message);
-        }
+      if (res.token) {
+        const { token, userType, username } = res;
+        window.localStorage.setItem("token", token);
+        window.localStorage.setItem("usertype", userType);
+        window.localStorage.setItem("username", username);
+        location.replace("/navBar.html");
+      }
+      if (res === "Incorrect") {
+        alert("Usuario o contraseña incorrecta. Intente de nuevo.");
       }
     })
     .catch(err => {

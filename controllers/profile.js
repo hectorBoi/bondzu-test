@@ -10,7 +10,7 @@ const getPhoto = async (username, Parse) => {
     if (photo) {
       return photo._url
     }
-    return "No photo"
+    return null
   } catch (err) {
     return "Error"
   }
@@ -18,15 +18,17 @@ const getPhoto = async (username, Parse) => {
 
 // Returns the users information
 const handleProfile = async (req, res, Parse) => {
-  const { username } = req.header; // DEBERIA DE SER HEADER
-
+  const username = req.params.username;
 
   try {
-    console.log("username: ", username)
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)
     const user = await query.first();
+
+    const typeTable = Parse.Object.extend("UserType");
+    const queryType = new Parse.Query(typeTable);
+    const usertype = await queryType.get(user.get("userType").id);
 
     const name = user.get("name");
     const lastname = user.get("lastname");
@@ -35,10 +37,9 @@ const handleProfile = async (req, res, Parse) => {
     const response = {
       name,
       lastname,
-      photo
+      photo,
+      usertype: usertype.get("name"),
     }
-
-    console.log(response)
 
     res.json(response)
   } catch (err) {
@@ -46,10 +47,9 @@ const handleProfile = async (req, res, Parse) => {
   }
 }
 
-//TODO
 //Updates the user profile with new info
 const updateProfile = async (req, res, Parse) => {
-  const { Nname, Nemail, Nusername, username, token } = req.body;
+  const { Nname, Nlastname, Npassword, username, token } = req.body;
 
   try {
     const userTable = Parse.Object.extend("User");
@@ -58,21 +58,20 @@ const updateProfile = async (req, res, Parse) => {
     const user = await query.first();
 
 
-    if (Nname) {
+    if (Nname !== "") {
       user.set("name", Nname);
     }
 
-    if (Nemail) {
-      user.set("email", Nemail);
-      user.set("username", Nusername);
+    if (Nlastname !== "") {
+      user.set("lastname", Nlastname);
     }
 
-    const newUser = user.save(null, { sessionToken: token });
-    res.json({
-      username: newUser.get("username"),
-      email: newUser.get("email"),
-      name: newUser.get("name"),
-    })
+    if (Npassword !== "") {
+      user.setPassword(Npassword);
+    }
+
+    const newUser = await user.save(null, { sessionToken: token });
+    res.json("Success!")
 
   } catch (err) {
     console.log(err)

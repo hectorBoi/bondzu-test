@@ -30,8 +30,8 @@
 
   <body>
     <header>
-      <nav id="navBarLog"></nav>
-      <script src="js/navBarLoggedIn.js"></script>
+      <nav id="navBar"></nav>
+      <script src="js/navBar.js"></script>
     </header>
 
     <div class="jumbotron">
@@ -39,6 +39,7 @@
         <div class="row">
           <div class="col-lg-4">
             <img
+              id="profilePhoto"
               src="img/logoBondzu.png"
               width="250"
               height="250"
@@ -48,14 +49,12 @@
             />
           </div>
           <div class="col-lg-6">
-            <h2 style="display: inline; margin: 8px;" id="name">Nombre</h2>
-            <h2 style="display: inline;" id="lastname">Apellidos</h2>
+            <h2 style="display: inline; margin: 8px;" id="name"></h2>
+            <h2 style="display: inline;" id="lastname"></h2>
             <hr style="clear: both;" />
             <h5 class="text-muted" style="margin: 8px;" id="usertype">
-              Bondzù Lover
             </h5>
             <h5 class="text-muted" style="margin: 8px;" id="username">
-              correo@ejemplo.com
             </h5>
             <h5 class="text-muted" style="margin: 8px;">
               ***************
@@ -93,6 +92,7 @@
                   <div class="modal-body text-center">
                     <div class="container-sm">
                       <img
+                        id="profilePhotoMod"
                         src="img/logoBondzu.png"
                         width="200"
                         height="200"
@@ -110,7 +110,7 @@
                           <label for="name" class="col-auto col-form-label"
                             >Nombre</label
                           >
-                          <input type="text" class="form-control" id="name" />
+                          <input type="text" class="form-control" id="newName" />
                         </div>
                         <div class="form-group row">
                           <label for="lastName" class="col-auto col-form-label"
@@ -119,7 +119,7 @@
                           <input
                             type="text"
                             class="form-control"
-                            id="lastName"
+                            id="newLastName"
                           />
                         </div>
                         <div class="form-group row">
@@ -129,7 +129,7 @@
                           <input
                             type="password"
                             class="form-control"
-                            id="password"
+                            id="newPassword"
                           />
                         </div>
                       </form>
@@ -143,7 +143,7 @@
                     >
                       Cerrar
                     </button>
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-success" id="updateProfile">
                       Guardar cambios
                     </button>
                   </div>
@@ -153,6 +153,7 @@
             <br />
             <br />
             <button
+              id="showAdoptions"
               type="button"
               class="btn btn-success"
               style="margin-top: 8px; margin-left: 8px; margin-right: 8px;"
@@ -163,11 +164,15 @@
         </div>
       </div>
     </div>
-    <div class="alert alert-success" role="alert" style="top: -2rem;">
-      <h4 class="alert-heading text-center">Tus adopciones</h4>
+    <div style="display:none" id="adoptionsContainer">
+      <div class="alert alert-success" role="alert" style="top: -2rem;">
+        <h4 class="alert-heading text-center">Tus adopciones</h4>
+      </div>
+      <div class="container" id="container"></div>
     </div>
-    <div class="container" id="container"></div>
 
+    <script src="./js/index.js"></script>
     <script src="./js/profile.js"></script>
+    <script src="./js/logout.js"></script>
   </body>
 </html>

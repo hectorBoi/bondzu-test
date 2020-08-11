@@ -79,6 +79,29 @@
               </button></a
             >
           </li>
+
+
+          <li class="nav-item" id="navAnimals">
+            <a
+              href="animalsNew.html"
+              style="text-decoration: none; color: white;"
+            >
+              <button
+                type="button"
+                class="btn btn-outline-light"
+                style="
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                ¡Animales!
+              </button></a
+            >
+          </li>
+
+
+
           <li class="nav-item">
             <a href="quienes.html" style="text-decoration: none; color: white;">
               <button
@@ -144,7 +167,7 @@
           </li>
         </ul>
         <ul class="navbar-nav ml-auto justify-content-end">
-          <li class="nav-item">
+          <li class="nav-item" id="guest">
             <a
               class="loginIcon form-inline my-2 my-lg-0 ml-auto"
               type="button"
@@ -422,6 +445,39 @@
             </div>
           </li>
           <li class="nav-item">
+
+
+
+          <li class="nav-item" id="loggedIn">
+            <div class="dropdown">
+              <button
+                class="btn btn-primary dropdown-toggle"
+                type="button"
+                id="dropdownProfile"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                style="
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                <img
+                  src="img/profileIcon.png"
+                  alt="profileIcon"
+                  height="35"
+                  width="35"
+                />
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownProfile">
+                <a class="dropdown-item" href="profile.html">Perfil</a>
+                <a class="dropdown-item" id="logout">Cerrar sesión</a>
+              </div>
+            </div>
+          </li>
+
+
             <a class="faqIcon" href="faq.html">
               <img
                 src="img/faqIcon.png"
@@ -441,6 +497,8 @@
     </nav>
 
     <script src="./js/login.js"></script>
+    <script src="./js/logout.js"></script>
     <script src="./js/register.js"></script>
+    <script src="./js/index.js"></script>
   </body>
 </html>

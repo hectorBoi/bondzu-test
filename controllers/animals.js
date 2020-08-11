@@ -1,4 +1,5 @@
 const animalInfo = require("./animalInfo");
+const adopts = require("./adoptions");
 
 // Filter the array of animals depending on the type of the user
 const filterAnimals = (userType, animals) => {
@@ -40,13 +41,14 @@ const handleAnimals = async (req, res, Parse) => {
 // Extracts the information of a specific animal from the database
 const handleSingleAnimal = async (req, res, Parse) => {
   const animalID = req.params.animalID;
-  // const { usertype, animalID } = req.body; // DEBERIA DE SER HEADER
 
   try {
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     const animal = await query.get(animalID)
+    const isAdopted = await adopts.isAdopted(req, res, Parse, animalID);
     const animal_info = await animalInfo.getAnimalInfo(animal, Parse);
+    animal_info.isAdopted = isAdopted;
     res.json(animal_info);
   } catch (err) {
     res.json(err)

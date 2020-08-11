@@ -1,12 +1,12 @@
-const login = document.getElementById("login");
-const animals = document.getElementById("animals");
+const guest = document.getElementById("guest");
+const animals = document.getElementById("navAnimals");
+const loggedIn = document.getElementById("loggedIn");
 const token = window.localStorage.getItem("token");
 
 if (!token) {
-  login.style.display = "visible"
-  animals.style.display = "none"
+  animals.style.display = "none";
+  loggedIn.style.display = "none";
 } else {
-  login.style.display = "none"
-  animals.style.display = "visible"
+  guest.style.display = "none";
 }
 
