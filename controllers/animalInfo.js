@@ -38,8 +38,6 @@ const getAnimalInfo = async (animal, Parse) => {
   let animalInfo = {
     about: animal.get("about"),
     characteristics: animal.get("characteristics"),
-    id: animal.id,
-    name: animal.get("name"),
     profilePhoto: animal.get("profilePhoto")._url,
     species: animal.get("species"),
     youtubeID: video,

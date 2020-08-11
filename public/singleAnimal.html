@@ -41,8 +41,9 @@
             style="margin-top: 15px;"
           >
             <iframe
+              id="iframe"
               class="embed-responsive-item"
-              src="https://www.youtube.com/embed/NVCi9yYwRCY"
+              src=""
               allowfullscreen
             ></iframe>
           </div>
@@ -50,7 +51,8 @@
         <div class="col-xl-4">
           <div class="card" style="margin-top: 15px;">
             <img
-              src="https://images7.alphacoders.com/441/thumb-1920-441761.jpg"
+              id="animalPhoto"
+              src=""
               class="card-img img-fluid"
               alt="animal"
               height="300"
@@ -59,33 +61,22 @@
               ¡Adóptame!
             </button>
             <div class="card-body">
-              <h4 class="card-title text-center">Tigre</h4>
+              <h4 class="card-title text-center" id="species"></h4>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <h5 class="card-title">Acerca de</h5>
-                  El tigre de Bengala (Panthera tigris tigris), también conocido
-                  como tigre de Bengala real o tigre indio, es una subespecie de
-                  tigre que habita en la India, Nepal, Bangladés, Bután,
-                  Birmania y Tíbet. Es la subespecie más numerosa y conocida de
-                  tigre, y se encuentra en una gran variedad de hábitats,
-                  incluyendo sabanas y bosques tropicales y subtropicales.
+                  <div id="about">
+                  </div>
                 </li>
                 <li class="list-group-item">
                   <h5 class="card-title">Características</h5>
-                  Su piel es generalmente de color naranja o leonado. Existe una
-                  mutación genética que produce que la piel naranja del tigre
-                  sea sustituida por el color blanco; a estos tigres se les
-                  conoce como tigres blancos. Una mutación aún más rara (de la
-                  que existen menos de cien ejemplares, todos en cautiverio), se
-                  conoce como tigre dorado.
-                </li>
-                <li class="list-group-item">
-                  <h5 class="card-title">Especie</h5>
-                  Tigre de Bengala
+                  <div id="characteristics">
+                  </div>
                 </li>
                 <li class="list-group-item">
                   <h5 class="card-title">Cuidador</h5>
-                  Nombre Apellidos
+                  <div id="keeper">
+                  </div>
                 </li>
               </ul>
             </div>
@@ -93,5 +84,7 @@
         </div>
       </div>
     </div>
+
+    <script src="./js/singleAnimal.js"></script>
   </body>
 </html>
