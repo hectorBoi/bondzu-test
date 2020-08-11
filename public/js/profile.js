@@ -7,6 +7,7 @@ const profilePhotoModElem = document.getElementById("profilePhotoMod");
 const username = window.localStorage.getItem("username")
 
 // To modify the user
+const newProfilepicElem = document.getElementById("newProfilepic");
 const newNameElem = document.getElementById("newName");
 const newLastNameElem = document.getElementById("newLastName");
 const newPasswordElem = document.getElementById("newPassword");
@@ -30,14 +31,24 @@ updateProfileElem.addEventListener("click", () => {
   const newName = newNameElem.value;
   const newLastname = newLastNameElem.value;
   const newPassword = newPasswordElem.value;
+  let newProfilePic;
+
+  if (newProfilepicElem.files.length > 0) {
+    newProfilePic = newProfilepicElem.files[0];
+  }
+
+
   let request = {
     Nname: newName,
     Nlastname: newLastname,
     Npassword: newPassword,
+    Nprofilepic: newProfilePic,
     username: window.localStorage.getItem("username"),
     token: window.localStorage.getItem("token"),
   }
+
   console.log(request)
+
   fetch("/profile", {
     method: "post",
     headers: {
