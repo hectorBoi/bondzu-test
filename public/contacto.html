@@ -1,108 +1,60 @@
 <!DOCTYPE html>
-<html lang="es">
-    
-    <head>
-       <title>Bondzù</title>
-       <meta charset="utf-8">
-       <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
-       <link rel="stylesheet" href="css/fontello.css">
-       <link rel="stylesheet" href="css/estilos.css">
-       <link rel="stylesheet" href="css/estilo.css">
 
-      
-       <style type="text/css">
-       body,td,th {
-	font-family: "Open Sans", sans-serif;
-	              }
-	   </style>
-   
-   </head>
-    
-      <body>
-        <header> 
-          <div class="contenedor">
-             <h1 class="">Contacto</h1>
-             <input type="checkbox" id="menu-bar">
-             <label class="icon-menu" for="menu-bar"></label>
-          
-          <nav class="menu">
-             
-             
-                <a href="index.html">Inicio</a>
-                <a href="quienes.html">¿Quiénes Somos?</a>
-                <a href="app.html">Nuestra App</a>
-                <a href="blog.html">Blog</a>
-                <a href="faq.html">FAQ</a>
-                <a href="contacto.html">Contacto</a>
-                <a href="login.html" id="login">Login</a>
-                <a href="animals.html" id="animals">Animals!</a>
-             </nav> 
-          </div>       
-          </header>
-         
-          <main>
-                        <left>
-              <div class="banderas">
-               <center>
-               <article>
-                 <blockquote>
-                   <blockquote>
-                     <p align="right">&nbsp;</p>
-                     <p align="right">&nbsp;</p>
-                     <p align="right">&nbsp;</p>
-                     <p align="right"><span class="idioma">Idioma  </span></p>
-                     <p align="right"><a href="Ingles/contact.html"><img src="img/bandera-eua.png" height="20"></a>
-                       <a href="contacto.html"><img src="img/bandera-mexico.png" height="20"></a>                     </p>
-                   </blockquote>
-                 </blockquote>
-               </article> 
-                <article>
-                    <div align="right">
-                      <blockquote>
-                        <blockquote>&nbsp; </blockquote>
-                      </blockquote>
-                    </div>
-                  <blockquote>
-                    <blockquote>
-                        <p align="right">&nbsp;</p>
-                    </blockquote>
-                  </blockquote>
-                </article> 
-               <left>
-               
-           
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bondzù</title>
+    <link rel="icon" href="img/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <header>
+      <div
+        data-spy="scroll"
+        data-target="#navBar"
+        data-offset="0"
+        class="scrollspy-example"
+      >
+        <nav id="navBar"></nav>
+        <script src="./js/navBar.js"></script>
       </div>
-    
-    
-           <form action="enviar.php" method="post">
-           <h7>Contáctanos</h7>
-           <input type="text" name="nombre" placeholder="Nombre" required>
-           <input type="text" name="correo" placeholder="Correo" required>
-           <input type="text" name="asunto" placeholder="Asunto" required>
-           <textarea name="mensaje" placeholder="Escriba aqui su mensaje" required></textarea>
-           <input type="submit" value="Enviar" id="boton">
-             
-           </form>    
-                        
-           </main>   
-           <footer>
-              <div class=".contenedor">
-               <p class="derechos">Bondzù &copy 2020</p>
-               <div class="redes">
-                  <a class="icon-facebook" href="https://www.facebook.com/bondzu"></a>
-                  <a class="icon-twitter" href="https://twitter.com/bondzucubs"></a>
-                  <a class="icon-instagram" href="https://www.instagram.com/bondzucubs/"></a>
-                  <a class="icon-youtube" href="https://www.youtube.com/channel/UCDlP5uYzgyjtohKRAlkO63g"></a>
-               
-               </div>
-               </div>
-                                 
-           </footer>
-         
-         
-         <script src="./js/index.js"></script>
-         
-</body>
-</html> 
-      
- 
+    </header>
+    <br />
+    <h1 style="color: #3a8169;" class="text-center">
+      Contáctanos
+    </h1>
+    <br />
+    <div>
+      <a href="#navBar" style="text-decoration: none;">
+        <button type="button" class="btn btn-secondary btn-lg btn-block">
+          <h6 style="color: #ffffff;">Volver al principio</h6>
+        </button>
+      </a>
+    </div>
+  </body>
+  <script src="./js/index.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/logout.js"></script>
+</html>
