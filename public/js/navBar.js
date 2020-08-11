@@ -51,7 +51,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
 
     <li class="nav-item" id="navAnimals">
       <a
-        href="animalsNew.html"
+        href="animals.html"
         style="text-decoration: none; color: white;"
       >
         <button

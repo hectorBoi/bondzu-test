@@ -23,7 +23,7 @@ submit.addEventListener("click", () => {
         window.localStorage.setItem("token", token);
         window.localStorage.setItem("usertype", userType);
         window.localStorage.setItem("username", username);
-        location.replace("/navBar.html");
+        location.replace("/");
       }
       if (res === "Incorrect") {
         alert("Usuario o contraseña incorrecta. Intente de nuevo.");

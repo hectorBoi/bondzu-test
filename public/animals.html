@@ -1,70 +1,42 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Bondzù - Cámaras en vivo de tus animales favoritos!</title>
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;500;700&family=Roboto+Condensed:wght@300;400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-        <link rel = "stylesheet" type = "text/css" href = "./css/videoStyles.css">
-    </head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bondzù</title>
+    <link rel="icon" href="img/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header>
+      <nav id="navBar"></nav>
+      <script src="js/navBar.js"></script>
+    </header>
+    <br />
+    <div class="container-xl" id="container"></div>
 
-    <body>
-
-        <section class = "user-profile" id="testing">
-            
-            <img src="./img/Riley-Wheeler.jpg">
-            
-            <h1 class="username-header" id="username"> Riley Wheeler </h1>
-
-            <nav id="test">
-                <ul>
-                   <li><a href = "index.html">Inicio</a></li> 
-                   <li><a href = "#">Perfil</a></li> 
-                   <li><a href = "#">Adopciones</a></li>
-                   <li><a href = "#" id="logout">Cerrar sesión</a></li> 
-                </ul>
-            </nav>
-        </section>
-
-        <header>
-            <h1>Bondzù - Cámaras en vivo</h1>
-        </header>
-
-        <section class = "video-grid">
-            <div class = "video-container" id = "animal-1">
-                
-            </div>
-            <div class = "video-container">
-                
-            </div>
-            <div class = "video-container">Cam 3</div>
-            <div class = "video-container">Cam 4</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 5</div>
-            <div class = "video-container">Cam 6</div>
-            <div class = "video-container">Cam 6</div>
-            <div class = "video-container">Cam 7</div>
-            <div class = "video-container">Cam 8</div>
-        </section>
-
-        <script src="./js/animals.js"></script>
-        <script src="./js/logout.js"></script>
-
-        <!-- NOTE - Possible code to change the language.
-        <button id="changeToEnglish">English</button>
-
-        <script>
-            document.getElementById("changeToEnglish").addEventListener("click", function() {
-                document.title = "Bondzù - Live webcams of your favorite animals!"
-            })
-        </script>
-        -->
-    </body>
+    <script src="./js/animals.js"></script>
+    <script src="./js/logout.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
 </html>

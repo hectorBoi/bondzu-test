@@ -15,7 +15,7 @@ logout.addEventListener("click", () => {
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("usertype")
         window.localStorage.removeItem("username")
-        location.replace("/navBar.html")
+        location.replace("/")
       }
     })
     .catch(err => {
