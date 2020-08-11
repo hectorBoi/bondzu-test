@@ -51,7 +51,6 @@ const handleSingleAnimal = async (req, res, Parse) => {
     animal_info.isAdopted = isAdopted;
     res.json(animal_info);
   } catch (err) {
-    console.log(err)
     res.json(err)
   }
 }

@@ -29,7 +29,7 @@ app.post("/logout", (req, res) => {
   logout.handleLogout(req, res, Parse)
 })
 
-app.get("/profile", (req, res) => {
+app.get("/profile/:username", (req, res) => {
   profile.handleProfile(req, res, Parse);
 });
 

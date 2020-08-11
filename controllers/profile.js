@@ -10,7 +10,7 @@ const getPhoto = async (username, Parse) => {
     if (photo) {
       return photo._url
     }
-    return "No photo"
+    return null
   } catch (err) {
     return "Error"
   }
@@ -18,11 +18,9 @@ const getPhoto = async (username, Parse) => {
 
 // Returns the users information
 const handleProfile = async (req, res, Parse) => {
-  const { username } = req.header; // DEBERIA DE SER HEADER
-
+  const username = req.params.username; // DEBERIA DE SER HEADER
 
   try {
-    console.log("username: ", username)
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)
@@ -37,9 +35,7 @@ const handleProfile = async (req, res, Parse) => {
       lastname,
       photo
     }
-
-    console.log(response)
-
+    
     res.json(response)
   } catch (err) {
     res.json("User not found")
