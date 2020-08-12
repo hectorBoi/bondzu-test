@@ -29,14 +29,54 @@
   </head>
   <body>
     <header>
-      <nav id="navBar"></nav>
-      <script src="js/navBar.js"></script>
+      <div
+        data-spy="scroll"
+        data-target="#navBar"
+        data-offset="0"
+        class="scrollspy-example"
+      >
+        <nav id="navBar"></nav>
+        <script src="./js/navBar.js"></script>
+      </div>
     </header>
     <br />
-    <h2 style="color: #3a8169;" class="text-center">
-      ¡Disfruta de tus animales favoritos en vivo!
-    </h2>
-    <div class="container-xl" id="container"></div>
+    <div class="container mx-auto">
+      <div class="row">
+        <div class="col-lg-9">
+          <h2 style="color: #3a8169; display: inline;" class="text-center">
+            ¡Disfruta de tus animales favoritos en vivo!
+          </h2>
+        </div>
+        <div class="col-lg">
+          <a href="#colegas">
+            <button class="btn btn-primary btn-sm">
+              No te olvides de nuestros colegas
+            </button></a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid" id="containerAnimals"></div>
+    <div
+      data-spy="scroll"
+      data-target="#colegas"
+      data-offset="0"
+      class="scrollspy-example"
+    >
+      <h2 id="colegas" style="color: #3a8169;" class="text-center">
+        Nuestros colegas
+      </h2>
+    </div>
+    <div class="container-fluid" id="containerColleagues"></div>
+    <br />
+    <div>
+      <a href="#navBar" style="text-decoration: none;">
+        <button type="button" class="btn btn-secondary btn-lg btn-block">
+          <h6 style="color: #ffffff;">Volver al principio</h6>
+        </button>
+      </a>
+    </div>
 
     <script src="./js/animals.js"></script>
     <script src="./js/logout.js"></script>

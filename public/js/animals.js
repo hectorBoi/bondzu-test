@@ -1,10 +1,11 @@
-const container = document.getElementById("container");
+const containerAnimals = document.getElementById("containerAnimals");
+const containerColleagues = document.getElementById("containerColleagues");
 
 const createDiv = (className, id) => {
   let div = document.createElement("div");
   div.className = className;
   if (id) {
-    div.setAttribute("id", id)
+    div.setAttribute("id", id);
   }
   return div;
 };
@@ -13,10 +14,7 @@ const createButton = (location) => {
   let div = createDiv("card bg-dark text-white");
   div.setAttribute("type", "button");
   div.style.margin = "20px";
-  div.setAttribute(
-    "onclick",
-    `window.location.href='singleAnimal.html'`
-  );
+  div.setAttribute("onclick", `window.location.href='singleAnimal.html'`);
   return div;
 };
 
@@ -39,7 +37,7 @@ const createTitle = (title) => {
 
 const createRow = () => {
   let div = document.createElement("div");
-  div.className = "row row-cols-1 row-cols-md-2";
+  div.className = "row row-cols-1 row-cols-lg-2 row-cols-xl-4";
   return div;
 };
 
@@ -81,10 +79,23 @@ fetch("/animals", {
       row.appendChild(col);
       count++;
       if (
-        (count > 0 && count % 2 === 0) ||
-        (count === animals.length && animals.length % 2 !== 0)
+        (count > 0 && count % 4 === 0) ||
+        (count === animals.length && animals.length % 4 !== 0)
       ) {
-        container.appendChild(row);
+        containerAnimals.appendChild(row);
+        row = createRow();
+      }
+    }
+
+    for (animal of animals) {
+      let col = createCard(animal);
+      row.appendChild(col);
+      count++;
+      if (
+        (count > 0 && count % 4 === 0) ||
+        (count === animals.length && animals.length % 4 !== 0)
+      ) {
+        containerColleagues.appendChild(row);
         row = createRow();
       }
     }
@@ -92,8 +103,8 @@ fetch("/animals", {
   })
   .catch("Error in the request");
 
-window.onclick = event => {
+window.onclick = (event) => {
   if (event.target.id) {
-    window.localStorage.setItem("currentAnimal", event.target.id)
+    window.localStorage.setItem("currentAnimal", event.target.id);
   }
-}
+};
