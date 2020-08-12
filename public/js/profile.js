@@ -4,7 +4,7 @@ const usertypeElem = document.getElementById("usertype");
 const usernameElem = document.getElementById("username");
 const profilePhotoElem = document.getElementById("profilePhoto");
 const profilePhotoModElem = document.getElementById("profilePhotoMod");
-const username = window.localStorage.getItem("username")
+const username = window.localStorage.getItem("username");
 
 // To modify the user
 const newProfilepicElem = document.getElementById("newProfilepic");
@@ -14,6 +14,8 @@ const newPasswordElem = document.getElementById("newPassword");
 const newPasswordConfirmElem = document.getElementById("newPasswordConfirm");
 const updateProfileElem = document.getElementById("updateProfile");
 
+const noMatchPasswords = document.getElementById("noMatchPasswords");
+
 fetch(`/profile/${username}`)
   .then((res) => res.json())
   .then((userInfo) => {
@@ -22,8 +24,8 @@ fetch(`/profile/${username}`)
     usertypeElem.innerText = `Tipo: ${userInfo.usertype}`;
     usernameElem.innerText = window.localStorage.getItem("username");
     if (userInfo.photo) {
-      profilePhotoElem.setAttribute("src", userInfo.photo)
-      profilePhotoModElem.setAttribute("src", userInfo.photo)
+      profilePhotoElem.setAttribute("src", userInfo.photo);
+      profilePhotoModElem.setAttribute("src", userInfo.photo);
     }
   })
   .catch("Error in the request");
@@ -39,7 +41,6 @@ updateProfileElem.addEventListener("click", () => {
     newProfilePic = newProfilepicElem.files[0];
   }
 
-
   let request = {
     Nname: newName,
     Nlastname: newLastname,
@@ -47,9 +48,9 @@ updateProfileElem.addEventListener("click", () => {
     Nprofilepic: newProfilePic,
     username: window.localStorage.getItem("username"),
     token: window.localStorage.getItem("token"),
-  }
+  };
 
-  console.log(request)
+  console.log(request);
 
   if (newPasswordConfirm === newPassword) {
     fetch("/profile", {
@@ -60,7 +61,7 @@ updateProfileElem.addEventListener("click", () => {
         username: window.localStorage.getItem("username"),
         token: window.localStorage.getItem("token"),
       },
-      body: JSON.stringify(request)
+      body: JSON.stringify(request),
     })
       .then((res) => res.json())
       .then((newUser) => {
@@ -70,10 +71,11 @@ updateProfileElem.addEventListener("click", () => {
       })
       .catch("Error in the request");
   } else {
-    alert("Las contraseñas no coinciden, intenta de nuevo.")
+    //alert("Las contraseñas no coinciden, intenta de nuevo.")
+    newPasswordConfirmElem.className = "form-control is-invalid";
+    noMatchPasswords.removeAttribute("style");
   }
-
-})
+});
 
 // To interact with the adoptions
 const adoptionsContainerElem = document.getElementById("adoptionsContainer");
@@ -84,7 +86,7 @@ const createDiv = (className, id) => {
   let div = document.createElement("div");
   div.className = className;
   if (id) {
-    div.setAttribute("id", id)
+    div.setAttribute("id", id);
   }
   return div;
 };
@@ -93,10 +95,7 @@ const createButton = (location) => {
   let div = createDiv("card bg-dark text-white");
   div.setAttribute("type", "button");
   div.style.margin = "20px";
-  div.setAttribute(
-    "onclick",
-    `window.location.href='singleAnimal.html'`
-  );
+  div.setAttribute("onclick", `window.location.href='singleAnimal.html'`);
   return div;
 };
 
@@ -167,15 +166,15 @@ showAdoptionsElem.addEventListener("click", () => {
       } else {
         let h1 = document.createElement("h1");
         h1.innerText = "No has adoptado aun, ¡adopta!";
-        console.log(h1)
+        console.log(h1);
         container.appendChild(h1);
       }
     })
     .catch("Error in the request");
-})
+});
 
-window.onclick = event => {
+window.onclick = (event) => {
   if (event.target.id) {
-    window.localStorage.setItem("currentAnimal", event.target.id)
+    window.localStorage.setItem("currentAnimal", event.target.id);
   }
-}
+};
