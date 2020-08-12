@@ -14,6 +14,7 @@ submitElem.addEventListener("click", () => {
   const password = passwordElem.value;
   const passwordConf = passwordConfElem.value;
 
+  const existingUser = document.getElementById("existingUser");
 
   if (passwordConf === password) {
     fetch("/register", {
@@ -27,10 +28,10 @@ submitElem.addEventListener("click", () => {
         email: email,
         userType: usertype,
         password: password,
-      })
+      }),
     })
-      .then(res => res.json())
-      .then(res => {
+      .then((res) => res.json())
+      .then((res) => {
         if (res.token) {
           const { token, userType, username } = res;
           window.localStorage.setItem("token", token);
@@ -39,16 +40,16 @@ submitElem.addEventListener("click", () => {
           location.replace("/");
         }
         if (res === "Already registered") {
-          alert("Ese usuario ya existe!")
+          //alert("Ese usuario ya existe!");
+          existingUser.removeAttribute("style");
         }
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.code === 101) {
-          alert(err.message)
+          alert(err.message);
         }
-      })
+      });
   } else {
-    alert("Las contraseñas no coinciden, intenta de nuevo.")
+    alert("Las contraseñas no coinciden, intenta de nuevo.");
   }
-})
-
+});

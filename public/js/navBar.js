@@ -228,6 +228,13 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     aria-label="Correo"
                     autofocus
                   />
+                  <div
+                          id="invalidUser"
+                          class="invalid-feedback"
+                          style="display: none;"
+                        >
+                          Usuario o contraseña incorrecta. Intente de nuevo.
+                        </div>
                 </div>
 
                 <br />
@@ -248,6 +255,13 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     placeholder="Contraseña"
                     aria-label="Contraseña"
                   />
+                  <div
+                          id="invalidPassword"
+                          class="invalid-feedback"
+                          style="display: none;"
+                        >
+                          Usuario o contraseña incorrecta. Intente de nuevo.
+                        </div>
                 </div>
               </form>
             </div>
@@ -360,6 +374,13 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     placeholder="correo@ejemplo.com"
                     aria-label="Correo"
                   />
+                  <div
+                    id="existingUser"
+                    class="invalid-feedback"
+                    style="display: none;"
+                  >
+                  Esa cuenta ya existe. Intenta con otra.
+                  </div>
                 </div>
 
                 <br />

@@ -1,6 +1,8 @@
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const submit = document.getElementById("submit");
+const invalidUser = document.getElementById("invalidUser");
+const invalidPassword = document.getElementById("invalidPassword");
 
 submit.addEventListener("click", () => {
   const us = email.value;
@@ -14,10 +16,10 @@ submit.addEventListener("click", () => {
     body: JSON.stringify({
       email: us,
       password: pw,
-    })
+    }),
   })
-    .then(res => res.json())
-    .then(res => {
+    .then((res) => res.json())
+    .then((res) => {
       if (res.token) {
         const { token, userType, username } = res;
         window.localStorage.setItem("token", token);
@@ -26,13 +28,14 @@ submit.addEventListener("click", () => {
         location.replace("/");
       }
       if (res === "Incorrect") {
-        alert("Usuario o contraseña incorrecta. Intente de nuevo.");
+        //alert("Usuario o contraseña incorrecta. Intente de nuevo.");
+        invalidUser.removeAttribute("style");
+        invalidPassword.removeAttribute("style");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       if (err.code === 101) {
-        alert(err.message)
+        alert(err.message);
       }
-    })
-})
-
+    });
+});
