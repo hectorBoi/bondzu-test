@@ -101,21 +101,6 @@ style="background-color: #f28f1d; border-color: #ffffff;"
       >
     </li>
     <li class="nav-item">
-      <a href="blog.html" style="text-decoration: none; color: white;">
-        <button
-          type="button"
-          class="btn btn-outline-light"
-          style="
-            margin-left: 18px;
-            margin-right: 18px;
-            margin-bottom: 8px;
-          "
-        >
-          Blog
-        </button></a
-      >
-    </li>
-    <li class="nav-item">
       <a
         href="contacto.html"
         style="text-decoration: none; color: white;"
@@ -356,7 +341,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                   required 
                   id="usertypeReg">
                     <option value="">Seleccione una opción...</option>
-                    <option value="etDcoSci6K">Basic</option>
+                    <option value="etDcoSci6K">Bondzù User</option>
                     <option value="jHbSEutegP">Bondzù Fan</option>
                     <option value="nRXYUkuJJq">Bondzù Lover</option>
                     <option value="mWm6R6DLFX">Bondzù Hero</option>

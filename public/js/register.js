@@ -36,7 +36,7 @@ submitElem.addEventListener("click", () => {
           window.localStorage.setItem("token", token);
           window.localStorage.setItem("usertype", userType);
           window.localStorage.setItem("username", username);
-          location.replace("/navBarLoggedIn.html");
+          location.replace("/");
         }
         if (res === "Already registered") {
           alert("Ese usuario ya existe!")
