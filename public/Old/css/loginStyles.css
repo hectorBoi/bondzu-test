@@ -1,0 +1,57 @@
+body {
+    background: linear-gradient(#000000ab, #000000ab), url('../img/login_bg.jpeg');
+}
+
+.login-box {
+    position: absolute;
+    top: 15%;
+    left: 30%;
+    width: 40%;
+    height: 70%;
+    background-color: #c77800DA;
+    border-radius: 10%;
+    justify-items: center;
+}
+
+h1 {
+    display: block;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    font-size: 2.4em;
+    text-align: center;
+    margin-top: 7%;
+}
+
+.form {
+    margin-top: 5%;
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    background-color: none;
+    width: 70%;
+}
+
+input[type=text], input[type=password] {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5em;
+    display: block;
+    width: 100%;
+    margin-bottom: 6vh;
+
+}
+
+label { 
+    display: block;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 400;
+    font-size: 1.75em;
+    margin-bottom: 2vh;
+}
+
+button {
+    display: block;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 0 auto;
+}
