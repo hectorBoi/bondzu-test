@@ -4,7 +4,7 @@ const subjectElem = document.getElementById("subject")
 const messageElem = document.getElementById("message")
 const submitButton = document.getElementById("submitButton")
 
-const smtpToken = "c398baa5-5ed6-4fd2-b82b-2b9270642c05"
+const smtpToken = "e532f17b-18c6-49a2-99f7-04f158ff339c"
 
 submitButton.addEventListener("click", () => {
   const name = nameElem.value;
@@ -15,12 +15,11 @@ submitButton.addEventListener("click", () => {
 
   Email.send({
     SecureToken: smtpToken,
-    To: 'duli500@hotmail.com',
-    From: "duliotest@gmail.com",
+    To: 'jorgehuerta@bondzu.com',
+    From: "contactoBondzu@gmail.com",
     Subject: subject,
     Body: body
   }).then(
     message => alert(message)
   );
 })
-

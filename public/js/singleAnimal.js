@@ -44,7 +44,7 @@ fetch(`/singleAnimal/${animalID}`, {
 
 adoptElem.addEventListener("click", () => {
   $(".toast").toast("show");
-  /*const url = `/adoptions/${animalID}`;
+  const url = `/adoptions/${animalID}`;
   fetch(url, {
     method: "post",
     headers: {
@@ -60,5 +60,5 @@ adoptElem.addEventListener("click", () => {
         adoptElem.disabled = true;
       }
     })
-    .catch("Error in the request");*/
+    .catch("Error in the request");
 });

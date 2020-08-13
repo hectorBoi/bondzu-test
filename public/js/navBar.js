@@ -620,70 +620,6 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     </div>
                   </div>
                 </div>
-                <div class="card">
-                  <div class="card-header" id="headingFour">
-                    <h2 class="mb-0">
-                      <button
-                        class="btn btn-block text-left collapsed"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#collapseFour"
-                        aria-expanded="false"
-                        aria-controls="collapseFour"
-                        style="color: #f28f1d;"
-                      >
-                        <b
-                          >¿Cuáles son los beneficios que el animal
-                          obtiene cuando hago mi contribución?</b
-                        >
-                      </button>
-                    </h2>
-                  </div>
-                  <div
-                    id="collapseFour"
-                    class="collapse"
-                    aria-labelledby="headingFour"
-                    data-parent="#accordionFAQ"
-                  >
-                    <div class="card-body" style="text-align: justify;">
-                      Los fondos serán destinados a las diferentes
-                      necesidades de los animales, esto puede variar según
-                      la especie y sus condiciones de vida. Estos
-                      beneficios se pueden traducir en una mejor
-                      alimentación, atención médica, vacunas, y mejores
-                      recintos.
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingFive">
-                    <h2 class="mb-0">
-                      <button
-                        class="btn btn-block text-left collapsed"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#collapseFive"
-                        aria-expanded="false"
-                        aria-controls="collapseFive"
-                        style="color: #f28f1d;"
-                      >
-                        <b>¿Cómo puedo hacer mi contribución?</b>
-                      </button>
-                    </h2>
-                  </div>
-                  <div
-                    id="collapseFive"
-                    class="collapse"
-                    aria-labelledby="headingFive"
-                    data-parent="#accordionFAQ"
-                  >
-                    <div class="card-body" style="text-align: justify;">
-                      Ve a la tienda Bondzù, busca la categoría
-                      Contribuciones, allí se puede encontrar toda la
-                      información relacionada con las contribuciones y
-                      nuestra campaña vigente.
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -694,3 +630,68 @@ style="background-color: #f28f1d; border-color: #ffffff;"
   </ul>
 </div>
 </nav>`;
+
+{/* <div class="card">
+  <div class="card-header" id="headingFour">
+    <h2 class="mb-0">
+      <button
+        class="btn btn-block text-left collapsed"
+        type="button"
+        data-toggle="collapse"
+        data-target="#collapseFour"
+        aria-expanded="false"
+        aria-controls="collapseFour"
+        style="color: #f28f1d;"
+      >
+        <b
+        >¿Cuáles son los beneficios que el animal
+                          obtiene cuando hago mi contribución?</b
+        >
+      </button>
+    </h2>
+  </div>
+  <div
+    id="collapseFour"
+    class="collapse"
+    aria-labelledby="headingFour"
+    data-parent="#accordionFAQ"
+  >
+    <div class="card-body" style="text-align: justify;">
+      Los fondos serán destinados a las diferentes
+      necesidades de los animales, esto puede variar según
+      la especie y sus condiciones de vida. Estos
+      beneficios se pueden traducir en una mejor
+      alimentación, atención médica, vacunas, y mejores
+      recintos.
+                    </div>
+  </div>
+</div>
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h2 class="mb-0">
+        <button
+          class="btn btn-block text-left collapsed"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapseFive"
+          aria-expanded="false"
+          aria-controls="collapseFive"
+          style="color: #f28f1d;"
+        >
+          <b>¿Cómo puedo hacer mi contribución?</b>
+        </button>
+      </h2>
+    </div>
+    <div
+      id="collapseFive"
+      class="collapse"
+      aria-labelledby="headingFive"
+      data-parent="#accordionFAQ"
+    >
+      <div class="card-body" style="text-align: justify;">
+        Ve a la tienda Bondzù, busca la categoría
+        Contribuciones, allí se puede encontrar toda la
+        información relacionada con las contribuciones y
+        nuestra campaña vigente.
+                    </div>
+    </div> */}
