@@ -47,7 +47,7 @@
             <div class="form-group">
               <label for="name">Nombre completo</label>
               <input
-                type="email"
+                type="text"
                 class="form-control"
                 id="name"
                 placeholder="Nombre Apellidos"
@@ -58,7 +58,7 @@
               <input
                 type="email"
                 class="form-control"
-                id="email"
+                id="emailField"
                 placeholder="nombre@correo.com"
               />
             </div>
@@ -67,7 +67,7 @@
               <input
                 type="subject"
                 class="form-control"
-                id="exampleFormControlInput1"
+                id="subject"
                 placeholder="Asunto"
               />
             </div>
@@ -83,7 +83,7 @@
           </form>
         </div>
         <div class="card-footer text-muted">
-          <a href="#" class="btn btn-primary btn-lg btn-block">Enviar</a>
+          <a id="submitButton" href="#" class="btn btn-primary btn-lg btn-block">Enviar</a>
         </div>
       </div>
     </div>
@@ -91,4 +91,7 @@
   <script src="./js/index.js"></script>
   <script src="./js/login.js"></script>
   <script src="./js/logout.js"></script>
+  <script src="./js/contact.js"></script>
+  <script src="https://smtpjs.com/v3/smtp.js">
+</script>
 </html>

@@ -26,7 +26,7 @@ submitElem.addEventListener("click", () => {
         name: name,
         lastname: lastname,
         email: email,
-        userType: usertype,
+        // userType: usertype,
         password: password,
       }),
     })

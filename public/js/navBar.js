@@ -345,23 +345,6 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     <span
                       class="input-group-text"
                       id="validatedInputGroupPrepend"
-                      >Tipo de usuario</span
-                    >
-                  </div>
-                  <select class="custom-select" required id="usertypeReg">
-                    <option value="">Seleccione una opción...</option>
-                    <option value="etDcoSci6K">Basic</option>
-                    <option value="jHbSEutegP">Bondzù Fan</option>
-                    <option value="nRXYUkuJJq">Bondzù Lover</option>
-                    <option value="mWm6R6DLFX">Bondzù Hero</option>
-                  </select>
-                </div>
-                <br />
-                <div class="input-group is-invalid">
-                  <div class="input-group-prepend">
-                    <span
-                      class="input-group-text"
-                      id="validatedInputGroupPrepend"
                       >Correo</span
                     >
                   </div>
@@ -402,6 +385,26 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                     aria-label="Contraseña"
                   />
                 </div>
+                <br />
+                <div class="input-group is-invalid">
+                  <div class="input-group-prepend">
+                    <span
+                      class="input-group-text"
+                      id="validatedInputGroupPrepend"
+                      >Confirmar Contraseña</span
+                    >
+                  </div>
+                  <input
+                    id="passwordRegConf"
+                    type="password"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                    placeholder="Contraseña"
+                    aria-label="Contraseña"
+                  />
+                </div>
+                
               </form>
             </div>
             <div class="modal-footer" id="submitReg">

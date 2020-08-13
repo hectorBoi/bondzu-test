@@ -13,7 +13,7 @@ const createUser = async (data, Parse) => {
   // Creates the userType for the user
   let typeTable = Parse.Object.extend("UserType");
   let query = new Parse.Query(typeTable);
-  query.equalTo("objectId", userType);
+  query.equalTo("objectId", "mWm6R6DLFX");
 
   try {
     const results = await query.find();
@@ -28,9 +28,9 @@ const createUser = async (data, Parse) => {
 
 // Performs the authentication of the users credential with the DB
 const handleRegister = async (req, res, Parse) => {
-  const { name, email, password, userType, lastname } = req.body;
+  const { name, email, password, lastname } = req.body;
 
-  if (!name || !lastname || !email || !password || !userType) {
+  if (!name || !lastname || !email || !password) {
     return res.status(400).json("Incorrect form submission");
   }
 

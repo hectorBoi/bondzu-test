@@ -10,7 +10,9 @@ if (!token) {
   loggedIn.style.display = "none";
 } else {
   guest.style.display = "none";
-  cardLogin.style.display = "none";
-  conocenos.className = "";
+  if (cardLogin) {
+    cardLogin.style.display = "none";
+    conocenos.className = "";
+  }
 }
 

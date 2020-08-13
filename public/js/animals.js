@@ -55,6 +55,24 @@ const createCard = (object) => {
   return col;
 };
 
+const createCards = (array, container) => {
+  let count = 0;
+  let row = createRow();
+
+  for (elem of array) {
+    let col = createCard(elem);
+    row.appendChild(col);
+    count++;
+    if (
+      (count > 0 && count % 4 === 0) ||
+      (count === array.length && array.length % 4 !== 0)
+    ) {
+      container.appendChild(row);
+      row = createRow();
+    }
+  }
+}
+
 // Only allows access to users which have a session
 if (!window.localStorage.getItem("token")) {
   location.replace("/");
@@ -70,36 +88,19 @@ fetch("/animals", {
   },
 })
   .then((res) => res.json())
-  .then((animals) => {
-    let count = 0;
-    let row = createRow();
-
-    for (animal of animals) {
-      let col = createCard(animal);
-      row.appendChild(col);
-      count++;
-      if (
-        (count > 0 && count % 4 === 0) ||
-        (count === animals.length && animals.length % 4 !== 0)
-      ) {
-        containerAnimals.appendChild(row);
-        row = createRow();
+  .then((animalsColleagues) => {
+    const animals = []
+    const colleagues = []
+    animalsColleagues.forEach((elem) => {
+      if (elem.species !== "Colega") {
+        animals.push(elem)
+      } else {
+        colleagues.push(elem)
       }
-    }
+    })
 
-    for (animal of animals) {
-      let col = createCard(animal);
-      row.appendChild(col);
-      count++;
-      if (
-        (count > 0 && count % 4 === 0) ||
-        (count === animals.length && animals.length % 4 !== 0)
-      ) {
-        containerColleagues.appendChild(row);
-        row = createRow();
-      }
-    }
-    console.log(animals);
+    createCards(animals, containerAnimals)
+    createCards(colleagues, containerColleagues)
   })
   .catch("Error in the request");
 
