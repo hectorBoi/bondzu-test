@@ -13,6 +13,7 @@ const newLastNameElem = document.getElementById("newLastName");
 const newPasswordElem = document.getElementById("newPassword");
 const newPasswordConfirmElem = document.getElementById("newPasswordConfirm");
 const updateProfileElem = document.getElementById("updateProfile");
+const backTopElem = document.getElementById("backTop");
 
 const noMatchPasswords = document.getElementById("noMatchPasswords");
 
@@ -71,7 +72,6 @@ updateProfileElem.addEventListener("click", () => {
       })
       .catch("Error in the request");
   } else {
-    //alert("Las contraseñas no coinciden, intenta de nuevo.")
     newPasswordConfirmElem.className = "form-control is-invalid";
     noMatchPasswords.removeAttribute("style");
   }
@@ -81,6 +81,7 @@ updateProfileElem.addEventListener("click", () => {
 const adoptionsContainerElem = document.getElementById("adoptionsContainer");
 const showAdoptionsElem = document.getElementById("showAdoptions");
 const container = document.getElementById("container");
+const headerAdoptions = document.getElementById("alertAdoptions");
 
 const createDiv = (className, id) => {
   let div = document.createElement("div");
@@ -151,6 +152,11 @@ showAdoptionsElem.addEventListener("click", () => {
         let count = 0;
         let row = createRow();
 
+        backTopElem.style.display = "";
+        showAdoptionsElem.disable = true;
+        headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Tus adopciones</h4>`;
+        headerAdoptions.className = "alert alert-success";
+
         for (animal of animals) {
           let col = createCard(animal);
           row.appendChild(col);
@@ -164,10 +170,8 @@ showAdoptionsElem.addEventListener("click", () => {
           }
         }
       } else {
-        let h1 = document.createElement("h1");
-        h1.innerText = "No has adoptado aun, ¡adopta!";
-        console.log(h1);
-        container.appendChild(h1);
+        headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones. <a href="animals.html">¡Ve a adoptar! <a/></h4>`;
+        headerAdoptions.className = "alert alert-danger";
       }
     })
     .catch("Error in the request");

@@ -19,8 +19,7 @@ submitButton.addEventListener("click", () => {
   if (name != "" && email != "" && subject != "" && message != "") {
     Email.send({
       SecureToken: smtpToken,
-      //To: 'jorgehuerta@bondzu.com',
-      To: "abr1499@gmail.com",
+      To: "jorgehuerta@bondzu.com",
       From: "contactoBondzu@gmail.com",
       Subject: subject,
       Body: body,

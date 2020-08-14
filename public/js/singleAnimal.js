@@ -8,6 +8,8 @@ const adoptElem = document.getElementById("adoptButton");
 const animalID = window.localStorage.getItem("currentAnimal");
 const titleElem = document.getElementById("title");
 
+const popoverAdoptElem = document.getElementById("popoverAdopt");
+
 fetch(`/singleAnimal/${animalID}`, {
   method: "post",
   headers: {
@@ -32,6 +34,10 @@ fetch(`/singleAnimal/${animalID}`, {
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
     keeperElem.innerText = animal.keeper;
+    popoverAdoptElem.setAttribute(
+      "data-content",
+      `Puedes verme en tus adopciones dentro de tu <a href="profile.html">perfil</a>.`
+    );
 
     if (animal.isAdopted) {
       adoptElem.innerText = "¡Ya me adoptaste!";
@@ -54,7 +60,9 @@ adoptElem.addEventListener("click", () => {
     .then((res) => {
       if (res === "Worked") {
         adoptElem.innerText = "¡Ya me adoptaste!";
-        adoptElem.disabled = true;
+        setTimeout(() => {
+          adoptElem.disabled = true;
+        }, 10000);
       }
     })
     .catch("Error in the request");

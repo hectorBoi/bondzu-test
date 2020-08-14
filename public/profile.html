@@ -102,6 +102,10 @@
                       />
                       <br />
                       <br />
+                      <h6 style="color: green;">
+                        Completa solo la información que deseas modificar.
+                      </h6>
+                      <br />
                       <form>
                         <div class="form-group row">
                           <input
@@ -149,11 +153,7 @@
                             class="form-control"
                             id="newPasswordConfirm"
                           />
-                          <div
-                            id="noMatchPasswords"
-                            class="invalid-feedback"
-                            style="display: none;"
-                          >
+                          <div id="noMatchPasswords" class="invalid-feedback">
                             La contraseña no coincide. Intenta de nuevo.
                           </div>
                         </div>
@@ -194,12 +194,25 @@
       </div>
     </div>
     <div style="display: none;" id="adoptionsContainer">
-      <div class="alert alert-success" role="alert" style="top: -2rem;">
-        <h4 class="alert-heading text-center">Tus adopciones</h4>
-      </div>
+      <div
+        id="alertAdoptions"
+        class="alert"
+        role="alert"
+        style="top: -2rem;"
+      ></div>
       <div class="container-fluid" id="container"></div>
     </div>
-
+    <div>
+      <a
+        id="backTop"
+        href="#navBar"
+        style="text-decoration: none; display: none;"
+      >
+        <button type="button" class="btn btn-secondary btn-lg btn-block">
+          <h6 style="color: #ffffff;">Volver al principio</h6>
+        </button>
+      </a>
+    </div>
     <script src="./js/index.js"></script>
     <script src="./js/profile.js"></script>
     <script src="./js/logout.js"></script>

@@ -66,13 +66,33 @@
               alt="animal"
               height="300"
             />
-            <button
-              type="button"
-              class="btn btn-success btn-lg btn-block"
-              id="adoptButton"
+            <a
+              id="popoverAdopt"
+              tabindex="0"
+              role="button"
+              data-toggle="popover"
+              data-trigger="focus"
+              data-placement="top"
+              data-html="true"
+              title="¡Gracias por adoptarme!"
+              data-content=""
+              ><button
+                type="button"
+                class="btn btn-success btn-lg btn-block"
+                id="adoptButton"
+              >
+                ¡Adóptame!
+              </button></a
             >
-              ¡Adóptame!
-            </button>
+            <!-- Scripts para utilizar un dismiss popover-->
+            <script>
+              $(function () {
+                $('[data-toggle="popover"]').popover();
+              });
+              $(".popover-dismiss").popover({
+                trigger: "focus",
+              });
+            </script>
             <div class="card-body">
               <h4 class="card-title text-center" id="species"></h4>
               <ul class="list-group list-group-flush">
