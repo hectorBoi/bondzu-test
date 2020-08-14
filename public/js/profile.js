@@ -173,6 +173,7 @@ showAdoptionsElem.addEventListener("click", () => {
         headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones. <a href="animals.html">¡Ve a adoptar! <a/></h4>`;
         headerAdoptions.className = "alert alert-danger";
       }
+      showAdoptionsElem.setAttribute("disabled", "disabled");
     })
     .catch("Error in the request");
 });

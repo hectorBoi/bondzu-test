@@ -23,6 +23,7 @@
     "big-integer": "^1.6.48",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-fileupload": "^1.1.10",
     "parse": "^2.14.0"
   },
   "devDependencies": {
