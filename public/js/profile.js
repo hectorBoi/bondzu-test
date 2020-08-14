@@ -17,6 +17,9 @@ const backTopElem = document.getElementById("backTop");
 
 const noMatchPasswords = document.getElementById("noMatchPasswords");
 
+document.cookie = `token=${window.localStorage.getItem("token")}`;
+document.cookie = `username=${window.localStorage.getItem("username")}`;
+
 fetch(`/profile/${username}`)
   .then((res) => res.json())
   .then((userInfo) => {
@@ -51,8 +54,6 @@ updateProfileElem.addEventListener("click", () => {
     token: window.localStorage.getItem("token"),
   };
 
-  console.log(request);
-
   if (newPasswordConfirm === newPassword) {
     fetch("/profile", {
       method: "post",
@@ -66,11 +67,10 @@ updateProfileElem.addEventListener("click", () => {
     })
       .then((res) => res.json())
       .then((newUser) => {
-        console.log(newUser);
         location.reload();
         return false;
       })
-      .catch("Error in the request");
+      .catch(err => err);
   } else {
     newPasswordConfirmElem.className = "form-control is-invalid";
     noMatchPasswords.removeAttribute("style");
@@ -173,7 +173,17 @@ showAdoptionsElem.addEventListener("click", () => {
         headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones. <a href="animals.html">¡Ve a adoptar! <a/></h4>`;
         headerAdoptions.className = "alert alert-danger";
       }
-      showAdoptionsElem.setAttribute("disabled", "disabled");
+      showClass = showAdoptionsElem.className;
+      console.log(showClass)
+      if (showAdoptionsElem.className.includes("hide")) {
+        showAdoptionsElem.className = showAdoptionsElem.className.substr(0, showClass.length - 6)
+        adoptionsContainerElem.style.display = "none";
+        showAdoptionsElem.innerText = "Ver tus adopciones"
+
+      } else {
+        showAdoptionsElem.className += "  hide;"
+        showAdoptionsElem.innerText = "Ocultar tus adopciones"
+      }
     })
     .catch("Error in the request");
 });

@@ -106,11 +106,12 @@
                         Completa solo la información que deseas modificar.
                       </h6>
                       <br />
-                      <form>
+                      <form action="/profile" method="POST" enctype="multipart/form-data" id="formTest">
                         <div class="form-group row">
                           <input
                             type="file"
                             class="form-control-file"
+                            name="newProfilepic"
                             id="newProfilepic"
                           />
                         </div>
@@ -157,6 +158,7 @@
                             La contraseña no coincide. Intenta de nuevo.
                           </div>
                         </div>
+                        <input type="submit" value="testing woo" id="submittest">
                       </form>
                     </div>
                   </div>

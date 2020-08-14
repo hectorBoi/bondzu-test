@@ -1,6 +1,5 @@
 const express = require("express");
 const Parse = require('parse/node');
-const fileupload = require('express-fileupload')
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I");
 Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/parse";
@@ -14,11 +13,15 @@ const adoptions = require('./controllers/adoptions');
 const logout = require('./controllers/logout');
 const banner = require('./controllers/banner');
 
+const fileUpload = require('express-fileupload');
+const cookieParser = require("cookie-parser");
+
 // Declares the express server and  middlewares
 const app = express();
 app.use(express.json());
-app.use(fileupload());
 app.use(express.static("public"));
+app.use(fileUpload());
+app.use(cookieParser());
 
 // Handlers for all the routes
 app.post("/login", signin.signinAuth(Parse));

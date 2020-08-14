@@ -47,6 +47,23 @@ const handleProfile = async (req, res, Parse) => {
   }
 }
 
+const updatePicture = async (req, res, Parse) => {
+  const { username, token } = req.cookies;
+  if (req.files) {
+    const userTable = Parse.Object.extend("User");
+    const query = new Parse.Query(userTable);
+    query.equalTo("username", username)
+    const user = await query.first();
+
+    const data = Array.from(Buffer.from(req.files.newProfilepic.data))
+    const contentType = req.headers['content-type'];
+    const file = new Parse.File('testing.png', data, contentType);
+    user.set("photoFile", file)
+    const newUser = await user.save(null, { sessionToken: "r:f99d33cc4252a87d028fdeee2e958e84" });
+    res.json({ message: "Success" });
+  }
+}
+
 //Updates the user profile with new info
 const updateProfile = async (req, res, Parse) => {
   const { Nname, Nlastname, Npassword, username, token } = req.body;
@@ -57,21 +74,20 @@ const updateProfile = async (req, res, Parse) => {
     query.equalTo("username", username)
     const user = await query.first();
 
-
-    if (Nname !== "") {
+    if (Nname) {
       user.set("name", Nname);
     }
 
-    if (Nlastname !== "") {
+    if (Nlastname) {
       user.set("lastname", Nlastname);
     }
 
-    if (Npassword !== "") {
+    if (Npassword) {
       user.setPassword(Npassword);
     }
 
     const newUser = await user.save(null, { sessionToken: token });
-    res.json("Success!")
+    res.json({ message: "Success" });
 
   } catch (err) {
     console.log(err)
