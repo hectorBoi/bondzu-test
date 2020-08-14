@@ -101,9 +101,8 @@
                         style="margin: 10px;"
                       />
                       <br />
-                      <br />
                       <h6 style="color: green;">
-                        Completa solo la información que deseas modificar.
+                        Selecciona una nueva foto de perfil.
                       </h6>
                       <br />
                       <form action="/profile" method="POST" enctype="multipart/form-data" id="formTest">
@@ -115,6 +114,11 @@
                             id="newProfilepic"
                           />
                         </div>
+                          <input type="submit" value="Actualizar foto" id="submitPhoto" class="btn btn-success">
+                        <hr>
+                      <h6 style="color: green;">
+                        Completa solo la información que deseas modificar.
+                      </h6>
                         <div class="form-group row">
                           <label for="name" class="col-auto col-form-label"
                             >Nombre</label
@@ -158,7 +162,6 @@
                             La contraseña no coincide. Intenta de nuevo.
                           </div>
                         </div>
-                        <input type="submit" value="testing woo" id="submittest">
                       </form>
                     </div>
                   </div>

@@ -39,19 +39,11 @@ updateProfileElem.addEventListener("click", () => {
   const newLastname = newLastNameElem.value;
   const newPassword = newPasswordElem.value;
   const newPasswordConfirm = newPasswordConfirmElem.value;
-  let newProfilePic;
-
-  if (newProfilepicElem.files.length > 0) {
-    newProfilePic = newProfilepicElem.files[0];
-  }
 
   let request = {
     Nname: newName,
     Nlastname: newLastname,
     Npassword: newPassword,
-    Nprofilepic: newProfilePic,
-    username: window.localStorage.getItem("username"),
-    token: window.localStorage.getItem("token"),
   };
 
   if (newPasswordConfirm === newPassword) {
@@ -59,16 +51,13 @@ updateProfileElem.addEventListener("click", () => {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        usertype: window.localStorage.getItem("usertype"),
-        username: window.localStorage.getItem("username"),
-        token: window.localStorage.getItem("token"),
       },
       body: JSON.stringify(request),
     })
       .then((res) => res.json())
       .then((newUser) => {
-        location.reload();
-        return false;
+        console.log(newUser)
+        location.replace("profile.html");
       })
       .catch(err => err);
   } else {
@@ -144,48 +133,51 @@ if (!window.localStorage.getItem("token")) {
 
 showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
+  console.log("Container")
+  if (container.innerHTML === "") {
+    fetch(`/adoptions/${username}`)
+      .then((res) => res.json())
+      .then((animals) => {
+        if (animals.length !== 0) {
+          let count = 0;
+          let row = createRow();
 
-  fetch(`/adoptions/${username}`)
-    .then((res) => res.json())
-    .then((animals) => {
-      if (animals.length !== 0) {
-        let count = 0;
-        let row = createRow();
+          backTopElem.style.display = "";
+          showAdoptionsElem.disable = true;
+          headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Tus adopciones</h4>`;
+          headerAdoptions.className = "alert alert-success";
 
-        backTopElem.style.display = "";
-        showAdoptionsElem.disable = true;
-        headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Tus adopciones</h4>`;
-        headerAdoptions.className = "alert alert-success";
-
-        for (animal of animals) {
-          let col = createCard(animal);
-          row.appendChild(col);
-          count++;
-          if (
-            (count > 0 && count % 4 === 0) ||
-            (count === animals.length && animals.length % 4 !== 0)
-          ) {
-            container.appendChild(row);
-            row = createRow();
+          for (animal of animals) {
+            let col = createCard(animal);
+            row.appendChild(col);
+            count++;
+            if (
+              (count > 0 && count % 4 === 0) ||
+              (count === animals.length && animals.length % 4 !== 0)
+            ) {
+              container.appendChild(row);
+              row = createRow();
+            }
           }
+        } else {
+          headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones. <a href="animals.html">¡Ve a adoptar! <a/></h4>`;
+          headerAdoptions.className = "alert alert-danger";
         }
-      } else {
-        headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones. <a href="animals.html">¡Ve a adoptar! <a/></h4>`;
-        headerAdoptions.className = "alert alert-danger";
-      }
-      showClass = showAdoptionsElem.className;
-      console.log(showClass)
-      if (showAdoptionsElem.className.includes("hide")) {
-        showAdoptionsElem.className = showAdoptionsElem.className.substr(0, showClass.length - 6)
-        adoptionsContainerElem.style.display = "none";
-        showAdoptionsElem.innerText = "Ver tus adopciones"
+      })
+      .catch("Error in the request");
+  }
+  showClass = showAdoptionsElem.className;
+  if (showAdoptionsElem.className.includes("hide")) {
+    showAdoptionsElem.className = "btn btn-success"
+    showAdoptionsElem.className = showAdoptionsElem.className.substr(0, showClass.length - 6)
+    adoptionsContainerElem.style.display = "none";
+    showAdoptionsElem.innerText = "Ver tus adopciones"
+  } else {
+    showAdoptionsElem.className += "btn btn-info"
+    showAdoptionsElem.className += "  hide"
+    showAdoptionsElem.innerText = "Ocultar tus adopciones"
 
-      } else {
-        showAdoptionsElem.className += "  hide;"
-        showAdoptionsElem.innerText = "Ocultar tus adopciones"
-      }
-    })
-    .catch("Error in the request");
+  }
 });
 
 window.onclick = (event) => {
@@ -193,3 +185,12 @@ window.onclick = (event) => {
     window.localStorage.setItem("currentAnimal", event.target.id);
   }
 };
+
+const formTest = document.getElementById("formTest");
+const submitPhoto = document.getElementById("newProfilepic");
+formTest.addEventListener("submit", (event) => {
+  if (!submitPhoto.files[0]) {
+    event.preventDefault()
+    alert("No haz seleccionado ninguna foto!")
+  }
+})
