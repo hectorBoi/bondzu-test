@@ -7,7 +7,6 @@ const keeperElem = document.getElementById("keeper");
 const adoptElem = document.getElementById("adoptButton");
 const animalID = window.localStorage.getItem("currentAnimal");
 const titleElem = document.getElementById("title");
-const toastBodyElem = document.getElementById("toastBody");
 
 fetch(`/singleAnimal/${animalID}`, {
   method: "post",
@@ -33,7 +32,6 @@ fetch(`/singleAnimal/${animalID}`, {
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
     keeperElem.innerText = animal.keeper;
-    toastBodyElem.innerHTML = `Adoptaste a <b>${animal.species} </b>`;
 
     if (animal.isAdopted) {
       adoptElem.innerText = "¡Ya me adoptaste!";
@@ -43,7 +41,6 @@ fetch(`/singleAnimal/${animalID}`, {
   .catch("Error in the request");
 
 adoptElem.addEventListener("click", () => {
-  $(".toast").toast("show");
   const url = `/adoptions/${animalID}`;
   fetch(url, {
     method: "post",

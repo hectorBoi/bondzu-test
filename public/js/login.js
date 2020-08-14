@@ -1,7 +1,6 @@
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const submit = document.getElementById("submit");
-const invalidUser = document.getElementById("invalidUser");
 const invalidPassword = document.getElementById("invalidPassword");
 
 submit.addEventListener("click", () => {
@@ -29,7 +28,6 @@ submit.addEventListener("click", () => {
       }
       if (res === "Incorrect") {
         //alert("Usuario o contraseña incorrecta. Intente de nuevo.");
-        invalidUser.removeAttribute("style");
         invalidPassword.removeAttribute("style");
       }
     })

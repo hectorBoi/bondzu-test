@@ -118,7 +118,7 @@ const createTitle = (title) => {
 
 const createRow = () => {
   let div = document.createElement("div");
-  div.className = "row row-cols-1 row-cols-md-2";
+  div.className = "row row-cols-1 row-cols-lg-2 row-cols-xl-4";
   return div;
 };
 
@@ -156,8 +156,8 @@ showAdoptionsElem.addEventListener("click", () => {
           row.appendChild(col);
           count++;
           if (
-            (count > 0 && count % 2 === 0) ||
-            (count === animals.length && animals.length % 2 !== 0)
+            (count > 0 && count % 4 === 0) ||
+            (count === animals.length && animals.length % 4 !== 0)
           ) {
             container.appendChild(row);
             row = createRow();

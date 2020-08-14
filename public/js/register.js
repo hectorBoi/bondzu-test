@@ -15,41 +15,55 @@ submitElem.addEventListener("click", () => {
   const passwordConf = passwordConfElem.value;
 
   const existingUser = document.getElementById("existingUser");
+  const noMatchPasswords = document.getElementById("noMatchPasswords");
+  const missingInputs = document.getElementById("missingInputs");
 
-  if (passwordConf === password) {
-    fetch("/register", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        lastname: lastname,
-        email: email,
-        // userType: usertype,
-        password: password,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.token) {
-          const { token, userType, username } = res;
-          window.localStorage.setItem("token", token);
-          window.localStorage.setItem("usertype", userType);
-          window.localStorage.setItem("username", username);
-          location.replace("/");
-        }
-        if (res === "Already registered") {
-          //alert("Ese usuario ya existe!");
-          existingUser.removeAttribute("style");
-        }
+  noMatchPasswords.style.display = "none";
+  missingInputs.style.display = "none";
+
+  if (
+    name != "" &&
+    lastname != "" &&
+    email != "" &&
+    password != "" &&
+    passwordConf != ""
+  ) {
+    if (passwordConf === password) {
+      fetch("/register", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: name,
+          lastname: lastname,
+          email: email,
+          // userType: usertype,
+          password: password,
+        }),
       })
-      .catch((err) => {
-        if (err.code === 101) {
-          alert(err.message);
-        }
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.token) {
+            const { token, userType, username } = res;
+            window.localStorage.setItem("token", token);
+            window.localStorage.setItem("usertype", userType);
+            window.localStorage.setItem("username", username);
+            location.replace("/");
+          }
+          if (res === "Already registered") {
+            existingUser.removeAttribute("style");
+          }
+        })
+        .catch((err) => {
+          if (err.code === 101) {
+            alert(err.message);
+          }
+        });
+    } else {
+      noMatchPasswords.removeAttribute("style");
+    }
   } else {
-    alert("Las contraseñas no coinciden, intenta de nuevo.");
+    missingInputs.removeAttribute("style");
   }
 });

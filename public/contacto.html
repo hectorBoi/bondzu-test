@@ -44,48 +44,133 @@
 
     <div class="container">
       <div class="card mx-auto" style="width: 25rem;">
+        <div
+          style="
+            position: absolute;
+            z-index: 4;
+            right: 3rem;
+            top: -2rem;
+            max-width: 300px;
+          "
+        >
+          <div
+            id="toastSuccess"
+            class="toast"
+            role="alert"
+            data-delay="5000"
+            data-autohide="true"
+          >
+            <div class="toast-header">
+              <img
+                src="./img/logoBondzu.png"
+                class="rounded mr-2"
+                alt="logoBondzu"
+                width="25"
+                height="25"
+              />
+              <strong class="mr-auto">¡Gracias por contactar a Bondzù!</strong>
+              <button
+                type="button"
+                class="ml-2 mb-1 close"
+                data-dismiss="toast"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="toast-body" id="toastBody"></div>
+          </div>
+        </div>
+        <div
+          style="
+            position: absolute;
+            z-index: 4;
+            right: 3rem;
+            top: -5rem;
+            max-width: 300px;
+          "
+        >
+          <div
+            id="toastError"
+            class="toast"
+            role="alert"
+            data-delay="5000"
+            data-autohide="true"
+          >
+            <div class="toast-header">
+              <img
+                src="./img/logoBondzu.png"
+                class="rounded mr-2"
+                alt="logoBondzu"
+                width="25"
+                height="25"
+              />
+              <strong class="mr-auto">¡Ups! Olvidaste algo</strong>
+              <button
+                type="button"
+                class="ml-2 mb-1 close"
+                data-dismiss="toast"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="toast-body">
+              Parece ser que se te olvidó completar un campo. Por favor completa
+              toda la información.
+            </div>
+          </div>
+        </div>
         <div class="card-body">
-          <form>
-            <div class="form-group">
+          <form class="was-validated">
+            <div class="form-group is-invalid">
               <label for="name">Nombre completo</label>
               <input
                 type="text"
                 class="form-control"
                 id="name"
                 placeholder="Nombre Apellidos"
+                required
+                autofocus
               />
             </div>
-            <div class="form-group">
+            <div class="form-group is-invalid">
               <label for="email">Correo electrónico</label>
               <input
                 type="email"
                 class="form-control"
                 id="emailField"
                 placeholder="nombre@correo.com"
+                required
               />
             </div>
-            <div class="form-group">
+            <div class="form-group is-invalid">
               <label for="subject">Asunto</label>
               <input
                 type="subject"
                 class="form-control"
                 id="subject"
                 placeholder="Asunto"
+                required
               />
             </div>
-            <div class="form-group">
+            <div class="form-group is-invalid">
               <label for="message">Mensaje</label>
               <textarea
                 class="form-control"
                 id="message"
                 rows="3"
                 placeholder="Escriba su mensaje aquí"
+                required
               ></textarea>
             </div>
           </form>
         </div>
         <div class="card-footer text-muted">
-          <a id="submitButton" href="#" class="btn btn-primary btn-lg btn-block"
+          <a
+            id="submitButton"
+            type="submit"
+            class="btn btn-primary btn-lg btn-block"
             >Enviar</a
           >
         </div>

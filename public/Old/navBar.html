@@ -238,17 +238,11 @@
                   </div>
                   <div class="modal-body">
                     <form class="was-validated">
-                      <div class="input-group is-invalid">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text"
-                            id="validatedInputGroupPrepend"
-                            >Correo</span
-                          >
-                        </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Correo electrónico</label>
                         <input
                           id="email"
-                          type="text"
+                          type="email"
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
                           required
@@ -256,24 +250,9 @@
                           aria-label="Correo"
                           autofocus
                         />
-                        <div
-                          id="invalidUser"
-                          class="invalid-feedback"
-                          style="display: none;"
-                        >
-                          Usuario o contraseña incorrecta. Intente de nuevo.
-                        </div>
                       </div>
-
-                      <br />
-                      <div class="input-group is-invalid">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text"
-                            id="validatedInputGroupPrepend"
-                            >Contraseña</span
-                          >
-                        </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Contraseña</label>
                         <input
                           id="password"
                           type="password"
@@ -294,7 +273,7 @@
                     </form>
                   </div>
                   <div class="modal-footer" id="submit">
-                    <a href="#" class="btn btn-success btn-lg btn-block"
+                    <a class="btn btn-success btn-lg btn-block"
                       >Iniciar sesión</a
                     >
                   </div>
@@ -328,14 +307,8 @@
                   </div>
                   <div class="modal-body">
                     <form class="was-validated">
-                      <div class="input-group is-invalid">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text"
-                            id="validatedInputGroupPrepend"
-                            >Nombre</span
-                          >
-                        </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Nombre</label>
                         <input
                           id="nameReg"
                           type="text"
@@ -347,16 +320,8 @@
                           autofocus
                         />
                       </div>
-
-                      <br />
-                      <div class="input-group is-invalid">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text"
-                            id="validatedInputGroupPrepend"
-                            >Apellidos</span
-                          >
-                        </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Apellidos</label>
                         <input
                           id="lastnameReg"
                           type="text"
@@ -367,15 +332,8 @@
                           aria-label="Apellidos"
                         />
                       </div>
-                      <br />
-                      <div class="input-group is-invalid">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text"
-                            id="validatedInputGroupPrepend"
-                            >Tipo de usuario</span
-                          >
-                        </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Tipo de usuario</label>
                         <select class="custom-select" required id="usertypeReg">
                           <option value="">Seleccione una opción...</option>
                           <option value="etDcoSci6K">Basic</option>
@@ -384,18 +342,11 @@
                           <option value="mWm6R6DLFX">Bondzù Hero</option>
                         </select>
                       </div>
-                      <br />
-                      <div class="input-group is-invalid">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text"
-                            id="validatedInputGroupPrepend"
-                            >Correo</span
-                          >
-                        </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Correo electrónico</label>
                         <input
                           id="emailReg"
-                          type="text"
+                          type="email"
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
                           required
@@ -410,16 +361,8 @@
                           Esa cuenta ya existe. Intenta con otra.
                         </div>
                       </div>
-
-                      <br />
-                      <div class="input-group is-invalid">
-                        <div class="input-group-prepend">
-                          <span
-                            class="input-group-text"
-                            id="validatedInputGroupPrepend"
-                            >Contraseña</span
-                          >
-                        </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Contraseña</label>
                         <input
                           id="passwordReg"
                           type="password"
@@ -430,12 +373,37 @@
                           aria-label="Contraseña"
                         />
                       </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Confirmar contraseña</label>
+                        <input
+                          id="passwordRegConf"
+                          type="password"
+                          class="form-control is-invalid"
+                          aria-describedby="validatedInputGroupPrepend"
+                          required
+                          placeholder="Contraseña"
+                          aria-label="Contraseña"
+                        />
+                        <div
+                          id="noMatchPasswords"
+                          class="invalid-feedback"
+                          style="display: none;"
+                        >
+                          La contraseña no coincide. Intenta de nuevo.
+                        </div>
+                        <div
+                          id="missingInputs"
+                          class="invalid-feedback"
+                          style="display: none;"
+                        >
+                          Información incompleta. Por favor completa todos los
+                          campos.
+                        </div>
+                      </div>
                     </form>
                   </div>
                   <div class="modal-footer" id="submitReg">
-                    <a href="#" class="btn btn-warning btn-lg btn-block"
-                      >Regístrate</a
-                    >
+                    <a class="btn btn-warning btn-lg btn-block">Regístrate</a>
                   </div>
                 </div>
               </div>
