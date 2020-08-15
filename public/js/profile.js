@@ -13,7 +13,6 @@ const newLastNameElem = document.getElementById("newLastName");
 const newPasswordElem = document.getElementById("newPassword");
 const newPasswordConfirmElem = document.getElementById("newPasswordConfirm");
 const updateProfileElem = document.getElementById("updateProfile");
-const backTopElem = document.getElementById("backTop");
 
 const noMatchPasswords = document.getElementById("noMatchPasswords");
 
@@ -56,10 +55,10 @@ updateProfileElem.addEventListener("click", () => {
     })
       .then((res) => res.json())
       .then((newUser) => {
-        console.log(newUser)
+        console.log(newUser);
         location.replace("profile.html");
       })
-      .catch(err => err);
+      .catch((err) => err);
   } else {
     newPasswordConfirmElem.className = "form-control is-invalid";
     noMatchPasswords.removeAttribute("style");
@@ -71,6 +70,9 @@ const adoptionsContainerElem = document.getElementById("adoptionsContainer");
 const showAdoptionsElem = document.getElementById("showAdoptions");
 const container = document.getElementById("container");
 const headerAdoptions = document.getElementById("alertAdoptions");
+
+const backTopElem = document.getElementById("backTop");
+backTopElem.style.display = "none";
 
 const createDiv = (className, id) => {
   let div = document.createElement("div");
@@ -133,7 +135,8 @@ if (!window.localStorage.getItem("token")) {
 
 showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
-  console.log("Container")
+  backTopElem.style.display = "";
+  console.log("Container");
   if (container.innerHTML === "") {
     fetch(`/adoptions/${username}`)
       .then((res) => res.json())
@@ -142,7 +145,6 @@ showAdoptionsElem.addEventListener("click", () => {
           let count = 0;
           let row = createRow();
 
-          backTopElem.style.display = "";
           showAdoptionsElem.disable = true;
           headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Tus adopciones</h4>`;
           headerAdoptions.className = "alert alert-success";
@@ -168,15 +170,18 @@ showAdoptionsElem.addEventListener("click", () => {
   }
   showClass = showAdoptionsElem.className;
   if (showAdoptionsElem.className.includes("hide")) {
-    showAdoptionsElem.className = "btn btn-success"
-    showAdoptionsElem.className = showAdoptionsElem.className.substr(0, showClass.length - 6)
+    showAdoptionsElem.className = "btn btn-success";
+    showAdoptionsElem.className = showAdoptionsElem.className.substr(
+      0,
+      showClass.length - 6
+    );
     adoptionsContainerElem.style.display = "none";
-    showAdoptionsElem.innerText = "Ver tus adopciones"
+    showAdoptionsElem.innerText = "Ver tus adopciones";
+    backTopElem.style.display = "none";
   } else {
-    showAdoptionsElem.className += "btn btn-info"
-    showAdoptionsElem.className += "  hide"
-    showAdoptionsElem.innerText = "Ocultar tus adopciones"
-
+    showAdoptionsElem.className += "btn btn-info";
+    showAdoptionsElem.className += "  hide";
+    showAdoptionsElem.innerText = "Ocultar tus adopciones";
   }
 });
 
@@ -193,4 +198,4 @@ submitPhoto.addEventListener("change", () => {
   formPhoto.className = "btn btn-success";
   formPhoto.value = "Actualizar foto";
   formPhoto.disabled = false;
-})
+});

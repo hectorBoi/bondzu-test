@@ -28,15 +28,15 @@
     ></script>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <header>
-      <nav id="navBar"></nav>
+      <div id="navBar"></div>
       <script src="js/navBar.js"></script>
       <div id="faq"></div>
       <script src="./js/faq.js"></script>
     </header>
 
-    <div class="jumbotron">
+    <div class="jumbotron" style="margin-bottom: 0;">
       <div class="container-lg">
         <div class="row">
           <div class="col-lg-4">
@@ -57,7 +57,7 @@
             <h5 class="text-muted" style="margin: 8px;" id="usertype"></h5>
             <h5 class="text-muted" style="margin: 8px;" id="username"></h5>
             <h5 class="text-muted" style="margin: 8px;">
-              ***************
+              ************
             </h5>
             <a
               class="badge badge-secondary"
@@ -105,7 +105,12 @@
                         Selecciona una nueva foto de perfil.
                       </h6>
                       <br />
-                      <form action="/profile" method="POST" enctype="multipart/form-data" id="formTest">
+                      <form
+                        action="/profile"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        id="formTest"
+                      >
                         <div class="form-group row">
                           <input
                             type="file"
@@ -114,11 +119,17 @@
                             id="newProfilepic"
                           />
                         </div>
-                          <input disabled type="submit" value="No haz seleccionado foto" id="submitPhoto" class="btn btn-dark">
-                        <hr>
-                      <h6 style="color: green;">
-                        Completa solo la información que deseas modificar.
-                      </h6>
+                        <input
+                          disabled
+                          type="submit"
+                          value="No has seleccionado foto"
+                          id="submitPhoto"
+                          class="btn btn-dark"
+                        />
+                        <hr />
+                        <h6 style="color: green;">
+                          Completa solo la información que deseas modificar.
+                        </h6>
                         <div class="form-group row">
                           <label for="name" class="col-auto col-form-label"
                             >Nombre</label
@@ -199,27 +210,13 @@
       </div>
     </div>
     <div style="display: none;" id="adoptionsContainer">
-      <div
-        id="alertAdoptions"
-        class="alert"
-        role="alert"
-        style="top: -2rem;"
-      ></div>
+      <div id="alertAdoptions" class="alert" role="alert"></div>
       <div class="container-fluid" id="container"></div>
     </div>
-    <div>
-      <a
-        id="backTop"
-        href="#navBar"
-        style="text-decoration: none; display: none;"
-      >
-        <button type="button" class="btn btn-secondary btn-lg btn-block">
-          <h6 style="color: #ffffff;">Volver al principio</h6>
-        </button>
-      </a>
-    </div>
-    <script src="./js/index.js"></script>
-    <script src="./js/profile.js"></script>
-    <script src="./js/logout.js"></script>
+    <div id="footer" class="mt-auto"></div>
+    <script src="./js/footer.js"></script>
   </body>
+  <script src="./js/index.js"></script>
+  <script src="./js/profile.js"></script>
+  <script src="./js/logout.js"></script>
 </html>

@@ -5,6 +5,9 @@ const messageElem = document.getElementById("message");
 const submitButton = document.getElementById("submitButton");
 const toastBodyElem = document.getElementById("toastBody");
 
+const backTopElem = document.getElementById("backTop");
+backTopElem.style.display = "none";
+
 const smtpToken = "e532f17b-18c6-49a2-99f7-04f158ff339c";
 
 submitButton.addEventListener("click", () => {

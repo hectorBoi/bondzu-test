@@ -28,7 +28,7 @@
     ></script>
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <header>
       <div
         data-spy="scroll"
@@ -36,7 +36,7 @@
         data-offset="0"
         class="scrollspy-example"
       >
-        <nav id="navBar"></nav>
+        <div id="navBar"></div>
         <script src="./js/navBar.js"></script>
         <div id="faq"></div>
         <script src="./js/faq.js"></script>
@@ -588,14 +588,8 @@
       </div>
     </div>
     <br />
-    <br />
-    <div>
-      <a href="#navBar" style="text-decoration: none;">
-        <button type="button" class="btn btn-secondary btn-lg btn-block">
-          <h6 style="color: #ffffff;">Volver al principio</h6>
-        </button>
-      </a>
-    </div>
+    <div id="footer" class="mt-auto"></div>
+    <script src="./js/footer.js"></script>
   </body>
   <script src="./js/index.js"></script>
   <script src="./js/login.js"></script>
