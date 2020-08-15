@@ -1,0 +1,6 @@
+.animalCardHeader {
+  background-color: hsla(0, 0%, 100%, 0.6);
+  color: #000000;
+  padding: 12px;
+  border-radius: 15px;
+}

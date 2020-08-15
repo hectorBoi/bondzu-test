@@ -104,7 +104,12 @@ const createImage = (url) => {
 const createTitle = (title) => {
   let h5 = document.createElement("h5");
   h5.className = "card-title";
-  h5.innerHTML = title;
+
+  let span = document.createElement("span");
+  span.className = "animalCardHeader";
+  span.innerHTML = title;
+
+  h5.appendChild(span);
   return h5;
 };
 

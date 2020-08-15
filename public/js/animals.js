@@ -31,7 +31,12 @@ const createImage = (url) => {
 const createTitle = (title) => {
   let h5 = document.createElement("h5");
   h5.className = "card-title";
-  h5.innerHTML = title;
+
+  let span = document.createElement("span");
+  span.className = "animalCardHeader";
+  span.innerHTML = title;
+
+  h5.appendChild(span);
   return h5;
 };
 
@@ -71,7 +76,7 @@ const createCards = (array, container) => {
       row = createRow();
     }
   }
-}
+};
 
 // Only allows access to users which have a session
 if (!window.localStorage.getItem("token")) {
@@ -89,18 +94,18 @@ fetch("/animals", {
 })
   .then((res) => res.json())
   .then((animalsColleagues) => {
-    const animals = []
-    const colleagues = []
+    const animals = [];
+    const colleagues = [];
     animalsColleagues.forEach((elem) => {
       if (elem.species !== "Colega") {
-        animals.push(elem)
+        animals.push(elem);
       } else {
-        colleagues.push(elem)
+        colleagues.push(elem);
       }
-    })
+    });
 
-    createCards(animals, containerAnimals)
-    createCards(colleagues, containerColleagues)
+    createCards(animals, containerAnimals);
+    createCards(colleagues, containerColleagues);
   })
   .catch("Error in the request");
 
