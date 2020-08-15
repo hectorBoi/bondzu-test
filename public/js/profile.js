@@ -188,9 +188,9 @@ window.onclick = (event) => {
 
 const formTest = document.getElementById("formTest");
 const submitPhoto = document.getElementById("newProfilepic");
-formTest.addEventListener("submit", (event) => {
-  if (!submitPhoto.files[0]) {
-    event.preventDefault()
-    alert("No haz seleccionado ninguna foto!")
-  }
+const formPhoto = document.getElementById("submitPhoto");
+submitPhoto.addEventListener("change", () => {
+  formPhoto.className = "btn btn-success";
+  formPhoto.value = "Actualizar foto";
+  formPhoto.disabled = false;
 })
