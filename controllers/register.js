@@ -42,7 +42,7 @@ const handleRegister = async (req, res, Parse) => {
     const session = await Parse.User.logIn(email, password)
     const username = session.get("username")
     const typeID = session.get("userType")
-    const userSession = token.createSession({ user: username, userType: typeID.id, sessiontoken: user.getSessionToken() })
+    const userSession = await token.createSession({ user: username, userType: typeID.id, sessiontoken: user.getSessionToken() })
     res.json(userSession);
   } catch (error) {
     res.status(400).json("Already registered");

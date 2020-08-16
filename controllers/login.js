@@ -1,7 +1,7 @@
 const token = require("./token")
 
 // Performs the authentication of the users credential with the DB
-const handleLogin = (req, res, Parse) => {
+const handleLogin = async (req, res, Parse) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return Promise.reject("Some of the fields are empty!");
@@ -22,10 +22,10 @@ const handleLogin = (req, res, Parse) => {
 }
 
 // Manages the interaction with the frontend
-const signinAuth = (Parse) => (req, res) => {
-  return handleLogin(req, res, Parse)
-    .then(data => {
-      return data ? token.createSession(data) : Promise.reject(data);
+const signinAuth = (Parse) => async (req, res) => {
+  return await handleLogin(req, res, Parse)
+    .then(async data => {
+      return data ? await token.createSession(data) : Promise.reject(data);
     })
     .then(session => res.json(session))
     .catch(err => res.status(400).json("Incorrect"));

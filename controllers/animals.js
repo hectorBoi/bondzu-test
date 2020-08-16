@@ -2,7 +2,7 @@ const animalInfo = require("./animalInfo");
 const adopts = require("./adoptions");
 
 // Filter the array of animals depending on the type of the user
-const filterAnimals = (userType, animals) => {
+const filterAnimals = async (userType, animals) => {
   let filteredArray = [];
   switch (userType) {
     case "etDcoSci6K": // 0
@@ -31,7 +31,7 @@ const handleAnimals = async (req, res, Parse) => {
     query.equalTo("isActive", true);
     const activeAnimals = await query.find();
     const animalsInfo = await animalInfo.getAnimals(activeAnimals);
-    const result = filterAnimals(usertype, animalsInfo)
+    const result = await filterAnimals(usertype, animalsInfo)
     res.json(result);
   } catch (err) {
     res.json(err)

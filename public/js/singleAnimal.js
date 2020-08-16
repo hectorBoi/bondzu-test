@@ -61,7 +61,7 @@ adoptElem.addEventListener("click", () => {
         adoptElem.innerText = "¡Ya me adoptaste!";
         setTimeout(() => {
           adoptElem.disabled = true;
-        }, 2000);
+        }, 1000);
       }
     })
     .catch("Error in the request");

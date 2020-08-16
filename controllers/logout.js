@@ -1,5 +1,5 @@
 // Removes the user key from the Parse server session table
-const handleLogout = (req, res, Parse) => {
+const handleLogout = async (req, res, Parse) => {
   Parse.User.logOut()
     .then(() => {
       res.json("Success?")

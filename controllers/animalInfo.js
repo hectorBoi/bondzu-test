@@ -48,7 +48,7 @@ const getAnimalInfo = async (animal, Parse) => {
 }
 
 // Transforms the array of Parse.Objects into Json for the animals list
-const getAnimals = (array) => {
+const getAnimals = async (array) => {
   let animalInfo = array.map(animal => {
     return animal = {
       id: animal.id,
