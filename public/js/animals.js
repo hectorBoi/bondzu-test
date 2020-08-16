@@ -1,9 +1,4 @@
-//Preloading page
-
-window.addEventListener("load", function () {
-  const loader = document.getElementById("loader");
-  loader.className += " hidden";
-});
+const loaderElements = document.getElementById("loaderElements");
 
 const containerAnimals = document.getElementById("containerAnimals");
 const containerColleagues = document.getElementById("containerColleagues");
@@ -113,6 +108,8 @@ fetch("/animals", {
 
     createCards(animals, containerAnimals);
     createCards(colleagues, containerColleagues);
+
+    loaderElements.className += " hidden";
   })
   .catch("Error in the request");
 
@@ -121,3 +118,9 @@ window.onclick = (event) => {
     window.localStorage.setItem("currentAnimal", event.target.id);
   }
 };
+
+var widthDivAnimal = document.getElementById("animals").offsetWidth;
+var heightDivAnimal = document.getElementById("animals").offsetHeight;
+
+console.log(widthDivAnimal);
+console.log(heightDivAnimal);

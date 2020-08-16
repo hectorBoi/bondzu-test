@@ -56,7 +56,7 @@ document.getElementById("faq").innerHTML = `
                       teléfonos inteligentes y páginas web. Lo que
                       buscamos es darle vida digna a los animales en
                       cautiverio. Lo ideal es que los animales vivan en su
-                      hábitat. Sin embargo existen muchos animales en
+                      hábitat. Sin embargo, existen muchos animales en
                       cautiverio que es imposible liberar porque no
                       podrían adaptarse a un medio salvaje. Nuestra
                       contribución es darle información a la gente y

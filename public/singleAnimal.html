@@ -28,8 +28,8 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body class="d-flex flex-column min-vh-100">
-    <header>
+  <body id="body" class="d-flex flex-column min-vh-100">
+    <header style="z-index: 10;">
       <div
         data-spy="scroll"
         data-target="#navBar"
@@ -46,6 +46,12 @@
     <div id="loader" class="loader">
       <div class="spinner spinner-border" role="status">
         <span class="sr-only">Loading page...</span>
+      </div>
+    </div>
+
+    <div id="loaderElements" class="loaderElements">
+      <div class="spinner spinner-border" role="status">
+        <span class="sr-only">Loading elements...</span>
       </div>
     </div>
 
@@ -123,7 +129,7 @@
     </div>
 
     <br />
-    <div id="footer" class="mt-auto"></div>
+    <div id="footer" class="mt-auto" style="z-index: 10;"></div>
     <script src="./js/footer.js"></script>
 
     <script src="./js/singleAnimal.js"></script>

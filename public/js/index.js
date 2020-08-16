@@ -16,3 +16,8 @@ if (!token) {
   }
 }
 
+//Preloading page
+window.addEventListener("load", function () {
+  const loader = document.getElementById("loader");
+  loader.className += " hidden";
+});

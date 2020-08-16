@@ -1,10 +1,3 @@
-//Preloading page
-
-window.addEventListener("load", function () {
-  const loader = document.getElementById("loader");
-  loader.className += " hidden";
-});
-
 const nameElem = document.getElementById("name");
 const lastnameElem = document.getElementById("lastname");
 const usertypeElem = document.getElementById("usertype");
@@ -12,6 +5,8 @@ const usernameElem = document.getElementById("username");
 const profilePhotoElem = document.getElementById("profilePhoto");
 const profilePhotoModElem = document.getElementById("profilePhotoMod");
 const username = window.localStorage.getItem("username");
+
+const loaderElements = document.getElementById("loaderElements");
 
 // To modify the user
 const newProfilepicElem = document.getElementById("newProfilepic");
@@ -37,6 +32,7 @@ fetch(`/profile/${username}`)
       profilePhotoElem.setAttribute("src", userInfo.photo);
       profilePhotoModElem.setAttribute("src", userInfo.photo);
     }
+    loaderElements.className += " hidden";
   })
   .catch("Error in the request");
 

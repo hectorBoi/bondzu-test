@@ -1,10 +1,3 @@
-//Preloading page
-
-window.addEventListener("load", function () {
-  const loader = document.getElementById("loader");
-  loader.className += " hidden";
-});
-
 const iframeElem = document.getElementById("iframe");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const speciesElem = document.getElementById("species");
@@ -16,6 +9,10 @@ const animalID = window.localStorage.getItem("currentAnimal");
 const titleElem = document.getElementById("title");
 
 const popoverAdoptElem = document.getElementById("popoverAdopt");
+
+const loaderElements = document.getElementById("loaderElements");
+const body = document.getElementById("body");
+body.style.overflow = "hidden";
 
 fetch(`/singleAnimal/${animalID}`, {
   method: "post",
@@ -45,6 +42,9 @@ fetch(`/singleAnimal/${animalID}`, {
       "data-content",
       `Puedes verme en tus adopciones dentro de tu <a href="profile.html">perfil</a>.`
     );
+
+    loaderElements.className += " hidden";
+    body.style.overflow = "auto";
 
     if (animal.isAdopted) {
       adoptElem.innerText = "¡Ya me adoptaste!";
