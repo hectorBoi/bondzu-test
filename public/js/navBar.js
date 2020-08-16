@@ -304,16 +304,6 @@ style="background-color: #f28f1d; border-color: #ffffff;"
                         />
                       </div>
                       <div class="form-group is-invalid">
-                        <label for="email">Tipo de usuario</label>
-                        <select class="custom-select" required id="usertypeReg">
-                          <option value="">Seleccione una opción...</option>
-                          <option value="etDcoSci6K">Basic</option>
-                          <option value="jHbSEutegP">Bondzù Fan</option>
-                          <option value="nRXYUkuJJq">Bondzù Lover</option>
-                          <option value="mWm6R6DLFX">Bondzù Hero</option>
-                        </select>
-                      </div>
-                      <div class="form-group is-invalid">
                         <label for="email">Correo electrónico</label>
                         <input
                           id="emailReg"

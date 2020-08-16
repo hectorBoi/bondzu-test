@@ -3,7 +3,6 @@ const animals = document.getElementById("navAnimals");
 const loggedIn = document.getElementById("loggedIn");
 const cardLogin = document.getElementById("cardLogin");
 const conocenos = document.getElementById("conocenos");
-const token = window.localStorage.getItem("token");
 
 if (!document.cookie.includes("token")) {
   animals.style.display = "none";

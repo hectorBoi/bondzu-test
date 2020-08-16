@@ -13,9 +13,6 @@ logout.addEventListener("click", () => {
         document.cookie = "token" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         document.cookie = "usertype" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
         document.cookie = "username" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        // window.localStorage.removeItem("token")
-        // window.localStorage.removeItem("usertype")
-        // window.localStorage.removeItem("username")
         location.replace("/")
       }
     })

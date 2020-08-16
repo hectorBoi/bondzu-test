@@ -12,6 +12,7 @@ const animals = require('./controllers/animals');
 const adoptions = require('./controllers/adoptions');
 const logout = require('./controllers/logout');
 const banner = require('./controllers/banner');
+const middlewares = require('./middlewares');
 
 const fileUpload = require('express-fileupload');
 const cookieParser = require("cookie-parser");
@@ -75,6 +76,9 @@ app.post("/adoptions/:animalID", (req, res) => {
 app.get("/banner", (req, res) => {
   banner.getBanner(req, res, Parse);
 })
+
+app.use(middlewares.notFound);
+app.use(middlewares.errorHandler);
 
 // Initilizes the server
 const port = process.env.PORT || 8081;

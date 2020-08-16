@@ -55,7 +55,6 @@ const updateAdoptions = async (req, res, Parse) => {
   const { username, token } = req.cookies; // DEBERIA DE SER HEADER
   const { animalID } = req.params;
 
-  console.log(username, token, animalID)
   try {
     // USER
     const userTable = Parse.Object.extend("User");

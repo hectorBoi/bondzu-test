@@ -80,11 +80,6 @@ const createCards = (array, container) => {
   }
 };
 
-// Only allows access to users which have a session
-// if (!window.localStorage.getItem("token")) {
-//   location.replace("/");
-// }
-
 if (!document.cookie.includes("token")) {
   location.replace("/");
 }
@@ -93,9 +88,6 @@ fetch("/animals", {
   method: "post",
   headers: {
     "Content-Type": "application/json",
-    // usertype: window.localStorage.getItem("usertype"),
-    // username: window.localStorage.getItem("username"),
-    // token: window.localStorage.getItem("token"),
   },
 })
   .then((res) => res.json())
@@ -122,9 +114,3 @@ window.onclick = (event) => {
     window.localStorage.setItem("currentAnimal", event.target.id);
   }
 };
-
-var widthDivAnimal = document.getElementById("animals").offsetWidth;
-var heightDivAnimal = document.getElementById("animals").offsetHeight;
-
-console.log(widthDivAnimal);
-console.log(heightDivAnimal);
