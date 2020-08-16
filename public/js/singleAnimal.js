@@ -1,3 +1,10 @@
+//Preloading page
+
+window.addEventListener("load", function () {
+  const loader = document.getElementById("loader");
+  loader.className += " hidden";
+});
+
 const iframeElem = document.getElementById("iframe");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const speciesElem = document.getElementById("species");

@@ -1,3 +1,10 @@
+//Preloading page
+
+window.addEventListener("load", function () {
+  const loader = document.getElementById("loader");
+  loader.className += " hidden";
+});
+
 const nameElem = document.getElementById("name");
 const lastnameElem = document.getElementById("lastname");
 const usertypeElem = document.getElementById("usertype");

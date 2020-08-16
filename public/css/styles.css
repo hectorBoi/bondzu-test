@@ -4,3 +4,34 @@
   padding: 12px;
   border-radius: 15px;
 }
+
+.loader {
+  position: fixed;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 15rem;
+  height: 15rem;
+  color: #f28f1d;
+}
+
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.loader.hidden {
+  animation: fadeOut 1s;
+  animation-fill-mode: forwards;
+}
