@@ -14,7 +14,7 @@ const loaderElements = document.getElementById("loaderElements");
 const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
-fetch(`/singleAnimal/${animalID}`)
+fetch(`http://bondzuweb-env.eba-rndn2r3v.us-east-1.elasticbeanstalk.com/singleAnimal/${animalID}`)
   .then((res) => res.json())
   .then((animal) => {
     const youtubeURL = `https://www.youtube.com/embed/${animal.youtubeID}`;
@@ -48,7 +48,7 @@ fetch(`/singleAnimal/${animalID}`)
   .catch("Error in the request");
 
 adoptElem.addEventListener("click", () => {
-  const url = `/adoptions/${animalID}`;
+  const url = `http://bondzuweb-env.eba-rndn2r3v.us-east-1.elasticbeanstalk.com/adoptions/${animalID}`;
   fetch(url, {
     method: "post",
     headers: {
