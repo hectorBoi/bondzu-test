@@ -1,6 +1,7 @@
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const submit = document.getElementById("submit");
+const invalidPassword = document.getElementById("invalidPassword");
 
 submit.addEventListener("click", () => {
   const us = email.value;
@@ -14,26 +15,24 @@ submit.addEventListener("click", () => {
     body: JSON.stringify({
       email: us,
       password: pw,
-    })
+    }),
   })
-    .then(res => res.json())
-    .then(res => {
-      if (res) {
-        if (res.token) {
-          const { token, userType, username } = res;
-          window.localStorage.setItem("token", token);
-          window.localStorage.setItem("usertype", userType);
-          window.localStorage.setItem("username", username);
-          location.replace("/")
-        } else {
-          alert(err.message);
-        }
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.token) {
+        const { token, userType, username } = res;
+        document.cookie = `username=${username}`;
+        document.cookie = `token=${token}`;
+        document.cookie = `usertype=${userType}`;
+        location.replace("/");
+      }
+      if (res === "Incorrect") {
+        invalidPassword.removeAttribute("style");
       }
     })
-    .catch(err => {
+    .catch((err) => {
       if (err.code === 101) {
-        alert(err.message)
+        alert(err.message);
       }
-    })
-})
-
+    });
+});

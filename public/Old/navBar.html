@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bondzù</title>
+
+    <link rel="icon" href="img/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <nav
+      class="navbar navbar-expand-xl navbar-dark"
+      style="background-color: #f28f1d; border-color: #ffffff;"
+    >
+      <a class="navbar-brand mr-auto" href="index.html">
+        <img
+          class="navBarIcon"
+          src="../img/bondu_logo_white.png"
+          height="50"
+          alt="navBarIcon"
+          style="
+            margin-left: 18px;
+            margin-right: 18px;
+            margin-bottom: 8px;
+            right: 30rem;
+          "
+        />
+      </a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarToggler"
+        aria-controls="navbarToggler"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a href="index.html" style="text-decoration: none; color: #f28f1d;">
+              <button
+                type="button"
+                class="btn btn-light"
+                style="
+                  color: #f28f1d;
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                Inicio
+              </button></a
+            >
+          </li>
+
+          <li class="nav-item" id="navAnimals">
+            <a href="animals.html" style="text-decoration: none; color: white;">
+              <button
+                type="button"
+                class="btn btn-outline-light"
+                style="
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                ¡Animales!
+              </button></a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a href="quienes.html" style="text-decoration: none; color: white;">
+              <button
+                type="button"
+                class="btn btn-outline-light"
+                style="
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                ¿Quiénes somos?
+              </button></a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="app.html" style="text-decoration: none; color: white;">
+              <button
+                type="button"
+                class="btn btn-outline-light"
+                style="
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                Nuestra App
+              </button></a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="contacto.html"
+              style="text-decoration: none; color: white;"
+            >
+              <button
+                type="button"
+                class="btn btn-outline-light"
+                style="
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                Contacto
+              </button></a
+            >
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto justify-content-end">
+          <li class="nav-item" id="guest">
+            <a
+              class="loginIcon form-inline my-2 my-lg-0 ml-auto"
+              type="button"
+              data-toggle="modal"
+              data-target="#userModal"
+              style="text-decoration: none;"
+            >
+              <button
+                type="button"
+                class="btn btn-success"
+                style="
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                Iniciar sesión
+              </button></a
+            >
+
+            <div
+              class="modal fade"
+              id="userModal"
+              tabindex="-1"
+              aria-labelledby="userModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5
+                      class="modal-title text-center container"
+                      id="userModalLabel"
+                    >
+                      Ingresa a Bondzù
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <a
+                      href="#loginModal"
+                      data-toggle="modal"
+                      class="btn btn-success btn-lg btn-block"
+                      data-dismiss="modal"
+                      >Inicia sesión</a
+                    >
+                    <hr style="clear: both;" />
+                    <a
+                      href="#signupModal"
+                      data-toggle="modal"
+                      class="btn btn-warning btn-lg btn-block"
+                      data-dismiss="modal"
+                      >Regístrate</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="modal fade"
+              id="loginModal"
+              tabindex="-1"
+              aria-labelledby="loginModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5
+                      class="modal-title text-center container"
+                      id="loginModalLabel"
+                    >
+                      Inicia sesión
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form class="was-validated">
+                      <div class="form-group is-invalid">
+                        <label for="email">Correo electrónico</label>
+                        <input
+                          id="email"
+                          type="email"
+                          class="form-control is-invalid"
+                          aria-describedby="validatedInputGroupPrepend"
+                          required
+                          placeholder="correo@ejemplo.com"
+                          aria-label="Correo"
+                          autofocus
+                        />
+                      </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Contraseña</label>
+                        <input
+                          id="password"
+                          type="password"
+                          class="form-control is-invalid"
+                          aria-describedby="validatedInputGroupPrepend"
+                          required
+                          placeholder="Contraseña"
+                          aria-label="Contraseña"
+                        />
+                        <div
+                          id="invalidPassword"
+                          class="invalid-feedback"
+                          style="display: none;"
+                        >
+                          Usuario o contraseña incorrecta. Intente de nuevo.
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer" id="submit">
+                    <a class="btn btn-success btn-lg btn-block"
+                      >Iniciar sesión</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="modal fade"
+              id="signupModal"
+              tabindex="-1"
+              aria-labelledby="signupModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5
+                      class="modal-title text-center container"
+                      id="signupModalLabel"
+                    >
+                      Únete a Bondzù
+                    </h5>
+                    <button
+                      type="button"
+                      class="close"
+                      data-dismiss="modal"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form class="was-validated">
+                      <div class="form-group is-invalid">
+                        <label for="email">Nombre</label>
+                        <input
+                          id="nameReg"
+                          type="text"
+                          class="form-control is-invalid"
+                          aria-describedby="validatedInputGroupPrepend"
+                          required
+                          placeholder="Nombre"
+                          aria-label="Nombre"
+                          autofocus
+                        />
+                      </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Apellidos</label>
+                        <input
+                          id="lastnameReg"
+                          type="text"
+                          class="form-control is-invalid"
+                          aria-describedby="validatedInputGroupPrepend"
+                          required
+                          placeholder="Apellidos"
+                          aria-label="Apellidos"
+                        />
+                      </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Tipo de usuario</label>
+                        <select class="custom-select" required id="usertypeReg">
+                          <option value="">Seleccione una opción...</option>
+                          <option value="etDcoSci6K">Basic</option>
+                          <option value="jHbSEutegP">Bondzù Fan</option>
+                          <option value="nRXYUkuJJq">Bondzù Lover</option>
+                          <option value="mWm6R6DLFX">Bondzù Hero</option>
+                        </select>
+                      </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Correo electrónico</label>
+                        <input
+                          id="emailReg"
+                          type="email"
+                          class="form-control is-invalid"
+                          aria-describedby="validatedInputGroupPrepend"
+                          required
+                          placeholder="correo@ejemplo.com"
+                          aria-label="Correo"
+                        />
+                        <div
+                          id="existingUser"
+                          class="invalid-feedback"
+                          style="display: none;"
+                        >
+                          Esa cuenta ya existe. Intenta con otra.
+                        </div>
+                      </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Contraseña</label>
+                        <input
+                          id="passwordReg"
+                          type="password"
+                          class="form-control is-invalid"
+                          aria-describedby="validatedInputGroupPrepend"
+                          required
+                          placeholder="Contraseña"
+                          aria-label="Contraseña"
+                        />
+                      </div>
+                      <div class="form-group is-invalid">
+                        <label for="email">Confirmar contraseña</label>
+                        <input
+                          id="passwordRegConf"
+                          type="password"
+                          class="form-control is-invalid"
+                          aria-describedby="validatedInputGroupPrepend"
+                          required
+                          placeholder="Contraseña"
+                          aria-label="Contraseña"
+                        />
+                        <div
+                          id="noMatchPasswords"
+                          class="invalid-feedback"
+                          style="display: none;"
+                        >
+                          La contraseña no coincide. Intenta de nuevo.
+                        </div>
+                        <div
+                          id="missingInputs"
+                          class="invalid-feedback"
+                          style="display: none;"
+                        >
+                          Información incompleta. Por favor completa todos los
+                          campos.
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer" id="submitReg">
+                    <a class="btn btn-warning btn-lg btn-block">Regístrate</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item"></li>
+
+          <li class="nav-item" id="loggedIn">
+            <div class="dropdown">
+              <button
+                class="btn btn-success dropdown-toggle"
+                type="button"
+                id="dropdownProfile"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                style="
+                  margin-left: 18px;
+                  margin-right: 18px;
+                  margin-bottom: 8px;
+                "
+              >
+                <img
+                  src="../img/profileIcon.png"
+                  alt="profileIcon"
+                  height="35"
+                  width="35"
+                />
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownProfile">
+                <a class="dropdown-item" href="profile.html">Perfil</a>
+                <a class="dropdown-item" id="logout">Cerrar sesión</a>
+              </div>
+            </div>
+          </li>
+          <a
+            class="faqIcon"
+            type="button"
+            data-toggle="modal"
+            data-target="#faqModal"
+          >
+            <img
+              src="../img/faqIcon.png"
+              alt="faqIcon"
+              height="40"
+              width="40"
+              style="margin-left: 18px; margin-right: 18px; margin-bottom: 8px;"
+            />
+          </a>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="faq"></div>
+    <script src="../js/faq.js"></script>
+
+    <script src="../js/login.js"></script>
+    <script src="../js/logout.js"></script>
+    <script src="../js/register.js"></script>
+    <script src="../js/index.js"></script>
+  </body>
+</html>

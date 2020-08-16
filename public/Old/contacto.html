@@ -7,25 +7,21 @@
        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
        <link rel="stylesheet" href="css/fontello.css">
        <link rel="stylesheet" href="css/estilos.css">
-       <link rel="stylesheet" href="css/galeria.css">
+       <link rel="stylesheet" href="css/estilo.css">
+
       
        <style type="text/css">
        body,td,th {
 	font-family: "Open Sans", sans-serif;
 	              }
-       body {
-	background-color: #FFF;
-	        }
-       </style>
+	   </style>
    
    </head>
     
       <body>
-      
-
         <header> 
           <div class="contenedor">
-             <h1 class="">FAQ</h1>
+             <h1 class="">Contacto</h1>
              <input type="checkbox" id="menu-bar">
              <label class="icon-menu" for="menu-bar"></label>
           
@@ -40,12 +36,11 @@
                 <a href="contacto.html">Contacto</a>
                 <a href="login.html" id="login">Login</a>
                 <a href="animals.html" id="animals">Animals!</a>
-             </nav>    
+             </nav> 
           </div>       
           </header>
          
           <main>
-          
                         <left>
               <div class="banderas">
                <center>
@@ -56,8 +51,8 @@
                      <p align="right">&nbsp;</p>
                      <p align="right">&nbsp;</p>
                      <p align="right"><span class="idioma">Idioma  </span></p>
-                     <p align="right"><a href="Ingles/faq.html"><img src="img/bandera-eua.png" height="20"></a>
-                       <a href="FAQ.html"><img src="img/bandera-mexico.png" height="20"></a>                     </p>
+                     <p align="right"><a href="Ingles/contact.html"><img src="img/bandera-eua.png" height="20"></a>
+                       <a href="contacto.html"><img src="img/bandera-mexico.png" height="20"></a>                     </p>
                    </blockquote>
                  </blockquote>
                </article> 
@@ -77,29 +72,22 @@
                
            
       </div>
-                       
-                       
-              
-              <section id= "FAQ">	
-              <h2></h2>
-              <p><script src="http://feeds.feedburner.com/BondzFaq?format=sigpro" type="text/javascript" ></script><noscript><p><a href=""></a><br/></p> </noscript></p>
-              
-              
-              
-              
-
-              
-              
-              </section> 
-              
-                            
-           
-                                
+    
+    
+           <form action="enviar.php" method="post">
+           <h7>Contáctanos</h7>
+           <input type="text" name="nombre" placeholder="Nombre" required>
+           <input type="text" name="correo" placeholder="Correo" required>
+           <input type="text" name="asunto" placeholder="Asunto" required>
+           <textarea name="mensaje" placeholder="Escriba aqui su mensaje" required></textarea>
+           <input type="submit" value="Enviar" id="boton">
+             
+           </form>    
+                        
            </main>   
-           
            <footer>
               <div class=".contenedor">
-               <p class="derechos">Bondzù &copy 2016</p>
+               <p class="derechos">Bondzù &copy 2020</p>
                <div class="redes">
                   <a class="icon-facebook" href="https://www.facebook.com/bondzu"></a>
                   <a class="icon-twitter" href="https://twitter.com/bondzucubs"></a>

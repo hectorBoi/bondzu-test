@@ -20,8 +20,8 @@ const getVideo = async (id, Parse) => {
   try {
     const videoTable = Parse.Object.extend("Video");
     const query = new Parse.Query(videoTable);
-    const camera = await query.find();
-    const filter = camera.filter(camara => camara.get("animal_id").id === id)
+    const cameras = await query.find();
+    const filter = cameras.filter(camara => camara.get("animal_id").id === id);
     if (filter[0]) {
       return filter[0].get("youtube_ids")[0]
     }
@@ -31,28 +31,38 @@ const getVideo = async (id, Parse) => {
   }
 }
 
-// Transforms the array of Parse.Objects into Json
-const getAnimalInfo = async (array, Parse) => {
-  let animalInfo = await Promise.all(array.map(async animal => {
-    const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
-    const video = await getVideo(animal.id, Parse);
+// Transforms the array of Parse.Objects into Json 
+const getAnimalInfo = async (animal, Parse) => {
+  const video = await getVideo(animal.id, Parse);
+  const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
+  let animalInfo = {
+    about: animal.get("about"),
+    characteristics: animal.get("characteristics"),
+    profilePhoto: animal.get("profilePhoto")._url,
+    species: animal.get("species"),
+    youtubeID: video,
+    keeper: keeper,
+  };
+
+  return animalInfo;
+}
+
+// Transforms the array of Parse.Objects into Json for the animals list
+const getAnimals = (array) => {
+  let animalInfo = array.map(animal => {
     return animal = {
       id: animal.id,
-      youtubeID: video,
-      keeper: keeper,
       profilePhoto: animal.get("profilePhoto")._url,
-      name: animal.get("name"),
-      about: animal.get("about"),
-      characteristics: animal.get("characteristics"),
       species: animal.get("species"),
       userType: animal.get("animalRequiredPriority").id,
     }
   }
-  ));
+  );
 
   return animalInfo;
 }
 
 module.exports = {
   getAnimalInfo: getAnimalInfo,
+  getAnimals: getAnimals,
 }

@@ -12,11 +12,19 @@ const animals = require('./controllers/animals');
 const adoptions = require('./controllers/adoptions');
 const logout = require('./controllers/logout');
 const banner = require('./controllers/banner');
+const middlewares = require('./middlewares');
+
+const fileUpload = require('express-fileupload');
+const cookieParser = require("cookie-parser");
+const helmet = require('helmet');
 
 // Declares the express server and  middlewares
 const app = express();
 app.use(express.json());
 app.use(express.static("public"));
+app.use(fileUpload());
+app.use(cookieParser());
+app.use(helmet());
 
 // Handlers for all the routes
 app.post("/login", signin.signinAuth(Parse));
@@ -29,7 +37,7 @@ app.post("/logout", (req, res) => {
   logout.handleLogout(req, res, Parse)
 })
 
-app.get("/profile", (req, res) => {
+app.get("/profile/", (req, res) => {
   profile.handleProfile(req, res, Parse);
 });
 
@@ -45,17 +53,32 @@ app.post("/animals", (req, res) => {
   animals.handleAnimals(req, res, Parse);
 })
 
-app.get("/adoptions", (req, res) => {
+app.get("/singleAnimal/:animalID", (req, res) => {
+  animals.handleSingleAnimal(req, res, Parse);
+})
+
+app.post("/singleAnimal/:animalID", (req, res) => {
+  animals.handleSingleAnimal(req, res, Parse);
+})
+
+app.get("/adoptions/:userID", (req, res) => {
   adoptions.getAdoptions(req, res, Parse);
 })
 
-app.post("/adoptions", (req, res) => {
+app.post("/adoptions", (req, res) => { // THIS IS TEMPORAL
+  adoptions.getAdoptions(req, res, Parse);
+})
+
+app.post("/adoptions/:animalID", (req, res) => {
   adoptions.updateAdoptions(req, res, Parse);
 })
 
 app.get("/banner", (req, res) => {
   banner.getBanner(req, res, Parse);
 })
+
+app.use(middlewares.notFound);
+app.use(middlewares.errorHandler);
 
 // Initilizes the server
 const port = process.env.PORT || 8081;
