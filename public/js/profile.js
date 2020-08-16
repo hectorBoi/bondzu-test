@@ -21,7 +21,7 @@ const newPasswordConfirmElem = document.getElementById("newPasswordConfirm");
 const updateProfileElem = document.getElementById("updateProfile");
 const noMatchPasswords = document.getElementById("noMatchPasswords");
 
-fetch(`http://bondzuweb-env.eba-rndn2r3v.us-east-1.elasticbeanstalk.com/profile/`)
+fetch(`/profile/`)
   .then((res) => res.json())
   .then((userInfo) => {
     nameElem.innerText = userInfo.name;
@@ -49,7 +49,7 @@ updateProfileElem.addEventListener("click", () => {
   };
 
   if (newPasswordConfirm === newPassword) {
-    fetch("http://bondzuweb-env.eba-rndn2r3v.us-east-1.elasticbeanstalk.com/profile", {
+    fetch("/profile", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -140,7 +140,7 @@ showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
   backTopElem.style.display = "";
   if (container.innerHTML === "") {
-    fetch(`http://bondzuweb-env.eba-rndn2r3v.us-east-1.elasticbeanstalk.com/adoptions/${username}`)
+    fetch(`/adoptions/${username}`)
       .then((res) => res.json())
       .then((animals) => {
         if (animals.length !== 0) {

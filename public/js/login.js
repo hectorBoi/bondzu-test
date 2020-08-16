@@ -7,7 +7,7 @@ submit.addEventListener("click", () => {
   const us = email.value;
   const pw = password.value;
 
-  fetch("http://bondzuweb-env.eba-rndn2r3v.us-east-1.elasticbeanstalk.com/login", {
+  fetch("/login", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
