@@ -84,7 +84,7 @@ if (!document.cookie.includes("token")) {
   location.replace("/");
 }
 
-fetch("/animals", {
+fetch("http://bondzuweb-env.eba-rndn2r3v.us-east-1.elasticbeanstalk.com/animals", {
   method: "post",
   headers: {
     "Content-Type": "application/json",

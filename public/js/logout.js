@@ -1,7 +1,7 @@
 const logout = document.getElementById("logout");
 
 logout.addEventListener("click", () => {
-  fetch("/logout", {
+  fetch("http://bondzuweb-env.eba-rndn2r3v.us-east-1.elasticbeanstalk.com/logout", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
