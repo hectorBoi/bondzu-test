@@ -14,13 +14,7 @@ const loaderElements = document.getElementById("loaderElements");
 const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
-fetch(`/singleAnimal/${animalID}`, {
-  method: "post",
-  headers: {
-    "Content-Type": "application/json",
-    username: window.localStorage.getItem("username"),
-  },
-})
+fetch(`/singleAnimal/${animalID}`)
   .then((res) => res.json())
   .then((animal) => {
     const youtubeURL = `https://www.youtube.com/embed/${animal.youtubeID}`;
@@ -59,8 +53,6 @@ adoptElem.addEventListener("click", () => {
     method: "post",
     headers: {
       "Content-Type": "application/json",
-      username: window.localStorage.getItem("username"),
-      token: window.localStorage.getItem("token"),
     },
   })
     .then((res) => res.json())
@@ -69,7 +61,7 @@ adoptElem.addEventListener("click", () => {
         adoptElem.innerText = "¡Ya me adoptaste!";
         setTimeout(() => {
           adoptElem.disabled = true;
-        }, 10000);
+        }, 2000);
       }
     })
     .catch("Error in the request");

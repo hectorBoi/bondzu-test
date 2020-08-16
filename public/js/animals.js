@@ -81,7 +81,11 @@ const createCards = (array, container) => {
 };
 
 // Only allows access to users which have a session
-if (!window.localStorage.getItem("token")) {
+// if (!window.localStorage.getItem("token")) {
+//   location.replace("/");
+// }
+
+if (!document.cookie.includes("token")) {
   location.replace("/");
 }
 
@@ -89,9 +93,9 @@ fetch("/animals", {
   method: "post",
   headers: {
     "Content-Type": "application/json",
-    usertype: window.localStorage.getItem("usertype"),
-    username: window.localStorage.getItem("username"),
-    token: window.localStorage.getItem("token"),
+    // usertype: window.localStorage.getItem("usertype"),
+    // username: window.localStorage.getItem("username"),
+    // token: window.localStorage.getItem("token"),
   },
 })
   .then((res) => res.json())

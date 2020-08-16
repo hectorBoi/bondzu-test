@@ -15,6 +15,7 @@ const banner = require('./controllers/banner');
 
 const fileUpload = require('express-fileupload');
 const cookieParser = require("cookie-parser");
+const helmet = require('helmet');
 
 // Declares the express server and  middlewares
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(fileUpload());
 app.use(cookieParser());
+app.use(helmet());
 
 // Handlers for all the routes
 app.post("/login", signin.signinAuth(Parse));
@@ -34,7 +36,7 @@ app.post("/logout", (req, res) => {
   logout.handleLogout(req, res, Parse)
 })
 
-app.get("/profile/:username", (req, res) => {
+app.get("/profile/", (req, res) => {
   profile.handleProfile(req, res, Parse);
 });
 

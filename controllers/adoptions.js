@@ -1,7 +1,7 @@
 const animalInfo = require("./animalInfo");
 
 const getAdoptions = async (req, res, Parse) => {
-  const username = req.params.userID;
+  const { username } = req.cookies;
 
   try {
     const userTable = Parse.Object.extend("User");
@@ -23,7 +23,7 @@ const getAdoptions = async (req, res, Parse) => {
 }
 
 const isAdopted = async (req, res, Parse, animalID) => {
-  const { username } = req.headers; // DEBERIA DE SER HEADER
+  const { username } = req.cookies; // DEBERIA DE SER HEADER
 
   try {
     const userTable = Parse.Object.extend("User");
@@ -52,9 +52,10 @@ const isAdopted = async (req, res, Parse, animalID) => {
 }
 
 const updateAdoptions = async (req, res, Parse) => {
-  const { username, token } = req.headers; // DEBERIA DE SER HEADER
+  const { username, token } = req.cookies; // DEBERIA DE SER HEADER
   const { animalID } = req.params;
 
+  console.log(username, token, animalID)
   try {
     // USER
     const userTable = Parse.Object.extend("User");

@@ -1,10 +1,14 @@
+// Only allows access to users which have a session
+if (!document.cookie.includes("token")) {
+  location.replace("/");
+}
+
 const nameElem = document.getElementById("name");
 const lastnameElem = document.getElementById("lastname");
 const usertypeElem = document.getElementById("usertype");
 const usernameElem = document.getElementById("username");
 const profilePhotoElem = document.getElementById("profilePhoto");
 const profilePhotoModElem = document.getElementById("profilePhotoMod");
-const username = window.localStorage.getItem("username");
 
 const loaderElements = document.getElementById("loaderElements");
 
@@ -15,19 +19,15 @@ const newLastNameElem = document.getElementById("newLastName");
 const newPasswordElem = document.getElementById("newPassword");
 const newPasswordConfirmElem = document.getElementById("newPasswordConfirm");
 const updateProfileElem = document.getElementById("updateProfile");
-
 const noMatchPasswords = document.getElementById("noMatchPasswords");
 
-document.cookie = `token=${window.localStorage.getItem("token")}`;
-document.cookie = `username=${window.localStorage.getItem("username")}`;
-
-fetch(`/profile/${username}`)
+fetch(`/profile/`)
   .then((res) => res.json())
   .then((userInfo) => {
     nameElem.innerText = userInfo.name;
     lastnameElem.innerText = userInfo.lastname;
     usertypeElem.innerText = `Tipo: ${userInfo.usertype}`;
-    usernameElem.innerText = window.localStorage.getItem("username");
+    usernameElem.innerText = userInfo.username;
     if (userInfo.photo) {
       profilePhotoElem.setAttribute("src", userInfo.photo);
       profilePhotoModElem.setAttribute("src", userInfo.photo);
@@ -136,15 +136,9 @@ const createCard = (object) => {
   return col;
 };
 
-// Only allows access to users which have a session
-if (!window.localStorage.getItem("token")) {
-  location.replace("/");
-}
-
 showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
   backTopElem.style.display = "";
-  console.log("Container");
   if (container.innerHTML === "") {
     fetch(`/adoptions/${username}`)
       .then((res) => res.json())

@@ -23,7 +23,7 @@ const filterAnimals = (userType, animals) => {
 
 // Extracts the animals from the database and filter the results before sending them to the front end
 const handleAnimals = async (req, res, Parse) => {
-  const { usertype, username, token } = req.headers; // DEBERIA DE SER HEADER
+  const { usertype } = req.cookies;
 
   try {
     const animalTable = Parse.Object.extend("AnimalV2");

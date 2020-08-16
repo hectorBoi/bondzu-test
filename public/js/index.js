@@ -5,7 +5,7 @@ const cardLogin = document.getElementById("cardLogin");
 const conocenos = document.getElementById("conocenos");
 const token = window.localStorage.getItem("token");
 
-if (!token) {
+if (!document.cookie.includes("token")) {
   animals.style.display = "none";
   loggedIn.style.display = "none";
 } else {
@@ -20,4 +20,5 @@ if (!token) {
 window.addEventListener("load", function () {
   const loader = document.getElementById("loader");
   loader.className += " hidden";
+  loader.style.display = 'none';
 });
