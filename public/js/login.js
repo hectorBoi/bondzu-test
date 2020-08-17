@@ -7,6 +7,8 @@ submit.addEventListener("click", () => {
   const us = email.value;
   const pw = password.value;
 
+  invalidPassword.style.display = "none";
+
   fetch("/login", {
     method: "post",
     headers: {
