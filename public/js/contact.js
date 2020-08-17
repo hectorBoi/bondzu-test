@@ -1,8 +1,8 @@
-const nameElem = document.getElementById("name");
-const emailElem = document.getElementById("emailField");
-const subjectElem = document.getElementById("subject");
-const messageElem = document.getElementById("message");
-const submitButton = document.getElementById("submitButton");
+const nameContactElem = document.getElementById("name");
+const emailContactElem = document.getElementById("emailField");
+const subjectContactElem = document.getElementById("subject");
+const messageContactElem = document.getElementById("message");
+const submitContactButton = document.getElementById("submitButton");
 const toastBodyElem = document.getElementById("toastBody");
 
 const backTopElem = document.getElementById("backTop");
@@ -10,11 +10,11 @@ backTopElem.style.display = "none";
 
 const smtpToken = "e532f17b-18c6-49a2-99f7-04f158ff339c";
 
-submitButton.addEventListener("click", () => {
-  const name = nameElem.value;
-  const email = emailElem.value;
-  const subject = subjectElem.value;
-  const message = messageElem.value;
+submitContactButton.addEventListener("click", () => {
+  const name = nameContactElem.value;
+  const email = emailContactElem.value;
+  const subject = subjectContactElem.value;
+  const message = messageContactElem.value;
   const body = `_${name}_ con correo _${email}_ pregunta = ${message}`;
 
   toastBodyElem.innerText = `Pronto nos pondremos en contacto contigo, ${name}.`;

@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 const Parse = require('parse/node');
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I");
@@ -24,6 +25,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(fileUpload());
 app.use(cookieParser());
+app.use(morgan('common'));
 app.use(helmet());
 
 // Handlers for all the routes
