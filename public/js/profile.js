@@ -22,8 +22,12 @@ const updateProfileElem = document.getElementById("updateProfile");
 const noMatchPasswords = document.getElementById("noMatchPasswords");
 
 fetch(`/profile`)
-  .then((res) => res.json())
+  .then((res) => {
+    console.log(res)
+    return res.json()
+  })
   .then((userInfo) => {
+    console.log(userInfo)
     nameElem.innerText = userInfo.name;
     lastnameElem.innerText = userInfo.lastname;
     usertypeElem.innerText = `Tipo: ${userInfo.usertype}`;
@@ -140,6 +144,7 @@ showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
   backTopElem.style.display = "";
   if (container.innerHTML === "") {
+    console.log(username)
     fetch(`/adoptions/${username}`)
       .then((res) => res.json())
       .then((animals) => {
