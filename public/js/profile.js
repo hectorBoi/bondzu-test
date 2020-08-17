@@ -23,7 +23,8 @@ const noMatchPasswords = document.getElementById("noMatchPasswords");
 
 fetch(`/profile`)
   .then((res) => {
-    console.log(res)
+    const test = res.json()
+    console.log(test)
     return res.json()
   })
   .then((userInfo) => {
