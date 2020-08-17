@@ -18,8 +18,8 @@ const getPhoto = async (username, Parse) => {
 
 // Returns the users information
 const handleProfile = async (req, res, Parse) => {
-  const { username } = req.cookies;
   try {
+    const { username } = req.cookies;
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)

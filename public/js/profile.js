@@ -21,7 +21,7 @@ const newPasswordConfirmElem = document.getElementById("newPasswordConfirm");
 const updateProfileElem = document.getElementById("updateProfile");
 const noMatchPasswords = document.getElementById("noMatchPasswords");
 
-fetch(`/profile/`)
+fetch(`/profile`)
   .then((res) => res.json())
   .then((userInfo) => {
     nameElem.innerText = userInfo.name;
