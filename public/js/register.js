@@ -6,18 +6,19 @@ const passwordElem = document.getElementById("passwordReg");
 const passwordConfElem = document.getElementById("passwordRegConf");
 const submitElem = document.getElementById("submitReg");
 
+const existingUser = document.getElementById("existingUser");
+const noMatchPasswords = document.getElementById("noMatchPasswords");
+const missingInputs = document.getElementById("missingInputs");
+
 submitElem.addEventListener("click", () => {
   const name = nameElem.value;
   const lastname = lastnameElem.value;
-  const usertype = usertypeElem.options[usertypeElem.selectedIndex].value;
+  //const usertype = usertypeElem.options[usertypeElem.selectedIndex].value;
   const email = emailElem.value;
   const password = passwordElem.value;
   const passwordConf = passwordConfElem.value;
 
-  const existingUser = document.getElementById("existingUser");
-  const noMatchPasswords = document.getElementById("noMatchPasswords");
-  const missingInputs = document.getElementById("missingInputs");
-
+  existingUser.style.display = "none";
   noMatchPasswords.style.display = "none";
   missingInputs.style.display = "none";
 
