@@ -23,8 +23,6 @@ const noMatchPasswords = document.getElementById("noMatchPasswords");
 
 fetch(`/profile`)
   .then((res) => {
-    const test = res.json()
-    console.log(test)
     return res.json()
   })
   .then((userInfo) => {
@@ -39,7 +37,7 @@ fetch(`/profile`)
     }
     loaderElements.className += " hidden";
   })
-  .catch("Error in the request");
+  .catch(err => console.log(err));
 
 updateProfileElem.addEventListener("click", () => {
   const newName = newNameElem.value;
