@@ -35,10 +35,12 @@ const getVideo = async (id, Parse) => {
 const getAnimalInfo = async (animal, Parse) => {
   const video = await getVideo(animal.id, Parse);
   const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
+  const photo = animal.get("profilePhoto")._url;
+  const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
   let animalInfo = {
     about: animal.get("about"),
     characteristics: animal.get("characteristics"),
-    profilePhoto: animal.get("profilePhoto")._url,
+    profilePhoto: photoUrl,
     species: animal.get("species"),
     youtubeID: video,
     keeper: keeper,
@@ -50,9 +52,11 @@ const getAnimalInfo = async (animal, Parse) => {
 // Transforms the array of Parse.Objects into Json for the animals list
 const getAnimals = async (array) => {
   let animalInfo = array.map(animal => {
+    const photo = animal.get("profilePhoto")._url;
+    const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
     return animal = {
       id: animal.id,
-      profilePhoto: animal.get("profilePhoto")._url,
+      profilePhoto: photoUrl,
       species: animal.get("species"),
       userType: animal.get("animalRequiredPriority").id,
     }

@@ -25,7 +25,6 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(fileUpload());
 app.use(cookieParser());
-app.use(morgan('common'));
 app.use(helmet());
 
 // Handlers for all the routes
