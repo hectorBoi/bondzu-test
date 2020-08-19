@@ -8,7 +8,9 @@ const getPhoto = async (username, Parse) => {
     const user = userArr[0];
     const photo = user.get("photoFile");
     if (photo) {
-      return photo._url
+      const photoUrl = photo._url.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
+      console.log(photoUrl);
+      return photoUrl;
     }
     return null
   } catch (err) {

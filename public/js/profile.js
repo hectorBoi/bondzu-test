@@ -21,9 +21,12 @@ const newPasswordConfirmElem = document.getElementById("newPasswordConfirm");
 const updateProfileElem = document.getElementById("updateProfile");
 const noMatchPasswords = document.getElementById("noMatchPasswords");
 
-fetch(`/profile/`)
-  .then((res) => res.json())
+fetch(`/profile`)
+  .then((res) => {
+    return res.json()
+  })
   .then((userInfo) => {
+    console.log(userInfo)
     nameElem.innerText = userInfo.name;
     lastnameElem.innerText = userInfo.lastname;
     usertypeElem.innerText = `Tipo: ${userInfo.usertype}`;
@@ -34,7 +37,7 @@ fetch(`/profile/`)
     }
     loaderElements.className += " hidden";
   })
-  .catch("Error in the request");
+  .catch(err => console.log(err));
 
 updateProfileElem.addEventListener("click", () => {
   const newName = newNameElem.value;
@@ -139,6 +142,7 @@ showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
   backTopElem.style.display = "";
   if (container.innerHTML === "") {
+    console.log(username)
     fetch(`/adoptions/${username}`)
       .then((res) => res.json())
       .then((animals) => {
