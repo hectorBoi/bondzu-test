@@ -51,7 +51,7 @@ const handleProfile = async (req, res, Parse) => {
 const updateProfile = async (req, res, Parse) => {
   try {
     const { Nname, Nlastname, Npassword } = req.body;
-    const { username, token } = req.body; // req.cookies;
+    const { username, token } = req.cookies;
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)

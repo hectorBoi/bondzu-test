@@ -58,7 +58,6 @@ updateProfileElem.addEventListener("click", () => {
     })
       .then((res) => res.json())
       .then((newUser) => {
-        console.log(newUser);
         location.replace("profile.html");
       })
       .catch((err) => err);
