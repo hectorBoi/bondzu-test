@@ -2,23 +2,27 @@ const token = require("./token")
 
 // Performs the authentication of the users credential with the DB
 const handleLogin = async (req, res, Parse) => {
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return Promise.reject("Some of the fields are empty!");
-  }
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return Promise.reject("Some of the fields are empty!");
+    }
 
-  // Performs the authentication with the database, returns the result of the query if it has a match, err if not
-  return Parse.User.logIn(email, password)
-    .then(user => {
-      const token = user.getSessionToken();
-      const typeID = user.get("userType");
-      return {
-        user: user.get("username"),
-        userType: typeID.id,
-        sessiontoken: token,
-      }
-    })
-    .catch(err => Promise.reject(err))
+    // Performs the authentication with the database, returns the result of the query if it has a match, err if not
+    return Parse.User.logIn(email, password)
+      .then(user => {
+        const token = user.getSessionToken();
+        const typeID = user.get("userType");
+        return {
+          user: user.get("username"),
+          userType: typeID.id,
+          sessiontoken: token,
+        }
+      })
+      .catch(err => Promise.reject(err))
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 // Manages the interaction with the frontend

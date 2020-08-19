@@ -33,33 +33,41 @@ const getVideo = async (id, Parse) => {
 
 // Transforms the array of Parse.Objects into Json 
 const getAnimalInfo = async (animal, Parse) => {
-  const video = await getVideo(animal.id, Parse);
-  const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
-  let animalInfo = {
-    about: animal.get("about"),
-    characteristics: animal.get("characteristics"),
-    profilePhoto: animal.get("profilePhoto")._url,
-    species: animal.get("species"),
-    youtubeID: video,
-    keeper: keeper,
-  };
+  try {
+    const video = await getVideo(animal.id, Parse);
+    const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
+    let animalInfo = {
+      about: animal.get("about"),
+      characteristics: animal.get("characteristics"),
+      profilePhoto: animal.get("profilePhoto")._url,
+      species: animal.get("species"),
+      youtubeID: video,
+      keeper: keeper,
+    };
 
-  return animalInfo;
+    return animalInfo;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 // Transforms the array of Parse.Objects into Json for the animals list
 const getAnimals = async (array) => {
-  let animalInfo = array.map(animal => {
-    return animal = {
-      id: animal.id,
-      profilePhoto: animal.get("profilePhoto")._url,
-      species: animal.get("species"),
-      userType: animal.get("animalRequiredPriority").id,
+  try {
+    let animalInfo = array.map(animal => {
+      return animal = {
+        id: animal.id,
+        profilePhoto: animal.get("profilePhoto")._url,
+        species: animal.get("species"),
+        userType: animal.get("animalRequiredPriority").id,
+      }
     }
-  }
-  );
+    );
 
-  return animalInfo;
+    return animalInfo;
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = {

@@ -18,8 +18,8 @@ const getPhoto = async (username, Parse) => {
 
 // Returns the users information
 const handleProfile = async (req, res, Parse) => {
-  const { username } = req.cookies;
   try {
+    const { username } = req.cookies;
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)
@@ -49,10 +49,9 @@ const handleProfile = async (req, res, Parse) => {
 
 //Updates the user profile with new info
 const updateProfile = async (req, res, Parse) => {
-  const { Nname, Nlastname, Npassword } = req.body;
-  const { username, token } = req.cookies;
-
   try {
+    const { Nname, Nlastname, Npassword } = req.body;
+    const { username, token } = req.body; // req.cookies;
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)

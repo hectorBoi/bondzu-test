@@ -4,6 +4,8 @@ const Parse = require('parse/node');
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I");
 Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/parse";
+Parse.appName = 'Bondzu';
+
 
 // Imports all the controllers for the different routes
 const register = require('./controllers/register');
@@ -13,6 +15,7 @@ const animals = require('./controllers/animals');
 const adoptions = require('./controllers/adoptions');
 const logout = require('./controllers/logout');
 const banner = require('./controllers/banner');
+const passwordReset = require('./controllers/passwordReset');
 const middlewares = require('./middlewares');
 
 const fileUpload = require('express-fileupload');
@@ -25,7 +28,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(fileUpload());
 app.use(cookieParser());
-app.use(morgan('common'));
+// app.use(morgan('common'));
 app.use(helmet());
 
 // Handlers for all the routes
@@ -33,6 +36,10 @@ app.post("/login", signin.signinAuth(Parse));
 
 app.post("/register", (req, res) => {
   register.handleRegister(req, res, Parse);
+});
+
+app.post("/passwordReset", (req, res) => {
+  passwordReset.handlePasswordReset(req, res, Parse);
 });
 
 app.post("/logout", (req, res) => {
