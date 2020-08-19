@@ -33,44 +33,45 @@ const getVideo = async (id, Parse) => {
 
 // Transforms the array of Parse.Objects into Json 
 const getAnimalInfo = async (animal, Parse) => {
+  try {
+    const video = await getVideo(animal.id, Parse);
+    const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
+    const photo = animal.get("profilePhoto")._url;
+    const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
+    let animalInfo = {
+      about: animal.get("about"),
+      characteristics: animal.get("characteristics"),
+      profilePhoto: photoUrl,
+      species: animal.get("species"),
+      youtubeID: video,
+      keeper: keeper,
+    };
 
-  const video = await getVideo(animal.id, Parse);
-  const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
-  const photo = animal.get("profilePhoto")._url;
-  const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
-  let animalInfo = {
-    about: animal.get("about"),
-    characteristics: animal.get("characteristics"),
-    profilePhoto: photoUrl,
-    species: animal.get("species"),
-    youtubeID: video,
-    keeper: keeper,
-  };
+    return animalInfo;
+  } catch (error) {
+    console.log(error);
 
-  return animalInfo;
-} catch (error) {
-  console.log(error);
-
+  }
 }
 
 // Transforms the array of Parse.Objects into Json for the animals list
 const getAnimals = async (array) => {
-
-  let animalInfo = array.map(animal => {
-    const photo = animal.get("profilePhoto")._url;
-    const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
-    return animal = {
-      id: animal.id,
-      profilePhoto: photoUrl,
-      species: animal.get("species"),
-      userType: animal.get("animalRequiredPriority").id,
+  try {
+    let animalInfo = array.map(animal => {
+      const photo = animal.get("profilePhoto")._url;
+      const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
+      return animal = {
+        id: animal.id,
+        profilePhoto: photoUrl,
+        species: animal.get("species"),
+        userType: animal.get("animalRequiredPriority").id,
+      }
     }
     );
-
-  return animalInfo;
-} catch (error) {
-  console.log(error)
-
+    return animalInfo;
+  } catch (error) {
+    resizeBy.status(400).json("Couldnt get animals")
+  }
 }
 
 module.exports = {
