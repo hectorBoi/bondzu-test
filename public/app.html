@@ -30,7 +30,7 @@
   </head>
 
   <body class="d-flex flex-column min-vh-100">
-    <header>
+    <header style="z-index: 10;">
       <div
         data-spy="scroll"
         data-target="#navBar"
@@ -38,11 +38,11 @@
         class="scrollspy-example"
       >
         <div id="navBar"></div>
-        <script src="js/navBar.js"></script>
-        <div id="faq"></div>
-        <script src="./js/faq.js"></script>
+        <script src="./js/navBar.js"></script>
       </div>
     </header>
+    <div id="faq"></div>
+    <script src="./js/faq.js"></script>
 
     <div id="modalsLoginSignup"></div>
     <script src="./js/modalsLoginSignup.js"></script>
@@ -175,7 +175,7 @@
       </div>
     </div>
 
-    <div id="footer" class="mt-auto"></div>
+    <div id="footer" class="mt-auto" style="z-index: 10;"></div>
     <script src="./js/footer.js"></script>
   </body>
   <script src="./js/index.js"></script>

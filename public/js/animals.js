@@ -14,9 +14,9 @@ const createDiv = (className, id) => {
 
 const createButton = (location) => {
   let div = createDiv("card bg-dark text-white");
-  div.setAttribute("type", "button");
+  //div.setAttribute("type", "button");
   div.style.margin = "20px";
-  div.setAttribute("onclick", `window.location.href='singleAnimal.html'`);
+  //div.setAttribute("onclick", `window.location.href='singleAnimal.html'`);
   return div;
 };
 
@@ -51,8 +51,11 @@ const createRow = () => {
 const createCard = (object) => {
   const col = createDiv("col-xl");
   col.setAttribute("id", object.id);
+  const anchor = document.createElement("a");
+  anchor.href = "singleAnimal.html";
+  col.appendChild(anchor);
   const button = createButton(object.id);
-  col.appendChild(button);
+  anchor.appendChild(button);
   const img = createImage(object.profilePhoto);
   button.appendChild(img);
   const div = createDiv("card-img-overlay", object.id);

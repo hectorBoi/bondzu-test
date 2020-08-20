@@ -4,6 +4,7 @@ body {
 
 .animalCardHeader {
   background-color: hsla(0, 0%, 100%, 0.6);
+  font-size: 0.85rem;
   color: #000000;
   padding: 12px;
   border-radius: 15px;
@@ -16,21 +17,28 @@ body {
 }
 
 .loader {
-  /* position: fixed;
-  z-index: 99;
+  position: fixed;
+  z-index: 2;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #9696969d;
+  background: #ffffff;
   display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 }
 
 .loader.hidden {
-  animation: fadeOut 0.01s;
+  animation: fadeOut 1s;
   animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .loaderElements {
