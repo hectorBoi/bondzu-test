@@ -126,9 +126,12 @@ const createRow = () => {
 
 const createCard = (object) => {
   const col = createDiv("col-xl");
-  col.setAttribute("id", object.id);
   const anchor = document.createElement("a");
+  anchor.setAttribute("id", object.id);
   anchor.href = "singleAnimal.html";
+  anchor.onclick = function () {
+    window.localStorage.setItem("currentAnimal", object.id);
+  };
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
