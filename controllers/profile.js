@@ -9,9 +9,9 @@ const getPhoto = async (username, Parse) => {
     const photo = user.get("photoFile");
     if (photo) {
       const photoUrl = photo._url.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
-      console.log(photoUrl);
       return photoUrl;
     }
+
     return null
   } catch (err) {
     return "Error"
@@ -51,10 +51,9 @@ const handleProfile = async (req, res, Parse) => {
 
 //Updates the user profile with new info
 const updateProfile = async (req, res, Parse) => {
-  const { Nname, Nlastname, Npassword } = req.body;
-  const { username, token } = req.cookies;
-
   try {
+    const { Nname, Nlastname, Npassword } = req.body;
+    const { username, token } = req.cookies;
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)

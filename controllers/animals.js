@@ -23,9 +23,8 @@ const filterAnimals = async (userType, animals) => {
 
 // Extracts the animals from the database and filter the results before sending them to the front end
 const handleAnimals = async (req, res, Parse) => {
-  const { usertype } = req.cookies;
-
   try {
+    const { usertype } = req.cookies;
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     query.equalTo("isActive", true);
@@ -40,9 +39,8 @@ const handleAnimals = async (req, res, Parse) => {
 
 // Extracts the information of a specific animal from the database
 const handleSingleAnimal = async (req, res, Parse) => {
-  const animalID = req.params.animalID;
-
   try {
+    const animalID = req.params.animalID;
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     const animal = await query.get(animalID)

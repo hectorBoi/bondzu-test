@@ -55,6 +55,8 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           Usuario o contraseña incorrectos. Intenta de nuevo.
                         </div>
                       </div>
+                      <a class="form-text" href="passwordRecover.html"
+                      >Olvidé mi contraseña</a>
                     </form>
                   </div>
                   <div class="modal-footer" id="submit">
