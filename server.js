@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const Parse = require('parse/node');
+const mailer = require('express-mailer');
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I", "", "fF5zsMkXpw3eIcmg4ggwh6HlynYnNpYmZeJyl5Cw");
 Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/parse";
@@ -30,6 +31,22 @@ app.use(fileUpload());
 app.use(cookieParser());
 app.use(helmet());
 
+mailer.extend(app, {
+  from: 'contactoBondzu@gmail.com',
+  host: 'smtp.gmail.com', // hostname
+  secureConnection: true, // use SSL
+  port: 465, // port for secure SMTP
+  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: 'contactoBondzu@gmail.com',
+    pass: 'eGB*e4Pkd06Q'
+  }
+})
+
+app.set('views', __dirname + '/views');
+// set the view engine to pug
+app.set('view engine', 'pug');
+
 // Handlers for all the routes
 app.post("/login", signin.signinAuth(Parse));
 
@@ -38,7 +55,7 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/passwordReset", (req, res) => {
-  passwordReset.passwordReset(req, res, Parse);
+  passwordReset.passwordReset(req, res, Parse, app.mailer);
 });
 
 app.post("/logout", (req, res) => {
