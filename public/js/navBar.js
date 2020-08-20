@@ -84,7 +84,6 @@ style="background-color: #f28f1d; border-color: #ffffff;"
   <ul class="navbar-nav ml-auto justify-content-end">
     <li class="nav-item" id="guest">
       <a
-        type="button"
         data-toggle="modal"
         data-target="#loginModal"
         style="text-decoration: none;"
@@ -95,7 +94,6 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         </button></a
       >
       <a
-        type="button"
         data-toggle="modal"
         data-target="#signupModal"
         style="text-decoration: none;"
@@ -134,7 +132,6 @@ style="background-color: #f28f1d; border-color: #ffffff;"
     <li class="nav-item">
       <a
         class="navbarBtnMargins"
-        type="button"
         data-toggle="modal"
         data-target="#faqModal"
         href="#"

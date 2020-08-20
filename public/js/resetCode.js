@@ -1,5 +1,7 @@
 const sendCodeForm = document.getElementById("sendCodeForm");
 const restorePasswordForm = document.getElementById("restorePasswordForm");
+const loginButtons = document.getElementById("guest");
+loginButtons.style.display = "none";
 
 const emailElem = document.getElementById("emailReset");
 const codeElem = document.getElementById("codeReset");
