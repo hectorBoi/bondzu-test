@@ -2,7 +2,7 @@
 const passwordReset = async (req, res, Parse) => {
   if (!req.body.code) {
     try {
-      const { username, token } = req.body; // req.cookies
+      const { username } = req.body;
       console.log(username);
       const randomNumber = Math.floor(Math.random() * (99999 - 10000) + 10000).toString();
 
@@ -26,8 +26,7 @@ const passwordReset = async (req, res, Parse) => {
     }
   } else if (req.body.code) {
     try {
-      const { username, token } = req.body; // req.cookies
-      const { code, password } = req.body;
+      const { username, code, password } = req.body;
 
       const userTable = Parse.Object.extend("User");
       const query = new Parse.Query(userTable);
@@ -39,13 +38,13 @@ const passwordReset = async (req, res, Parse) => {
       if (code === dbcode) {
         user.set("password", password);
         const newUser = await user.save(null, { sessionToken: "fF5zsMkXpw3eIcmg4ggwh6HlynYnNpYmZeJyl5Cw" });
-        res.json({ message: true });
+        res.json({ message: "success" });
       } else {
-        res.json({ message: false });
+        res.json({ message: "fail" });
       }
     } catch (error) {
       console.log(error);
-      res.status(400).json({ message: "Error" });
+      res.status(400).json({ message: "error" });
     }
   }
 }
