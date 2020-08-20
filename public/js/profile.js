@@ -23,10 +23,10 @@ const noMatchPasswords = document.getElementById("noMatchPasswords");
 
 fetch(`/profile`)
   .then((res) => {
-    return res.json()
+    return res.json();
   })
   .then((userInfo) => {
-    console.log(userInfo)
+    console.log(userInfo);
     nameElem.innerText = userInfo.name;
     lastnameElem.innerText = userInfo.lastname;
     usertypeElem.innerText = `Tipo: ${userInfo.usertype}`;
@@ -37,7 +37,7 @@ fetch(`/profile`)
     }
     loaderElements.className += " hidden";
   })
-  .catch(err => console.log(err));
+  .catch((err) => console.log(err));
 
 updateProfileElem.addEventListener("click", () => {
   const newName = newNameElem.value;
@@ -90,9 +90,9 @@ const createDiv = (className, id) => {
 
 const createButton = (location) => {
   let div = createDiv("card bg-dark text-white");
-  div.setAttribute("type", "button");
+  //div.setAttribute("type", "button");
   div.style.margin = "20px";
-  div.setAttribute("onclick", `window.location.href='singleAnimal.html'`);
+  //div.setAttribute("onclick", `window.location.href='singleAnimal.html'`);
   return div;
 };
 
@@ -127,8 +127,11 @@ const createRow = () => {
 const createCard = (object) => {
   const col = createDiv("col-xl");
   col.setAttribute("id", object.id);
+  const anchor = document.createElement("a");
+  anchor.href = "singleAnimal.html";
+  col.appendChild(anchor);
   const button = createButton(object.id);
-  col.appendChild(button);
+  anchor.appendChild(button);
   const img = createImage(object.profilePhoto);
   button.appendChild(img);
   const div = createDiv("card-img-overlay", object.id);
@@ -142,7 +145,7 @@ showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
   backTopElem.style.display = "";
   if (container.innerHTML === "") {
-    console.log(username)
+    console.log(username);
     fetch(`/adoptions/${username}`)
       .then((res) => res.json())
       .then((animals) => {
