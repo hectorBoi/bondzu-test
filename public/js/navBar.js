@@ -88,6 +88,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         data-toggle="modal"
         data-target="#loginModal"
         style="text-decoration: none;"
+        href="#"
       >
         <button type="button" class="btn btn-success navbarBtnMargins">
           Iniciar sesión
@@ -98,6 +99,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         data-toggle="modal"
         data-target="#signupModal"
         style="text-decoration: none;"
+        href="#"
       >
         <button type="button" class="btn btn-primary navbarBtnMargins">
           Regístrate
@@ -135,6 +137,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         type="button"
         data-toggle="modal"
         data-target="#faqModal"
+        href="#"
       >
         <img
           src="./img/faqIcon.png"
