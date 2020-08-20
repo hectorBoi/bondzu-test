@@ -20,6 +20,8 @@ const sentCode = document.getElementById("sentCode");
 const invalidPasswordConf = document.getElementById("invalidPasswordConf");
 const missingFields = document.getElementById("missingFields");
 const successPassword = document.getElementById("successPassword");
+const userDoesntExist = document.getElementById("userDoesntExist");
+
 
 sendCodeBtn.addEventListener("click", () => {
   missingEmail.style.display = "none";
@@ -30,35 +32,21 @@ sendCodeBtn.addEventListener("click", () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      username: emailElem.value, // EMAILELEM.VALUE!!!
+      username: emailElem.value,
     }),
   })
     .then((res) => res.json())
     .then((res) => {
       if (emailElem.value != "") {
-        console.log(res.number);
-        if (res.number) {
-          Email.send({
-            SecureToken: smtpToken,
-            //To: emailElem.value, // EMAILELEM.VALUE!!!
-            //From: "contactoBondzu@gmail.com",
-            Subject: "Bondzú - Recuperación de contraseña",
-            Body: `El código para recuperar tu contraseña es el siguiente: ${res.number}, porfavor ingresalo en la ventana correspondiente dentro de la pagina de Bondzu`,
-          }).then((message) => {
-            sentCode.removeAttribute("style");
-            sendCodeForm.removeAttribute("style");
-            emailElem.disabled = true;
-            restorePasswordBtn.removeAttribute("style");
-            sendCodeBtn.setAttribute("style", "display: none;");
-            //alert(
-            // "Se envio un curreo con indicaciones para recuperar tu contraseña!"
-            //) /*$("#toastSuccess").toast("show")*/;
-            //sendCodeForm.style.display = "none";
-            //restorePasswordForm.style.display = "";
-          });
+        if (res.message === "success") {
+          sentCode.removeAttribute("style");
+          sendCodeForm.removeAttribute("style");
+          emailElem.disabled = true;
+          restorePasswordBtn.removeAttribute("style");
+          sendCodeBtn.setAttribute("style", "display: none;");
+          userDoesntExist.style.display = "none";
         } else {
-          alert("No se encontro a ningun usuario con ese correo");
-          // $("#toastError").toast("show");
+          userDoesntExist.removeAttribute("style");
         }
       } else {
         missingEmail.removeAttribute("style");
@@ -70,7 +58,7 @@ sendCodeBtn.addEventListener("click", () => {
 restorePasswordBtn.addEventListener("click", () => {
   sentCode.style.display = "none";
 
-  if (codeElem != "" && passwordElem != "" && passwordConfElem != "") {
+  if (codeElem.value !== "" && passwordElem.value !== "" && passwordConfElem.value !== "") {
     missingFields.style.display = "none";
 
     if (passwordElem.value === passwordConfElem.value) {
@@ -82,34 +70,27 @@ restorePasswordBtn.addEventListener("click", () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: emailElem.value, // EMAILELEM.VALUE!!!
-          code: codeElem.value, // CODELELEM.VALUE!!!
-          password: passwordElem.value, // PASSWORDELEM.VALUE!!!
+          username: emailElem.value,
+          code: codeElem.value,
+          password: passwordElem.value,
         }),
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res.message === "success");
-          if (res.message !== "error") {
-            /*alert(
-              "El cambio se realizo de manera exitosa, por favor inicia sesion con tu contraseña nueva."
-            );*/
+          if (res.message === "success") {
             successPassword.removeAttribute("style");
-            location.replace("/");
+            invalidCode.style.display = "none";
+            setTimeout(() => {
+              location.replace("/");
+            }, 4000);
           } else if (res.message === "fail") {
             invalidCode.removeAttribute("style");
-            /*alert(
-              "El codigo no corresponde con el enviado en el correo, por favor verifique el codigo"
-            );*/
-            // $("#toastError").toast("show");
           } else {
             alert("Hubo un error en el servidor, por favor intentar de nuevo");
-            location.reload();
           }
         })
         .catch((err) => console.log(err));
     } else {
-      //alert("Las contraseñas no coinciden");
       invalidPasswordConf.removeAttribute("style");
     }
   } else {

@@ -25,10 +25,11 @@ const passwordReset = async (req, res, Parse, mailer) => {
       mailer.send('email', mailOptions, (err, message) => {
         if (err) {
           console.log(err);
-          res.send('There was an error sending the email');
+          res.send({ message: "failed" });
           return;
+        } else {
+          return res.send({ message: "success" });
         }
-        return res.send('Email has been sent!');
       })
     } catch (err) {
       console.log(err);
