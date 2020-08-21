@@ -48,6 +48,7 @@ const passwordReset = async (req, res, Parse, mailer) => {
 
       if (code === dbcode) {
         user.set("password", password);
+        user.set("passwordCode", "th1si5f0r53cur1ty")
         const newUser = await user.save(null, { useMasterKey: true });
         res.json({ message: "success" });
       } else {
