@@ -2,6 +2,9 @@ const express = require("express");
 const morgan = require("morgan");
 const Parse = require('parse/node');
 const mailer = require('express-mailer');
+
+const { I18n } = require('i18n')
+
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I", "", "fF5zsMkXpw3eIcmg4ggwh6HlynYnNpYmZeJyl5Cw");
 Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/parse";
@@ -46,6 +49,10 @@ mailer.extend(app, {
 app.set('views', __dirname + '/views');
 // set the view engine to pug
 app.set('view engine', 'pug');
+
+app.get("/", (req, res) => {
+  res.redirect("/es/index.html")
+})
 
 // Handlers for all the routes
 app.post("/login", signin.signinAuth(Parse));

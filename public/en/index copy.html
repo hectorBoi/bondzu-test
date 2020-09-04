@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bondzù</title>
+    <link rel="icon" href="img/favicon.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="upgrade-insecure-requests"
+    />
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <header style="z-index: 10">
+      <div
+        data-spy="scroll"
+        data-target="#navBar"
+        data-offset="0"
+        class="scrollspy-example"
+      >
+        <div id="navBar"></div>
+        <script src="./js/navBar.js"></script>
+      </div>
+      <a href="../en/index_en.html">hello there boy</a>
+    </header>
+    <div id="faq"></div>
+    <script src="./js/faq.js"></script>
+
+    <div id="modalsLoginSignup"></div>
+    <script src="./js/modalsLoginSignup.js"></script>
+
+    <!--Scripts para hacer autofocus en los modales de login y signup-->
+    <script>
+      $(".modal").on("shown.bs.modal", function () {
+        $(this).find("[autofocus]").focus();
+      });
+    </script>
+
+    <div id="loader" class="loader">
+      <div class="spinner spinner-border" role="status">
+        <span class="sr-only">Loading page...</span>
+      </div>
+    </div>
+
+    <br />
+    <h1 style="color: #3a8169" class="text-center">¡Bienvenido a Bondzù!</h1>
+    <div class="jumbotron">
+      <!-- App comming soon -->
+      <div class="container">
+        <img src="img/appSoon4.png" class="img-fluid" alt="appSoon4" />
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col" id="cardLogin">
+          <div class="mx-auto text-center">
+            <h2 style="color: #f28f1d">¡Únete a la familia!</h2>
+            <div class="card">
+              <div class="card-body">
+                <a
+                  href="#loginModal"
+                  data-toggle="modal"
+                  class="btn btn-success btn-lg btn-block"
+                  data-dismiss="modal"
+                  >Inicia sesión</a
+                >
+                <hr style="clear: both" />
+                <a
+                  href="#signupModal"
+                  data-toggle="modal"
+                  class="btn btn-primary btn-lg btn-block"
+                  data-dismiss="modal"
+                  >Regístrate</a
+                >
+              </div>
+            </div>
+          </div>
+          <br />
+          <br />
+        </div>
+
+        <div class="col-xl-8" id="conocenos">
+          <h2 style="color: #f28f1d" class="text-center">Conócenos</h2>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-8">
+                  <div class="embed-responsive embed-responsive-16by9">
+                    <iframe
+                      src="https://youtube.com/embed/Z0XCFs1Rbz8"
+                      class="embed-responsive-item"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </div>
+
+                <div class="col-xl-4">
+                  <div class="mx-auto">
+                    <p style="color: #3a8169; text-align: justify">
+                      Bondzù es una iniciativa de educación y concientización
+                      utilizando los nuevos medios de comunicación que permite
+                      internet. Hace uso intensivo de las redes sociales,
+                      aplicaciones para teléfonos inteligentes y páginas web. Lo
+                      que buscamos es darle vida digna a los animales en
+                      cautiverio. Lo ideal es que los animales vivan en su
+                      hábitat; sin embargo, existen muchos animales en
+                      cautiverio que es imposible liberar, porque no podrían
+                      adaptarse a un medio salvaje.
+                    </p>
+
+                    <a href="quienes.html" style="text-decoration: none">
+                      <button type="button" class="btn btn-secondary btn-sm">
+                        Conoce más
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div class="container-xl">
+      <div class="jumbotron">
+        <h2 style="color: #f28f1d" class="text-center">
+          Visítanos en nuestras redes sociales
+        </h2>
+        <br />
+        <div class="row text-center">
+          <div class="col-sm">
+            <a
+              href="https://www.facebook.com/bondzu/"
+              style="text-decoration: none"
+              target="_blank"
+            >
+              <img src="./img/fbIcon.png" alt="fbIcon" height="75" width="75" />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://twitter.com/BondzuCubs"
+              style="text-decoration: none"
+              target="_blank"
+            >
+              <img src="./img/twIcon.png" alt="twIcon" height="75" width="75" />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://www.instagram.com/bondzucubs/"
+              style="text-decoration: none"
+              target="_blank"
+            >
+              <img
+                src="./img/instaIcon.png"
+                alt="igIcon"
+                height="75"
+                width="75"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="jumbotron" style="background: #f28f1d9a !important">
+      <div class="container text-center">
+        <h2 style="color: #3a8169">Consulta nuestros videos</h2>
+        <br />
+        <div class="row text-center">
+          <div class="col-sm">
+            <a
+              href="https://www.youtube.com/playlist?list=PLSaWlurIWnBaBrYXYd5mEA3lFbzfe3KMs"
+              style="text-decoration: none"
+              target="_blank"
+            >
+              <img
+                src="./img/video1.jpg"
+                alt="capsultas"
+                height="200"
+                width="200"
+                class="rounded-circle"
+              />
+              <h4 style="color: #ffffff">Cápsulas</h4>
+              <br />
+              <br />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://www.youtube.com/playlist?list=PLSaWlurIWnBY2gTTab7dHc9WJ0yyPe7We"
+              style="text-decoration: none"
+              target="_blank"
+            >
+              <img
+                src="./img/video2.jpg"
+                alt="capsultas"
+                height="200"
+                width="200"
+                class="rounded-circle"
+              />
+              <h4 style="color: #ffffff">Bondzù Girls</h4>
+              <br />
+              <br />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://www.youtube.com/playlist?list=PLSaWlurIWnBYbOUlnVo8yB6nGyNCDl9FI"
+              style="text-decoration: none"
+              target="_blank"
+            >
+              <img
+                src="./img/video3.jpg"
+                alt="capsultas"
+                height="200"
+                width="200"
+                class="rounded-circle"
+              />
+              <h4 style="color: #ffffff">Bondzù Music</h4>
+              <br />
+              <br />
+            </a>
+          </div>
+          <div class="col-sm">
+            <a
+              href="https://www.youtube.com/playlist?list=PLSaWlurIWnBau0WTuq8vQzBhEnMN6lzlh"
+              style="text-decoration: none"
+              target="_blank"
+            >
+              <img
+                src="./img/tienda5.jpg"
+                alt="capsultas"
+                height="200"
+                width="200"
+                class="rounded-circle"
+              />
+              <h4 style="color: #ffffff">Bondzùmania</h4>
+              <br />
+              <br />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- App comming soon -->
+    <div class="container">
+      <h2 style="color: #f28f1d" class="text-center">
+        ¡Espera pronto nuestra app!
+      </h2>
+      <br /><img src="./img/appSoon3.png" alt="appSoon3" class="img-fluid" />
+    </div>
+
+    <br />
+    <div id="footer" class="mt-auto" style="z-index: 10"></div>
+    <script src="./js/footer.js"></script>
+  </body>
+  <script src="./js/index.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/register.js"></script>
+  <script src="./js/logout.js"></script>
+</html>
+
+<!-- Carousel app -->
+<!--   <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-9">
+            <div id="carouselApp" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators">
+                <li
+                  data-target="#carouselApp"
+                  data-slide-to="0"
+                  class="active"
+                ></li>
+                <li data-target="#carouselApp" data-slide-to="1"></li>
+                <li data-target="#carouselApp" data-slide-to="2"></li>
+                <li data-target="#carouselApp" data-slide-to="3"></li>
+              </ol>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="./img/app1.png" class="d-block w-100" alt="app1" />
+                </div>
+                <div class="carousel-item">
+                  <img src="./img/app8.png" class="d-block w-100" alt="app8" />
+                </div>
+                <div class="carousel-item">
+                  <img src="./img/app2.png" class="d-block w-100" alt="app2" />
+                </div>
+                <div class="carousel-item">
+                  <img src="./img/app5.png" class="d-block w-100" alt="app5" />
+                </div>
+              </div>
+              <a
+                class="carousel-control-prev"
+                href="#carouselApp"
+                role="button"
+                data-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Anterior</span>
+              </a>
+              <a
+                class="carousel-control-next"
+                href="#carouselApp"
+                role="button"
+                data-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="sr-only">Siguiente</span>
+              </a>
+            </div>
+          </div>
+          <div class="mx-auto">
+            <div class="col-xl">
+              <br />
+              <br />
+              <br />
+              <a
+                href="https://apps.apple.com/mx/app/bondzu/id991575185"
+                target="_blank"
+              >
+                <img
+                  src="./img/appStoreIcon.svg"
+                  alt="appStoreIcon"
+                  height="53"
+                  width="180"
+              /></a>
+              <br />
+              <br />
+              <a
+                href="https://play.google.com/store/apps/details?id=com.bondzu.bondzuapp&hl=es"
+                target="_blank"
+              >
+                <img
+                  src="./img/playStoreIcon.png"
+                  alt="playStoreIcon"
+                  height="78"
+                  width="180"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+<!-- No olvides descargar nuestra app-->
+<!-- <div class="container-fluid">
+      <div class="row">
+        <div class="container text-center">
+          <h2 style="color: #f28f1d" class="text-center">
+            ¡No olvides descargar nuestra app!
+          </h2>
+          <br /><img src="./img/app3.png" alt="app3" class="img-fluid" />
+          <div class="row">
+            <div class="col-sm">
+              <a
+                href="https://apps.apple.com/mx/app/bondzu/id991575185"
+                target="_blank"
+              >
+                <img
+                  src="./img/appStoreIcon.svg"
+                  alt="appStoreIcon"
+                  height="53"
+                  width="180"
+                  style="margin-top: 12px"
+              /></a>
+            </div>
+
+            <div class="col-sm">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.bondzu.bondzuapp&hl=es"
+                target="_blank"
+              >
+                <img
+                  src="./img/playStoreIcon.png"
+                  alt="playStoreIcon"
+                  height="78"
+                  width="180"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->

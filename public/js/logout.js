@@ -9,9 +9,9 @@ logout.addEventListener("click", () => {
   })
     .then(res => {
       if (res) {
-        document.cookie = "token" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        document.cookie = "usertype" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        document.cookie = "username" + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = "token" + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = "usertype" + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = "username" + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         location.replace("/")
       }
     })
