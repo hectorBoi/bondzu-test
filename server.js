@@ -65,7 +65,7 @@ app.get("/admin/animals", (req, res) => {
   admin.handleAdminAnimals(req, res, Parse);
 });
 
-app.get("/admin/animals/:animalID", (req, res) => {
+app.post("/admin/animals/:animalID", (req, res) => {
   admin.getAnimal(req, res, Parse);
 });
 

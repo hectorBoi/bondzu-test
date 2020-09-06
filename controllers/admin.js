@@ -1,5 +1,39 @@
 const animalInfo = require("./animalInfo");
 
+const getAllVideos = async (Parse) => {
+  const tableObj = Parse.Object.extend("Video");
+  const query = new Parse.Query(tableObj);
+  const result = await query.find();
+
+  const response = result.map(temp => {
+    return {
+      id: temp.id, name: temp.get("titles")[0]
+    }
+  });
+  return response;
+}
+
+
+const getAllKeepers = async (Parse) => {
+  const tableObj = Parse.Object.extend("Keeper");
+  const query = new Parse.Query(tableObj);
+  const result = await query.find();
+
+  let response = []
+  for (let keeper of result) {
+    if (keeper.get("zoo").id) {
+      let zooTemp = keeper.get("zoo").id
+      const zooTable = Parse.Object.extend("Zoo");
+      const zooQuery = new Parse.Query(zooTable);
+      zooQuery.equalTo("objectId", zooTemp);
+      zoo = await zooQuery.first();
+      response.push({ id: keeper.id, name: zoo.get("name") });
+    }
+  };
+
+  return response;
+}
+
 // Extracts the animals from the database and filter the results before sending them to the front end
 const handleAdminAnimals = async (req, res, Parse) => {
   try {
@@ -26,7 +60,7 @@ const handleAdminAnimals = async (req, res, Parse) => {
 // Returns all the information (spanish and english) of single animal for the admin
 const getAnimal = async (req, res, Parse) => {
   try {
-    const { username } = req.cookies;
+    const { username } = req.body;
     const animalID = req.params.animalID;
 
     const userTable = Parse.Object.extend("User");
@@ -41,7 +75,10 @@ const getAnimal = async (req, res, Parse) => {
     const animalTable = Parse.Object.extend("AnimalV2");
     const queryAnimal = new Parse.Query(animalTable);
     const animal = await queryAnimal.get(animalID)
-    const animal_info = await animalInfo.getAnimalInfoAdmin(animal, Parse);
+    let animal_info = await animalInfo.getAnimalInfoAdmin(animal, Parse);
+    animal_info.allKeepers = await getAllKeepers(Parse);
+    animal_info.allVideos = await getAllVideos(Parse);;
+
     res.json(animal_info);
   } catch (err) {
     res.json(err)
@@ -78,12 +115,13 @@ const updateAnimal = async (req, res, Parse) => {
     let queryVideo = new Parse.Query(videoTable);
     const videosArray = await queryVideo.find();
 
-    for (video of videosArray) {
+    for (let video of videosArray) {
       let anID = video.get("animal_id").id
       if (anID === animalID) {
         let temp = video.get("youtube_ids");
         temp[0] = youtubeID;
         video.set("youtube_ids", temp);
+        video.set("titles", [species])
         const videoAnimal = await video.save(null, { sessionToken: token });
       }
     }
