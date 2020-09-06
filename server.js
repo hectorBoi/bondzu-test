@@ -59,13 +59,13 @@ app.get("/", (req, res) => {
 })
 
 // Manages the login for admins
-app.get("/adminLogin", signin.signinAuth(Parse))
+app.get("/adminLogin", signin.signinAuth(Parse));
 
 app.get("/admin/animals", (req, res) => {
   admin.handleAdminAnimals(req, res, Parse);
 });
 
-app.post("/admin/animals/:animalID", (req, res) => {
+app.get("/admin/animals/:animalID", (req, res) => {
   admin.getAnimal(req, res, Parse);
 });
 
@@ -76,6 +76,8 @@ app.post("/admin/animals/:animalID", (req, res) => {
 app.post("/admin/animals/", (req, res) => {
   admin.createAnimal(req, res, Parse);
 });
+
+///////////////////////////////
 
 // Handlers for all the routes
 app.post("/login", signin.signinAuth(Parse));
