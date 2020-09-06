@@ -23,9 +23,9 @@ submit.addEventListener("click", () => {
     .then((res) => {
       if (res.token) {
         const { token, userType, username } = res;
-        document.cookie = `username=${username}`;
-        document.cookie = `token=${token}`;
-        document.cookie = `usertype=${userType}`;
+        document.cookie = `username=${username}; path=/;`;
+        document.cookie = `token=${token}; path=/`;
+        document.cookie = `usertype=${userType}; path=/`;
         location.replace("/");
       }
       if (res === "Incorrect") {

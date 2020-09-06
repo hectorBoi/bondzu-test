@@ -26,7 +26,6 @@ fetch(`/profile`)
     return res.json();
   })
   .then((userInfo) => {
-    console.log(userInfo);
     nameElem.innerText = userInfo.name;
     lastnameElem.innerText = userInfo.lastname;
     usertypeElem.innerText = `Tipo: ${userInfo.usertype}`;

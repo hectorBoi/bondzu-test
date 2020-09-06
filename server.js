@@ -2,9 +2,6 @@ const express = require("express");
 const morgan = require("morgan");
 const Parse = require('parse/node');
 const mailer = require('express-mailer');
-
-const { I18n } = require('i18n')
-
 // Initialize connection with Parse Database
 Parse.initialize("7aGqZRDKBITfaIRAXq2oKoBkuWkhNqJZJWmf318I", "", "fF5zsMkXpw3eIcmg4ggwh6HlynYnNpYmZeJyl5Cw");
 Parse.serverURL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com/parse";
@@ -19,6 +16,7 @@ const animals = require('./controllers/animals');
 const adoptions = require('./controllers/adoptions');
 const logout = require('./controllers/logout');
 const banner = require('./controllers/banner');
+const admin = require('./controllers/admin');
 const passwordReset = require('./controllers/passwordReset');
 const middlewares = require('./middlewares');
 
@@ -50,9 +48,34 @@ app.set('views', __dirname + '/views');
 // set the view engine to pug
 app.set('view engine', 'pug');
 
+// Manages the login for clients
 app.get("/", (req, res) => {
-  res.redirect("/es/index.html")
+  const { lang } = req.cookies;
+  if (lang === "es" || lang === undefined) {
+    res.redirect("/es/index.html");
+  } else if (lang === "en") {
+    res.redirect("/en/index.html");
+  }
 })
+
+// Manages the login for admins
+app.get("/adminLogin", signin.signinAuth(Parse))
+
+app.get("/admin/animals", (req, res) => {
+  admin.handleAdminAnimals(req, res, Parse);
+});
+
+app.get("/admin/animals/:animalID", (req, res) => {
+  admin.getAnimal(req, res, Parse);
+});
+
+app.post("/admin/animals/:animalID", (req, res) => {
+  admin.updateAnimal(req, res, Parse);
+});
+
+app.post("/admin/animals/", (req, res) => {
+  admin.createAnimal(req, res, Parse);
+});
 
 // Handlers for all the routes
 app.post("/login", signin.signinAuth(Parse));

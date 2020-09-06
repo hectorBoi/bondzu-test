@@ -24,12 +24,13 @@ const filterAnimals = async (userType, animals) => {
 // Extracts the animals from the database and filter the results before sending them to the front end
 const handleAnimals = async (req, res, Parse) => {
   try {
+    const { lang } = req.cookies;
     const { usertype } = req.cookies;
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     query.equalTo("isActive", true);
     const activeAnimals = await query.find();
-    const animalsInfo = await animalInfo.getAnimals(activeAnimals);
+    const animalsInfo = await animalInfo.getAnimals(activeAnimals, lang);
     const result = await filterAnimals(usertype, animalsInfo)
     res.json(result);
   } catch (err) {
@@ -40,12 +41,13 @@ const handleAnimals = async (req, res, Parse) => {
 // Extracts the information of a specific animal from the database
 const handleSingleAnimal = async (req, res, Parse) => {
   try {
+    const { lang } = req.cookies;
     const animalID = req.params.animalID;
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     const animal = await query.get(animalID)
     const isAdopted = await adopts.isAdopted(req, res, Parse, animalID);
-    const animal_info = await animalInfo.getAnimalInfo(animal, Parse);
+    const animal_info = await animalInfo.getAnimalInfo(animal, Parse, lang);
     animal_info.isAdopted = isAdopted;
     res.json(animal_info);
   } catch (err) {

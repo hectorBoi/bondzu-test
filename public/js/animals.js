@@ -95,16 +95,19 @@ fetch("/animals", {
   headers: {
     "Content-Type": "application/json",
   },
+  body: JSON.stringify({
+    lang: window.localStorage.getItem("lang")
+  })
 })
   .then((res) => res.json())
   .then((animalsColleagues) => {
     const animals = [];
     const colleagues = [];
     animalsColleagues.forEach((elem) => {
-      if (elem.species !== "Colega") {
-        animals.push(elem);
-      } else {
+      if (elem.species === "Colega" || elem.species === "Colleague") {
         colleagues.push(elem);
+      } else {
+        animals.push(elem);
       }
     });
 

@@ -2,7 +2,7 @@ const animalInfo = require("./animalInfo");
 
 const getAdoptions = async (req, res, Parse) => {
   try {
-    const { username } = req.cookies;
+    const { username, lang } = req.cookies;
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)
@@ -12,7 +12,7 @@ const getAdoptions = async (req, res, Parse) => {
     const queryAD = adoptions.query();
     queryAD.equalTo("isActive", true);
     const activeAdoptions = await queryAD.find();
-    const adoptionsInfo = await animalInfo.getAnimals(activeAdoptions, Parse);
+    const adoptionsInfo = await animalInfo.getAnimals(activeAdoptions, lang);
 
     res.json(adoptionsInfo)
   } catch (err) {
@@ -23,7 +23,7 @@ const getAdoptions = async (req, res, Parse) => {
 
 const isAdopted = async (req, res, Parse, animalID) => {
   try {
-    const { username } = req.cookies; // DEBERIA DE SER HEADER
+    const { username, lang } = req.cookies; // DEBERIA DE SER HEADER
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)
@@ -33,7 +33,7 @@ const isAdopted = async (req, res, Parse, animalID) => {
     const queryAD = adoptions.query();
     queryAD.equalTo("isActive", true);
     const activeAdoptions = await queryAD.find();
-    const adoptionsInfo = await animalInfo.getAnimals(activeAdoptions, Parse);
+    const adoptionsInfo = await animalInfo.getAnimals(activeAdoptions, lang);
 
     let isAdopted = false
     adoptionsInfo.map(animal => {
