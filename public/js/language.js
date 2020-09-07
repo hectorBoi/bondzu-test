@@ -1,33 +1,32 @@
-const langBtn = document.getElementById("langBtn");
+const currentLang = document.getElementById("currLang");
+const langEsp = document.getElementById("esp");
+const langEng = document.getElementById("eng");
+
+var currentePage = window.location.href;
+var splitPage = currentePage.split("/");
 
 if (window.localStorage.getItem("lang") === "es") {
-  langBtn.style.backgroundColor = "red";
-  langBtn.textContent = "Current: es";
+  currentLang.src = "../img/mxFlag.png";
 } else if (window.localStorage.getItem("lang") === "en") {
-  langBtn.style.backgroundColor = "lightblue";
-  langBtn.textContent = "Current: en";
+  currentLang.src = "../img/ukFlag.png";
 } else {
   window.localStorage.setItem("lang", "es");
+  currentLang.src = "../img/mxFlag.png";
   document.cookie = "lang=es; path=/";
-  langBtn.style.backgroundColor = "red";
-  langBtn.textContent = "Current: es";
 }
 
+langEsp.addEventListener("click", () => {
+  window.localStorage.setItem("lang", "es");
+  document.cookie = "lang=;" + "expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie = "lang=es; path=/";
+  currentLang.src = "../img/mxFlag.png";
+  location.href = "/es/" + splitPage[splitPage.length - 1];
+});
 
-langBtn.addEventListener("click", () => {
-  if (window.localStorage.getItem("lang") === "es") {
-    window.localStorage.setItem("lang", "en");
-    document.cookie = "lang=;" + "expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    document.cookie = "lang=en; path=/";
-    langBtn.style.backgroundColor = "lightblue";
-    langBtn.textContent = "Current: en";
-    // window.location.href = "../../en/index.html";
-  } else if (window.localStorage.getItem("lang") === "en") {
-    window.localStorage.setItem("lang", "es");
-    document.cookie = "lang=;" + "expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    document.cookie = "lang=es; path=/";
-    langBtn.style.backgroundColor = "red";
-    langBtn.textContent = "Current: es";
-    // window.location.href = "../../es/index.html";
-  }
-})
+langEng.addEventListener("click", () => {
+  window.localStorage.setItem("lang", "en");
+  document.cookie = "lang=;" + "expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie = "lang=en; path=/";
+  currentLang.src = "../img/ukFlag.png";
+  location.href = "/en/" + splitPage[splitPage.length - 1];
+});

@@ -67,7 +67,17 @@ body {
 }
 
 .navbarBtnMargins {
+  margin: 0px 18px 8px 18px;
+}
+
+.navbarBtnProfile {
+  margin: 5px 18px 8px 18px;
+}
+
+.navbarBtnFAQ {
+  margin: 5px 0px 8px 8px;
+}
+
+.navbarBtnFlags {
   margin-left: 18px;
-  margin-right: 18px;
-  margin-bottom: 8px;
 }

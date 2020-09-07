@@ -11,7 +11,7 @@ document.getElementById("faq").innerHTML = `
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="faqModalLabel">
-              Preguntas frecuentes / FAQ
+             FAQ
             </h5>
             <button
               type="button"
