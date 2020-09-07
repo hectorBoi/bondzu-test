@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bondzù: Perfil</title>
-    <link rel="icon" href="img/favicon.png" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="../img/favicon.png" />
+    <link rel="stylesheet" href="../css/styles.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -30,9 +30,9 @@
   </head>
 
   <body class="d-flex flex-column min-vh-100">
-    <header style="z-index: 10;">
+    <header style="z-index: 10">
       <div id="navBar"></div>
-      <script src="js/navBar.js"></script>
+      <script src="./js/navBar.js"></script>
     </header>
     <div id="faq"></div>
     <script src="./js/faq.js"></script>
@@ -49,32 +49,30 @@
       </div>
     </div>
 
-    <div class="jumbotron" style="margin-bottom: 0;">
+    <div class="jumbotron" style="margin-bottom: 0">
       <div class="container-lg">
         <div class="row">
           <div class="col-lg-4 text-center">
             <img
               id="profilePhoto"
-              src="img/logoBondzu.png"
+              src="../img/logoBondzu.png"
               width="250"
               height="250"
               class="rounded-circle"
               alt="profilePicture"
-              style="margin-top: 8px; margin-left: 8px; margin-right: 8px;"
+              style="margin-top: 8px; margin-left: 8px; margin-right: 8px"
             />
           </div>
           <div class="col-lg-6">
-            <h2 style="display: inline; margin: 8px;" id="name"></h2>
-            <h2 style="display: inline;" id="lastname"></h2>
-            <hr style="clear: both;" />
-            <h5 class="text-muted" style="margin: 8px;" id="usertype"></h5>
-            <h5 class="text-muted" style="margin: 8px;" id="username"></h5>
-            <h5 class="text-muted" style="margin: 8px;">
-              ************
-            </h5>
+            <h2 style="display: inline; margin: 8px" id="name"></h2>
+            <h2 style="display: inline" id="lastname"></h2>
+            <hr style="clear: both" />
+            <h5 class="text-muted" style="margin: 8px" id="usertype"></h5>
+            <h5 class="text-muted" style="margin: 8px" id="username"></h5>
+            <h5 class="text-muted" style="margin: 8px">************</h5>
             <a
               class="badge badge-secondary"
-              style="margin: 8px;"
+              style="margin: 8px"
               data-toggle="modal"
               data-target="#editProfile"
               href="#"
@@ -111,10 +109,10 @@
                         height="200"
                         class="rounded-circle"
                         alt="profilePicture"
-                        style="margin: 10px;"
+                        style="margin: 10px"
                       />
                       <br />
-                      <h6 style="color: green;">
+                      <h6 style="color: green">
                         Selecciona una nueva foto de perfil.
                       </h6>
                       <br />
@@ -141,7 +139,7 @@
                           class="btn btn-dark"
                         />
                         <hr />
-                        <h6 style="color: green;">
+                        <h6 style="color: green">
                           Completa solo la información que deseas modificar.
                         </h6>
                         <div class="form-group row">
@@ -190,7 +188,7 @@
                       </form>
                     </div>
                   </div>
-                  <div class="modal-footer" style="align-items: center;">
+                  <div class="modal-footer" style="align-items: center">
                     <button
                       type="button"
                       class="btn btn-danger"
@@ -215,7 +213,7 @@
               id="showAdoptions"
               type="button"
               class="btn btn-success"
-              style="margin-top: 8px; margin-left: 8px; margin-right: 8px;"
+              style="margin-top: 8px; margin-left: 8px; margin-right: 8px"
             >
               Ver tus adopciones
             </button>
@@ -223,14 +221,15 @@
         </div>
       </div>
     </div>
-    <div style="display: none;" id="adoptionsContainer">
+    <div style="display: none" id="adoptionsContainer">
       <div id="alertAdoptions" class="alert" role="alert"></div>
       <div class="container-fluid" id="container"></div>
     </div>
-    <div id="footer" class="mt-auto" style="z-index: 10;"></div>
+    <div id="footer" class="mt-auto" style="z-index: 10"></div>
     <script src="./js/footer.js"></script>
   </body>
-  <script src="./js/index.js"></script>
-  <script src="./js/profile.js"></script>
-  <script src="./js/logout.js"></script>
+
+  <script src="../js/index.js"></script>
+  <script src="../js/profile.js"></script>
+  <script src="../js/logout.js"></script>
 </html>

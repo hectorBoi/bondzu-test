@@ -5,7 +5,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
 <a class="navbar-brand mr-auto" href="index.html">
   <img
     class="navbarBtnMargins"
-    src="./img/bondu_logo_white.png"
+    src="../img/bondu_logo_white.png"
     height="50"
     alt="navBarIcon"
   />
@@ -116,7 +116,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
           aria-expanded="false"
         >
           <img
-            src="./img/profileIcon.png"
+            src="../img/profileIcon.png"
             alt="profileIcon"
             height="35"
             width="35"
@@ -137,7 +137,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         href="#"
       >
         <img
-          src="./img/faqIcon.png"
+          src="../img/faqIcon.png"
           alt="faqIcon"
           height="40"
           width="40"

@@ -36,7 +36,7 @@ document.getElementById("footer").innerHTML = `
                     target="_blank"
                   >
                     <img
-                      src="./img/fbIcon.png"
+                      src="../img/fbIcon.png"
                       alt="fbIcon"
                       height="40"
                       width="40"
@@ -50,7 +50,7 @@ document.getElementById("footer").innerHTML = `
                     target="_blank"
                   >
                     <img
-                      src="./img/twIcon.png"
+                      src="../img/twIcon.png"
                       alt="twIcon"
                       height="40"
                       width="40"
@@ -64,7 +64,7 @@ document.getElementById("footer").innerHTML = `
                     target="_blank"
                   >
                     <img
-                      src="./img/instaIcon.png"
+                      src="../img/instaIcon.png"
                       alt="igIcon"
                       height="40"
                       width="40"
@@ -85,7 +85,7 @@ document.getElementById("footer").innerHTML = `
         </div>
         <hr style="clear: both; margin-bottom: 0; margin-top: 3px;" />
         <img
-          src="./img/bondu_logo_white.png"
+          src="../img/bondu_logo_white.png"
           alt="logoBondzuFooter"
           height="50"
           width="100"
