@@ -73,7 +73,7 @@ app.post("/admin/animals/:animalID", (req, res) => {
   admin.updateAnimal(req, res, Parse);
 });
 
-app.post("/admin/animals/", (req, res) => {
+app.post("/admin/animals", (req, res) => {
   admin.createAnimal(req, res, Parse);
 });
 

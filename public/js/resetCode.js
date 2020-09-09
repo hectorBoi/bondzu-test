@@ -11,8 +11,6 @@ const passwordConfElem = document.getElementById("passwordConfReset");
 const sendCodeBtn = document.getElementById("sendCodeBtn");
 const restorePasswordBtn = document.getElementById("restorePasswordBtn");
 
-const smtpToken = "e532f17b-18c6-49a2-99f7-04f158ff339c";
-
 const backTopElem = document.getElementById("backTop");
 backTopElem.style.display = "none";
 

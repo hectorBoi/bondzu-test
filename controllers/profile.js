@@ -22,18 +22,23 @@ const getPhoto = async (username, Parse) => {
 const handleProfile = async (req, res, Parse) => {
   try {
     const { username } = req.cookies;
+    console.log("---------------");
+    console.log("Entering profile");
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username)
     const user = await query.first();
+    console.log("Profile loaded");
 
     const typeTable = Parse.Object.extend("UserType");
     const queryType = new Parse.Query(typeTable);
     const usertype = await queryType.get(user.get("userType").id);
+    console.log("UserType loaded");
 
     const name = user.get("name");
     const lastname = user.get("lastname");
     const photo = await getPhoto(username, Parse)
+    console.log("Photo loaded");
 
     const response = {
       name,
@@ -44,6 +49,8 @@ const handleProfile = async (req, res, Parse) => {
     }
 
     res.json(response)
+    console.log("Info sent");
+    console.log("---------------");
   } catch (err) {
     res.json("User not found")
   }
