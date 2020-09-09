@@ -76,7 +76,7 @@
               data-toggle="modal"
               data-target="#editProfile"
               href="#"
-              >Editar</a
+              >Edit</a
             >
             <div
               class="modal fade"
@@ -89,7 +89,7 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="editProfileLabel">
-                      Editar perfil
+                      Edit profile
                     </h5>
                     <button
                       type="button"
@@ -104,7 +104,7 @@
                     <div class="container-sm">
                       <img
                         id="profilePhotoMod"
-                        src="img/logoBondzu.png"
+                        src="../img/logoBondzu.png"
                         width="200"
                         height="200"
                         class="rounded-circle"
@@ -112,9 +112,7 @@
                         style="margin: 10px"
                       />
                       <br />
-                      <h6 style="color: green">
-                        Selecciona una nueva foto de perfil.
-                      </h6>
+                      <h6 style="color: green">Choose a new profile photo</h6>
                       <br />
                       <form
                         action="/profile"
@@ -134,17 +132,17 @@
                         <input
                           disabled
                           type="submit"
-                          value="Ninguna foto seleccionada"
+                          value="No photo selected"
                           id="submitPhoto"
                           class="btn btn-dark"
                         />
                         <hr />
                         <h6 style="color: green">
-                          Completa solo la información que deseas modificar.
+                          Fill in only the information you want to modify
                         </h6>
                         <div class="form-group row">
                           <label for="name" class="col-auto col-form-label"
-                            >Nombre</label
+                            >First name</label
                           >
                           <input
                             type="text"
@@ -154,7 +152,7 @@
                         </div>
                         <div class="form-group row">
                           <label for="lastName" class="col-auto col-form-label"
-                            >Apellidos</label
+                            >Last name</label
                           >
                           <input
                             type="text"
@@ -164,7 +162,7 @@
                         </div>
                         <div class="form-group row">
                           <label for="password" class="col-auto col-form-label"
-                            >Contraseña</label
+                            >Password</label
                           >
                           <input
                             type="password"
@@ -174,7 +172,7 @@
                         </div>
                         <div class="form-group row">
                           <label for="password" class="col-auto col-form-label"
-                            >Confirma contraseña</label
+                            >Confirm password</label
                           >
                           <input
                             type="password"
@@ -182,7 +180,7 @@
                             id="newPasswordConfirm"
                           />
                           <div id="noMatchPasswords" class="invalid-feedback">
-                            La contraseña no coincide. Intenta de nuevo.
+                            The password does not match. Try again.
                           </div>
                         </div>
                       </form>
@@ -194,14 +192,14 @@
                       class="btn btn-danger"
                       data-dismiss="modal"
                     >
-                      Cerrar
+                      Close
                     </button>
                     <button
                       type="button"
                       class="btn btn-success"
                       id="updateProfile"
                     >
-                      Guardar cambios
+                      Save changes
                     </button>
                   </div>
                 </div>
@@ -215,7 +213,7 @@
               class="btn btn-success"
               style="margin-top: 8px; margin-left: 8px; margin-right: 8px"
             >
-              Ver tus adopciones
+              Your adoptions
             </button>
           </div>
         </div>

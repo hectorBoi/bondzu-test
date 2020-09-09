@@ -17,7 +17,11 @@ submitContactButton.addEventListener("click", () => {
   const message = messageContactElem.value;
   const body = `_${name}_ con correo _${email}_ pregunta = ${message}`;
 
-  toastBodyElem.innerText = `Pronto nos pondremos en contacto contigo, ${name}.`;
+  if (window.localStorage.getItem("lang") === "es") {
+    toastBodyElem.innerText = `Pronto nos pondremos en contacto contigo, ${name}.`;
+  } else if (window.localStorage.getItem("lang") === "en") {
+    toastBodyElem.innerText = `We will contact you soon, ${name}.`;
+  }
 
   if (name != "" && email != "" && subject != "" && message != "") {
     Email.send({

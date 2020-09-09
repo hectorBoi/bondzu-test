@@ -21,7 +21,7 @@ document.getElementById("footer").innerHTML = `
                   ¿Quiénes somos?
                 </a>
                 <br />
-                <a href="app.html" style="color: white;">Nuestra app</a>
+                <a href="app.html" style="color: white;">Nuestra App</a>
               </p>
             </div>
             <div class="col-4">

@@ -52,7 +52,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
             type="button"
             class="btn btn-outline-light navbarBtnMargins"
           >
-            ¡Animals!
+            Animals!
           </button></a
         >
       </li>
@@ -99,8 +99,8 @@ style="background-color: #f28f1d; border-color: #ffffff;"
           style="text-decoration: none;"
           href="#"
         >
-          <button type="button" class="btn btn-success navbarBtnMargins">
-          Login
+          <button type="button" class="btn btn-success navbarBtnLoginSignup">
+          Log in
           </button></a
         >
         <a
@@ -109,7 +109,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
           style="text-decoration: none;"
           href="#"
         >
-          <button type="button" class="btn btn-primary navbarBtnMargins">
+          <button type="button" class="btn btn-primary navbarBtnLoginSignup">
           Sign up
           </button></a
         >

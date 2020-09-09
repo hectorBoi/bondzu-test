@@ -7,7 +7,7 @@ document.getElementById("footer").innerHTML = `
             class="btn btn-lg btn-block"
             style="background-color: #a8a8a8;"
           >
-            <h6 style="color: #ffffff;">Inicio de página</h6>
+            <h6 style="color: #ffffff;">Back to top</h6>
           </button>
         </a>
       </div>
@@ -15,18 +15,18 @@ document.getElementById("footer").innerHTML = `
         <div class="container">
           <div class="row">
             <div class="col-4">
-              <h5 style="margin: 5px; color: white;">Conócenos</h5>
+              <h5 style="margin: 5px; color: white;">Get to Know Us</h5>
               <p>
                 <a href="quienes.html" style="color: white;">
-                  ¿Quiénes somos?
+                  About us
                 </a>
                 <br />
-                <a href="app.html" style="color: white;">Nuestra app</a>
+                <a href="app.html" style="color: white;">Our App</a>
               </p>
             </div>
             <div class="col-4">
               <h5 style="margin: 5px; color: white;">
-                Nuestras redes sociales
+              Our Social Media
               </h5>
               <div class="row">
                 <div class="col-sm">
@@ -74,10 +74,10 @@ document.getElementById("footer").innerHTML = `
               </div>
             </div>
             <div class="col-4">
-              <h5 style="margin: 5px; color: white;">Contáctanos</h5>
+              <h5 style="margin: 5px; color: white;">Contact Us</h5>
               <p>
                 <a href="contacto.html" style="color: white;">
-                  Contacto
+                  Contact
                 </a>
               </p>
             </div>

@@ -74,6 +74,10 @@ body {
   margin: 5px 18px 8px 18px;
 }
 
+.navbarBtnLoginSignup {
+  margin: 10px 18px 5px 18px;
+}
+
 .navbarBtnFAQ {
   margin: 5px 0px 8px 8px;
 }

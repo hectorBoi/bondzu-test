@@ -28,7 +28,7 @@ fetch(`/profile`)
   .then((userInfo) => {
     nameElem.innerText = userInfo.name;
     lastnameElem.innerText = userInfo.lastname;
-    usertypeElem.innerText = `Tipo: ${userInfo.usertype}`;
+    usertypeElem.innerText = userInfo.usertype;
     usernameElem.innerText = userInfo.username;
     if (userInfo.photo) {
       profilePhotoElem.setAttribute("src", userInfo.photo);
@@ -156,7 +156,13 @@ showAdoptionsElem.addEventListener("click", () => {
           let row = createRow();
 
           showAdoptionsElem.disable = true;
-          headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Tus adopciones</h4>`;
+
+          if (window.localStorage.getItem("lang") === "es") {
+            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Tus adopciones</h4>`;
+          } else if (window.localStorage.getItem("lang") === "en") {
+            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Your adoptions</h4>`;
+          }
+
           headerAdoptions.className = "alert alert-success";
 
           for (animal of animals) {
@@ -172,7 +178,12 @@ showAdoptionsElem.addEventListener("click", () => {
             }
           }
         } else {
-          headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones. <a href="animals.html">¡Ve a adoptar! <a/></h4>`;
+          if (window.localStorage.getItem("lang") === "es") {
+            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones. <a href="animals.html">¡Ve a adoptar! <a/></h4>`;
+          } else if (window.localStorage.getItem("lang") === "en") {
+            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">You do not have adoptions yet. <a href="animals.html"> Go and adopt!<a/></h4>`;
+          }
+
           headerAdoptions.className = "alert alert-danger";
         }
       })
@@ -186,12 +197,22 @@ showAdoptionsElem.addEventListener("click", () => {
       showClass.length - 6
     );
     adoptionsContainerElem.style.display = "none";
-    showAdoptionsElem.innerText = "Ver tus adopciones";
     backTopElem.style.display = "none";
+
+    if (window.localStorage.getItem("lang") === "es") {
+      showAdoptionsElem.innerText = "Tus adopciones";
+    } else if (window.localStorage.getItem("lang") === "en") {
+      showAdoptionsElem.innerText = "Your adoptions";
+    }
   } else {
     showAdoptionsElem.className += "btn btn-info";
     showAdoptionsElem.className += "  hide";
-    showAdoptionsElem.innerText = "Ocultar tus adopciones";
+
+    if (window.localStorage.getItem("lang") === "es") {
+      showAdoptionsElem.innerText = "Ocultar tus adopciones";
+    } else if (window.localStorage.getItem("lang") === "en") {
+      showAdoptionsElem.innerText = "Hide your adoptions";
+    }
   }
 });
 
@@ -206,6 +227,11 @@ const submitPhoto = document.getElementById("newProfilepic");
 const formPhoto = document.getElementById("submitPhoto");
 submitPhoto.addEventListener("change", () => {
   formPhoto.className = "btn btn-success";
-  formPhoto.value = "Actualizar foto";
   formPhoto.disabled = false;
+
+  if (window.localStorage.getItem("lang") === "es") {
+    formPhoto.value = "Actualizar foto";
+  } else if (window.localStorage.getItem("lang") === "en") {
+    formPhoto.value = "Update photo";
+  }
 });
