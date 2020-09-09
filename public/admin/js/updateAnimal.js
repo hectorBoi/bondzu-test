@@ -37,7 +37,7 @@ fetch(`/admin/animals/${animalID}`)
 
     let chars = "";
     for (let key in animal_info.characteristics) {
-      let temp = `${key}: ${animal_info.characteristics[key]} \\n`;
+      let temp = `${key}: ${animal_info.characteristics[key]} `;
       chars = chars.concat(temp);
     }
     caracteristicasElem.innerHTML = chars;
