@@ -35,6 +35,8 @@ const getVideo = async (id, Parse) => {
 const getAnimalInfo = async (animal, Parse, lang) => {
   try {
     if (lang === "en") {
+      console.log("Entered animal in english")
+      console.log(animal)
       const video = await getVideo(animal.id, Parse);
       const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
       const photo = animal.get("profilePhoto")._url;
@@ -49,6 +51,8 @@ const getAnimalInfo = async (animal, Parse, lang) => {
       };
       return animalInfo;
     } else {
+      console.log("Entered animal spanish")
+      console.log(animal)
       const video = await getVideo(animal.id, Parse);
       const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
       const photo = animal.get("profilePhoto")._url;

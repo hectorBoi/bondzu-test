@@ -21,34 +21,20 @@ const getPhoto = async (username, Parse) => {
 // Returns the users information
 const handleProfile = async (req, res, Parse) => {
   try {
-    const { username } = req.cookies;
+    const { lang, usertype } = req.cookies;
     console.log("---------------");
-    console.log("Entering profile");
-    const userTable = Parse.Object.extend("User");
-    const query = new Parse.Query(userTable);
-    query.equalTo("username", username)
-    const user = await query.first();
-    console.log("Profile loaded");
+    console.log("Entering all animals");
+    const animalTable = Parse.Object.extend("AnimalV2");
+    const query = new Parse.Query(animalTable);
+    query.equalTo("isActive", true);
+    const activeAnimals = await query.find();
+    console.log("Animals loaded");
 
-    const typeTable = Parse.Object.extend("UserType");
-    const queryType = new Parse.Query(typeTable);
-    const usertype = await queryType.get(user.get("userType").id);
-    console.log("UserType loaded");
-
-    const name = user.get("name");
-    const lastname = user.get("lastname");
-    const photo = await getPhoto(username, Parse)
-    console.log("Photo loaded");
-
-    const response = {
-      name,
-      lastname,
-      username,
-      photo,
-      usertype: usertype.get("name"),
-    }
-
-    res.json(response)
+    const animalsInfo = await animalInfo.getAnimals(activeAnimals, lang);
+    console.log("Info animals loaded");
+    const result = await filterAnimals(usertype, animalsInfo)
+    console.log("Animals filtered");
+    res.json(result);
     console.log("Info sent");
     console.log("---------------");
   } catch (err) {

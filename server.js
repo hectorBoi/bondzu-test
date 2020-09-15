@@ -56,7 +56,6 @@ app.get("/", (req, res) => {
   } else if (lang === "en") {
     res.redirect("/en/index.html");
   }
-})
 
 // Manages the login for admins
 app.get("/adminLogin", signin.signinAuth(Parse));
