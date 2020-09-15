@@ -5,7 +5,7 @@ const getAdoptions = async (req, res, Parse) => {
     const { username, lang } = req.cookies;
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
-    query.equalTo("username", username)
+    query.equalTo("username", username);
     const user = await query.first();
 
     const adoptions = user.get("adoptersRelation");
@@ -14,19 +14,19 @@ const getAdoptions = async (req, res, Parse) => {
     const activeAdoptions = await queryAD.find();
     const adoptionsInfo = await animalInfo.getAnimals(activeAdoptions, lang);
 
-    res.json(adoptionsInfo)
+    res.json(adoptionsInfo);
   } catch (err) {
-    console.log(err)
-    res.status(400).json("Adoptions did not worked")
+    console.log(err);
+    res.status(400).json("Adoptions did not worked");
   }
-}
+};
 
 const isAdopted = async (req, res, Parse, animalID) => {
   try {
     const { username, lang } = req.cookies; // DEBERIA DE SER HEADER
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
-    query.equalTo("username", username)
+    query.equalTo("username", username);
     const user = await query.first();
 
     const adoptions = user.get("adoptersRelation");
@@ -35,19 +35,19 @@ const isAdopted = async (req, res, Parse, animalID) => {
     const activeAdoptions = await queryAD.find();
     const adoptionsInfo = await animalInfo.getAnimals(activeAdoptions, lang);
 
-    let isAdopted = false
-    adoptionsInfo.map(animal => {
+    let isAdopted = false;
+    adoptionsInfo.map((animal) => {
       if (animal.id === animalID) {
-        isAdopted = true
+        isAdopted = true;
       }
-    })
+    });
 
-    return isAdopted
+    return isAdopted;
   } catch (err) {
-    console.log(err)
-    res.status(400).json("Adoptions did not worked")
+    console.log(err);
+    res.status(400).json("Adoptions did not worked");
   }
-}
+};
 
 const updateAdoptions = async (req, res, Parse) => {
   try {
@@ -56,7 +56,7 @@ const updateAdoptions = async (req, res, Parse) => {
     // USER
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
-    query.equalTo("username", username)
+    query.equalTo("username", username);
     const user = await query.first();
     const adoptions = user.get("adoptersRelation");
     // ANIMAL
@@ -65,15 +65,17 @@ const updateAdoptions = async (req, res, Parse) => {
     const animal = await queryAnimal.get(animalID);
     // // ADD ADOPTION TO RELATION
     adoptions.add(animal);
+    animal.increment("adopters");
+    const testAnimal = await animal.save(null, { sessionToken: token });
     const test = await user.save(null, { sessionToken: token });
     res.json("Worked");
   } catch (err) {
-    res.status(400).json("Adoptions did not worked")
+    res.status(400).json("Adoptions did not worked");
   }
-}
+};
 
 module.exports = {
   getAdoptions: getAdoptions,
   updateAdoptions: updateAdoptions,
-  isAdopted: isAdopted
-}
+  isAdopted: isAdopted,
+};

@@ -34,7 +34,233 @@
       <script src="./js/navBar.js"></script>
     </header>
 
-    <div class="container-fluid"></div>
+    <br />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <div class="card mx-auto" style="width: 30rem; margin-bottom: 1rem">
+            <div class="card-header text-center">
+              <h4>Datos únicos</h4>
+            </div>
+            <div class="card-body">
+              <form class="was-validated">
+                <!-- method="POST" 
+                enctype="multipart/form-data"
+                id="formTest"-->
+                <div class="form-group" style="margin-left: 5px">
+                  <div class="text-center mx-auto">
+                    <b><label>Imagen</label></b>
+                    <br />
+                    <input
+                      type="file"
+                      class="form-control-file"
+                      name="newProfilepic"
+                      id="newProfilepic"
+                      accept="image/*"
+                    />
+                    <br />
+                    <input
+                      type="submit"
+                      value="Ninguna foto seleccionada"
+                      id="submitPhoto"
+                      class="btn btn-dark"
+                      disabled
+                    />
+                  </div>
+                </div>
+
+                <hr />
+              </form>
+
+              <form class="was-validated">
+                <div class="form-group is-invalid text-center">
+                  <b><label>Estatus</label></b>
+                  <div class="custom-control custom-switch">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="status"
+                      required
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="status"
+                      id="statusText"
+                    ></label>
+                  </div>
+
+                  <!-- Script para switch -->
+                  <script>
+                    //Switch status
+                    $("#status").change(function () {
+                      $("#statusText").html("Inactivo");
+                      if ($(this).is(":checked")) {
+                        $("#statusText").html("Activo");
+                      }
+                    });
+                  </script>
+                </div>
+
+                <hr />
+
+                <div class="form-group is-invalid">
+                  <b><label>YouTube ID</label></b>
+                  <input
+                    id="youtubeId"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr />
+
+                <div class="form-group is-invalid">
+                  <b><label>Cuidador</label></b>
+                  <select
+                    id="allKeepers"
+                    class="custom-select"
+                    required
+                  ></select>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md">
+          <div class="card mx-auto" style="width: 100%">
+            <div class="card-header text-center">
+              <h4>Español</h4>
+            </div>
+            <div class="card-body">
+              <form class="was-validated">
+                <div class="form-group is-invalid">
+                  <b><label>Especie</label></b>
+                  <input
+                    id="especie"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr />
+
+                <div class="form-group is-invalid">
+                  <b><label>Acerca de</label></b>
+                  <textarea
+                    id="acerca"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    rows="8"
+                    style="text-align: justify"
+                    required
+                  ></textarea>
+                </div>
+
+                <hr />
+
+                <div class="form-group is-invalid">
+                  <b><label>Características</label></b>
+                  <textarea
+                    id="caracteristicas"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    rows="8"
+                    style="text-align: justify"
+                    required
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md">
+          <div class="card mx-auto" style="width: 100%">
+            <div class="card-header text-center">
+              <h4>English</h4>
+            </div>
+            <div class="card-body">
+              <form class="was-validated">
+                <div class="form-group is-invalid">
+                  <b><label>Species</label></b>
+                  <input
+                    id="species"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr />
+
+                <div class="form-group is-invalid">
+                  <b><label>About</label></b>
+                  <textarea
+                    id="about"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    rows="8"
+                    style="text-align: justify"
+                    required
+                  ></textarea>
+                </div>
+
+                <hr />
+
+                <div class="form-group is-invalid">
+                  <b><label>Characteristics</label></b>
+                  <textarea
+                    id="characteristics"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    rows="8"
+                    style="text-align: justify"
+                    required
+                  ></textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <div class="row">
+        <div class="col mx-auto text-center">
+          <h5>
+            <small class="text-danger" style="display: none" id="missingInfo"
+              >Información incompleta. Por favor llena todos los campos.</small
+            >
+            <small
+              class="text-success"
+              style="display: none"
+              id="successfulSave"
+              >Cambios guardados exitosamente</small
+            >
+          </h5>
+          <button class="btn btn-success" id="save">
+            Guardar cambios
+            <span
+              id="buttonSpinner"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              style="display: none"
+            ></span>
+            <span class="sr-only">Loading...</span>
+          </button>
+        </div>
+      </div>
+
+      <br />
+      <br />
+    </div>
   </body>
 
   <script src="./js/index.js"></script>

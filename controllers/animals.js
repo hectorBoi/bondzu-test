@@ -6,13 +6,23 @@ const filterAnimals = async (userType, animals) => {
   let filteredArray = [];
   switch (userType) {
     case "etDcoSci6K": // 0
-      filteredArray = animals.filter(animal => animal.userType === "etDcoSci6K");
+      filteredArray = animals.filter(
+        (animal) => animal.userType === "etDcoSci6K"
+      );
       break;
     case "jHbSEutegP": // 1
-      filteredArray = animals.filter(animal => animal.userType === "etDcoSci6K" || animal.userType === "jHbSEutegP");
+      filteredArray = animals.filter(
+        (animal) =>
+          animal.userType === "etDcoSci6K" || animal.userType === "jHbSEutegP"
+      );
       break;
     case "nRXYUkuJJq": // 2
-      filteredArray = animals.filter(animal => animal.userType === "etDcoSci6K" || animal.userType === "jHbSEutegP" || animal.userType === "nRXYUkuJJq");
+      filteredArray = animals.filter(
+        (animal) =>
+          animal.userType === "etDcoSci6K" ||
+          animal.userType === "jHbSEutegP" ||
+          animal.userType === "nRXYUkuJJq"
+      );
       break;
     case "mWm6R6DLFX": // 3
       filteredArray = animals;
@@ -22,7 +32,7 @@ const filterAnimals = async (userType, animals) => {
       break;
   }
   return filteredArray;
-}
+};
 
 // Extracts the animals from the database and filter the results before sending them to the front end
 const handleAnimals = async (req, res, Parse) => {
@@ -36,17 +46,19 @@ const handleAnimals = async (req, res, Parse) => {
     const activeAnimals = await query.find();
     console.log("Animals loaded");
 
+    console.log(activeAnimals);
+
     const animalsInfo = await animalInfo.getAnimals(activeAnimals, lang);
     console.log("Info animals loaded");
-    const result = await filterAnimals(usertype, animalsInfo)
+    const result = await filterAnimals(usertype, animalsInfo);
     console.log("Animals filtered");
     res.json(result);
     console.log("Info sent");
     console.log("---------------");
   } catch (err) {
-    res.json(err)
+    res.json(err);
   }
-}
+};
 
 // Extracts the information of a specific animal from the database
 const handleSingleAnimal = async (req, res, Parse) => {
@@ -68,11 +80,12 @@ const handleSingleAnimal = async (req, res, Parse) => {
     console.log("Info sent");
     console.log("---------------");
   } catch (err) {
-    res.json(err)
+    res.json(err);
   }
-}
+};
 
 module.exports = {
   handleAnimals: handleAnimals,
-  handleSingleAnimal, handleSingleAnimal,
-}
+  handleSingleAnimal,
+  handleSingleAnimal,
+};
