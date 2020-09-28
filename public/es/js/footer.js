@@ -34,6 +34,7 @@ document.getElementById("footer").innerHTML = `
                     href="https://www.facebook.com/bondzu/"
                     style="text-decoration: none;"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <img
                       src="../../img/fbIcon.png"
@@ -48,6 +49,7 @@ document.getElementById("footer").innerHTML = `
                     href="https://twitter.com/BondzuCubs"
                     style="text-decoration: none;"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <img
                       src="../../img/twIcon.png"
@@ -62,6 +64,7 @@ document.getElementById("footer").innerHTML = `
                     href="https://www.instagram.com/bondzucubs/"
                     style="text-decoration: none;"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <img
                       src="../../img/instaIcon.png"
