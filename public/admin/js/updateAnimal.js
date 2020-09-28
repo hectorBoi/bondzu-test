@@ -21,11 +21,23 @@ const statusTextElem = document.getElementById("statusText");
 const especieElem = document.getElementById("especie");
 const acercaElem = document.getElementById("acerca");
 const caracteristicasElem = document.getElementById("caracteristicas");
+const nombreCientElem = document.getElementById("nomCient");
+const estadoConElem = document.getElementById("estadoCon");
+const distGeoElem = document.getElementById("distGeo");
+const habitatEspElem = document.getElementById("habitatEsp");
+const dietaElem = document.getElementById("dieta");
+const reproduccionElem = document.getElementById("reproduccion");
 
 //English data
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
+const scieNameElem = document.getElementById("scieName");
+const conStatusElem = document.getElementById("conStatus");
+const geoDistElem = document.getElementById("geoDist");
+const habitatEngElem = document.getElementById("habitatEng");
+const dietElem = document.getElementById("diet");
+const reproductionElem = document.getElementById("reproduction");
 
 //Keepers
 const allKeepersElem = document.getElementById("allKeepers");
@@ -48,7 +60,6 @@ const createSelectKeepers = (array, form, currentKeeper) => {
 
 //Quitar variable global
 let pruebaCaracteristicas = {};
-
 let pruebaCaracteristicasEn = {};
 
 fetch(`/admin/animals/${animalID}`)
@@ -114,41 +125,71 @@ submitSaveElem.addEventListener("click", () => {
   missingInfoElem.style.display = "none";
   successfulSaveElem.style.display = "none";
 
+  //Información única
   const status = statusElem.checked;
   const youtubeId = youtubeIdElem.value;
   const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
+
+  //Información español
   const especie = especieElem.value;
   const acerca = acercaElem.value;
-  const caracteristicas = caracteristicasElem.value;
+  const nombreCient = nombreCientElem.value;
+  const estadoCon = estadoConElem.value;
+  const distGeo = distGeoElem.value;
+  const habitatEsp = habitatEspElem.value;
+  const dieta = dietaElem.value;
+  const reproduccion = reproduccionElem.value;
+
+  //English information
   const species = speciesElem.value;
   const about = aboutElem.value;
-  const characteristics = characteristicsElem.value;
-
-  const newChars = {
-    "Average height": youtubeId,
-    "Average weight": especie,
-  };
-
-  /*console.log(status);
-  console.log(youtubeId);
-  console.log(keeper);
-  console.log(especie);
-  console.log(acerca);
-  console.log(caracteristicas);
-  console.log(species);
-  console.log(about);
-  console.log(characteristics);*/
+  const scieName = scieNameElem.value;
+  const conStatus = conStatusElem.value;
+  const geoDist = geoDistElem.value;
+  const habitatEng = habitatEngElem.value;
+  const diet = dietElem.value;
+  const reproduction = reproductionElem.value;
 
   if (
     youtubeId != "" &&
     especie != "" &&
     acerca != "" &&
-    caracteristicas != "" &&
+    nombreCient != "" &&
+    estadoCon != "" &&
+    distGeo != "" &&
+    habitatEsp != "" &&
+    dieta != "" &&
+    reproduccion != "" &&
     species != "" &&
     about != "" &&
-    characteristics != ""
+    scieName != "" &&
+    conStatus != "" &&
+    geoDist != "" &&
+    habitatEng != "" &&
+    diet != "" &&
+    reproduction != ""
   ) {
     buttonSpinnerElem.removeAttribute("style");
+
+    //Características español
+    const caracteristicas = {
+      "Nombre científico": nombreCient,
+      "Estado de conservación": estadoCon,
+      "Distribución geográfica": distGeo,
+      "Hábitat": habitatEsp,
+      "Dieta": dieta,
+      "Reproducción": reproduccion,
+    };
+
+    //English characteristics
+    const characteristics = {
+      "Scientific name": scieName,
+      "Conservation status": conStatus,
+      "Geographical distribution": geoDist,
+      "Habitat": habitatEng,
+      "Diet": diet,
+      "Reproduction": reproduction,
+    };
 
     const request = {
       about: acerca,
@@ -161,8 +202,6 @@ submitSaveElem.addEventListener("click", () => {
       isActive: status,
       keeper: keeper,
     };
-
-    //console.log(request);
 
     fetch(`/admin/animals/${animalID}`, {
       method: "post",

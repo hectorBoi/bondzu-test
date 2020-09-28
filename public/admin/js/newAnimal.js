@@ -97,6 +97,7 @@ submitSaveElem.addEventListener("click", () => {
   ) {
     buttonSpinnerElem.removeAttribute("style");
 
+    //Características español
     const caracteristicas = {
       "Nombre científico": nombreCient,
       "Estado de conservación": estadoCon,
@@ -106,6 +107,7 @@ submitSaveElem.addEventListener("click", () => {
       "Reproducción": reproduccion,
     };
 
+    //English characteristics
     const characteristics = {
       "Scientific name": scieName,
       "Conservation status": conStatus,
