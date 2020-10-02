@@ -63,7 +63,7 @@ app.get("/", (req, res) => {
 });
 
 // Manages the login for admins
-app.get("/adminLogin", signin.signinAuth(Parse));
+app.post("/adminLogin", signin.signinAuth(Parse));
 
 app.get("/admin/animals", (req, res) => {
   admin.handleAdminAnimals(req, res, Parse);

@@ -9,7 +9,7 @@ submit.addEventListener("click", () => {
 
   invalidPassword.style.display = "none";
 
-  fetch("/login", {
+  fetch("/adminLogin", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
