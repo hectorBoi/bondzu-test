@@ -38,23 +38,14 @@ const filterAnimals = async (userType, animals) => {
 const handleAnimals = async (req, res, Parse) => {
   try {
     const { lang, usertype } = req.cookies;
-    console.log("---------------");
-    console.log("Entering all animals");
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     query.equalTo("isActive", true);
     const activeAnimals = await query.find();
-    console.log("Animals loaded");
-
-    console.log(activeAnimals);
 
     const animalsInfo = await animalInfo.getAnimals(activeAnimals, lang);
-    console.log("Info animals loaded");
     const result = await filterAnimals(usertype, animalsInfo);
-    console.log("Animals filtered");
     res.json(result);
-    console.log("Info sent");
-    console.log("---------------");
   } catch (err) {
     res.json(err);
   }
@@ -65,20 +56,13 @@ const handleSingleAnimal = async (req, res, Parse) => {
   try {
     const { lang } = req.cookies;
     const animalID = req.params.animalID;
-    console.log("---------------");
-    console.log("Entering single animal");
     const animalTable = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(animalTable);
     const animal = await query.get(animalID);
-    console.log("Animal loaded");
     const isAdopted = await adopts.isAdopted(req, res, Parse, animalID);
-    console.log("Adopted loaded");
     const animal_info = await animalInfo.getAnimalInfo(animal, Parse, lang);
-    console.log("Info loaded");
     animal_info.isAdopted = isAdopted;
     res.json(animal_info);
-    console.log("Info sent");
-    console.log("---------------");
   } catch (err) {
     res.json(err);
   }

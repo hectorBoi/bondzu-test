@@ -12,35 +12,38 @@ const getKeeper = async (id, Parse) => {
     const zooName = zoo.get("name");
     return zooName;
   } catch (err) {
-    return "Didnt find keeper"
+    return "Didnt find keeper";
   }
-}
+};
 
 const getVideo = async (id, Parse) => {
   try {
     const videoTable = Parse.Object.extend("Video");
     const query = new Parse.Query(videoTable);
     const cameras = await query.find();
-    const filter = cameras.filter(camara => camara.get("animal_id").id === id);
+    const filter = cameras.filter(
+      (camara) => camara.get("animal_id").id === id
+    );
     if (filter[0]) {
-      return filter[0].get("youtube_ids")[0]
+      return filter[0].get("youtube_ids")[0];
     }
-    return "No url"
+    return "No url";
   } catch (err) {
-    return err
+    return err;
   }
-}
+};
 
-// Transforms the array of Parse.Objects into Json 
+// Transforms the array of Parse.Objects into Json
 const getAnimalInfo = async (animal, Parse, lang) => {
   try {
     if (lang === "en") {
-      console.log("Entered animal in english")
-      console.log(animal)
       const video = await getVideo(animal.id, Parse);
       const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
       const photo = animal.get("profilePhoto")._url;
-      const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
+      const photoUrl = photo.replace(
+        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+        "https://d36skj58da74xm.cloudfront.net/"
+      );
       let animalInfo = {
         about: animal.get("about_en"),
         characteristics: animal.get("characteristics_en"),
@@ -51,12 +54,13 @@ const getAnimalInfo = async (animal, Parse, lang) => {
       };
       return animalInfo;
     } else {
-      console.log("Entered animal spanish")
-      console.log(animal)
       const video = await getVideo(animal.id, Parse);
       const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
       const photo = animal.get("profilePhoto")._url;
-      const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
+      const photoUrl = photo.replace(
+        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+        "https://d36skj58da74xm.cloudfront.net/"
+      );
       let animalInfo = {
         about: animal.get("about"),
         characteristics: animal.get("characteristics"),
@@ -69,11 +73,10 @@ const getAnimalInfo = async (animal, Parse, lang) => {
     }
   } catch (error) {
     console.log(error);
-
   }
-}
+};
 
-// Transforms the array of Parse.Objects into Json 
+// Transforms the array of Parse.Objects into Json
 const getAnimalInfoAdmin = async (animal, Parse, lang) => {
   try {
     const video = await getVideo(animal.id, Parse);
@@ -93,49 +96,52 @@ const getAnimalInfoAdmin = async (animal, Parse, lang) => {
       isActive: animal.get("isActive"),
     };
     return animalInfo;
-
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 // Transforms the array of Parse.Objects into Json for the animals list
 const getAnimals = async (array, lang) => {
   try {
     if (lang === "en") {
-      let animalInfo = array.map(animal => {
+      let animalInfo = array.map((animal) => {
         const photo = animal.get("profilePhoto")._url;
-        const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
-        return animal = {
+        const photoUrl = photo.replace(
+          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+          "https://d36skj58da74xm.cloudfront.net/"
+        );
+        return (animal = {
           id: animal.id,
           profilePhoto: photoUrl,
           species: animal.get("species_en"),
           userType: animal.get("animalRequiredPriority").id,
-        }
-      }
-      );
+        });
+      });
       return animalInfo;
     } else {
-      let animalInfo = array.map(animal => {
+      let animalInfo = array.map((animal) => {
         const photo = animal.get("profilePhoto")._url;
-        const photoUrl = photo.replace("http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/", "https://d36skj58da74xm.cloudfront.net/");
-        return animal = {
+        const photoUrl = photo.replace(
+          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+          "https://d36skj58da74xm.cloudfront.net/"
+        );
+        return (animal = {
           id: animal.id,
           profilePhoto: photoUrl,
           species: animal.get("species"),
           userType: animal.get("animalRequiredPriority").id,
-        }
-      }
-      );
+        });
+      });
       return animalInfo;
     }
   } catch (error) {
-    resizeBy.status(400).json("Couldnt get animals")
+    resizeBy.status(400).json("Couldnt get animals");
   }
-}
+};
 
 module.exports = {
   getAnimalInfo: getAnimalInfo,
   getAnimals: getAnimals,
-  getAnimalInfoAdmin: getAnimalInfoAdmin
-}
+  getAnimalInfoAdmin: getAnimalInfoAdmin,
+};

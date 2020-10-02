@@ -23,22 +23,18 @@ const getAdoptions = async (req, res, Parse) => {
 
 const isAdopted = async (req, res, Parse, animalID) => {
   try {
-    console.log("Entered in isAdopted")
     const { username, lang } = req.cookies; // DEBERIA DE SER HEADER
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
     query.equalTo("username", username);
     const user = await query.first();
-    console.log("User retrieved")
 
     const adoptions = user.get("adoptersRelation");
     const queryAD = adoptions.query();
     queryAD.equalTo("isActive", true);
     const activeAdoptions = await queryAD.find();
-    console.log("User adoptions retrieved")
 
     const adoptionsInfo = await animalInfo.getAnimals(activeAdoptions, lang);
-    console.log("Got animal Info")
 
     let isAdopted = false;
     adoptionsInfo.map((animal) => {
