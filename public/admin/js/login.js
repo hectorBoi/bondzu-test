@@ -9,7 +9,7 @@ submit.addEventListener("click", () => {
 
   invalidPassword.style.display = "none";
 
-  fetch("/login", {
+  fetch("/adminLogin", {
     method: "post",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +26,7 @@ submit.addEventListener("click", () => {
         document.cookie = `username=${username}; path=/;`;
         document.cookie = `token=${token}; path=/`;
         document.cookie = `usertype=${userType}; path=/`;
-        location.replace("/");
+        location.replace("/admin/index.html");
       }
       if (res === "Incorrect") {
         invalidPassword.removeAttribute("style");

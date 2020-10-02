@@ -22,15 +22,35 @@ const passwordReset = async (req, res, Parse, mailer) => {
         }
       }
 
-      mailer.send('email', mailOptions, (err, message) => {
-        if (err) {
-          console.log(err);
-          res.send({ message: "failed" });
-          return;
-        } else {
-          return res.send({ message: "success" });
+      var mailOptions_en = {
+        to: username,
+        subject: 'Bondzu password recover',
+        user: {  // data to view template, you can access as - user.name
+          code: randomNumber
         }
-      })
+      }
+
+      if (req.cookies.lang === "es") {
+        mailer.send('email', mailOptions, (err, message) => {
+          if (err) {
+            console.log(err);
+            res.send({ message: "failed" });
+            return;
+          } else {
+            return res.send({ message: "success" });
+          }
+        })
+      } else {
+        mailer.send('email_en', mailOptions_en, (err, message) => {
+          if (err) {
+            console.log(err);
+            res.send({ message: "failed" });
+            return;
+          } else {
+            return res.send({ message: "success" });
+          }
+        })
+      }
     } catch (err) {
       console.log(err);
       res.status(400).json({ message: "Couldnt find user" });

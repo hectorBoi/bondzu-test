@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bondzù: About us</title>
+    <link rel="icon" href="../img/favicon.png" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+    <header style="z-index: 10">
+      <div
+        data-spy="scroll"
+        data-target="#navBar"
+        data-offset="0"
+        class="scrollspy-example"
+      >
+        <div id="navBar"></div>
+        <script src="./js/navBar.js"></script>
+      </div>
+    </header>
+    <div id="faq"></div>
+    <script src="./js/faq.js"></script>
+
+    <div id="modalsLoginSignup"></div>
+    <script src="./js/modalsLoginSignup.js"></script>
+
+    <!--Scripts para hacer autofocus en los modales de login y signup-->
+    <script>
+      $(".modal").on("shown.bs.modal", function () {
+        $(this).find("[autofocus]").focus();
+      });
+    </script>
+
+    <div id="loader" class="loader">
+      <div class="spinner spinner-border" role="status">
+        <span class="sr-only">Loading page...</span>
+      </div>
+    </div>
+
+    <br />
+    <h1 style="color: #3a8169" class="text-center">About us</h1>
+    <div class="jumbotron">
+      <div class="container text-center">
+        <img src="../img/banner.png" alt="banner" class="img-fluid" />
+      </div>
+    </div>
+    <div class="container-xl">
+      <ul class="list-unstyled">
+        <li class="media">
+          <img
+            src="../img/pinguino.jpg"
+            class="mr-3 align-self-end"
+            alt="pinguino"
+            height="150"
+            width="150"
+          />
+          <div class="media-body align-self-center" style="text-align: justify">
+            Bondzù is an education and awareness initiative using the new means
+            of communication that the internet enables. Makes heavy use of
+            social media, smartphone apps, and web pages. What we seek is to
+            give animals in captivity a dignified life.
+          </div>
+        </li>
+        <br />
+        <li class="media">
+          <div class="media-body align-self-center" style="text-align: justify">
+            Ideally, animals should live in their habitat; however, there are
+            many animals in captivity that it is impossible to release, because
+            they could not adapt to a wild environment. Our contribution is to
+            give people information and ignite their love for nature. There are
+            many institutions that do their best to keep these captive animals
+            in the best possible shape.
+          </div>
+          <img
+            src="../img/panda.jpg"
+            class="ml-3"
+            alt="panda"
+            height="150"
+            width="150"
+          />
+        </li>
+        <br />
+        <li class="media">
+          <img
+            src="../img/tigre.jpg"
+            class="mr-3 align-self-end"
+            alt="tigre"
+            height="150"
+            width="150"
+          />
+          <div class="media-body align-self-center" style="text-align: justify">
+            But these institutions need that their efforts and contributions to
+            be known to receive the support of the people, to show solidarity
+            and to be willing to financially support their activities in favor
+            of the preservation of the species. Bondzù works every day so that
+            people can enjoy live images of animals.
+          </div>
+        </li>
+        <br />
+        <li class="media">
+          <div class="media-body align-self-center" style="text-align: justify">
+            The research and development department is working on the design of
+            various robotic devices and toys to serve as environmental
+            enrichment and contribute to greater physical activity for animals
+            in captivity. Bondzù promotes the love of animals, but above all, an
+            attitude of respect towards all living beings.
+          </div>
+          <img
+            src="../img/aguilaPescadora.jpg"
+            class="ml-3"
+            alt="aguilaPescadora"
+            height="150"
+            width="150"
+          />
+        </li>
+      </ul>
+    </div>
+    <br />
+    <br />
+    <div
+      class="jumbotron"
+      style="background: #f28f1d9a !important; margin-bottom: 0"
+    >
+      <div class="container text-center">
+        <div class="row">
+          <div class="col-md">
+            <div
+              class="embed-responsive embed-responsive-16by9"
+              style="margin-bottom: 15px"
+            >
+              <iframe
+                src="https://youtube.com/embed/Z0XCFs1Rbz8"
+                class="embed-responsive-item"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+
+          <div class="col-md">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe
+                src="https://youtube.com/embed/pHV51jA2VMY"
+                class="embed-responsive-item"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
+    <div id="footer" class="mt-auto" style="z-index: 10"></div>
+    <script src="./js/footer.js"></script>
+  </body>
+
+  <script src="../js/language.js"></script>
+  <script src="../js/index.js"></script>
+  <script src="../js/login.js"></script>
+  <script src="../js/register.js"></script>
+  <script src="../js/logout.js"></script>
+</html>

@@ -32,16 +32,29 @@ fetch(`/singleAnimal/${animalID}`)
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
     keeperElem.innerText = animal.keeper;
-    popoverAdoptElem.setAttribute(
-      "data-content",
-      `Puedes verme en tus adopciones dentro de tu <a href="profile.html">perfil</a>.`
-    );
+
+    if (window.localStorage.getItem("lang") === "es") {
+      popoverAdoptElem.setAttribute(
+        "data-content",
+        `Puedes verme en tus adopciones dentro de tu <a href="profile.html">perfil</a>.`
+      );
+    } else if (window.localStorage.getItem("lang") === "en") {
+      popoverAdoptElem.setAttribute(
+        "data-content",
+        `You can find me in your adoptions in your <a href="profile.html">profile</a>.`
+      );
+    }
 
     loaderElements.className += " hidden";
     body.style.overflow = "auto";
 
     if (animal.isAdopted) {
-      adoptElem.innerText = "¡Ya me adoptaste!";
+      if (window.localStorage.getItem("lang") === "es") {
+        adoptElem.innerText = "¡Ya me adoptaste!";
+      } else if (window.localStorage.getItem("lang") === "en") {
+        adoptElem.innerText = "You already adopted me!";
+      }
+
       adoptElem.disabled = true;
     }
   })
@@ -58,7 +71,11 @@ adoptElem.addEventListener("click", () => {
     .then((res) => res.json())
     .then((res) => {
       if (res === "Worked") {
-        adoptElem.innerText = "¡Ya me adoptaste!";
+        if (window.localStorage.getItem("lang") === "es") {
+          adoptElem.innerText = "¡Ya me adoptaste!";
+        } else if (window.localStorage.getItem("lang") === "en") {
+          adoptElem.innerText = "You already adopted me!";
+        }
         setTimeout(() => {
           adoptElem.disabled = true;
         }, 3000);

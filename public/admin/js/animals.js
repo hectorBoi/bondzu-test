@@ -14,9 +14,7 @@ const createDiv = (className, id) => {
 
 const createButton = (location) => {
   let div = createDiv("card bg-dark text-white");
-  //div.setAttribute("type", "button");
   div.style.margin = "20px";
-  //div.setAttribute("onclick", `window.location.href='singleAnimal.html'`);
   return div;
 };
 
@@ -25,7 +23,6 @@ const createImage = (url) => {
   img.setAttribute("src", url);
   img.className = "card-img img-fluid";
   img.setAttribute("alt", "animal");
-  //img.style.width = "500px";
   img.style.height = "300px";
   return img;
 };
@@ -52,7 +49,7 @@ const createCard = (object) => {
   const col = createDiv("col-xl");
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
-  anchor.href = "singleAnimal.html";
+  anchor.href = "updateAnimal.html";
   anchor.onclick = function () {
     window.localStorage.setItem("currentAnimal", object.id);
   };
@@ -90,20 +87,14 @@ if (!document.cookie.includes("token")) {
   location.replace("/");
 }
 
-fetch("/animals", {
-  method: "post",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    lang: window.localStorage.getItem("lang")
-  })
-})
+fetch("/admin/animals")
   .then((res) => res.json())
-  .then((animalsColleagues) => {
+  .then((animalsInfo) => {
+    console.log(animalsInfo);
+
     const animals = [];
     const colleagues = [];
-    animalsColleagues.forEach((elem) => {
+    animalsInfo.forEach((elem) => {
       if (elem.species === "Colega" || elem.species === "Colleague") {
         colleagues.push(elem);
       } else {
