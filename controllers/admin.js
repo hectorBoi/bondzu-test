@@ -48,7 +48,6 @@ const getAnimalDB = async (animalID, Parse) => {
 
 // Gets a specific userType from the database
 const getUserType = async (priority, Parse) => {
-  console.log(priority);
   let typeTable = Parse.Object.extend("UserType");
   let queryUserType = new Parse.Query(typeTable);
   queryUserType.equalTo("objectId", priority);
@@ -66,13 +65,9 @@ const handleAdminAnimals = async (req, res, Parse) => {
       throw { message: "No admin" };
     }
 
-    //console.log("Username: ", username);
-
     const animalTable = Parse.Object.extend("AnimalV2");
     const queryAnimals = new Parse.Query(animalTable);
-    //queryAnimals.notEqualTo("species", "Clamidosaurio");
     const animals = await queryAnimals.find();
-    //console.log("Animals: ", animals);
     const animalsInfo = await animalInfo.getAnimals(animals);
     res.json(animalsInfo);
   } catch (err) {
@@ -109,6 +104,8 @@ const updateAnimal = async (req, res, Parse) => {
     const animalID = req.params.animalID;
 
     const {
+      name,
+      name_en,
       about,
       about_en,
       characteristics,
@@ -134,14 +131,16 @@ const updateAnimal = async (req, res, Parse) => {
     let queryVideo = new Parse.Query(videoTable);
     const videosArray = await queryVideo.find();
 
-    for (let video of videosArray) {
-      let anID = video.get("animal_id").id;
-      if (anID === animalID) {
-        let temp = video.get("youtube_ids");
-        temp[0] = youtubeID;
-        video.set("youtube_ids", temp);
-        video.set("titles", [species]);
-        const videoAnimal = await video.save(null, { sessionToken: token });
+    if (youtubeID) {
+      for (let video of videosArray) {
+        let anID = video.get("animal_id").id;
+        if (anID === animalID) {
+          let temp = video.get("youtube_ids");
+          temp[0] = youtubeID;
+          video.set("youtube_ids", temp);
+          video.set("titles", [species]);
+          const videoAnimal = await video.save(null, { sessionToken: token });
+        }
       }
     }
 
@@ -150,25 +149,62 @@ const updateAnimal = async (req, res, Parse) => {
       className: "Keeper",
       objectId: keeper,
     };
+
     const keeperArray = [keeperPointer];
 
-    animal.set("animalRequiredPriority", userType);
-    animal.set("about", about);
-    animal.set("about_en", about_en);
-    animal.set("characteristics", characteristics);
-    animal.set("characteristics_en", characteristics_en);
-    animal.set("species", species);
-    animal.set("species_en", species_en);
-    animal.set("isActive", isActive);
-    animal.set("keepers", keeperArray);
+    if (name) {
+      animal.set("name", name);
+    }
+
+    if (name_en) {
+      animal.set("name_en", name_en);
+    }
+
+    if (userType) {
+      animal.set("animalRequiredPriority", userType);
+    }
+
+    if (about) {
+      animal.set("about", about);
+    }
+
+    if (about_en) {
+      animal.set("about_en", about_en);
+    }
+
+    if (characteristics) {
+      animal.set("characteristics", characteristics);
+    }
+
+    if (characteristics_en) {
+      animal.set("characteristics_en", characteristics_en);
+    }
+
+    if (species) {
+      animal.set("species", species);
+    }
+
+    if (species_en) {
+      animal.set("species_en", species_en);
+    }
+
+    if (isActive) {
+      animal.set("isActive", isActive);
+    }
+
+    if (keeper) {
+      animal.set("keepers", keeperArray);
+    }
 
     if (req.files) {
+      console.log("In the update photo");
       const photo = await createsPhotoFile(req, Parse);
       animal.set("profilePhoto", photo);
+      const updatedAnimal = await animal.save(null, { sessionToken: token });
+      res.redirect("/admin/updateAnimal.html");
     }
 
     const updatedAnimal = await animal.save(null, { sessionToken: token });
-
     res.json(updatedAnimal);
   } catch (err) {
     console.log(err);
@@ -179,8 +215,10 @@ const updateAnimal = async (req, res, Parse) => {
 // Creates and animal and video with info provided by the admin console
 const createAnimal = async (req, res, Parse) => {
   try {
-    const { username, token } = req.body; // TODO debe de ser cookies
+    const { username, token } = req.cookies; // TODO debe de ser cookies
     const {
+      name,
+      name_en,
       about,
       about_en,
       characteristics,
@@ -211,20 +249,55 @@ const createAnimal = async (req, res, Parse) => {
     };
     const keeperArray = [keeperPointer];
 
-    animal.set("animalRequiredPriority", userType);
-    animal.set("about", about);
-    animal.set("about_en", about_en);
-    animal.set("characteristics", characteristics);
-    animal.set("characteristics_en", characteristics_en);
-    animal.set("species", species);
-    animal.set("species_en", species_en);
+    if (name) {
+      animal.set("name", name);
+    }
+
+    if (name_en) {
+      animal.set("name_en", name_en);
+    }
+
+    if (userType) {
+      animal.set("animalRequiredPriority", userType);
+    }
+
+    if (about) {
+      animal.set("about", about);
+    }
+
+    if (about_en) {
+      animal.set("about_en", about_en);
+    }
+
+    if (characteristics) {
+      animal.set("characteristics", characteristics);
+    }
+
+    if (characteristics_en) {
+      animal.set("characteristics_en", characteristics_en);
+    }
+
+    if (species) {
+      animal.set("species", species);
+    }
+
+    if (species_en) {
+      animal.set("species_en", species_en);
+    }
+
     animal.set("isActive", isActive);
+
+    if (keeper) {
+      animal.set("keepers", keeperArray);
+    }
+
     animal.set("adopters", 0);
-    animal.set("keepers", keeperArray);
 
     if (req.files) {
       const photo = await createsPhotoFile(req, Parse);
       animal.set("profilePhoto", photo);
+      const updatedAnimal = await animal.save(null, { sessionToken: token });
+      res.redirect("/admin/updateAnimal.html");
     }
 
     const updatedAnimal = await animal.save(null, { sessionToken: token });

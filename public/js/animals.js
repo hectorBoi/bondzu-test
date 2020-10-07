@@ -59,8 +59,12 @@ const createCard = (object) => {
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  const img = createImage(object.profilePhoto);
-  button.appendChild(img);
+  console.log("object.profilePhoto");
+  console.log(object.profilePhoto);
+  if (object.profilePhoto) {
+    const img = createImage(object.profilePhoto);
+    button.appendChild(img);
+  }
   const div = createDiv("card-img-overlay", object.id);
   const h5 = createTitle(object.species);
   div.appendChild(h5);
@@ -96,8 +100,8 @@ fetch("/animals", {
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    lang: window.localStorage.getItem("lang")
-  })
+    lang: window.localStorage.getItem("lang"),
+  }),
 })
   .then((res) => res.json())
   .then((animalsColleagues) => {

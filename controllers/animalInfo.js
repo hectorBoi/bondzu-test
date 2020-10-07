@@ -39,11 +39,15 @@ const getAnimalInfo = async (animal, Parse, lang) => {
     if (lang === "en") {
       const video = await getVideo(animal.id, Parse);
       const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
-      const photo = animal.get("profilePhoto")._url;
-      const photoUrl = photo.replace(
-        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-        "https://d36skj58da74xm.cloudfront.net/"
-      );
+      let photo = "";
+      let photoUrl = "";
+      if (animal.get("profilePhoto")) {
+        photo = animal.get("profilePhoto")._url;
+        photoUrl = photo.replace(
+          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+          "https://d36skj58da74xm.cloudfront.net/"
+        );
+      }
       let animalInfo = {
         about: animal.get("about_en"),
         characteristics: animal.get("characteristics_en"),
@@ -56,11 +60,15 @@ const getAnimalInfo = async (animal, Parse, lang) => {
     } else {
       const video = await getVideo(animal.id, Parse);
       const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
-      const photo = animal.get("profilePhoto")._url;
-      const photoUrl = photo.replace(
-        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-        "https://d36skj58da74xm.cloudfront.net/"
-      );
+      let photo = "";
+      let photoUrl = "";
+      if (animal.get("profilePhoto")) {
+        photo = animal.get("profilePhoto")._url;
+        photoUrl = photo.replace(
+          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+          "https://d36skj58da74xm.cloudfront.net/"
+        );
+      }
       let animalInfo = {
         about: animal.get("about"),
         characteristics: animal.get("characteristics"),
@@ -81,7 +89,10 @@ const getAnimalInfoAdmin = async (animal, Parse, lang) => {
   try {
     const video = await getVideo(animal.id, Parse);
     const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
-    const photo = animal.get("profilePhoto")._url;
+    let photo = "";
+    if (animal.get("profilePhoto")) {
+      photo = animal.get("profilePhoto")._url;
+    }
 
     let animalInfo = {
       about: animal.get("about"),
@@ -106,11 +117,15 @@ const getAnimals = async (array, lang) => {
   try {
     if (lang === "en") {
       let animalInfo = array.map((animal) => {
-        const photo = animal.get("profilePhoto")._url;
-        const photoUrl = photo.replace(
-          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-          "https://d36skj58da74xm.cloudfront.net/"
-        );
+        let photo = "";
+        let photoUrl = "";
+        if (animal.get("profilePhoto")) {
+          photo = animal.get("profilePhoto")._url;
+          photoUrl = photo.replace(
+            "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+            "https://d36skj58da74xm.cloudfront.net/"
+          );
+        }
         return (animal = {
           id: animal.id,
           profilePhoto: photoUrl,
@@ -121,11 +136,15 @@ const getAnimals = async (array, lang) => {
       return animalInfo;
     } else {
       let animalInfo = array.map((animal) => {
-        const photo = animal.get("profilePhoto")._url;
-        const photoUrl = photo.replace(
-          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-          "https://d36skj58da74xm.cloudfront.net/"
-        );
+        let photo = "";
+        let photoUrl = "";
+        if (animal.get("profilePhoto")) {
+          photo = animal.get("profilePhoto")._url;
+          photoUrl = photo.replace(
+            "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+            "https://d36skj58da74xm.cloudfront.net/"
+          );
+        }
         return (animal = {
           id: animal.id,
           profilePhoto: photoUrl,

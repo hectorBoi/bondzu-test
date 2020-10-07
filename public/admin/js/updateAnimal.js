@@ -176,9 +176,9 @@ submitSaveElem.addEventListener("click", () => {
       "Nombre científico": nombreCient,
       "Estado de conservación": estadoCon,
       "Distribución geográfica": distGeo,
-      "Hábitat": habitatEsp,
-      "Dieta": dieta,
-      "Reproducción": reproduccion,
+      Hábitat: habitatEsp,
+      Dieta: dieta,
+      Reproducción: reproduccion,
     };
 
     //English characteristics
@@ -186,21 +186,24 @@ submitSaveElem.addEventListener("click", () => {
       "Scientific name": scieName,
       "Conservation status": conStatus,
       "Geographical distribution": geoDist,
-      "Habitat": habitatEng,
-      "Diet": diet,
-      "Reproduction": reproduction,
+      Habitat: habitatEng,
+      Diet: diet,
+      Reproduction: reproduction,
     };
 
     const request = {
+      name: nombreCient,
+      name_en: scieName,
       about: acerca,
       about_en: about,
-      characteristics: pruebaCaracteristicas,
-      characteristics_en: pruebaCaracteristicasEn,
+      characteristics: caracteristicas,
+      characteristics_en: characteristics,
       species: especie,
       species_en: species,
       youtubeID: youtubeId,
-      isActive: status,
       keeper: keeper,
+      isActive: status,
+      priority: "etDcoSci6K",
     };
 
     fetch(`/admin/animals/${animalID}`, {
@@ -224,7 +227,7 @@ submitSaveElem.addEventListener("click", () => {
   }
 });
 
-/*const formTest = document.getElementById("formTest");
+const formTest = document.getElementById("formTest");
 formTest.setAttribute("action", `/admin/animals/${animalID}`);
 
 const submitPhoto = document.getElementById("newProfilepic");
@@ -238,4 +241,4 @@ submitPhoto.addEventListener("change", () => {
   } else if (window.localStorage.getItem("lang") === "en") {
     formPhoto.value = "Update photo";
   }
-});*/
+});

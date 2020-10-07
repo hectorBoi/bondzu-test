@@ -73,7 +73,11 @@ const updateProfile = async (req, res, Parse) => {
       const file = new Parse.File("testing.png", data, contentType);
       user.set("photoFile", file);
       const newUser = await user.save(null, { sessionToken: token });
-      res.redirect("/profile.html");
+      if (window.localStorage.getItem("lang") == "en") {
+        res.redirect("/en/profile.html");
+      } else {
+        res.redirect("/es/profile.html");
+      }
     } else {
       if (Nname) {
         user.set("name", Nname);

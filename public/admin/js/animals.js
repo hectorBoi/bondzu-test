@@ -56,8 +56,10 @@ const createCard = (object) => {
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  const img = createImage(object.profilePhoto);
-  button.appendChild(img);
+  if (object.profilePhoto) {
+    const img = createImage(object.profilePhoto);
+    button.appendChild(img);
+  }
   const div = createDiv("card-img-overlay", object.id);
   const h5 = createTitle(object.species);
   div.appendChild(h5);
@@ -90,8 +92,6 @@ if (!document.cookie.includes("token")) {
 fetch("/admin/animals")
   .then((res) => res.json())
   .then((animalsInfo) => {
-    console.log(animalsInfo);
-
     const animals = [];
     const colleagues = [];
     animalsInfo.forEach((elem) => {

@@ -102,9 +102,9 @@ submitSaveElem.addEventListener("click", () => {
       "Nombre científico": nombreCient,
       "Estado de conservación": estadoCon,
       "Distribución geográfica": distGeo,
-      "Hábitat": habitatEsp,
-      "Dieta": dieta,
-      "Reproducción": reproduccion,
+      Hábitat: habitatEsp,
+      Dieta: dieta,
+      Reproducción: reproduccion,
     };
 
     //English characteristics
@@ -112,12 +112,14 @@ submitSaveElem.addEventListener("click", () => {
       "Scientific name": scieName,
       "Conservation status": conStatus,
       "Geographical distribution": geoDist,
-      "Habitat": habitatEng,
-      "Diet": diet,
-      "Reproduction": reproduction,
+      Habitat: habitatEng,
+      Diet: diet,
+      Reproduction: reproduction,
     };
 
     const request = {
+      name: nombreCient,
+      name_en: scieName,
       about: acerca,
       about_en: about,
       characteristics: caracteristicas,
@@ -125,28 +127,27 @@ submitSaveElem.addEventListener("click", () => {
       species: especie,
       species_en: species,
       youtubeID: youtubeId,
+      keeper: "keeper",
       isActive: status,
-      //keeper: keeper,
+      priority: "etDcoSci6K",
     };
 
     console.log(request);
 
-    /*fetch("/admin/animals", {
+    fetch("/admin/animals", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(request),
     })
-      .then((res) => res.json())
-      .then((res) => {*/
-    successfulSaveElem.removeAttribute("style");
-    buttonSpinnerElem.style.display = "none";
-    /*setTimeout(() => {
-          location.href("/admin/index.html");
-        }, 3000);
+      .then((res) => location.replace("/admin/index.html"))
+      .then((res) => {
+        location.replace("/admin/index.html");
+        successfulSaveElem.removeAttribute("style");
+        buttonSpinnerElem.style.display = "none";
       })
-      .catch((err) => err);*/
+      .catch((err) => err);
   } else {
     missingInfoElem.removeAttribute("style");
   }
