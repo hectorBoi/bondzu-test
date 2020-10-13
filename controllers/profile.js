@@ -92,7 +92,13 @@ const updateProfile = async (req, res, Parse) => {
       }
 
       const newUser = await user.save(null, { sessionToken: token });
-      res.json({ message: "Success" });
+
+      let resp = { 
+        message: "Success", 
+        token: user.getSessionToken() 
+      }
+      
+      res.json(resp);
     }
   } catch (err) {
     console.log(err);
