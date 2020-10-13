@@ -97,6 +97,28 @@ const getAnimal = async (req, res, Parse) => {
   }
 };
 
+const getKeepers = async (req, res, Parse) => {
+  try {
+    const { username } = req.cookies;
+
+    const user = await getUser(username, Parse);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    allKeepers = await getAllKeepers(Parse);
+
+    const resp = {
+      allKeepers: allKeepers
+    }
+
+    res.json(resp);
+  } catch (err) {
+    res.json(err);
+  }
+};
+
 // Updates the animal with the info provided by the admin console
 const updateAnimal = async (req, res, Parse) => {
   try {
@@ -321,4 +343,5 @@ module.exports = {
   getAnimal: getAnimal,
   updateAnimal: updateAnimal,
   createAnimal: createAnimal,
+  getKeepers: getKeepers
 };

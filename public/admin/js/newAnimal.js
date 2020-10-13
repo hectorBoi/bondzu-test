@@ -38,6 +38,7 @@ const allKeepersElem = document.getElementById("allKeepers");
 const createSelectKeepers = (array, form) => {
   for (let i = 0; i < array.length; i++) {
     let keeper = array[i];
+    console.log(keeper)
 
     const option = document.createElement("option");
     option.setAttribute("value", keeper.id);
@@ -47,6 +48,18 @@ const createSelectKeepers = (array, form) => {
   }
 };
 
+// Get all the keepers for selection
+console.log("making the request")
+fetch("/admin/animals/keepers")
+  .then(res => res.json())
+  .then(info => {
+    createSelectKeepers(
+      info.allKeepers,
+      allKeepersElem
+    );
+  })
+  .catch(err => console.log(err))
+
 submitSaveElem.addEventListener("click", () => {
   missingInfoElem.style.display = "none";
   successfulSaveElem.style.display = "none";
@@ -54,7 +67,7 @@ submitSaveElem.addEventListener("click", () => {
   //Información única
   const status = statusElem.checked;
   const youtubeId = youtubeIdElem.value;
-  //const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
+  const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
 
   //Información español
   const especie = especieElem.value;
@@ -93,7 +106,8 @@ submitSaveElem.addEventListener("click", () => {
     geoDist != "" &&
     habitatEng != "" &&
     diet != "" &&
-    reproduction != ""
+    reproduction != "" &&
+    keeper != ""
   ) {
     buttonSpinnerElem.removeAttribute("style");
 
@@ -127,7 +141,7 @@ submitSaveElem.addEventListener("click", () => {
       species: especie,
       species_en: species,
       youtubeID: youtubeId,
-      keeper: "keeper",
+      keeper: keeper,
       isActive: status,
       priority: "etDcoSci6K",
     };
