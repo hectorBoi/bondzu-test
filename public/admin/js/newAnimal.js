@@ -3,6 +3,10 @@ const missingInfoElem = document.getElementById("missingInfo");
 const buttonSpinnerElem = document.getElementById("buttonSpinner");
 const successfulSaveElem = document.getElementById("successfulSave");
 
+const loaderElements = document.getElementById("loaderElements");
+const body = document.getElementById("body");
+body.style.overflow = "hidden";
+
 //Datos únicos
 const iframeElem = document.getElementById("iframe");
 const youtubeIdElem = document.getElementById("youtubeId");
@@ -38,7 +42,7 @@ const allKeepersElem = document.getElementById("allKeepers");
 const createSelectKeepers = (array, form) => {
   for (let i = 0; i < array.length; i++) {
     let keeper = array[i];
-    console.log(keeper)
+    console.log(keeper);
 
     const option = document.createElement("option");
     option.setAttribute("value", keeper.id);
@@ -49,16 +53,15 @@ const createSelectKeepers = (array, form) => {
 };
 
 // Get all the keepers for selection
-console.log("making the request")
+console.log("making the request");
 fetch("/admin/animals/keepers")
-  .then(res => res.json())
-  .then(info => {
-    createSelectKeepers(
-      info.allKeepers,
-      allKeepersElem
-    );
+  .then((res) => res.json())
+  .then((info) => {
+    createSelectKeepers(info.allKeepers, allKeepersElem);
+    loaderElements.className += " hidden";
+    body.style.overflow = "auto";
   })
-  .catch(err => console.log(err))
+  .catch((err) => console.log(err));
 
 submitSaveElem.addEventListener("click", () => {
   missingInfoElem.style.display = "none";
