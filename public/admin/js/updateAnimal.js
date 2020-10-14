@@ -39,6 +39,43 @@ const habitatEngElem = document.getElementById("habitatEng");
 const dietElem = document.getElementById("diet");
 const reproductionElem = document.getElementById("reproduction");
 
+//Llaves características
+const caracs = [
+  "Nombre científico",
+  "Estado de conservación",
+  "Distribución geográfica",
+  "Hábitat",
+  "Dieta",
+  "Reproducción",
+];
+
+const caracsElems = [
+  nombreCientElem,
+  estadoConElem,
+  distGeoElem,
+  habitatEspElem,
+  dietaElem,
+  reproduccionElem,
+];
+
+const characs = [
+  "Scientific name",
+  "Conservation status",
+  "Geographical distribution",
+  "Habitat",
+  "Diet",
+  "Reproduction",
+];
+
+const characsElems = [
+  scieNameElem,
+  conStatusElem,
+  geoDistElem,
+  habitatEngElem,
+  dietElem,
+  reproductionElem,
+];
+
 //Keepers
 const allKeepersElem = document.getElementById("allKeepers");
 
@@ -58,16 +95,9 @@ const createSelectKeepers = (array, form, currentKeeper) => {
   }
 };
 
-//Quitar variable global
-let pruebaCaracteristicas = {};
-let pruebaCaracteristicasEn = {};
-
 fetch(`/admin/animals/${animalID}`)
   .then((res) => res.json())
   .then((animal_info) => {
-    pruebaCaracteristicas = animal_info.characteristics;
-    pruebaCaracteristicasEn = animal_info.characteristics_en;
-
     titleElem.innerText = `Actualizar: ${animal_info.species}`;
 
     //Switch status (Animal status - Active/Inactive)
@@ -100,6 +130,15 @@ fetch(`/admin/animals/${animalID}`)
 
     let chars = "";
     for (let key in animal_info.characteristics) {
+      for (let i = 0; i < caracs.length; i++) {
+        if (key === caracs[i]) {
+          console.log(caracs[i]);
+          //console.log(`${key}: ${animal_info.characteristics[key]}\n`);
+          //console.log(key);
+          caracsElems[i].innerHTML = animal_info.characteristics[key];
+        }
+      }
+
       let temp = `${key}: ${animal_info.characteristics[key]}\n`;
       chars = chars.concat(temp);
     }
@@ -107,10 +146,20 @@ fetch(`/admin/animals/${animalID}`)
 
     //English data
     speciesElem.setAttribute("value", animal_info.species_en);
+
     aboutElem.innerHTML = animal_info.about_en;
 
     chars = "";
     for (let key in animal_info.characteristics_en) {
+      for (let i = 0; i < characs.length; i++) {
+        if (key === characs[i]) {
+          //console.log(characs[i]);
+          //console.log(key);
+          //console.log(`${key}: ${animal_info.characteristics_en[key]}\n`);
+          characsElems[i].innerHTML = animal_info.characteristics_en[key];
+        }
+      }
+
       let temp = `${key}: ${animal_info.characteristics_en[key]}\n`;
       chars = chars.concat(temp);
     }
