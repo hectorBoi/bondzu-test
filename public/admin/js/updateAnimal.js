@@ -132,10 +132,13 @@ fetch(`/admin/animals/${animalID}`)
     for (let key in animal_info.characteristics) {
       for (let i = 0; i < caracs.length; i++) {
         if (key === caracs[i]) {
-          console.log(caracs[i]);
-          //console.log(`${key}: ${animal_info.characteristics[key]}\n`);
-          //console.log(key);
-          caracsElems[i].innerHTML = animal_info.characteristics[key];
+          if (i == 0) {
+            //Nombre científico (input value)
+            caracsElems[i].value = animal_info.characteristics[key];
+          } else {
+            //Demás atributos (textarea)
+            caracsElems[i].innerHTML = animal_info.characteristics[key];
+          }
         }
       }
 
@@ -153,10 +156,13 @@ fetch(`/admin/animals/${animalID}`)
     for (let key in animal_info.characteristics_en) {
       for (let i = 0; i < characs.length; i++) {
         if (key === characs[i]) {
-          //console.log(characs[i]);
-          //console.log(key);
-          //console.log(`${key}: ${animal_info.characteristics_en[key]}\n`);
-          characsElems[i].innerHTML = animal_info.characteristics_en[key];
+          if (i == 0) {
+            //Scientific name (input value)
+            characsElems[i].value = animal_info.characteristics_en[key];
+          } else {
+            //Other attributes (textarea)
+            characsElems[i].innerHTML = animal_info.characteristics_en[key];
+          }
         }
       }
 
@@ -284,10 +290,4 @@ const formPhoto = document.getElementById("submitPhoto");
 submitPhoto.addEventListener("change", () => {
   formPhoto.className = "btn btn-success";
   formPhoto.disabled = false;
-
-  if (window.localStorage.getItem("lang") === "es") {
-    formPhoto.value = "Actualizar foto";
-  } else if (window.localStorage.getItem("lang") === "en") {
-    formPhoto.value = "Update photo";
-  }
 });
