@@ -61,12 +61,16 @@ submitSaveElem.addEventListener("click", () => {
   //Información español
   const nombre = nombreElem.value;
   const acerca = acercaElem.value;
-  const caracteristicas = caracteristicasElem.value;
+  const caracteristicas = {
+    "": caracteristicasElem.value
+  };
 
   //English information
   const name = nameElem.value;
   const about = aboutElem.value;
-  const characteristics = characteristicsElem.value;
+  const characteristics = {
+    "": characteristicsElem.value
+  };
 
   if (
     youtubeId != "" &&
