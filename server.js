@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
   }
 });
 
-// Manages the login for admins
+// Manages the login and routes for admin
 app.post("/adminLogin", signin.signinAuth(Parse));
 
 app.get("/admin/animals", (req, res) => {
@@ -83,6 +83,14 @@ app.post("/admin/animals/:animalID", (req, res) => {
 
 app.post("/admin/animals", (req, res) => {
   admin.createAnimal(req, res, Parse);
+});
+
+app.post("/admin/zoo", (req, res) => {
+  admin.createZoo(req, res, Parse);
+});
+
+app.post("/admin/zoo/:zooID", (req, res) => {
+  admin.updateZoo(req, res, Parse);
 });
 
 ///////////////////////////////

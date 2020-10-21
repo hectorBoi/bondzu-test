@@ -46,6 +46,14 @@ const getAnimalDB = async (animalID, Parse) => {
   return animal;
 };
 
+// Gets a specific zoo from the database
+const getZooDB = async (zooID, Parse) => {
+  const zooTable = Parse.Object.extend("Zoo");
+  const queryZoo = new Parse.Query(zooTable);
+  const zoo = await queryZoo.get(zooID);
+  return zoo;
+};
+
 // Gets a specific userType from the database
 const getUserType = async (priority, Parse) => {
   let typeTable = Parse.Object.extend("UserType");
@@ -338,10 +346,106 @@ const createAnimal = async (req, res, Parse) => {
   }
 };
 
+// Creates a keeper with info provided by the admin console
+const createZoo = async (req, res, Parse) => {
+  try {
+    const { username, token } = req.body; // TODO debe de ser cookies
+    // This is for the zoo
+    const {
+      name,
+      location,
+      description,
+      photoUrl
+    } = req.body;
+
+    const user = await getUser(username, Parse);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    const zoosTable = Parse.Object.extend("Zoo");
+    let zoo = new zoosTable();
+
+
+    if (name) {
+      zoo.set("name", name);
+    }
+
+    if (location) {
+      zoo.set("location", location);
+    }
+
+    if (description) {
+      zoo.set("description", description);
+    }
+
+    if (photoUrl) {
+      zoo.set("photoUrl", photoUrl);
+    }
+
+    const zooCreated = await zoo.save(null, { sessionToken: token });
+
+    res.json(zooCreated);
+  } catch (err) {
+    res.json(err);
+  }
+};
+
+// Creates a keeper with info provided by the admin console
+const updateZoo = async (req, res, Parse) => {
+  try {
+    const { username, token } = req.body; // TODO debe de ser cookies
+    // This is for the zoo
+    const {
+      name,
+      location,
+      description,
+      photoUrl
+    } = req.body;
+
+    const zooID = req.params.zooID;
+    console.log(zooID)
+
+    const user = await getUser(username, Parse);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    let zoo = await getZooDB(zooID, Parse);
+
+    if (name) {
+      zoo.set("name", name);
+    }
+
+    if (location) {
+      zoo.set("location", location);
+    }
+
+    if (description) {
+      zoo.set("description", description);
+    }
+
+    if (photoUrl) {
+      zoo.set("photoUrl", photoUrl);
+    }
+
+    const zooUpdated = await zoo.save(null, { sessionToken: token });
+
+    res.json(zooUpdated);
+  } catch (err) {
+    console.log(err)
+    res.json(err);
+  }
+};
+
 module.exports = {
   handleAdminAnimals: handleAdminAnimals,
   getAnimal: getAnimal,
   updateAnimal: updateAnimal,
   createAnimal: createAnimal,
-  getKeepers: getKeepers
+  getKeepers: getKeepers,
+  createZoo: createZoo,
+  updateZoo: updateZoo
 };
