@@ -1,16 +1,12 @@
 // Get the name of the zoo in charge of a specific animal
 const getKeeper = async (id, Parse) => {
   try {
-    const keepersTable = Parse.Object.extend("Keeper");
-    const queryKeeper = new Parse.Query(keepersTable);
-    const keeperObj = await queryKeeper.get(id);
-    const keeperZoo = keeperObj.get("zoo");
-
     const zooTable = Parse.Object.extend("Zoo");
     const queryZoo = new Parse.Query(zooTable);
-    const zoo = await queryZoo.get(keeperZoo.id);
+    const zoo = await queryZoo.get(id);
     const zooName = zoo.get("name");
     return zooName;
+
   } catch (err) {
     return "Didnt find keeper";
   }
