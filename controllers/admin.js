@@ -1,24 +1,23 @@
 const animalInfo = require("./animalInfo");
 
-// Returns an array of all the keepers so the admin can choose one instead of creating one
+// Returns an array of all the zoo's so the admin can choose one instead of creating one
 const getAllKeepers = async (Parse) => {
-  const tableObj = Parse.Object.extend("Keeper");
-  const query = new Parse.Query(tableObj);
-  const result = await query.find();
-
-  let response = [];
-  for (let keeper of result) {
-    if (keeper.get("zoo").id) {
-      let zooTemp = keeper.get("zoo").id;
-      const zooTable = Parse.Object.extend("Zoo");
-      const zooQuery = new Parse.Query(zooTable);
-      zooQuery.equalTo("objectId", zooTemp);
-      zoo = await zooQuery.first();
-      response.push({ id: keeper.id, name: zoo.get("name") });
+  try {
+    let response = [];
+  
+    const zooTable = Parse.Object.extend("Zoo");
+    const zooQuery = new Parse.Query(zooTable);
+    const resultZoo = await zooQuery.find();
+  
+    for (let zoo of resultZoo) {
+      response.push({ id: zoo.id, name: zoo.get("name") });
     }
+  
+    return response;
+    
+  } catch (error) {
+    console.log(error)
   }
-
-  return response;
 };
 
 // Gets the photo file from the admin and transforms it into a parse file

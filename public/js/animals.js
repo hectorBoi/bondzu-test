@@ -66,7 +66,7 @@ const createCard = (object) => {
     button.appendChild(img);
   }
   const div = createDiv("card-img-overlay", object.id);
-  const h5 = createTitle(object.species);
+  const h5 = createTitle(object.name);
   div.appendChild(h5);
   button.appendChild(div);
   return col;

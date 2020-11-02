@@ -158,95 +158,95 @@ app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
 
-//////////////////////////////// scripts to modify the database
-const changeToZoo = async () => {
-  try {
-    // Get all the animals
-    const animalTable = Parse.Object.extend("AnimalV2");
-    const query = new Parse.Query(animalTable);
-    query.equalTo("isActive", true);
-    const noActiveAnimals = await query.find();
-    console.log("no active animals: ", noActiveAnimals.length);
+//////////////////////////////// scripts to modify the animals to change from keeper to zoo
+// const changeToZoo = async () => {
+//   try {
+//     // Get all the animals
+//     const animalTable = Parse.Object.extend("AnimalV2");
+//     const query = new Parse.Query(animalTable);
+//     query.equalTo("isActive", true);
+//     const noActiveAnimals = await query.find();
+//     console.log("no active animals: ", noActiveAnimals.length);
 
-    // Declares the keepers table outside the map
-    const keeperTable = Parse.Object.extend("Keeper");
-    const queryKeeper = new Parse.Query(keeperTable);
-    const allKeepers = await queryKeeper.find();
-    console.log("all keepers: ", allKeepers.length);
+//     // Declares the keepers table outside the map
+//     const keeperTable = Parse.Object.extend("Keeper");
+//     const queryKeeper = new Parse.Query(keeperTable);
+//     const allKeepers = await queryKeeper.find();
+//     console.log("all keepers: ", allKeepers.length);
 
-    // For each animal, gets the keeper and the zoo it works for
-    noActiveAnimals.map(async animal => {
-      try {
-        const keeper = animal.get("keepers")
-        if (keeper.length != 1) {
-          return animal
-        }
-        const keeperID = keeper[0].id
-        console.log("-----------")
-        console.log("keeper from the animal table:")
-        console.log(keeperID)
+//     // For each animal, gets the keeper and the zoo it works for
+//     noActiveAnimals.map(async animal => {
+//       try {
+//         const keeper = animal.get("keepers")
+//         if (keeper.length != 1) {
+//           return animal
+//         }
+//         const keeperID = keeper[0].id
+//         console.log("-----------")
+//         console.log("keeper from the animal table:")
+//         console.log(keeperID)
 
-        let flag = true
-        for (let k of allKeepers) {
-          if( k.id == keeperID) {
-            console.log("Zoo:")
-            console.log(k.get("zoo"))
-            flag = false
+//         let flag = true
+//         for (let k of allKeepers) {
+//           if( k.id == keeperID) {
+//             console.log("Zoo:")
+//             console.log(k.get("zoo"))
+//             flag = false
 
-            // Create animal
-            const zooPointer = {
-              __type: "Pointer",
-              className: "Zoo",
-              objectId: k.get("zoo").id,
-            };
-            const zooArray = [zooPointer];
-            animal.set("keepers", zooArray);
-            await animal.save(null, { useMasterKey: true })
-            console.log("completed")
-          }
-        }
+//             // Create animal
+//             const zooPointer = {
+//               __type: "Pointer",
+//               className: "Zoo",
+//               objectId: k.get("zoo").id,
+//             };
+//             const zooArray = [zooPointer];
+//             animal.set("keepers", zooArray);
+//             await animal.save(null, { useMasterKey: true })
+//             console.log("completed")
+//           }
+//         }
 
-        if (flag) {
-          console.log("No match for id: ", keeperID)
-        }
+//         if (flag) {
+//           console.log("No match for id: ", keeperID)
+//         }
 
-        return animal
-      } catch (err) {
-        console.log("Error:")
-        console.log(err)
-      }
-    })
+//         return animal
+//       } catch (err) {
+//         console.log("Error:")
+//         console.log(err)
+//       }
+//     })
 
-    // console.log(result.length)
-  } catch (err) {
-    console.log("Error:")
-    console.log(err)
-  }
-}
+//     // console.log(result.length)
+//   } catch (err) {
+//     console.log("Error:")
+//     console.log(err)
+//   }
+// }
 
-changeToZoo()
+// changeToZoo()
 
-const lookUpZoo = async () => {
-  try {
-    const animalTable = Parse.Object.extend("AnimalV3");
-    const query = new Parse.Query(animalTable);
-    const animals = await query.find();
+// const lookUpZoo = async () => {
+//   try {
+//     const animalTable = Parse.Object.extend("AnimalV3");
+//     const query = new Parse.Query(animalTable);
+//     const animals = await query.find();
   
-    const zooTable = Parse.Object.extend("Zoo");
-    const queryZoo = new Parse.Query(zooTable);
+//     const zooTable = Parse.Object.extend("Zoo");
+//     const queryZoo = new Parse.Query(zooTable);
   
-    for (let animal of animals) {
-      zooID = animal.get("keepers")[0].id
-      console.log(zooID)
-      const zoo = await queryZoo.get(zooID);
-      const zooName = zoo.get("name");
-      console.log(zooName)
-    }
-  } catch (error) {
-    console.log("Error:")
-    console.log(error)
-  }
-}
+//     for (let animal of animals) {
+//       zooID = animal.get("keepers")[0].id
+//       console.log(zooID)
+//       const zoo = await queryZoo.get(zooID);
+//       const zooName = zoo.get("name");
+//       console.log(zooName)
+//     }
+//   } catch (error) {
+//     console.log("Error:")
+//     console.log(error)
+//   }
+// }
 
 // lookUpZoo()
 

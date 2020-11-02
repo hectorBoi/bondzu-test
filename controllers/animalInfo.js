@@ -126,6 +126,7 @@ const getAnimals = async (array, lang) => {
           id: animal.id,
           profilePhoto: photoUrl,
           species: animal.get("species_en"),
+          name: animal.get("name_en"),
           userType: animal.get("animalRequiredPriority").id,
         });
       });
@@ -145,6 +146,7 @@ const getAnimals = async (array, lang) => {
           id: animal.id,
           profilePhoto: photoUrl,
           species: animal.get("species"),
+          name: animal.get("name"),
           userType: animal.get("animalRequiredPriority").id,
         });
       });
