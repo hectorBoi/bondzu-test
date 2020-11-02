@@ -217,9 +217,7 @@ const updateAnimal = async (req, res, Parse) => {
       animal.set("species_en", species_en);
     }
 
-    if (isActive) {
-      animal.set("isActive", isActive);
-    }
+    animal.set("isActive", isActive);
 
     if (keeper) {
       animal.set("keepers", keeperArray);

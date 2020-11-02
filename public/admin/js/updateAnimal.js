@@ -110,7 +110,13 @@ fetch(`/admin/animals/${animalID}`)
     }
 
     //Video
-    const youtubeURL = `https://www.youtube.com/embed/${animal_info.youtubeID}`;
+    let youtubeURL = "";
+    // Checks if the camera is from youtube or another page
+    if (animal_info.youtubeID.includes("http")) {
+      youtubeURL = animal_info.youtubeID
+    } else {
+      youtubeURL = `https://www.youtube.com/embed/${animal_info.youtubeID}`
+    }
     iframeElem.setAttribute("src", youtubeURL);
     youtubeIdElem.setAttribute("value", animal_info.youtubeID);
 
