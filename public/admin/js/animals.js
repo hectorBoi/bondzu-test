@@ -102,6 +102,8 @@ fetch("/admin/animals")
       }
     });
 
+    animals.sort(compareNames);
+
     createCards(animals, containerAnimals);
     createCards(colleagues, containerColleagues);
 
@@ -114,3 +116,13 @@ window.onclick = (event) => {
     window.localStorage.setItem("currentAnimal", event.target.id);
   }
 };
+
+function compareNames(animal1, animal2) {
+  if (animal1.species < animal2.species) {
+    return -1;
+  }
+  if (animal1.species > animal2.species) {
+    return 1;
+  }
+  return 0;
+}
