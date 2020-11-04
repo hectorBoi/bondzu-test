@@ -348,8 +348,9 @@ const createAnimal = async (req, res, Parse) => {
 // Creates a keeper with info provided by the admin console
 const createZoo = async (req, res, Parse) => {
   try {
-    const { username, token } = req.body; // TODO debe de ser cookies
+    const { username, token } = req.cookies; // TODO debe de ser cookies
     // This is for the zoo
+    console.log("entered creating zoo")
     const {
       name,
       location,
