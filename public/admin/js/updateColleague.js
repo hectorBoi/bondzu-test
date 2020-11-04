@@ -90,7 +90,7 @@ fetch(`/admin/animals/${animalID}`)
 
     let chars = "";
     for (let key in animal_info.characteristics) {
-      let temp = `${key}: ${animal_info.characteristics[key]}\n`;
+      let temp = animal_info.characteristics[key];
       chars = chars.concat(temp);
     }
 
@@ -101,7 +101,7 @@ fetch(`/admin/animals/${animalID}`)
 
     chars = "";
     for (let key in animal_info.characteristics_en) {
-      let temp = `${key}: ${animal_info.characteristics_en[key]}\n`;
+      let temp = animal_info.characteristics_en[key];
       chars = chars.concat(temp);
     }
 
@@ -139,7 +139,7 @@ submitSaveElem.addEventListener("click", () => {
     nombre != "" &&
     acerca != "" &&
     caracteristicas != "" &&
-    name != "" &&
+    keeper != "" &&
     about != "" &&
     characteristics != ""
   ) {
