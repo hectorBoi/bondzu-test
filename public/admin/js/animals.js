@@ -45,11 +45,17 @@ const createRow = () => {
   return div;
 };
 
-const createCard = (object) => {
+const createCard = (object, type) => {
   const col = createDiv("col-xl");
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
-  anchor.href = "updateAnimal.html";
+
+  if (type === "animals") {
+    anchor.href = "updateAnimal.html";
+  } else if (type === "colleagues") {
+    anchor.href = "updateColleague.html";
+  }
+
   anchor.onclick = function () {
     window.localStorage.setItem("currentAnimal", object.id);
   };
@@ -67,12 +73,12 @@ const createCard = (object) => {
   return col;
 };
 
-const createCards = (array, container) => {
+const createCards = (array, container, type) => {
   let count = 0;
   let row = createRow();
 
   for (elem of array) {
-    let col = createCard(elem);
+    let col = createCard(elem, type);
     row.appendChild(col);
     count++;
     if (
@@ -104,8 +110,8 @@ fetch("/admin/animals")
 
     animals.sort(compareNames);
 
-    createCards(animals, containerAnimals);
-    createCards(colleagues, containerColleagues);
+    createCards(animals, containerAnimals, "animals");
+    createCards(colleagues, containerColleagues, "colleagues");
 
     loaderElements.className += " hidden";
   })

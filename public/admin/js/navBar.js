@@ -35,7 +35,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
   <div class="collapse navbar-collapse" id="navbarToggler">
 
     <ul class="navbar-nav ml-auto" id="loggedIn">
-    <li class="nav-item active">
+      <li class="nav-item active">
         <a href="index.html" style="text-decoration: none; color: #f28f1d;">
           <button
             type="button"
@@ -43,6 +43,16 @@ style="background-color: #f28f1d; border-color: #ffffff;"
             style="color: #f28f1d;"
           >
             Inicio
+          </button></a
+        >
+      </li>
+      <li class="nav-item active">
+        <a href="index.html" style="text-decoration: none; color: #f28f1d;">
+          <button
+            type="button"
+            class="btn btn-primary navbarBtnMargins"
+          >
+            Ver zoos
           </button></a
         >
       </li>
@@ -63,6 +73,16 @@ style="background-color: #f28f1d; border-color: #ffffff;"
             class="btn btn-outline-light navbarBtnMargins"
           >
             Nuevo colega
+          </button></a
+        >
+      </li>
+      <li class="nav-item">
+        <a href="newZoo.html" style="text-decoration: none; color: white;">
+          <button
+            type="button"
+            class="btn btn-outline-light navbarBtnMargins"
+          >
+            Nuevo zoo
           </button></a
         >
       </li>

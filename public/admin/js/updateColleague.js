@@ -1,17 +1,22 @@
+const loaderElements = document.getElementById("loaderElements");
+const body = document.getElementById("body");
+body.style.overflow = "hidden";
+
+const animalID = window.localStorage.getItem("currentAnimal");
+const titleElem = document.getElementById("title");
+
 const submitSaveElem = document.getElementById("save");
 const missingInfoElem = document.getElementById("missingInfo");
 const buttonSpinnerElem = document.getElementById("buttonSpinner");
 const successfulSaveElem = document.getElementById("successfulSave");
 
-const loaderElements = document.getElementById("loaderElements");
-const body = document.getElementById("body");
-body.style.overflow = "hidden";
-
 //Datos únicos
+const iframeElem = document.getElementById("iframe");
 const nombreElem = document.getElementById("nombre");
 const youtubeIdElem = document.getElementById("youtubeId");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const statusElem = document.getElementById("status");
+const statusTextElem = document.getElementById("statusText");
 
 //Datos en español
 const acercaElem = document.getElementById("acerca");
@@ -24,29 +29,88 @@ const characteristicsElem = document.getElementById("characteristics");
 //Keepers
 const allKeepersElem = document.getElementById("allKeepers");
 
-const createSelectKeepers = (array, form) => {
+const createSelectKeepers = (array, form, currentKeeper) => {
   for (let i = 0; i < array.length; i++) {
     let keeper = array[i];
-    console.log(keeper);
 
     const option = document.createElement("option");
     option.setAttribute("value", keeper.id);
     option.innerText = keeper.name;
 
+    if (currentKeeper === keeper.name) {
+      option.selected = true;
+    }
+
     form.appendChild(option);
   }
 };
 
-// Get all the keepers for selection
-console.log("making the request");
-fetch("/admin/animals/keepers")
+fetch(`/admin/animals/${animalID}`)
   .then((res) => res.json())
-  .then((info) => {
-    createSelectKeepers(info.allKeepers, allKeepersElem);
+  .then((animal_info) => {
+    console.log(animal_info);
+
+    titleElem.innerText = `Actualizar: ${animal_info.name}`;
+
+    //Nombre
+    nombreElem.setAttribute("value", animal_info.name);
+
+    //Switch status (Animal status - Active/Inactive)
+    if (animal_info.isActive) {
+      statusElem.checked = true;
+      statusTextElem.innerText = "Activo";
+    } else {
+      statusElem.checked = false;
+      statusTextElem.innerText = "Inactivo";
+    }
+
+    //Video
+    let youtubeURL = "";
+    // Checks if the camera is from youtube or another page
+    if (animal_info.youtubeID.includes("http")) {
+      youtubeURL = animal_info.youtubeID;
+    } else {
+      youtubeURL = `https://www.youtube.com/embed/${animal_info.youtubeID}`;
+    }
+    iframeElem.setAttribute("src", youtubeURL);
+    youtubeIdElem.setAttribute("value", animal_info.youtubeID);
+
+    //Photo
+    animalPhotoElem.setAttribute("src", animal_info.profilePhoto);
+
+    //Keepers
+    createSelectKeepers(
+      animal_info.allKeepers,
+      allKeepersElem,
+      animal_info.keeper
+    );
+
+    //Datos en español
+    acercaElem.innerHTML = animal_info.about;
+
+    let chars = "";
+    for (let key in animal_info.characteristics) {
+      let temp = `${key}: ${animal_info.characteristics[key]}\n`;
+      chars = chars.concat(temp);
+    }
+
+    caracteristicasElem.innerHTML = chars;
+
+    //English data
+    aboutElem.innerHTML = animal_info.about_en;
+
+    chars = "";
+    for (let key in animal_info.characteristics_en) {
+      let temp = `${key}: ${animal_info.characteristics_en[key]}\n`;
+      chars = chars.concat(temp);
+    }
+
+    characteristicsElem.innerHTML = chars;
+
     loaderElements.className += " hidden";
     body.style.overflow = "auto";
   })
-  .catch((err) => console.log(err));
+  .catch("Error in the request");
 
 submitSaveElem.addEventListener("click", () => {
   missingInfoElem.style.display = "none";
@@ -75,8 +139,8 @@ submitSaveElem.addEventListener("click", () => {
     nombre != "" &&
     acerca != "" &&
     caracteristicas != "" &&
+    name != "" &&
     about != "" &&
-    keeper != "" &&
     characteristics != ""
   ) {
     buttonSpinnerElem.removeAttribute("style");
@@ -96,23 +160,33 @@ submitSaveElem.addEventListener("click", () => {
       priority: "etDcoSci6K",
     };
 
-    console.log(request);
-
-    fetch("/admin/animals", {
+    fetch(`/admin/animals/${animalID}`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(request),
     })
-      .then((res) => location.replace("/admin/index.html"))
+      .then((res) => res.json())
       .then((res) => {
-        location.replace("/admin/index.html");
         successfulSaveElem.removeAttribute("style");
         buttonSpinnerElem.style.display = "none";
+        setTimeout(() => {
+          location.reload();
+        }, 3000);
       })
       .catch((err) => err);
   } else {
     missingInfoElem.removeAttribute("style");
   }
+});
+
+const formTest = document.getElementById("formTest");
+formTest.setAttribute("action", `/admin/animals/${animalID}`);
+
+const submitPhoto = document.getElementById("newProfilepic");
+const formPhoto = document.getElementById("submitPhoto");
+submitPhoto.addEventListener("change", () => {
+  formPhoto.className = "btn btn-success";
+  formPhoto.disabled = false;
 });

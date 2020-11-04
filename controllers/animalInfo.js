@@ -6,7 +6,6 @@ const getKeeper = async (id, Parse) => {
     const zoo = await queryZoo.get(id);
     const zooName = zoo.get("name");
     return zooName;
-
   } catch (err) {
     return "Didnt find keeper";
   }
@@ -91,6 +90,8 @@ const getAnimalInfoAdmin = async (animal, Parse, lang) => {
     }
 
     let animalInfo = {
+      name: animal.get("name"),
+      name_en: animal.get("name_en"),
       about: animal.get("about"),
       about_en: animal.get("about_en"),
       characteristics: animal.get("characteristics"),
