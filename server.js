@@ -96,6 +96,14 @@ app.post("/admin/zoo/:zooID", (req, res) => {
   admin.updateZoo(req, res, Parse);
 });
 
+app.post("/admin/zoos", (req, res) => {
+  admin.handleZoos(req, res, Parse);
+});
+
+app.post("/admin/zoos/:zooID", (req, res) => {
+  admin.getZoo(req, res, Parse);
+});
+
 ///////////////////////////////
 
 // Handlers for all the routes

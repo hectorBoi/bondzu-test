@@ -72,6 +72,7 @@ const handleAdminAnimals = async (req, res, Parse) => {
       throw { message: "No admin" };
     }
 
+
     const animalTable = Parse.Object.extend("AnimalV2");
     const queryAnimals = new Parse.Query(animalTable);
     const animals = await queryAnimals.find();
@@ -79,6 +80,7 @@ const handleAdminAnimals = async (req, res, Parse) => {
     res.json(animalsInfo);
   } catch (err) {
     res.json(err);
+    console.log(err)
   }
 };
 
@@ -437,6 +439,47 @@ const updateZoo = async (req, res, Parse) => {
   }
 };
 
+// Extracts the zoo's from the database
+const handleZoos = async (req, res, Parse) => {
+  try {
+    const { username } = req.body; // TODO debe de ser cookies
+    const user = await getUser(username, Parse);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    const ZooTable = Parse.Object.extend("Zoo");
+    const queryZoos = new Parse.Query(ZooTable);
+    const zoos = await queryZoos.find();
+    const zoosInfo = await animalInfo.getZoos(zoos);
+    res.json(zoosInfo);
+  } catch (err) {
+    res.json(err);
+  }
+};
+
+// Returns all the information (spanish and english) of single animal for the admin
+const getZoo = async (req, res, Parse) => {
+  try {
+    const { username } = req.body; // TODO debe de ser cookies
+    const zooID = req.params.zooID;
+
+    const user = await getUser(username, Parse);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    const zoo = await getZooDB(zooID, Parse);
+    let zoo_info = await animalInfo.getZooInfo(zoo, Parse);
+
+    res.json(zoo_info);
+  } catch (err) {
+    res.json(err);
+  }
+};
+
 module.exports = {
   handleAdminAnimals: handleAdminAnimals,
   getAnimal: getAnimal,
@@ -444,5 +487,7 @@ module.exports = {
   createAnimal: createAnimal,
   getKeepers: getKeepers,
   createZoo: createZoo,
-  updateZoo: updateZoo
+  updateZoo: updateZoo,
+  handleZoos: handleZoos,
+  getZoo: getZoo,
 };

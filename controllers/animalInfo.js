@@ -80,7 +80,7 @@ const getAnimalInfo = async (animal, Parse, lang) => {
 };
 
 // Transforms the array of Parse.Objects into Json
-const getAnimalInfoAdmin = async (animal, Parse, lang) => {
+const getAnimalInfoAdmin = async (animal, Parse) => {
   try {
     const video = await getVideo(animal.id, Parse);
     const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
@@ -158,8 +158,40 @@ const getAnimals = async (array, lang) => {
   }
 };
 
+// Transforms the array of Parse.Objects into Json for the zoo list
+const getZoos = async (array) => {
+  try {
+    let zooInfo = array.map((zoo) => {
+      return (zoo = {
+        id: zoo.id,
+        name: zoo.get("name"),
+        photo: zoo.get("photoUrl"),
+      });
+    });
+    return zooInfo;
+  } catch (error) {
+    resizeBy.status(400).json("Couldnt get zoos");
+  }
+};
+
+// Transforms the array of Parse.Objects into Json
+const getZooInfo = async (zoo, Parse) => {
+  try {
+    let zooInfo = {
+      name: zoo.get("name"),
+      location: zoo.get("location"),
+      description: zoo.get("description"),
+      photoUrl: zoo.get("photoUrl"),
+    };
+    return zooInfo;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getAnimalInfo: getAnimalInfo,
   getAnimals: getAnimals,
   getAnimalInfoAdmin: getAnimalInfoAdmin,
+  getZoos: getZoos,
 };
