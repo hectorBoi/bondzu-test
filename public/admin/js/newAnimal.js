@@ -8,6 +8,7 @@ const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
 //Datos únicos
+const apodoElem = document.getElementById("apodo");
 const youtubeIdElem = document.getElementById("youtubeId");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const statusElem = document.getElementById("status");
@@ -38,7 +39,7 @@ const allKeepersElem = document.getElementById("allKeepers");
 const createSelectKeepers = (array, form) => {
   for (let i = 0; i < array.length; i++) {
     let keeper = array[i];
-    console.log(keeper);
+    //console.log(keeper);
 
     const option = document.createElement("option");
     option.setAttribute("value", keeper.id);
@@ -65,6 +66,7 @@ submitSaveElem.addEventListener("click", () => {
 
   //Información única
   const status = statusElem.checked;
+  const apodo = apodoElem.value;
   const youtubeId = youtubeIdElem.value;
   const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
 
@@ -89,6 +91,7 @@ submitSaveElem.addEventListener("click", () => {
   const reproduction = reproductionElem.value;
 
   if (
+    apodo != "" &&
     youtubeId != "" &&
     especie != "" &&
     acerca != "" &&
@@ -131,8 +134,8 @@ submitSaveElem.addEventListener("click", () => {
     };
 
     const request = {
-      name: nombreCient,
-      name_en: scieName,
+      name: apodo,
+      name_en: apodo,
       about: acerca,
       about_en: about,
       characteristics: caracteristicas,
@@ -145,7 +148,7 @@ submitSaveElem.addEventListener("click", () => {
       priority: "etDcoSci6K",
     };
 
-    console.log(request);
+    //console.log(request);
 
     fetch("/admin/animals", {
       method: "post",

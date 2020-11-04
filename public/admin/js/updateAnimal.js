@@ -12,6 +12,7 @@ const successfulSaveElem = document.getElementById("successfulSave");
 
 //Datos únicos
 const iframeElem = document.getElementById("iframe");
+const apodoElem = document.getElementById("apodo");
 const youtubeIdElem = document.getElementById("youtubeId");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const statusElem = document.getElementById("status");
@@ -98,7 +99,7 @@ const createSelectKeepers = (array, form, currentKeeper) => {
 fetch(`/admin/animals/${animalID}`)
   .then((res) => res.json())
   .then((animal_info) => {
-    titleElem.innerText = `Actualizar: ${animal_info.species}`;
+    titleElem.innerText = `Actualizar: ${animal_info.name}`;
 
     //Switch status (Animal status - Active/Inactive)
     if (animal_info.isActive) {
@@ -109,13 +110,16 @@ fetch(`/admin/animals/${animalID}`)
       statusTextElem.innerText = "Inactivo";
     }
 
+    //Apodo
+    apodoElem.setAttribute("value", animal_info.name);
+
     //Video
     let youtubeURL = "";
     // Checks if the camera is from youtube or another page
     if (animal_info.youtubeID.includes("http")) {
-      youtubeURL = animal_info.youtubeID
+      youtubeURL = animal_info.youtubeID;
     } else {
-      youtubeURL = `https://www.youtube.com/embed/${animal_info.youtubeID}`
+      youtubeURL = `https://www.youtube.com/embed/${animal_info.youtubeID}`;
     }
     iframeElem.setAttribute("src", youtubeURL);
     youtubeIdElem.setAttribute("value", animal_info.youtubeID);
@@ -155,7 +159,6 @@ fetch(`/admin/animals/${animalID}`)
 
     //English data
     speciesElem.setAttribute("value", animal_info.species_en);
-
     aboutElem.innerHTML = animal_info.about_en;
 
     chars = "";
@@ -188,6 +191,7 @@ submitSaveElem.addEventListener("click", () => {
 
   //Información única
   const status = statusElem.checked;
+  const apodo = apodoElem.value;
   const youtubeId = youtubeIdElem.value;
   const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
 
@@ -212,6 +216,7 @@ submitSaveElem.addEventListener("click", () => {
   const reproduction = reproductionElem.value;
 
   if (
+    apodo != "" &&
     youtubeId != "" &&
     especie != "" &&
     acerca != "" &&
@@ -253,8 +258,8 @@ submitSaveElem.addEventListener("click", () => {
     };
 
     const request = {
-      name: nombreCient,
-      name_en: scieName,
+      name: apodo,
+      name_en: apodo,
       about: acerca,
       about_en: about,
       characteristics: caracteristicas,

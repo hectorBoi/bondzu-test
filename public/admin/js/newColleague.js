@@ -27,7 +27,7 @@ const allKeepersElem = document.getElementById("allKeepers");
 const createSelectKeepers = (array, form) => {
   for (let i = 0; i < array.length; i++) {
     let keeper = array[i];
-    console.log(keeper);
+    //console.log(keeper);
 
     const option = document.createElement("option");
     option.setAttribute("value", keeper.id);
@@ -96,7 +96,7 @@ submitSaveElem.addEventListener("click", () => {
       priority: "etDcoSci6K",
     };
 
-    console.log(request);
+    //console.log(request);
 
     fetch("/admin/animals", {
       method: "post",

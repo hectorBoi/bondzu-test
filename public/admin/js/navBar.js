@@ -47,7 +47,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         >
       </li>
       <li class="nav-item active">
-        <a href="index.html" style="text-decoration: none; color: #f28f1d;">
+        <a href="zoos.html" style="text-decoration: none; color: #f28f1d;">
           <button
             type="button"
             class="btn btn-primary navbarBtnMargins"
