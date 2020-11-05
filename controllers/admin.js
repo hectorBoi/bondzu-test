@@ -403,9 +403,8 @@ const updateZoo = async (req, res, Parse) => {
       description,
       photoUrl
     } = req.body;
-
+    
     const zooID = req.params.zooID;
-    console.log(zooID)
 
     const user = await getUser(username, Parse);
 

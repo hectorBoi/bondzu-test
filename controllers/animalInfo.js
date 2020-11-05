@@ -194,4 +194,5 @@ module.exports = {
   getAnimals: getAnimals,
   getAnimalInfoAdmin: getAnimalInfoAdmin,
   getZoos: getZoos,
+  getZooInfo: getZooInfo,
 };

@@ -18,11 +18,12 @@ const photoUrlElem = document.getElementById("photoLink");
 const pageElem = document.getElementById("pageLink");
 const locationElem = document.getElementById("location");
 
+console.log(zooID)
+
 fetch(`/admin/zoos/${zooID}`)
   .then((res) => res.json())
   .then((zoo_info) => {
-    console.log(zoo_info);
-
+    console.log(zoo_info)
     titleElem.innerText = `Actualizar: ${zoo_info.name}`;
     imageElem.setAttribute("src", zoo_info.photoUrl);
 
@@ -33,7 +34,7 @@ fetch(`/admin/zoos/${zooID}`)
     locationElem.setAttribute("value", zoo_info.location);
 
 
-    loaderElements.className += " hidden";
+    // loaderElements.className += " hidden";
     body.style.overflow = "auto";
   })
   .catch("Error in the request");
@@ -43,50 +44,27 @@ submitSaveElem.addEventListener("click", () => {
   successfulSaveElem.style.display = "none";
 
   //Información única
-  const status = statusElem.checked;
-  const nombre = nombreElem.value;
-  const youtubeId = youtubeIdElem.value;
-  const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
-
-  //Información español
-  const acerca = acercaElem.value;
-  const caracteristicas = {
-    "": caracteristicasElem.value,
-  };
-
-  //English information
-  const about = aboutElem.value;
-  const characteristics = {
-    "": characteristicsElem.value,
-  };
+  const name = nameElem.value;
+  const photoUrl = photoUrlElem.value;
+  const page = pageElem.value;
+  const location = locationElem.value;
 
   if (
-    youtubeId != "" &&
-    nombre != "" &&
-    acerca != "" &&
-    caracteristicas != "" &&
-    keeper != "" &&
-    about != "" &&
-    characteristics != ""
+    name != "" &&
+    photoUrl != "" &&
+    page != "" &&
+    location != ""
   ) {
     buttonSpinnerElem.removeAttribute("style");
 
     const request = {
-      name: nombre,
-      name_en: nombre,
-      about: acerca,
-      about_en: about,
-      characteristics: caracteristicas,
-      characteristics_en: characteristics,
-      species: "Colega",
-      species_en: "Colleague",
-      youtubeID: youtubeId,
-      keeper: keeper,
-      isActive: status,
-      priority: "etDcoSci6K",
+      name: name,
+      photoUrl: photoUrl,
+      description: page,
+      location: location,
     };
 
-    fetch(`/admin/animals/${animalID}`, {
+    fetch(`/admin/zoo/${zooID}`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -98,7 +76,7 @@ submitSaveElem.addEventListener("click", () => {
         successfulSaveElem.removeAttribute("style");
         buttonSpinnerElem.style.display = "none";
         setTimeout(() => {
-          location.reload();
+          window.location.reload();
         }, 3000);
       })
       .catch((err) => err);
