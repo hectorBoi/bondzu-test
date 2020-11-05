@@ -395,7 +395,7 @@ const createZoo = async (req, res, Parse) => {
 // Creates a keeper with info provided by the admin console
 const updateZoo = async (req, res, Parse) => {
   try {
-    const { username, token } = req.body; // TODO debe de ser cookies
+    const { username, token } = req.cookies; // TODO debe de ser cookies
     // This is for the zoo
     const {
       name,
@@ -443,7 +443,7 @@ const updateZoo = async (req, res, Parse) => {
 // Extracts the zoo's from the database
 const handleZoos = async (req, res, Parse) => {
   try {
-    const { username } = req.body; // TODO debe de ser cookies
+    const { username } = req.cookies; // TODO debe de ser cookies
     const user = await getUser(username, Parse);
 
     if (!user.get("isAdmin")) {
@@ -463,7 +463,7 @@ const handleZoos = async (req, res, Parse) => {
 // Returns all the information (spanish and english) of single animal for the admin
 const getZoo = async (req, res, Parse) => {
   try {
-    const { username } = req.body; // TODO debe de ser cookies
+    const { username } = req.cookies; // TODO debe de ser cookies
     const zooID = req.params.zooID;
 
     const user = await getUser(username, Parse);
