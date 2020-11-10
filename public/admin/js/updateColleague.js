@@ -189,4 +189,5 @@ const formPhoto = document.getElementById("submitPhoto");
 submitPhoto.addEventListener("change", () => {
   formPhoto.className = "btn btn-success";
   formPhoto.disabled = false;
+  formPhoto.value = "Actualizar foto";
 });

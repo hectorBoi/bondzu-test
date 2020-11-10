@@ -12,13 +12,13 @@ const successfulSaveElem = document.getElementById("successfulSave");
 
 //Datos únicos
 const iframeElem = document.getElementById("iframe");
-const apodoElem = document.getElementById("apodo");
 const youtubeIdElem = document.getElementById("youtubeId");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const statusElem = document.getElementById("status");
 const statusTextElem = document.getElementById("statusText");
 
 //Datos en español
+const apodoElem = document.getElementById("apodo");
 const especieElem = document.getElementById("especie");
 const acercaElem = document.getElementById("acerca");
 const caracteristicasElem = document.getElementById("caracteristicas");
@@ -30,6 +30,7 @@ const dietaElem = document.getElementById("dieta");
 const reproduccionElem = document.getElementById("reproduccion");
 
 //English data
+const nicknameElem = document.getElementById("nickname");
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
@@ -110,9 +111,6 @@ fetch(`/admin/animals/${animalID}`)
       statusTextElem.innerText = "Inactivo";
     }
 
-    //Apodo
-    apodoElem.setAttribute("value", animal_info.name);
-
     //Video
     let youtubeURL = "";
     // Checks if the camera is from youtube or another page
@@ -135,6 +133,7 @@ fetch(`/admin/animals/${animalID}`)
     );
 
     //Datos en español
+    apodoElem.setAttribute("value", animal_info.name);
     especieElem.setAttribute("value", animal_info.species);
     acercaElem.innerHTML = animal_info.about;
 
@@ -158,6 +157,7 @@ fetch(`/admin/animals/${animalID}`)
     caracteristicasElem.innerHTML = chars;
 
     //English data
+    nicknameElem.setAttribute("value", animal_info.name_en);
     speciesElem.setAttribute("value", animal_info.species_en);
     aboutElem.innerHTML = animal_info.about_en;
 
@@ -191,11 +191,11 @@ submitSaveElem.addEventListener("click", () => {
 
   //Información única
   const status = statusElem.checked;
-  const apodo = apodoElem.value;
   const youtubeId = youtubeIdElem.value;
   const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
 
   //Información español
+  const apodo = apodoElem.value;
   const especie = especieElem.value;
   const acerca = acercaElem.value;
   const nombreCient = nombreCientElem.value;
@@ -206,6 +206,7 @@ submitSaveElem.addEventListener("click", () => {
   const reproduccion = reproduccionElem.value;
 
   //English information
+  const nickname = nicknameElem.value;
   const species = speciesElem.value;
   const about = aboutElem.value;
   const scieName = scieNameElem.value;
@@ -216,8 +217,8 @@ submitSaveElem.addEventListener("click", () => {
   const reproduction = reproductionElem.value;
 
   if (
-    apodo != "" &&
     youtubeId != "" &&
+    apodo != "" &&
     especie != "" &&
     acerca != "" &&
     nombreCient != "" &&
@@ -226,6 +227,7 @@ submitSaveElem.addEventListener("click", () => {
     habitatEsp != "" &&
     dieta != "" &&
     reproduccion != "" &&
+    nickname != "" &&
     species != "" &&
     about != "" &&
     scieName != "" &&
@@ -259,7 +261,7 @@ submitSaveElem.addEventListener("click", () => {
 
     const request = {
       name: apodo,
-      name_en: apodo,
+      name_en: nickname,
       about: acerca,
       about_en: about,
       characteristics: caracteristicas,
@@ -301,4 +303,5 @@ const formPhoto = document.getElementById("submitPhoto");
 submitPhoto.addEventListener("change", () => {
   formPhoto.className = "btn btn-success";
   formPhoto.disabled = false;
+  formPhoto.value = "Actualizar foto";
 });

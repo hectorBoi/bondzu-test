@@ -8,12 +8,12 @@ const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
 //Datos únicos
-const apodoElem = document.getElementById("apodo");
 const youtubeIdElem = document.getElementById("youtubeId");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const statusElem = document.getElementById("status");
 
 //Datos en español
+const apodoElem = document.getElementById("apodo");
 const especieElem = document.getElementById("especie");
 const acercaElem = document.getElementById("acerca");
 const nombreCientElem = document.getElementById("nomCient");
@@ -24,6 +24,7 @@ const dietaElem = document.getElementById("dieta");
 const reproduccionElem = document.getElementById("reproduccion");
 
 //English data
+const nicknameElem = document.getElementById("nickname");
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const scieNameElem = document.getElementById("scieName");
@@ -66,11 +67,11 @@ submitSaveElem.addEventListener("click", () => {
 
   //Información única
   const status = statusElem.checked;
-  const apodo = apodoElem.value;
   const youtubeId = youtubeIdElem.value;
   const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
 
   //Información español
+  const apodo = apodoElem.value;
   const especie = especieElem.value;
   const acerca = acercaElem.value;
   const nombreCient = nombreCientElem.value;
@@ -81,6 +82,7 @@ submitSaveElem.addEventListener("click", () => {
   const reproduccion = reproduccionElem.value;
 
   //English information
+  const nickname = nicknameElem.value;
   const species = speciesElem.value;
   const about = aboutElem.value;
   const scieName = scieNameElem.value;
@@ -91,8 +93,8 @@ submitSaveElem.addEventListener("click", () => {
   const reproduction = reproductionElem.value;
 
   if (
-    apodo != "" &&
     youtubeId != "" &&
+    apodo != "" &&
     especie != "" &&
     acerca != "" &&
     nombreCient != "" &&
@@ -101,6 +103,7 @@ submitSaveElem.addEventListener("click", () => {
     habitatEsp != "" &&
     dieta != "" &&
     reproduccion != "" &&
+    nickname != "" &&
     species != "" &&
     about != "" &&
     scieName != "" &&
@@ -135,7 +138,7 @@ submitSaveElem.addEventListener("click", () => {
 
     const request = {
       name: apodo,
-      name_en: apodo,
+      name_en: nickname,
       about: acerca,
       about_en: about,
       characteristics: caracteristicas,

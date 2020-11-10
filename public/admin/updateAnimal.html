@@ -66,10 +66,14 @@
           <div class="text-center">
             <img
               id="animalPhoto"
-              src=""
-              class="card-img img-fluid"
               alt="animal"
-              style="margin-top: 15px; margin-bottom: 15px; object-fit: cover"
+              class="card-img img-fluid"
+              style="
+                margin-top: 15px;
+                margin-bottom: 15px;
+                object-fit: contain;
+                max-height: 450px;
+              "
             />
           </div>
         </div>
@@ -145,18 +149,6 @@
                 <hr />
 
                 <div class="form-group is-invalid">
-                  <b><label>Apodo</label></b>
-                  <input
-                    id="apodo"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
                   <b><label>YouTube ID | URL de video</label></b>
                   <input
                     id="youtubeId"
@@ -190,6 +182,18 @@
             </div>
             <div class="card-body">
               <form class="was-validated">
+                <div class="form-group is-invalid">
+                  <b><label>Apodo</label></b>
+                  <input
+                    id="apodo"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr />
+
                 <div class="form-group is-invalid">
                   <b><label>Especie</label></b>
                   <input
@@ -322,6 +326,18 @@
             </div>
             <div class="card-body">
               <form class="was-validated">
+                <div class="form-group is-invalid">
+                  <b><label>Nickname</label></b>
+                  <input
+                    id="nickname"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr />
+
                 <div class="form-group is-invalid">
                   <b><label>Species</label></b>
                   <input
