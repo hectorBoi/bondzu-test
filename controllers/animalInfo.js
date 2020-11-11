@@ -1,5 +1,7 @@
+const { Parse } = require("../database");
+
 // Get the name of the zoo in charge of a specific animal
-const getKeeper = async (id, Parse) => {
+const getKeeper = async (id) => {
   try {
     const zooTable = Parse.Object.extend("Zoo");
     const queryZoo = new Parse.Query(zooTable);
@@ -11,7 +13,7 @@ const getKeeper = async (id, Parse) => {
   }
 };
 
-const getVideo = async (id, Parse) => {
+const getVideo = async (id) => {
   try {
     const videoTable = Parse.Object.extend("Video");
     const query = new Parse.Query(videoTable);
@@ -29,11 +31,11 @@ const getVideo = async (id, Parse) => {
 };
 
 // Transforms the array of Parse.Objects into Json
-const getAnimalInfo = async (animal, Parse, lang) => {
+const getAnimalInfo = async (animal, lang) => {
   try {
     if (lang === "en") {
-      const video = await getVideo(animal.id, Parse);
-      const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
+      const video = await getVideo(animal.id);
+      const keeper = await getKeeper(animal.get("keepers")[0].id);
       let photo = "";
       let photoUrl = "";
       if (animal.get("profilePhoto")) {
@@ -53,8 +55,8 @@ const getAnimalInfo = async (animal, Parse, lang) => {
       };
       return animalInfo;
     } else {
-      const video = await getVideo(animal.id, Parse);
-      const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
+      const video = await getVideo(animal.id);
+      const keeper = await getKeeper(animal.get("keepers")[0].id);
       let photo = "";
       let photoUrl = "";
       if (animal.get("profilePhoto")) {
@@ -80,10 +82,10 @@ const getAnimalInfo = async (animal, Parse, lang) => {
 };
 
 // Transforms the array of Parse.Objects into Json
-const getAnimalInfoAdmin = async (animal, Parse) => {
+const getAnimalInfoAdmin = async (animal) => {
   try {
-    const video = await getVideo(animal.id, Parse);
-    const keeper = await getKeeper(animal.get("keepers")[0].id, Parse);
+    const video = await getVideo(animal.id);
+    const keeper = await getKeeper(animal.get("keepers")[0].id);
     let photo = "";
     if (animal.get("profilePhoto")) {
       photo = animal.get("profilePhoto")._url;
@@ -175,7 +177,7 @@ const getZoos = async (array) => {
 };
 
 // Transforms the array of Parse.Objects into Json
-const getZooInfo = async (zoo, Parse) => {
+const getZooInfo = async (zoo) => {
   try {
     let zooInfo = {
       name: zoo.get("name"),

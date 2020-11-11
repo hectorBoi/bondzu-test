@@ -1,122 +1,45 @@
+// Represents all the routes for the admin console
 const animalInfo = require("./animalInfo");
+const { Parse } = require("../database");
+const { Router } = require("express");
 
-// Returns an array of all the zoo's so the admin can choose one instead of creating one
-const getAllKeepers = async (Parse) => {
+// Initializes the router
+const router = Router();
+
+// Returns all the animals to show the catalog inside the admin console
+router.get('/animals', async (req, res, next) => {
   try {
-    let response = [];
-  
-    const zooTable = Parse.Object.extend("Zoo");
-    const zooQuery = new Parse.Query(zooTable);
-    const resultZoo = await zooQuery.find();
-  
-    for (let zoo of resultZoo) {
-      response.push({ id: zoo.id, name: zoo.get("name") });
-    }
-  
-    return response;
-    
-  } catch (error) {
-    console.log(error)
-  }
-};
-
-// Gets the photo file from the admin and transforms it into a parse file
-const createsPhotoFile = async (req, Parse) => {
-  const data = Array.from(Buffer.from(req.files.newProfilepic.data));
-  const contentType = req.headers["content-type"];
-  const file = new Parse.File("testing.png", data, contentType);
-  return file;
-};
-
-// Gets a specific user from the database
-const getUser = async (username, Parse) => {
-  const userTable = Parse.Object.extend("User");
-  const query = new Parse.Query(userTable);
-  query.equalTo("username", username);
-  const user = await query.first();
-  return user;
-};
-
-// Gets a specific animal from the database
-const getAnimalDB = async (animalID, Parse) => {
-  const animalTable = Parse.Object.extend("AnimalV2");
-  const queryAnimal = new Parse.Query(animalTable);
-  const animal = await queryAnimal.get(animalID);
-  return animal;
-};
-
-// Gets a specific zoo from the database
-const getZooDB = async (zooID, Parse) => {
-  const zooTable = Parse.Object.extend("Zoo");
-  const queryZoo = new Parse.Query(zooTable);
-  const zoo = await queryZoo.get(zooID);
-  return zoo;
-};
-
-// Gets a specific userType from the database
-const getUserType = async (priority, Parse) => {
-  let typeTable = Parse.Object.extend("UserType");
-  let queryUserType = new Parse.Query(typeTable);
-  queryUserType.equalTo("objectId", priority);
-  const results = await queryUserType.find();
-  return results[0];
-};
-
-// Extracts the animals from the database and filter the results before sending them to the front end
-const handleAdminAnimals = async (req, res, Parse) => {
-  try {
+    // Verifies if the user making the request is an Admin
     const { username } = req.cookies;
-    const user = await getUser(username, Parse);
+    const user = await getUser(username);
 
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
     }
 
-
+    // Extracts all the animals from the database and responds with them
     const animalTable = Parse.Object.extend("AnimalV2");
     const queryAnimals = new Parse.Query(animalTable);
     const animals = await queryAnimals.find();
     const animalsInfo = await animalInfo.getAnimals(animals);
     res.json(animalsInfo);
   } catch (err) {
-    res.json(err);
-    console.log(err)
+    next(error)
   }
-};
+});
 
-// Returns all the information (spanish and english) of single animal for the admin
-const getAnimal = async (req, res, Parse) => {
+// Returns all the zoos for the pages where the admin can select the new zoo for a given animal or colleague
+router.get('/animals/keepers', async (req, res, next) => {
   try {
+    // Verifies if the user making the request is an Admin
     const { username } = req.cookies;
-    const animalID = req.params.animalID;
-
-    const user = await getUser(username, Parse);
+    const user = await getUser(username);
 
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
     }
 
-    const animal = await getAnimalDB(animalID, Parse);
-    let animal_info = await animalInfo.getAnimalInfoAdmin(animal, Parse);
-    animal_info.allKeepers = await getAllKeepers(Parse);
-
-    res.json(animal_info);
-  } catch (err) {
-    res.json(err);
-  }
-};
-
-const getKeepers = async (req, res, Parse) => {
-  try {
-    const { username } = req.cookies;
-
-    const user = await getUser(username, Parse);
-
-    if (!user.get("isAdmin")) {
-      throw { message: "No admin" };
-    }
-
-    allKeepers = await getAllKeepers(Parse);
+    allKeepers = await getAllKeepers();
 
     const resp = {
       allKeepers: allKeepers
@@ -124,16 +47,41 @@ const getKeepers = async (req, res, Parse) => {
 
     res.json(resp);
   } catch (err) {
-    res.json(err);
+    next(err)
   }
-};
+});
 
-// Updates the animal with the info provided by the admin console
-const updateAnimal = async (req, res, Parse) => {
+// Returns all the information of single animal identified by the ID given for the admin
+router.get('/animals/:animalID', async (req, res, next) => {
+  try {
+    // Verifies if the user making the request is an Admin
+    const { username } = req.cookies;
+    const animalID = req.params.animalID;
+
+    const user = await getUser(username);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    // Get the specific animal with they ID from the database and extracts all the information needed for the update
+    const animal = await getAnimalDB(animalID);
+    let animal_info = await animalInfo.getAnimalInfoAdmin(animal);
+    animal_info.allKeepers = await getAllKeepers();
+
+    res.json(animal_info);
+  } catch (err) {
+    next(err)
+  }
+});
+
+// Updates the animal with the info provided by the admin console, returns the updated info
+router.post('/animals/:animalID', async (req, res, next) => {
   try {
     const { username, token } = req.cookies;
     const animalID = req.params.animalID;
 
+    // Gets all the variables sended in the request
     const {
       name,
       name_en,
@@ -149,19 +97,23 @@ const updateAnimal = async (req, res, Parse) => {
       priority,
     } = req.body;
 
-    const user = await getUser(username, Parse);
+    // Verifies if the user making the request is an Admin
+    const user = await getUser(username);
 
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
     }
 
-    const userType = await getUserType(priority, Parse);
-    const animal = await getAnimalDB(animalID, Parse);
-
+    // Gets the priority reference for the animal and the animal from the database
+    // The animal is searched based on the provided ID
+    const userType = await getUserType(priority);
+    const animal = await getAnimalDB(animalID);
+    // Gets the reference for the video table in the database
     let videoTable = Parse.Object.extend("Video");
     let queryVideo = new Parse.Query(videoTable);
     const videosArray = await queryVideo.find();
 
+    // Updates the reference in the video table for the animal video
     if (youtubeID) {
       for (let video of videosArray) {
         let anID = video.get("animal_id").id;
@@ -175,6 +127,7 @@ const updateAnimal = async (req, res, Parse) => {
       }
     }
 
+    // Creates the array for the keeper field
     const keeperPointer = {
       __type: "Pointer",
       className: "Keeper",
@@ -183,6 +136,7 @@ const updateAnimal = async (req, res, Parse) => {
 
     const keeperArray = [keeperPointer];
 
+    // Updates all the fields of the animal with the new information sended in the request
     if (name) {
       animal.set("name", name);
     }
@@ -225,9 +179,10 @@ const updateAnimal = async (req, res, Parse) => {
       animal.set("keepers", keeperArray);
     }
 
+    // In case that the request is to update the animal photo, the request is treated differently
     if (req.files) {
       console.log("In the update photo");
-      const photo = await createsPhotoFile(req, Parse);
+      const photo = await createsPhotoFile(req);
       animal.set("profilePhoto", photo);
       const updatedAnimal = await animal.save(null, { sessionToken: token });
       res.redirect("/admin/updateAnimal.html");
@@ -236,15 +191,16 @@ const updateAnimal = async (req, res, Parse) => {
     const updatedAnimal = await animal.save(null, { sessionToken: token });
     res.json(updatedAnimal);
   } catch (err) {
-    console.log(err);
-    res.json(err);
+    next(err)
   }
-};
+});
 
-// Creates and animal and video with info provided by the admin console
-const createAnimal = async (req, res, Parse) => {
+// Creates an animal and video with info provided by the admin console, returns to the index page
+router.post('/animals', async (req, res, next) => {
   try {
-    const { username, token } = req.cookies; // TODO debe de ser cookies
+    const { username, token } = req.cookies;
+
+    // Gets all the variables sended in the request
     const {
       name,
       name_en,
@@ -260,24 +216,31 @@ const createAnimal = async (req, res, Parse) => {
       priority,
     } = req.body;
 
-    const user = await getUser(username, Parse);
+    // Verifies if the user making the request is an Admin
+    const user = await getUser(username);
 
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
     }
 
-    const userType = await getUserType(priority, Parse);
+    // Gets the priority reference for the animal and the animal from the database
+    // The animal is searched based on the provided ID
+    const userType = await getUserType(priority);
 
+    // Gets the reference for the animal table in the database
     const animalTable = Parse.Object.extend("AnimalV2");
     let animal = new animalTable();
 
+    // Creates the pointer for the keeper array
     const keeperPointer = {
       __type: "Pointer",
       className: "Keeper",
       objectId: keeper,
     };
+
     const keeperArray = [keeperPointer];
 
+    // Updates all the fields of the animal with the new information sended in the request
     if (name) {
       animal.set("name", name);
     }
@@ -322,8 +285,9 @@ const createAnimal = async (req, res, Parse) => {
 
     animal.set("adopters", 0);
 
+    // In case that the request is to update the animal photo, the request is treated differently
     if (req.files) {
-      const photo = await createsPhotoFile(req, Parse);
+      const photo = await createsPhotoFile(req);
       animal.set("profilePhoto", photo);
       const updatedAnimal = await animal.save(null, { sessionToken: token });
       res.redirect("/admin/updateAnimal.html");
@@ -331,6 +295,7 @@ const createAnimal = async (req, res, Parse) => {
 
     const updatedAnimal = await animal.save(null, { sessionToken: token });
 
+    // Creates the entry in the video table with the reference of the new animal
     const videoTable = Parse.Object.extend("Video");
     let video = new videoTable();
     video.set("videoRequiredPriority", userType);
@@ -340,17 +305,17 @@ const createAnimal = async (req, res, Parse) => {
     const newVideo = await video.save(null, { sessionToken: token });
 
     res.json(updateAnimal);
-  } catch (err) {
-    res.json(err);
+  } catch(err) {
+    next(err)
   }
-};
+});
 
-// Creates a keeper with info provided by the admin console
-const createZoo = async (req, res, Parse) => {
+// Creates a zoo with the info provided by the admin console, returns to the index page
+router.post('/zoo', async (req, res, next) => {
   try {
-    const { username, token } = req.cookies; // TODO debe de ser cookies
-    // This is for the zoo
-    console.log("entered creating zoo")
+    const { username, token } = req.cookies;
+
+    // Gets all the variables sended in the request
     const {
       name,
       location,
@@ -358,16 +323,18 @@ const createZoo = async (req, res, Parse) => {
       photoUrl
     } = req.body;
 
-    const user = await getUser(username, Parse);
+    // Verifies that the user making the request is admin
+    const user = await getUser(username);
 
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
     }
 
+    // Gets the reference for the zoo
     const zoosTable = Parse.Object.extend("Zoo");
     let zoo = new zoosTable();
 
-
+    // Creates an entry with all the information sended in the request
     if (name) {
       zoo.set("name", name);
     }
@@ -385,18 +352,18 @@ const createZoo = async (req, res, Parse) => {
     }
 
     const zooCreated = await zoo.save(null, { sessionToken: token });
-
     res.json(zooCreated);
   } catch (err) {
-    res.json(err);
+    next(error)
   }
-};
+});
 
-// Creates a keeper with info provided by the admin console
-const updateZoo = async (req, res, Parse) => {
+// Update the zoo identified by the ID given for the admin
+router.post('/zoo/:zooID', async (req, res, next) => {
   try {
-    const { username, token } = req.cookies; // TODO debe de ser cookies
-    // This is for the zoo
+    const { username, token } = req.cookies;
+    
+    // Gets all the variables sended in the request
     const {
       name,
       location,
@@ -406,14 +373,17 @@ const updateZoo = async (req, res, Parse) => {
     
     const zooID = req.params.zooID;
 
-    const user = await getUser(username, Parse);
+    // Verifies that the user making the request is admin
+    const user = await getUser(username);
 
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
     }
 
-    let zoo = await getZooDB(zooID, Parse);
+    // Gets the zoo from the database with the id provided
+    let zoo = await getZooDB(zooID);
 
+    // Updates all the fields with the info provided in the request
     if (name) {
       zoo.set("name", name);
     }
@@ -434,60 +404,117 @@ const updateZoo = async (req, res, Parse) => {
 
     res.json(zooUpdated);
   } catch (err) {
-    console.log(err)
-    res.json(err);
+    next(error)
   }
-};
+});
 
-// Extracts the zoo's from the database
-const handleZoos = async (req, res, Parse) => {
+// Update the zoo returns a list of all the zoos for the catalog in the admin console
+router.get('/zoos', async (req, res, next) => {
   try {
-    const { username } = req.cookies; // TODO debe de ser cookies
-    const user = await getUser(username, Parse);
+    const { username } = req.cookies;
+    const user = await getUser(username);
 
+    // Verifies that the user is an admin
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
     }
 
+    // Returns a list of all the zoos
     const ZooTable = Parse.Object.extend("Zoo");
     const queryZoos = new Parse.Query(ZooTable);
     const zoos = await queryZoos.find();
     const zoosInfo = await animalInfo.getZoos(zoos);
     res.json(zoosInfo);
   } catch (err) {
-    res.json(err);
+    next(error)
   }
-};
+});
 
-// Returns all the information (spanish and english) of single animal for the admin
-const getZoo = async (req, res, Parse) => {
+// Returns all the information of a specific zoo to the admin console
+router.get('/zoos/:zooID', async (req, res, next) => {
   try {
-    const { username } = req.cookies; // TODO debe de ser cookies
+    const { username } = req.cookies;
     const zooID = req.params.zooID;
 
-    const user = await getUser(username, Parse);
-
+    const user = await getUser(username);
+    
+    // Verifies that the user is an admin
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
     }
 
-    const zoo = await getZooDB(zooID, Parse);
-    let zoo_info = await animalInfo.getZooInfo(zoo, Parse);
+    // Returns all the information of the zoo
+    const zoo = await getZooDB(zooID);
+    let zoo_info = await animalInfo.getZooInfo(zoo);
 
     res.json(zoo_info);
   } catch (err) {
-    res.json(err);
+     next(error)
+   }
+ });
+
+// === This are all the helpers functions used in the routes
+
+// Returns an array of all the zoo's so the admin can choose one instead of creating one
+const getAllKeepers = async () => {
+  try {
+    let response = [];
+  
+    const zooTable = Parse.Object.extend("Zoo");
+    const zooQuery = new Parse.Query(zooTable);
+    const resultZoo = await zooQuery.find();
+  
+    for (let zoo of resultZoo) {
+      response.push({ id: zoo.id, name: zoo.get("name") });
+    }
+  
+    return response;
+    
+  } catch (error) {
+    console.log(error)
   }
 };
 
-module.exports = {
-  handleAdminAnimals: handleAdminAnimals,
-  getAnimal: getAnimal,
-  updateAnimal: updateAnimal,
-  createAnimal: createAnimal,
-  getKeepers: getKeepers,
-  createZoo: createZoo,
-  updateZoo: updateZoo,
-  handleZoos: handleZoos,
-  getZoo: getZoo,
+// Gets the photo file from the admin and transforms it into a parse file
+const createsPhotoFile = async (req) => {
+  const data = Array.from(Buffer.from(req.files.newProfilepic.data));
+  const contentType = req.headers["content-type"];
+  const file = new Parse.File("testing.png", data, contentType);
+  return file;
 };
+
+// Gets a specific user from the database
+const getUser = async (username) => {
+  const userTable = Parse.Object.extend("User");
+  const query = new Parse.Query(userTable);
+  query.equalTo("username", username);
+  const user = await query.first();
+  return user;
+};
+
+// Gets a specific animal from the database
+const getAnimalDB = async (animalID) => {
+  const animalTable = Parse.Object.extend("AnimalV2");
+  const queryAnimal = new Parse.Query(animalTable);
+  const animal = await queryAnimal.get(animalID);
+  return animal;
+};
+
+// Gets a specific zoo from the database
+const getZooDB = async (zooID) => {
+  const zooTable = Parse.Object.extend("Zoo");
+  const queryZoo = new Parse.Query(zooTable);
+  const zoo = await queryZoo.get(zooID);
+  return zoo;
+};
+
+// Gets a specific userType from the database
+const getUserType = async (priority) => {
+  let typeTable = Parse.Object.extend("UserType");
+  let queryUserType = new Parse.Query(typeTable);
+  queryUserType.equalTo("objectId", priority);
+  const results = await queryUserType.find();
+  return results[0];
+};
+
+module.exports = router;
