@@ -130,7 +130,7 @@ router.post('/animals/:animalID', async (req, res, next) => {
     // Creates the array for the keeper field
     const keeperPointer = {
       __type: "Pointer",
-      className: "Keeper",
+      className: "Zoo",
       objectId: keeper,
     };
 
@@ -234,7 +234,7 @@ router.post('/animals', async (req, res, next) => {
     // Creates the pointer for the keeper array
     const keeperPointer = {
       __type: "Pointer",
-      className: "Keeper",
+      className: "Zoo",
       objectId: keeper,
     };
 
