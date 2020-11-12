@@ -59,10 +59,14 @@ const createCard = (object) => {
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  const img = createImage(object.profilePhoto);
-  button.appendChild(img);
+  console.log("object.profilePhoto");
+  console.log(object.profilePhoto);
+  if (object.profilePhoto) {
+    const img = createImage(object.profilePhoto);
+    button.appendChild(img);
+  }
   const div = createDiv("card-img-overlay", object.id);
-  const h5 = createTitle(object.species);
+  const h5 = createTitle(object.name);
   div.appendChild(h5);
   button.appendChild(div);
   return col;
@@ -90,15 +94,7 @@ if (!document.cookie.includes("token")) {
   location.replace("/");
 }
 
-fetch("/animals", {
-  method: "post",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    lang: window.localStorage.getItem("lang")
-  })
-})
+fetch("/animals/all")
   .then((res) => res.json())
   .then((animalsColleagues) => {
     const animals = [];

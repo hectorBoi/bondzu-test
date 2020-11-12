@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bondzù: Nuevo animal</title>
+    <title>Bondzù: Nuevo Colega</title>
     <link rel="icon" href="../img/favicon.png" />
     <link rel="stylesheet" href="../css/styles.css" />
     <link
@@ -88,6 +88,18 @@
                 <hr />
 
                 <div class="form-group is-invalid">
+                  <b><label>Nombre</label></b>
+                  <input
+                    id="nombre"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr />
+
+                <div class="form-group is-invalid">
                   <b><label>YouTube ID | URL de video</label></b>
                   <input
                     id="youtubeId"
@@ -122,30 +134,6 @@
             <div class="card-body">
               <form class="was-validated">
                 <div class="form-group is-invalid">
-                  <b><label>Apodo</label></b>
-                  <input
-                    id="apodo"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Especie</label></b>
-                  <input
-                    id="especie"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
                   <b><label>Acerca de</label></b>
                   <textarea
                     id="acerca"
@@ -160,77 +148,9 @@
                 <hr />
 
                 <div class="form-group is-invalid">
-                  <b><label>Nombre científico</label></b>
-                  <input
-                    id="nomCient"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Estado de conservación</label></b>
+                  <b><label>Características</label></b>
                   <textarea
-                    id="estadoCon"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    rows="2"
-                    style="text-align: justify"
-                    required
-                  ></textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Distribución geográfica</label></b>
-                  <textarea
-                    id="distGeo"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    rows="6"
-                    style="text-align: justify"
-                    required
-                  ></textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Hábitat</label></b>
-                  <textarea
-                    id="habitatEsp"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    rows="6"
-                    style="text-align: justify"
-                    required
-                  ></textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Dieta</label></b>
-                  <textarea
-                    id="dieta"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    rows="4"
-                    style="text-align: justify"
-                    required
-                  ></textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Reproducción</label></b>
-                  <textarea
-                    id="reproduccion"
+                    id="caracteristicas"
                     class="form-control is-invalid"
                     aria-describedby="validatedInputGroupPrepend"
                     rows="6"
@@ -251,30 +171,6 @@
             <div class="card-body">
               <form class="was-validated">
                 <div class="form-group is-invalid">
-                  <b><label>Nickname</label></b>
-                  <input
-                    id="nickname"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Species</label></b>
-                  <input
-                    id="species"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
                   <b><label>About</label></b>
                   <textarea
                     id="about"
@@ -289,76 +185,9 @@
                 <hr />
 
                 <div class="form-group is-invalid">
-                  <b><label>Scientific name</label></b>
-                  <input
-                    id="scieName"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Conservation status</label></b>
+                  <b><label>Characteristics</label></b>
                   <textarea
-                    id="conStatus"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    rows="2"
-                    style="text-align: justify"
-                    required
-                  ></textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Geographical distribution</label></b>
-                  <textarea
-                    id="geoDist"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    rows="6"
-                    style="text-align: justify"
-                    required
-                  ></textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Habitat</label></b>
-                  <textarea
-                    id="habitatEng"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    rows="6"
-                    style="text-align: justify"
-                    required
-                  ></textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Diet</label></b>
-                  <textarea
-                    id="diet"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    rows="4"
-                    style="text-align: justify"
-                    required
-                  ></textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label>Reproduction</label></b>
-                  <textarea
-                    id="reproduction"
+                    id="characteristics"
                     class="form-control is-invalid"
                     aria-describedby="validatedInputGroupPrepend"
                     rows="6"
@@ -384,7 +213,7 @@
               class="text-success"
               style="display: none"
               id="successfulSave"
-              >Animal guardado exitosamente</small
+              >Colega guardado exitosamente</small
             >
           </h5>
           <button class="btn btn-success" id="save">
@@ -407,6 +236,6 @@
   </body>
 
   <script src="./js/index.js"></script>
-  <script src="./js/newAnimal.js"></script>
+  <script src="./js/newColleague.js"></script>
   <script src="../js/logout.js"></script>
 </html>

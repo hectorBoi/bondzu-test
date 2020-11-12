@@ -45,6 +45,7 @@ updateProfileElem.addEventListener("click", () => {
   const newPasswordConfirm = newPasswordConfirmElem.value;
 
   let request = {
+    lang: window.localStorage.getItem("lang"),
     Nname: newName,
     Nlastname: newLastname,
     Npassword: newPassword,
@@ -59,7 +60,10 @@ updateProfileElem.addEventListener("click", () => {
       body: JSON.stringify(request),
     })
       .then((res) => res.json())
-      .then((newUser) => {
+      .then((res) => {
+        console.log(res.token)
+        document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/;"
+        document.cookie = `token=${res.token}; path=/`;
         location.replace("profile.html");
       })
       .catch((err) => err);

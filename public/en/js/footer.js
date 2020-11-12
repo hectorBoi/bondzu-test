@@ -86,9 +86,9 @@ document.getElementById("footer").innerHTML = `
             </div>
           </div>
         </div>
-        <hr style="clear: both; margin-bottom: 0; margin-top: 3px;" />
+        <hr style="clear: both; margin-bottom: 10px; margin-top: 10px;" />
         <img
-          src="../img/bondu_logo_white.png"
+          src="../../img/bondu_logo_white.png"
           alt="logoBondzuFooter"
           height="50"
           width="100"
@@ -97,6 +97,13 @@ document.getElementById("footer").innerHTML = `
         <p style="color: #ffffff; display: inline;">
           &copy 2020 Bondzù
         </p>
+      </div>
+      <div class="text-center" style="background-color: #cf6f00; margin: 0">
+        <a href="privacidad.html" style="color: white; font-size: 15px; ">
+          Privacy notice
+        </a>
+        <br>
+        <br>
       </div>
     </footer>
 `;

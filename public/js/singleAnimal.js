@@ -14,10 +14,21 @@ const loaderElements = document.getElementById("loaderElements");
 const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
-fetch(`/singleAnimal/${animalID}`)
+fetch(`/animals/${animalID}`)
   .then((res) => res.json())
   .then((animal) => {
-    const youtubeURL = `https://www.youtube.com/embed/${animal.youtubeID}`;
+    let youtubeURL = "";
+    console.log("This is the animal id: ", animal.youtubeID)
+    // Checks if the camera is from youtube or another page
+    if (animal.youtubeID.includes("http")) {
+      youtubeURL = animal.youtubeID
+      console.log("youtubeURL")      
+      console.log(youtubeURL)
+    } else {
+      youtubeURL = `https://www.youtube.com/embed/${animal.youtubeID}`
+      console.log("youtubeURL")      
+      console.log(youtubeURL)
+    }
     iframeElem.setAttribute("src", youtubeURL);
 
     let chars = "";

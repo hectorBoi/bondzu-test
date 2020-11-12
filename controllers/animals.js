@@ -1,5 +1,52 @@
+// Represents all the routes for the admin console
 const animalInfo = require("./animalInfo");
 const adopts = require("./adoptions");
+const { Parse } = require("../database");
+const { Router } = require("express");
+
+// Initializes the router
+const router = Router();
+
+// Extracts the animals from the database and filter the results before sending them to the front end
+router.get('/all', async (req, res, next) => {
+  try {
+    const { lang, usertype } = req.cookies;
+    // Gets the reference for the animal table
+    const animalTable = Parse.Object.extend("AnimalV2");
+    const query = new Parse.Query(animalTable);
+    query.equalTo("isActive", true);
+    const activeAnimals = await query.find();
+
+    // Extracts the information for the animals and returns it for the catalog screen
+    const animalsInfo = await animalInfo.getAnimals(activeAnimals, lang);
+    const result = await filterAnimals(usertype, animalsInfo);
+    res.json(result);
+  } catch (err) {
+    next(err)
+  }
+});
+
+// Extracts the animal from the database based on the provided ID
+router.get('/:animalID', async (req, res, next) => {
+  try {
+    const { lang } = req.cookies;
+    const animalID = req.params.animalID;
+    // Gets the reference for the animal table
+    const animalTable = Parse.Object.extend("AnimalV2");
+    const query = new Parse.Query(animalTable);
+    const animal = await query.get(animalID);
+    // Extracts the animal and checks for the information
+    const isAdopted = await adopts.isAdopted(req, res, animalID);
+    const animal_info = await animalInfo.getAnimalInfo(animal, lang);
+    // Assigns if the animal is adopted or not by the user that made the request
+    animal_info.isAdopted = isAdopted;
+    res.json(animal_info);
+  } catch (err) {
+    next(err)
+  }
+});
+
+// === Helper functions used in the routes
 
 // Filter the array of animals depending on the type of the user
 const filterAnimals = async (userType, animals) => {
@@ -34,42 +81,5 @@ const filterAnimals = async (userType, animals) => {
   return filteredArray;
 };
 
-// Extracts the animals from the database and filter the results before sending them to the front end
-const handleAnimals = async (req, res, Parse) => {
-  try {
-    const { lang, usertype } = req.cookies;
-    const animalTable = Parse.Object.extend("AnimalV2");
-    const query = new Parse.Query(animalTable);
-    query.equalTo("isActive", true);
-    const activeAnimals = await query.find();
 
-    const animalsInfo = await animalInfo.getAnimals(activeAnimals, lang);
-    const result = await filterAnimals(usertype, animalsInfo);
-    res.json(result);
-  } catch (err) {
-    res.json(err);
-  }
-};
-
-// Extracts the information of a specific animal from the database
-const handleSingleAnimal = async (req, res, Parse) => {
-  try {
-    const { lang } = req.cookies;
-    const animalID = req.params.animalID;
-    const animalTable = Parse.Object.extend("AnimalV2");
-    const query = new Parse.Query(animalTable);
-    const animal = await query.get(animalID);
-    const isAdopted = await adopts.isAdopted(req, res, Parse, animalID);
-    const animal_info = await animalInfo.getAnimalInfo(animal, Parse, lang);
-    animal_info.isAdopted = isAdopted;
-    res.json(animal_info);
-  } catch (err) {
-    res.json(err);
-  }
-};
-
-module.exports = {
-  handleAnimals: handleAnimals,
-  handleSingleAnimal,
-  handleSingleAnimal,
-};
+module.exports = router;

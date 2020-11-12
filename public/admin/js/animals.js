@@ -45,19 +45,27 @@ const createRow = () => {
   return div;
 };
 
-const createCard = (object) => {
+const createCard = (object, type) => {
   const col = createDiv("col-xl");
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
-  anchor.href = "updateAnimal.html";
+
+  if (type === "animals") {
+    anchor.href = "updateAnimal.html";
+  } else if (type === "colleagues") {
+    anchor.href = "updateColleague.html";
+  }
+
   anchor.onclick = function () {
     window.localStorage.setItem("currentAnimal", object.id);
   };
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  const img = createImage(object.profilePhoto);
-  button.appendChild(img);
+  if (object.profilePhoto) {
+    const img = createImage(object.profilePhoto);
+    button.appendChild(img);
+  }
   const div = createDiv("card-img-overlay", object.id);
   const h5 = createTitle(object.species);
   div.appendChild(h5);
@@ -65,12 +73,12 @@ const createCard = (object) => {
   return col;
 };
 
-const createCards = (array, container) => {
+const createCards = (array, container, type) => {
   let count = 0;
   let row = createRow();
 
   for (elem of array) {
-    let col = createCard(elem);
+    let col = createCard(elem, type);
     row.appendChild(col);
     count++;
     if (
@@ -90,8 +98,6 @@ if (!document.cookie.includes("token")) {
 fetch("/admin/animals")
   .then((res) => res.json())
   .then((animalsInfo) => {
-    console.log(animalsInfo);
-
     const animals = [];
     const colleagues = [];
     animalsInfo.forEach((elem) => {
@@ -102,8 +108,10 @@ fetch("/admin/animals")
       }
     });
 
-    createCards(animals, containerAnimals);
-    createCards(colleagues, containerColleagues);
+    animals.sort(compareNames);
+
+    createCards(animals, containerAnimals, "animals");
+    createCards(colleagues, containerColleagues, "colleagues");
 
     loaderElements.className += " hidden";
   })
@@ -114,3 +122,13 @@ window.onclick = (event) => {
     window.localStorage.setItem("currentAnimal", event.target.id);
   }
 };
+
+function compareNames(animal1, animal2) {
+  if (animal1.species < animal2.species) {
+    return -1;
+  }
+  if (animal1.species > animal2.species) {
+    return 1;
+  }
+  return 0;
+}

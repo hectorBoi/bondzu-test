@@ -12,71 +12,19 @@ const successfulSaveElem = document.getElementById("successfulSave");
 
 //Datos únicos
 const iframeElem = document.getElementById("iframe");
+const nombreElem = document.getElementById("nombre");
 const youtubeIdElem = document.getElementById("youtubeId");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const statusElem = document.getElementById("status");
 const statusTextElem = document.getElementById("statusText");
 
 //Datos en español
-const apodoElem = document.getElementById("apodo");
-const especieElem = document.getElementById("especie");
 const acercaElem = document.getElementById("acerca");
 const caracteristicasElem = document.getElementById("caracteristicas");
-const nombreCientElem = document.getElementById("nomCient");
-const estadoConElem = document.getElementById("estadoCon");
-const distGeoElem = document.getElementById("distGeo");
-const habitatEspElem = document.getElementById("habitatEsp");
-const dietaElem = document.getElementById("dieta");
-const reproduccionElem = document.getElementById("reproduccion");
 
 //English data
-const nicknameElem = document.getElementById("nickname");
-const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
-const scieNameElem = document.getElementById("scieName");
-const conStatusElem = document.getElementById("conStatus");
-const geoDistElem = document.getElementById("geoDist");
-const habitatEngElem = document.getElementById("habitatEng");
-const dietElem = document.getElementById("diet");
-const reproductionElem = document.getElementById("reproduction");
-
-//Llaves características
-const caracs = [
-  "Nombre científico",
-  "Estado de conservación",
-  "Distribución geográfica",
-  "Hábitat",
-  "Dieta",
-  "Reproducción",
-];
-
-const caracsElems = [
-  nombreCientElem,
-  estadoConElem,
-  distGeoElem,
-  habitatEspElem,
-  dietaElem,
-  reproduccionElem,
-];
-
-const characs = [
-  "Scientific name",
-  "Conservation status",
-  "Geographical distribution",
-  "Habitat",
-  "Diet",
-  "Reproduction",
-];
-
-const characsElems = [
-  scieNameElem,
-  conStatusElem,
-  geoDistElem,
-  habitatEngElem,
-  dietElem,
-  reproductionElem,
-];
 
 //Keepers
 const allKeepersElem = document.getElementById("allKeepers");
@@ -100,7 +48,12 @@ const createSelectKeepers = (array, form, currentKeeper) => {
 fetch(`/admin/animals/${animalID}`)
   .then((res) => res.json())
   .then((animal_info) => {
+    console.log(animal_info);
+
     titleElem.innerText = `Actualizar: ${animal_info.name}`;
+
+    //Nombre
+    nombreElem.setAttribute("value", animal_info.name);
 
     //Switch status (Animal status - Active/Inactive)
     if (animal_info.isActive) {
@@ -133,51 +86,25 @@ fetch(`/admin/animals/${animalID}`)
     );
 
     //Datos en español
-    apodoElem.setAttribute("value", animal_info.name);
-    especieElem.setAttribute("value", animal_info.species);
     acercaElem.innerHTML = animal_info.about;
 
     let chars = "";
     for (let key in animal_info.characteristics) {
-      for (let i = 0; i < caracs.length; i++) {
-        if (key === caracs[i]) {
-          if (i == 0) {
-            //Nombre científico (input value)
-            caracsElems[i].value = animal_info.characteristics[key];
-          } else {
-            //Demás atributos (textarea)
-            caracsElems[i].innerHTML = animal_info.characteristics[key];
-          }
-        }
-      }
-
-      let temp = `${key}: ${animal_info.characteristics[key]}\n`;
+      let temp = animal_info.characteristics[key];
       chars = chars.concat(temp);
     }
+
     caracteristicasElem.innerHTML = chars;
 
     //English data
-    nicknameElem.setAttribute("value", animal_info.name_en);
-    speciesElem.setAttribute("value", animal_info.species_en);
     aboutElem.innerHTML = animal_info.about_en;
 
     chars = "";
     for (let key in animal_info.characteristics_en) {
-      for (let i = 0; i < characs.length; i++) {
-        if (key === characs[i]) {
-          if (i == 0) {
-            //Scientific name (input value)
-            characsElems[i].value = animal_info.characteristics_en[key];
-          } else {
-            //Other attributes (textarea)
-            characsElems[i].innerHTML = animal_info.characteristics_en[key];
-          }
-        }
-      }
-
-      let temp = `${key}: ${animal_info.characteristics_en[key]}\n`;
+      let temp = animal_info.characteristics_en[key];
       chars = chars.concat(temp);
     }
+
     characteristicsElem.innerHTML = chars;
 
     loaderElements.className += " hidden";
@@ -191,83 +118,42 @@ submitSaveElem.addEventListener("click", () => {
 
   //Información única
   const status = statusElem.checked;
+  const nombre = nombreElem.value;
   const youtubeId = youtubeIdElem.value;
   const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
 
   //Información español
-  const apodo = apodoElem.value;
-  const especie = especieElem.value;
   const acerca = acercaElem.value;
-  const nombreCient = nombreCientElem.value;
-  const estadoCon = estadoConElem.value;
-  const distGeo = distGeoElem.value;
-  const habitatEsp = habitatEspElem.value;
-  const dieta = dietaElem.value;
-  const reproduccion = reproduccionElem.value;
+  const caracteristicas = {
+    "": caracteristicasElem.value,
+  };
 
   //English information
-  const nickname = nicknameElem.value;
-  const species = speciesElem.value;
   const about = aboutElem.value;
-  const scieName = scieNameElem.value;
-  const conStatus = conStatusElem.value;
-  const geoDist = geoDistElem.value;
-  const habitatEng = habitatEngElem.value;
-  const diet = dietElem.value;
-  const reproduction = reproductionElem.value;
+  const characteristics = {
+    "": characteristicsElem.value,
+  };
 
   if (
     youtubeId != "" &&
-    apodo != "" &&
-    especie != "" &&
+    nombre != "" &&
     acerca != "" &&
-    nombreCient != "" &&
-    estadoCon != "" &&
-    distGeo != "" &&
-    habitatEsp != "" &&
-    dieta != "" &&
-    reproduccion != "" &&
-    nickname != "" &&
-    species != "" &&
+    caracteristicas != "" &&
+    keeper != "" &&
     about != "" &&
-    scieName != "" &&
-    conStatus != "" &&
-    geoDist != "" &&
-    habitatEng != "" &&
-    diet != "" &&
-    reproduction != ""
+    characteristics != ""
   ) {
     buttonSpinnerElem.removeAttribute("style");
 
-    //Características español
-    const caracteristicas = {
-      "Nombre científico": nombreCient,
-      "Estado de conservación": estadoCon,
-      "Distribución geográfica": distGeo,
-      Hábitat: habitatEsp,
-      Dieta: dieta,
-      Reproducción: reproduccion,
-    };
-
-    //English characteristics
-    const characteristics = {
-      "Scientific name": scieName,
-      "Conservation status": conStatus,
-      "Geographical distribution": geoDist,
-      Habitat: habitatEng,
-      Diet: diet,
-      Reproduction: reproduction,
-    };
-
     const request = {
-      name: apodo,
-      name_en: nickname,
+      name: nombre,
+      name_en: nombre,
       about: acerca,
       about_en: about,
       characteristics: caracteristicas,
       characteristics_en: characteristics,
-      species: especie,
-      species_en: species,
+      species: "Colega",
+      species_en: "Colleague",
       youtubeID: youtubeId,
       keeper: keeper,
       isActive: status,

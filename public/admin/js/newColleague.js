@@ -8,31 +8,18 @@ const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
 //Datos únicos
+const nombreElem = document.getElementById("nombre");
 const youtubeIdElem = document.getElementById("youtubeId");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const statusElem = document.getElementById("status");
 
 //Datos en español
-const apodoElem = document.getElementById("apodo");
-const especieElem = document.getElementById("especie");
 const acercaElem = document.getElementById("acerca");
-const nombreCientElem = document.getElementById("nomCient");
-const estadoConElem = document.getElementById("estadoCon");
-const distGeoElem = document.getElementById("distGeo");
-const habitatEspElem = document.getElementById("habitatEsp");
-const dietaElem = document.getElementById("dieta");
-const reproduccionElem = document.getElementById("reproduccion");
+const caracteristicasElem = document.getElementById("caracteristicas");
 
 //English data
-const nicknameElem = document.getElementById("nickname");
-const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
-const scieNameElem = document.getElementById("scieName");
-const conStatusElem = document.getElementById("conStatus");
-const geoDistElem = document.getElementById("geoDist");
-const habitatEngElem = document.getElementById("habitatEng");
-const dietElem = document.getElementById("diet");
-const reproductionElem = document.getElementById("reproduction");
+const characteristicsElem = document.getElementById("characteristics");
 
 //Keepers
 const allKeepersElem = document.getElementById("allKeepers");
@@ -67,84 +54,42 @@ submitSaveElem.addEventListener("click", () => {
 
   //Información única
   const status = statusElem.checked;
+  const nombre = nombreElem.value;
   const youtubeId = youtubeIdElem.value;
   const keeper = allKeepersElem.options[allKeepersElem.selectedIndex].value;
 
   //Información español
-  const apodo = apodoElem.value;
-  const especie = especieElem.value;
   const acerca = acercaElem.value;
-  const nombreCient = nombreCientElem.value;
-  const estadoCon = estadoConElem.value;
-  const distGeo = distGeoElem.value;
-  const habitatEsp = habitatEspElem.value;
-  const dieta = dietaElem.value;
-  const reproduccion = reproduccionElem.value;
+  const caracteristicas = {
+    "": caracteristicasElem.value,
+  };
 
   //English information
-  const nickname = nicknameElem.value;
-  const species = speciesElem.value;
   const about = aboutElem.value;
-  const scieName = scieNameElem.value;
-  const conStatus = conStatusElem.value;
-  const geoDist = geoDistElem.value;
-  const habitatEng = habitatEngElem.value;
-  const diet = dietElem.value;
-  const reproduction = reproductionElem.value;
+  const characteristics = {
+    "": characteristicsElem.value,
+  };
 
   if (
     youtubeId != "" &&
-    apodo != "" &&
-    especie != "" &&
+    nombre != "" &&
     acerca != "" &&
-    nombreCient != "" &&
-    estadoCon != "" &&
-    distGeo != "" &&
-    habitatEsp != "" &&
-    dieta != "" &&
-    reproduccion != "" &&
-    nickname != "" &&
-    species != "" &&
+    caracteristicas != "" &&
     about != "" &&
-    scieName != "" &&
-    conStatus != "" &&
-    geoDist != "" &&
-    habitatEng != "" &&
-    diet != "" &&
-    reproduction != "" &&
-    keeper != ""
+    keeper != "" &&
+    characteristics != ""
   ) {
     buttonSpinnerElem.removeAttribute("style");
 
-    //Características español
-    const caracteristicas = {
-      "Nombre científico": nombreCient,
-      "Estado de conservación": estadoCon,
-      "Distribución geográfica": distGeo,
-      Hábitat: habitatEsp,
-      Dieta: dieta,
-      Reproducción: reproduccion,
-    };
-
-    //English characteristics
-    const characteristics = {
-      "Scientific name": scieName,
-      "Conservation status": conStatus,
-      "Geographical distribution": geoDist,
-      Habitat: habitatEng,
-      Diet: diet,
-      Reproduction: reproduction,
-    };
-
     const request = {
-      name: apodo,
-      name_en: nickname,
+      name: nombre,
+      name_en: nombre,
       about: acerca,
       about_en: about,
       characteristics: caracteristicas,
       characteristics_en: characteristics,
-      species: especie,
-      species_en: species,
+      species: "Colega",
+      species_en: "Colleague",
       youtubeID: youtubeId,
       keeper: keeper,
       isActive: status,

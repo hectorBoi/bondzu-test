@@ -1,5 +1,109 @@
+// Represents all the routes for the admin console
+const { Parse } = require("../database");
+const { Router } = require("express");
+
+// Initializes the router
+const router = Router();
+
+// Returns the profile information for the user
+router.get('/', async (req, res, next) => {
+  try {
+    const { username } = req.cookies;
+    // Gets the reference for the user
+    const userTable = Parse.Object.extend("User");
+    const query = new Parse.Query(userTable);
+    query.equalTo("username", username);
+    const user = await query.first();
+
+    // Gets the reference for the user type
+    const typeTable = Parse.Object.extend("UserType");
+    const queryType = new Parse.Query(typeTable);
+    const usertype = await queryType.get(user.get("userType").id);
+
+    // Extracts the user's information
+    const name = user.get("name");
+    const lastname = user.get("lastname");
+    const photo = await getPhoto(username, Parse);
+
+    // Constructs the response for the fron tend
+    const response = {
+      name,
+      lastname,
+      username,
+      photo,
+      usertype: usertype.get("name"),
+    };
+
+    res.json(response);
+  } catch (err) {
+    console.log(err)
+    next(err)
+  }
+});
+
+// Updates the profile with the given information and returns the updated info
+router.post('/', async (req, res, next) => {
+  try {
+    const { Nname, Nlastname, Npassword } = req.body;
+    const { username, token, lang } = req.cookies;
+    // Gets the reference for the user table
+    const userTable = Parse.Object.extend("User");
+    const query = new Parse.Query(userTable);
+    query.equalTo("username", username);
+    const user = await query.first();
+
+    // In case that the request is to update the user profile picture the request is treated differently
+    if (req.files) {
+      // Gets the reference for the user
+      const userTable = Parse.Object.extend("User");
+      const query = new Parse.Query(userTable);
+      query.equalTo("username", username);
+      const user = await query.first();
+
+      // Constructs the picture from the bit array sended by the frontend
+      const data = Array.from(Buffer.from(req.files.newProfilepic.data));
+      const contentType = req.headers["content-type"];
+      const file = new Parse.File("testing.png", data, contentType);
+      user.set("photoFile", file);
+      // Saves the new photo
+      const newUser = await user.save(null, { sessionToken: token });
+      if (lang == "en") {
+        res.redirect("/en/profile.html");
+      } else {
+        res.redirect("/es/profile.html");
+      }
+    } else {
+      // Updates the fields with the new info
+      if (Nname) {
+        user.set("name", Nname);
+      }
+
+      if (Nlastname) {
+        user.set("lastname", Nlastname);
+      }
+
+      if (Npassword) {
+        user.setPassword(Npassword);
+      }
+
+      const newUser = await user.save(null, { sessionToken: token });
+
+      let resp = { 
+        message: "Success", 
+        token: user.getSessionToken() 
+      }
+      
+      res.json(resp);
+    }
+  } catch (err) {
+    console.log(err);
+    next(err)
+ }
+});
+
+// === Helper functions used in the routes
 //Gets the URL of the photo of the user
-const getPhoto = async (username, Parse) => {
+const getPhoto = async (username) => {
   try {
     const userTable = Parse.Object.extend("User");
     const query = new Parse.Query(userTable);
@@ -21,82 +125,4 @@ const getPhoto = async (username, Parse) => {
   }
 };
 
-// Returns the users information
-const handleProfile = async (req, res, Parse) => {
-  try {
-    const { username } = req.cookies;
-    const userTable = Parse.Object.extend("User");
-    const query = new Parse.Query(userTable);
-    query.equalTo("username", username);
-    const user = await query.first();
-
-    const typeTable = Parse.Object.extend("UserType");
-    const queryType = new Parse.Query(typeTable);
-    const usertype = await queryType.get(user.get("userType").id);
-
-    const name = user.get("name");
-    const lastname = user.get("lastname");
-    const photo = await getPhoto(username, Parse);
-
-    const response = {
-      name,
-      lastname,
-      username,
-      photo,
-      usertype: usertype.get("name"),
-    };
-
-    res.json(response);
-  } catch (err) {
-    res.json("User not found");
-  }
-};
-
-//Updates the user profile with new info
-const updateProfile = async (req, res, Parse) => {
-  try {
-    const { Nname, Nlastname, Npassword } = req.body;
-    const { username, token } = req.cookies;
-    const userTable = Parse.Object.extend("User");
-    const query = new Parse.Query(userTable);
-    query.equalTo("username", username);
-    const user = await query.first();
-
-    if (req.files) {
-      const userTable = Parse.Object.extend("User");
-      const query = new Parse.Query(userTable);
-      query.equalTo("username", username);
-      const user = await query.first();
-
-      const data = Array.from(Buffer.from(req.files.newProfilepic.data));
-      const contentType = req.headers["content-type"];
-      const file = new Parse.File("testing.png", data, contentType);
-      user.set("photoFile", file);
-      const newUser = await user.save(null, { sessionToken: token });
-      res.redirect("/profile.html");
-    } else {
-      if (Nname) {
-        user.set("name", Nname);
-      }
-
-      if (Nlastname) {
-        user.set("lastname", Nlastname);
-      }
-
-      if (Npassword) {
-        user.setPassword(Npassword);
-      }
-
-      const newUser = await user.save(null, { sessionToken: token });
-      res.json({ message: "Success" });
-    }
-  } catch (err) {
-    console.log(err);
-    res.json("Not saved");
-  }
-};
-
-module.exports = {
-  handleProfile: handleProfile,
-  updateProfile: updateProfile,
-};
+module.exports = router;
