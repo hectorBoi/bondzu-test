@@ -60,6 +60,8 @@ app.use('/adoptions', adoptions.router);
 app.use('/profile', profile);
 // Controller functions for one type of execution
 const { Parse } = require("./database"); // This is only to pass the database
+// Manages the login for admins
+app.post("/adminLogin", login.signinAuth(Parse));
 
 app.post("/login", login.signinAuth(Parse));
 app.post("/register", (req, res) => {register.handleRegister(req, res, Parse)});

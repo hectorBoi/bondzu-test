@@ -22,7 +22,7 @@ router.get('/all', async (req, res, next) => {
     const result = await filterAnimals(usertype, animalsInfo);
     res.json(result);
   } catch (err) {
-    next(error)
+    next(err)
   }
 });
 
@@ -42,7 +42,7 @@ router.get('/:animalID', async (req, res, next) => {
     animal_info.isAdopted = isAdopted;
     res.json(animal_info);
   } catch (err) {
-    next(error)
+    next(err)
   }
 });
 

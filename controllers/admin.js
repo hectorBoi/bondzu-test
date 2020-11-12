@@ -24,7 +24,7 @@ router.get('/animals', async (req, res, next) => {
     const animalsInfo = await animalInfo.getAnimals(animals);
     res.json(animalsInfo);
   } catch (err) {
-    next(error)
+    next(err)
   }
 });
 
@@ -354,7 +354,7 @@ router.post('/zoo', async (req, res, next) => {
     const zooCreated = await zoo.save(null, { sessionToken: token });
     res.json(zooCreated);
   } catch (err) {
-    next(error)
+    next(err)
   }
 });
 
@@ -404,7 +404,7 @@ router.post('/zoo/:zooID', async (req, res, next) => {
 
     res.json(zooUpdated);
   } catch (err) {
-    next(error)
+    next(err)
   }
 });
 
@@ -426,7 +426,7 @@ router.get('/zoos', async (req, res, next) => {
     const zoosInfo = await animalInfo.getZoos(zoos);
     res.json(zoosInfo);
   } catch (err) {
-    next(error)
+    next(err)
   }
 });
 
@@ -449,7 +449,7 @@ router.get('/zoos/:zooID', async (req, res, next) => {
 
     res.json(zoo_info);
   } catch (err) {
-     next(error)
+     next(err)
    }
  });
 

@@ -25,7 +25,7 @@ router.get('/:userID', async (req, res, next) => {
 
     res.json(adoptionsInfo);
   } catch (err) {
-    next(error)
+    next(err)
   }
 });
 
@@ -52,7 +52,7 @@ router.post('/:animalID', async (req, res, next) => {
     const test = await user.save(null, { sessionToken: token });
     res.json("Worked");
   } catch (err) {
-    next(error)
+    next(err)
   }
 });
 
