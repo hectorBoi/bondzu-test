@@ -13,6 +13,7 @@ const getKeeper = async (id) => {
   }
 };
 
+// Get the video of a specific animal based on the id
 const getVideo = async (id) => {
   try {
     const videoTable = Parse.Object.extend("Video");

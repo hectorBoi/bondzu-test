@@ -45,6 +45,7 @@ updateProfileElem.addEventListener("click", () => {
   const newPasswordConfirm = newPasswordConfirmElem.value;
 
   let request = {
+    lang: window.localStorage.getItem("lang"),
     Nname: newName,
     Nlastname: newLastname,
     Npassword: newPassword,

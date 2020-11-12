@@ -14,7 +14,7 @@ const loaderElements = document.getElementById("loaderElements");
 const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
-fetch(`/singleAnimal/${animalID}`)
+fetch(`/animals/${animalID}`)
   .then((res) => res.json())
   .then((animal) => {
     let youtubeURL = "";

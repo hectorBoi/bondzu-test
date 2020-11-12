@@ -94,15 +94,7 @@ if (!document.cookie.includes("token")) {
   location.replace("/");
 }
 
-fetch("/animals", {
-  method: "post",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    lang: window.localStorage.getItem("lang"),
-  }),
-})
+fetch("/animals/all")
   .then((res) => res.json())
   .then((animalsColleagues) => {
     const animals = [];

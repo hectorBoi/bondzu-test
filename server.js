@@ -1,5 +1,4 @@
 const express = require("express");
-// const Parse = require("parse/node");
 const mailer = require("express-mailer");
 const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
@@ -7,20 +6,17 @@ const helmet = require("helmet");
 
 require('dotenv').config();
 
-// Imports all the controllers for the different routes
-// const register = require("./controllers/register");
-// const signin = require("./controllers/login");
-// const profile = require("./controllers/profile");
-// const animals = require("./controllers/animals");
-// const adoptions = require("./controllers/adoptions");
-// const logout = require("./controllers/logout");
-// const banner = require("./controllers/banner");
-// const admin = require("./controllers/admin");
-// const passwordReset = require("./controllers/passwordReset");
-const middlewares = require("./middlewares");
-
-// This is for the new routes
+// Routers
 const admin = require("./controllers/admin");
+const profile = require("./controllers/profile");
+const adoptions = require("./controllers/adoptions");
+const animals = require("./controllers/animals");
+const middlewares = require("./middlewares");
+// Controller functions
+const register = require("./controllers/register");
+const login = require("./controllers/login");
+const logout = require("./controllers/logout");
+const passwordReset = require("./controllers/passwordReset");
 
 // Declares the express server and middleware
 const app = express();
@@ -57,72 +53,22 @@ app.get("/", (req, res) => {
   }
 });
 
-// Using the new routes
+// Routers
 app.use('/admin', admin);
+app.use('/animals', animals);
+app.use('/adoptions', adoptions.router);
+app.use('/profile', profile);
+// Controller functions for one type of execution
+const { Parse } = require("./database"); // This is only to pass the database
 
-///////////////////////////////
+app.post("/login", login.signinAuth(Parse));
+app.post("/register", (req, res) => {register.handleRegister(req, res, Parse)});
+app.post("/passwordReset", (req, res) => {passwordReset.passwordReset(req, res, app.mailer)});
+app.post("/logout", (req, res) => {logout.handleLogout(req, res, Parse)});
 
-// Handlers for all the routes
-// app.post("/login", signin.signinAuth(Parse));
-
-// app.post("/register", (req, res) => {
-//   register.handleRegister(req, res, Parse);
-// });
-
-// app.post("/passwordReset", (req, res) => {
-//   passwordReset.passwordReset(req, res, Parse, app.mailer);
-// });
-
-// app.post("/logout", (req, res) => {
-//   logout.handleLogout(req, res, Parse);
-// });
-
-// app.get("/profile/", (req, res) => {
-//   profile.handleProfile(req, res, Parse);
-// });
-
-// app.post("/profile", (req, res) => {
-//   profile.updateProfile(req, res, Parse);
-// });
-
-// app.get("/animals", (req, res) => {
-//   animals.handleAnimals(req, res, Parse);
-// });
-
-// app.post("/animals", (req, res) => {
-//   animals.handleAnimals(req, res, Parse);
-// });
-
-// app.get("/singleAnimal/:animalID", (req, res) => {
-//   animals.handleSingleAnimal(req, res, Parse);
-// });
-
-// app.post("/singleAnimal/:animalID", (req, res) => {
-//   animals.handleSingleAnimal(req, res, Parse);
-// });
-
-// app.get("/adoptions/:userID", (req, res) => {
-//   adoptions.getAdoptions(req, res, Parse);
-// });
-
-// app.post("/adoptions", (req, res) => {
-//   // THIS IS TEMPORAL
-//   adoptions.getAdoptions(req, res, Parse);
-// });
-
-// app.post("/adoptions/:animalID", (req, res) => {
-//   adoptions.updateAdoptions(req, res, Parse);
-// });
-
-// app.get("/banner", (req, res) => {
-//   banner.getBanner(req, res, Parse);
-// });
-
+// MiddleWares to catch any type of errors
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
-
-
-////////////////////////////////
 
 // Initializes the server
 const port = process.env.PORT || 8081;
