@@ -90,8 +90,13 @@ const getAnimalInfoAdmin = async (animal) => {
     const video = await getVideo(animal.id);
     const keeper = await getKeeper(animal.get("keepers")[0].id);
     let photo = "";
+    let photoUrl = "";
     if (animal.get("profilePhoto")) {
       photo = animal.get("profilePhoto")._url;
+      photoUrl = photo.replace(
+        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+        "https://d36skj58da74xm.cloudfront.net/"
+      );
     }
 
     let animalInfo = {
@@ -101,7 +106,7 @@ const getAnimalInfoAdmin = async (animal) => {
       about_en: animal.get("about_en"),
       characteristics: animal.get("characteristics"),
       characteristics_en: animal.get("characteristics_en"),
-      profilePhoto: photo,
+      profilePhoto: photoUrl,
       species: animal.get("species"),
       species_en: animal.get("species_en"),
       youtubeID: video,
