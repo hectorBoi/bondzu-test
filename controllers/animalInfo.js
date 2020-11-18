@@ -47,6 +47,7 @@ const getAnimalInfo = async (animal, lang) => {
         );
       }
       let animalInfo = {
+        name: animal.get("name_en"),
         about: animal.get("about_en"),
         characteristics: animal.get("characteristics_en"),
         profilePhoto: photoUrl,
@@ -68,6 +69,7 @@ const getAnimalInfo = async (animal, lang) => {
         );
       }
       let animalInfo = {
+        name: animal.get("name"),
         about: animal.get("about"),
         characteristics: animal.get("characteristics"),
         profilePhoto: photoUrl,

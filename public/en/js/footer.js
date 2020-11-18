@@ -98,12 +98,10 @@ document.getElementById("footer").innerHTML = `
           &copy 2020 Bondzù
         </p>
       </div>
-      <div class="text-center" style="background-color: #cf6f00; margin: 0">
+      <div class="text-center" style="background-color: #ec7c26; padding: 10px">
         <a href="privacidad.html" style="color: white; font-size: 15px; ">
           Privacy notice
         </a>
-        <br>
-        <br>
       </div>
     </footer>
 `;

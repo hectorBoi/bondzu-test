@@ -67,7 +67,7 @@ const createCard = (object, type) => {
     button.appendChild(img);
   }
   const div = createDiv("card-img-overlay", object.id);
-  const h5 = createTitle(object.species);
+  const h5 = createTitle(object.name);
   div.appendChild(h5);
   button.appendChild(div);
   return col;
@@ -124,10 +124,10 @@ window.onclick = (event) => {
 };
 
 function compareNames(animal1, animal2) {
-  if (animal1.species < animal2.species) {
+  if (animal1.name < animal2.name) {
     return -1;
   }
-  if (animal1.species > animal2.species) {
+  if (animal1.name > animal2.name) {
     return 1;
   }
   return 0;

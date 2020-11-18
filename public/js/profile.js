@@ -61,8 +61,9 @@ updateProfileElem.addEventListener("click", () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.token)
-        document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/;"
+        console.log(res.token);
+        document.cookie =
+          "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
         document.cookie = `token=${res.token}; path=/`;
         location.replace("profile.html");
       })
@@ -141,7 +142,7 @@ const createCard = (object) => {
   const img = createImage(object.profilePhoto);
   button.appendChild(img);
   const div = createDiv("card-img-overlay", object.id);
-  const h5 = createTitle(object.species);
+  const h5 = createTitle(object.name);
   div.appendChild(h5);
   button.appendChild(div);
   return col;
@@ -168,6 +169,8 @@ showAdoptionsElem.addEventListener("click", () => {
           }
 
           headerAdoptions.className = "alert alert-success";
+
+          animals.sort(compareNames);
 
           for (animal of animals) {
             let col = createCard(animal);
@@ -239,3 +242,13 @@ submitPhoto.addEventListener("change", () => {
     formPhoto.value = "Update photo";
   }
 });
+
+function compareNames(animal1, animal2) {
+  if (animal1.name < animal2.name) {
+    return -1;
+  }
+  if (animal1.name > animal2.name) {
+    return 1;
+  }
+  return 0;
+}

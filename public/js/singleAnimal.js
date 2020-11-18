@@ -1,5 +1,6 @@
 const iframeElem = document.getElementById("iframe");
 const animalPhotoElem = document.getElementById("animalPhoto");
+const nameElem = document.getElementById("name");
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
@@ -18,16 +19,16 @@ fetch(`/animals/${animalID}`)
   .then((res) => res.json())
   .then((animal) => {
     let youtubeURL = "";
-    console.log("This is the animal id: ", animal.youtubeID)
+    //console.log("This is the animal id: ", animal.youtubeID);
     // Checks if the camera is from youtube or another page
     if (animal.youtubeID.includes("http")) {
-      youtubeURL = animal.youtubeID
-      console.log("youtubeURL")      
-      console.log(youtubeURL)
+      youtubeURL = animal.youtubeID;
+      //console.log("youtubeURL");
+      //console.log(youtubeURL);
     } else {
-      youtubeURL = `https://www.youtube.com/embed/${animal.youtubeID}`
-      console.log("youtubeURL")      
-      console.log(youtubeURL)
+      youtubeURL = `https://www.youtube.com/embed/${animal.youtubeID}`;
+      //console.log("youtubeURL");
+      //console.log(youtubeURL);
     }
     iframeElem.setAttribute("src", youtubeURL);
 
@@ -37,8 +38,9 @@ fetch(`/animals/${animalID}`)
       chars = chars.concat(temp);
     }
 
-    titleElem.innerText = `Bondzù: ${animal.species}`;
+    titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
+    nameElem.innerText = animal.name;
     speciesElem.innerText = animal.species;
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
