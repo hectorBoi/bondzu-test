@@ -62,9 +62,9 @@ updateProfileElem.addEventListener("click", () => {
       .then((res) => res.json())
       .then((res) => {
         console.log(res.token);
-        document.cookie =
-          "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
-        document.cookie = `token=${res.token}; path=/`;
+        // document.cookie =
+        //   "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT; path=/;";
+        // document.cookie = `token=${res.token}; path=/`;
         location.replace("profile.html");
       })
       .catch((err) => err);
