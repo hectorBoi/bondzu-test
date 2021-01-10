@@ -3,7 +3,7 @@ const { Parse } = require("../database");
 const { Router } = require("express");
 
 //Library for image resize
-const sharp = require("sharp");
+// const sharp = require("sharp");
 
 // Initializes the router
 const router = Router();
@@ -59,20 +59,20 @@ router.post("/", async (req, res, next) => {
     if (req.files) {
       const image = req.files.newProfilepic.data;
 
-      let width = 0;
-      let height = 0;
+      // let width = 0;
+      // let height = 0;
 
-      sharp(image)
-        .metadata()
-        .then((metadata) => {
-          width = metadata.width;
-          height = metadata.height;
-        })
-        .catch((e) => {
-          res.status(500, {
-            error: e,
-          });
-        });
+      // sharp(image)
+      //   .metadata()
+      //   .then((metadata) => {
+      //     width = metadata.width;
+      //     height = metadata.height;
+      //   })
+      //   .catch((e) => {
+      //     res.status(500, {
+      //       error: e,
+      //     });
+      //   });
 
       // Gets the reference for the user
       const userTable = Parse.Object.extend("User");
@@ -93,52 +93,52 @@ router.post("/", async (req, res, next) => {
       // Resize the image with new width or height depending its aspect ratio
 
       //Obtain the aspect ratio of the image
-      let aspectRatio = width / height;
+      // let aspectRatio = width / height;
 
-      if (width < height) {
-        //Calculates the new width for the thumbnail
-        let newWidth = Math.round(80 * aspectRatio);
+      // if (width < height) {
+      //   //Calculates the new width for the thumbnail
+      //   let newWidth = Math.round(80 * aspectRatio);
 
-        sharp(image)
-          .resize(newWidth, 80, { fit: "contain" }) //Risize the image with the new sizes
-          .toBuffer()
-          .then((data) => {
-            //Construct the thumbnail from its data and uploaded it to the database
-            const thumbnailData = Array.from(Buffer.from(data));
-            const contentTypeThumbnail = req.headers["content-type"];
-            const thumbnail = new Parse.File(
-              "thumbnail.png",
-              thumbnailData,
-              contentTypeThumbnail
-            );
-            thumbnail.save();
-            user.set("thumbnail", thumbnail);
-          })
-          .catch((err) => {
-            res.status(500, { error: err });
-          });
-      } else {
-        let newHeigth = Math.round(80 / aspectRatio);
+      //   sharp(image)
+      //     .resize(newWidth, 80, { fit: "contain" }) //Risize the image with the new sizes
+      //     .toBuffer()
+      //     .then((data) => {
+      //       //Construct the thumbnail from its data and uploaded it to the database
+      //       const thumbnailData = Array.from(Buffer.from(data));
+      //       const contentTypeThumbnail = req.headers["content-type"];
+      //       const thumbnail = new Parse.File(
+      //         "thumbnail.png",
+      //         thumbnailData,
+      //         contentTypeThumbnail
+      //       );
+      //       thumbnail.save();
+      //       user.set("thumbnail", thumbnail);
+      //     })
+      //     .catch((err) => {
+      //       res.status(500, { error: err });
+      //     });
+      // } else {
+      //   let newHeigth = Math.round(80 / aspectRatio);
 
-        sharp(image)
-          .resize(80, newHeigth, { fit: "contain" }) //Risize the image with the new sizes
-          .toBuffer()
-          .then((data) => {
-            //Construct the thumbnail from its data and uploaded it to the database
-            const thumbnailData = Array.from(Buffer.from(data));
-            const contentTypeThumbnail = req.headers["content-type"];
-            const thumbnail = new Parse.File(
-              "thumbnail.png",
-              thumbnailData,
-              contentTypeThumbnail
-            );
-            thumbnail.save();
-            user.set("thumbnail", thumbnail);
-          })
-          .catch((err) => {
-            res.status(500, { error: err });
-          });
-      }
+      //   sharp(image)
+      //     .resize(80, newHeigth, { fit: "contain" }) //Risize the image with the new sizes
+      //     .toBuffer()
+      //     .then((data) => {
+      //       //Construct the thumbnail from its data and uploaded it to the database
+      //       const thumbnailData = Array.from(Buffer.from(data));
+      //       const contentTypeThumbnail = req.headers["content-type"];
+      //       const thumbnail = new Parse.File(
+      //         "thumbnail.png",
+      //         thumbnailData,
+      //         contentTypeThumbnail
+      //       );
+      //       thumbnail.save();
+      //       user.set("thumbnail", thumbnail);
+      //     })
+      //     .catch((err) => {
+      //       res.status(500, { error: err });
+      //     });
+      // }
 
       // Saves the new photo
       const newUser = await user.save(null, { sessionToken: token });
