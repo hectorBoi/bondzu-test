@@ -4,7 +4,7 @@ const fileUpload = require("express-fileupload");
 const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 
-require('dotenv').config();
+require("dotenv").config();
 
 // Routers
 const admin = require("./controllers/admin");
@@ -54,19 +54,25 @@ app.get("/", (req, res) => {
 });
 
 // Routers
-app.use('/admin', admin);
-app.use('/animals', animals);
-app.use('/adoptions', adoptions.router);
-app.use('/profile', profile);
+app.use("/admin", admin);
+app.use("/animals", animals);
+app.use("/adoptions", adoptions.router);
+app.use("/profile", profile);
 // Controller functions for one type of execution
 const { Parse } = require("./database"); // This is only to pass the database
 // Manages the login for admins
 app.post("/adminLogin", login.signinAuth(Parse));
 
 app.post("/login", login.signinAuth(Parse));
-app.post("/register", (req, res) => {register.handleRegister(req, res, Parse)});
-app.post("/passwordReset", (req, res) => {passwordReset.passwordReset(req, res, app.mailer)});
-app.post("/logout", (req, res) => {logout.handleLogout(req, res, Parse)});
+app.post("/register", (req, res) => {
+  register.handleRegister(req, res, Parse);
+});
+app.post("/passwordReset", (req, res) => {
+  passwordReset.passwordReset(req, res, Parse, app.mailer);
+});
+app.post("/logout", (req, res) => {
+  logout.handleLogout(req, res, Parse);
+});
 
 // MiddleWares to catch any type of errors
 app.use(middlewares.notFound);

@@ -59,8 +59,8 @@ const createCard = (object) => {
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  console.log("object.profilePhoto");
-  console.log(object.profilePhoto);
+  // console.log("object.profilePhoto");
+  // console.log(object.profilePhoto);
   if (object.profilePhoto) {
     const img = createImage(object.profilePhoto);
     button.appendChild(img);
