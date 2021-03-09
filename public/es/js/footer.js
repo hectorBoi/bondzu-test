@@ -46,6 +46,21 @@ document.getElementById("footer").innerHTML = `
                 </div>
                 <div class="col-sm">
                   <a
+                    href="https://vm.tiktok.com/ZMervVtnA/"
+                    style="text-decoration: none"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                  <img
+                    src="../img/tikTokIcon.png"
+                    alt="fbIcon"
+                    height="45"
+                    width="45"
+                  />
+                  </a>
+                </div>
+                <div class="col-sm">
+                  <a
                     href="https://twitter.com/BondzuCubs"
                     style="text-decoration: none;"
                     target="_blank"
