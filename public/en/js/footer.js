@@ -44,7 +44,7 @@ document.getElementById("footer").innerHTML = `
                     />
                   </a>
                 </div>
-                <div class="col-sm">
+                <div class="col-sm" style="margin-top: 2px">
                   <a
                     href="https://vm.tiktok.com/ZMervVtnA/"
                     style="text-decoration: none"

@@ -2,6 +2,10 @@ body {
   overflow: auto;
 }
 
+h1 {
+  padding: 25px;
+  margin: 10px;
+}
 .animalCardHeader {
   background-color: hsla(0, 0%, 100%, 0.6);
   font-size: 0.85rem;
