@@ -46,6 +46,24 @@ router.get('/:animalID', async (req, res, next) => {
   }
 });
 
+// Extracts the technical data of the animal from the database based on the provided ID
+router.get('/technicalData/:animalID', async (req, res, next) => {
+  try {
+    const { lang } = req.cookies;
+    const animalID = req.params.animalID;
+    // Gets the reference for the animal table
+    const animalTable = Parse.Object.extend("AnimalV2");
+    const query = new Parse.Query(animalTable);
+    const animal = await query.get(animalID);
+    // Extracts the animal and checks for the information
+    const animal_info = await animalInfo.getAnimalTechnicalInfo(animal, lang);
+    // Assigns if the animal is adopted or not by the user that made the request
+    res.json(animal_info);
+  } catch (err) {
+    next(err)
+  }
+});
+
 // === Helper functions used in the routes
 
 // Filter the array of animals depending on the type of the user

@@ -84,6 +84,41 @@ const getAnimalInfo = async (animal, lang) => {
   }
 };
 
+
+// Transforms the array of Parse.Objects into Json
+const getAnimalTechnicalInfo = async (animal, lang) => {
+  try {
+    if (lang === "en") {
+      const video = await getVideo(animal.id);
+      const keeper = await getKeeper(animal.get("keepers")[0].id);
+      let animalInfo = {
+        name: animal.get("name_en"),
+        about: animal.get("about_en"),
+        species: animal.get("species_en"),
+        technicalData: animal.get("technicalData_en"),
+        keeper: keeper,
+        youtubeID: video,
+      };
+      return animalInfo;
+    } else {
+      const video = await getVideo(animal.id);
+      const keeper = await getKeeper(animal.get("keepers")[0].id);
+      let animalInfo = {
+        name: animal.get("name"),
+        about: animal.get("about"),
+        species: animal.get("species"),
+        technicalData: animal.get("technicalData"),
+        keeper: keeper,
+        youtubeID: video,
+      };
+      return animalInfo;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 // Transforms the array of Parse.Objects into Json
 const getAnimalInfoAdmin = async (animal) => {
   try {
@@ -112,6 +147,8 @@ const getAnimalInfoAdmin = async (animal) => {
       youtubeID: video,
       keeper: keeper,
       isActive: animal.get("isActive"),
+      technicalData: animal.get("technicalData"),
+      technicalData_en: animal.get("technicalData_en"),
     };
     return animalInfo;
   } catch (error) {
