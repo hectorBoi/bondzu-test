@@ -84,7 +84,6 @@ const getAnimalInfo = async (animal, lang) => {
   }
 };
 
-
 // Transforms the array of Parse.Objects into Json
 const getAnimalTechnicalInfo = async (animal, lang) => {
   try {
@@ -117,7 +116,6 @@ const getAnimalTechnicalInfo = async (animal, lang) => {
     console.log(error);
   }
 };
-
 
 // Transforms the array of Parse.Objects into Json
 const getAnimalInfoAdmin = async (animal) => {
@@ -239,6 +237,7 @@ const getZooInfo = async (zoo) => {
 module.exports = {
   getAnimalInfo: getAnimalInfo,
   getAnimals: getAnimals,
+  getAnimalTechnicalInfo: getAnimalTechnicalInfo,
   getAnimalInfoAdmin: getAnimalInfoAdmin,
   getZoos: getZoos,
   getZooInfo: getZooInfo,
