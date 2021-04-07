@@ -7,7 +7,7 @@ const { Router } = require("express");
 const router = Router();
 
 // Returns all the animals to show the catalog inside the admin console
-router.get('/animals', async (req, res, next) => {
+router.get("/animals", async (req, res, next) => {
   try {
     // Verifies if the user making the request is an Admin
     const { username } = req.cookies;
@@ -24,12 +24,12 @@ router.get('/animals', async (req, res, next) => {
     const animalsInfo = await animalInfo.getAnimals(animals);
     res.json(animalsInfo);
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
 // Returns all the zoos for the pages where the admin can select the new zoo for a given animal or colleague
-router.get('/animals/keepers', async (req, res, next) => {
+router.get("/animals/keepers", async (req, res, next) => {
   try {
     // Verifies if the user making the request is an Admin
     const { username } = req.cookies;
@@ -42,17 +42,17 @@ router.get('/animals/keepers', async (req, res, next) => {
     allKeepers = await getAllKeepers();
 
     const resp = {
-      allKeepers: allKeepers
-    }
+      allKeepers: allKeepers,
+    };
 
     res.json(resp);
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
 // Returns all the information of single animal identified by the ID given for the admin
-router.get('/animals/:animalID', async (req, res, next) => {
+router.get("/animals/:animalID", async (req, res, next) => {
   try {
     // Verifies if the user making the request is an Admin
     const { username } = req.cookies;
@@ -71,12 +71,12 @@ router.get('/animals/:animalID', async (req, res, next) => {
 
     res.json(animal_info);
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
 // Updates the animal with the info provided by the admin console, returns the updated info
-router.post('/animals/:animalID', async (req, res, next) => {
+router.post("/animals/:animalID", async (req, res, next) => {
   try {
     const { username, token } = req.cookies;
     const animalID = req.params.animalID;
@@ -89,6 +89,8 @@ router.post('/animals/:animalID', async (req, res, next) => {
       about_en,
       characteristics,
       characteristics_en,
+      technicalData,
+      technicalData_en,
       species,
       species_en,
       youtubeID,
@@ -179,6 +181,14 @@ router.post('/animals/:animalID', async (req, res, next) => {
       animal.set("keepers", keeperArray);
     }
 
+    if (technicalData) {
+      animal.set("technicalData", technicalData);
+    }
+
+    if (technicalData_en) {
+      animal.set("technicalData_en", technicalData_en);
+    }
+
     // In case that the request is to update the animal photo, the request is treated differently
     if (req.files) {
       console.log("In the update photo");
@@ -191,12 +201,12 @@ router.post('/animals/:animalID', async (req, res, next) => {
     const updatedAnimal = await animal.save(null, { sessionToken: token });
     res.json(updatedAnimal);
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
 // Creates an animal and video with info provided by the admin console, returns to the index page
-router.post('/animals', async (req, res, next) => {
+router.post("/animals", async (req, res, next) => {
   try {
     const { username, token } = req.cookies;
 
@@ -208,6 +218,8 @@ router.post('/animals', async (req, res, next) => {
       about_en,
       characteristics,
       characteristics_en,
+      technicalData,
+      technicalData_en,
       species,
       species_en,
       youtubeID,
@@ -240,7 +252,7 @@ router.post('/animals', async (req, res, next) => {
 
     const keeperArray = [keeperPointer];
 
-    // Updates all the fields of the animal with the new information sended in the request
+    // Updates all the fields of the animal with the new information sent in the request
     if (name) {
       animal.set("name", name);
     }
@@ -283,6 +295,14 @@ router.post('/animals', async (req, res, next) => {
       animal.set("keepers", keeperArray);
     }
 
+    if (technicalData) {
+      animal.set("technicalData", technicalData);
+    }
+
+    if (technicalData_en) {
+      animal.set("technicalData_en", technicalData_en);
+    }
+
     animal.set("adopters", 0);
 
     // In case that the request is to update the animal photo, the request is treated differently
@@ -305,23 +325,18 @@ router.post('/animals', async (req, res, next) => {
     const newVideo = await video.save(null, { sessionToken: token });
 
     res.json(updateAnimal);
-  } catch(err) {
-    next(err)
+  } catch (err) {
+    next(err);
   }
 });
 
 // Creates a zoo with the info provided by the admin console, returns to the index page
-router.post('/zoo', async (req, res, next) => {
+router.post("/zoo", async (req, res, next) => {
   try {
     const { username, token } = req.cookies;
 
     // Gets all the variables sended in the request
-    const {
-      name,
-      location,
-      description,
-      photoUrl
-    } = req.body;
+    const { name, location, description, photoUrl } = req.body;
 
     // Verifies that the user making the request is admin
     const user = await getUser(username);
@@ -354,23 +369,18 @@ router.post('/zoo', async (req, res, next) => {
     const zooCreated = await zoo.save(null, { sessionToken: token });
     res.json(zooCreated);
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
 // Update the zoo identified by the ID given for the admin
-router.post('/zoo/:zooID', async (req, res, next) => {
+router.post("/zoo/:zooID", async (req, res, next) => {
   try {
     const { username, token } = req.cookies;
-    
+
     // Gets all the variables sended in the request
-    const {
-      name,
-      location,
-      description,
-      photoUrl
-    } = req.body;
-    
+    const { name, location, description, photoUrl } = req.body;
+
     const zooID = req.params.zooID;
 
     // Verifies that the user making the request is admin
@@ -404,12 +414,12 @@ router.post('/zoo/:zooID', async (req, res, next) => {
 
     res.json(zooUpdated);
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
 // Update the zoo returns a list of all the zoos for the catalog in the admin console
-router.get('/zoos', async (req, res, next) => {
+router.get("/zoos", async (req, res, next) => {
   try {
     const { username } = req.cookies;
     const user = await getUser(username);
@@ -426,18 +436,18 @@ router.get('/zoos', async (req, res, next) => {
     const zoosInfo = await animalInfo.getZoos(zoos);
     res.json(zoosInfo);
   } catch (err) {
-    next(err)
+    next(err);
   }
 });
 
 // Returns all the information of a specific zoo to the admin console
-router.get('/zoos/:zooID', async (req, res, next) => {
+router.get("/zoos/:zooID", async (req, res, next) => {
   try {
     const { username } = req.cookies;
     const zooID = req.params.zooID;
 
     const user = await getUser(username);
-    
+
     // Verifies that the user is an admin
     if (!user.get("isAdmin")) {
       throw { message: "No admin" };
@@ -449,9 +459,9 @@ router.get('/zoos/:zooID', async (req, res, next) => {
 
     res.json(zoo_info);
   } catch (err) {
-     next(err)
-   }
- });
+    next(err);
+  }
+});
 
 // === This are all the helpers functions used in the routes
 
@@ -459,19 +469,18 @@ router.get('/zoos/:zooID', async (req, res, next) => {
 const getAllKeepers = async () => {
   try {
     let response = [];
-  
+
     const zooTable = Parse.Object.extend("Zoo");
     const zooQuery = new Parse.Query(zooTable);
     const resultZoo = await zooQuery.find();
-  
+
     for (let zoo of resultZoo) {
       response.push({ id: zoo.id, name: zoo.get("name") });
     }
-  
+
     return response;
-    
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 

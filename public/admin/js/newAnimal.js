@@ -22,6 +22,13 @@ const distGeoElem = document.getElementById("distGeo");
 const habitatEspElem = document.getElementById("habitatEsp");
 const dietaElem = document.getElementById("dieta");
 const reproduccionElem = document.getElementById("reproduccion");
+const fichaNombreCienElem = document.getElementById("fichaNomCient");
+const fichaEstadoConElem = document.getElementById("fichaEstadoCon");
+const fichaDistGeoElem = document.getElementById("fichaDistGeo");
+const fichaHabitatEspElem = document.getElementById("fichaHabitatEsp");
+const fichaDietaElem = document.getElementById("fichaDieta");
+const fichaReproduccionElem = document.getElementById("fichaReproduccion");
+const referenciasElem = document.getElementById("referencias");
 
 //English data
 const nicknameElem = document.getElementById("nickname");
@@ -33,6 +40,15 @@ const geoDistElem = document.getElementById("geoDist");
 const habitatEngElem = document.getElementById("habitatEng");
 const dietElem = document.getElementById("diet");
 const reproductionElem = document.getElementById("reproduction");
+const technicalScieNameElem = document.getElementById("technicalScieName");
+const technicalConStatusElem = document.getElementById("technicalConStatus");
+const technicalGeoDistElem = document.getElementById("technicalGeoDist");
+const technicalHabitatEngElem = document.getElementById("technicalHabitatEng");
+const technicalDietElem = document.getElementById("technicalDiet");
+const technicalReproductionElem = document.getElementById(
+  "technicalReproduction"
+);
+const referencesElem = document.getElementById("references");
 
 //Keepers
 const allKeepersElem = document.getElementById("allKeepers");
@@ -80,6 +96,13 @@ submitSaveElem.addEventListener("click", () => {
   const habitatEsp = habitatEspElem.value;
   const dieta = dietaElem.value;
   const reproduccion = reproduccionElem.value;
+  const fichaNombreCient = fichaNombreCienElem.value;
+  const fichaEstadoCon = fichaEstadoConElem.value;
+  const fichaDistGeo = fichaDistGeoElem.value;
+  const fichaHabitatEsp = fichaHabitatEspElem.value;
+  const fichaDieta = fichaDietaElem.value;
+  const fichaReproduccion = fichaReproduccionElem.value;
+  const referencias = referenciasElem.value;
 
   //English information
   const nickname = nicknameElem.value;
@@ -91,6 +114,17 @@ submitSaveElem.addEventListener("click", () => {
   const habitatEng = habitatEngElem.value;
   const diet = dietElem.value;
   const reproduction = reproductionElem.value;
+  const technicalScieName = technicalScieNameElem.value;
+  const technicalConStatus = technicalConStatusElem.value;
+  const technicalGeoDist = technicalGeoDistElem.value;
+  const technicalHabitatEng = technicalHabitatEngElem.value;
+  const technicalDiet = technicalDietElem.value;
+  const technicalReproduction = technicalReproductionElem.value;
+  const references = referencesElem.value;
+
+  //References
+  const referencesArray = references.split("\n");
+  const referencesArreglo = referencias.split("\n");
 
   if (
     youtubeId != "" &&
@@ -103,6 +137,13 @@ submitSaveElem.addEventListener("click", () => {
     habitatEsp != "" &&
     dieta != "" &&
     reproduccion != "" &&
+    fichaNombreCient != "" &&
+    fichaEstadoCon != "" &&
+    fichaDistGeo != "" &&
+    fichaHabitatEsp != "" &&
+    fichaDieta != "" &&
+    fichaReproduccion != "" &&
+    referencesArreglo != "" &&
     nickname != "" &&
     species != "" &&
     about != "" &&
@@ -112,6 +153,13 @@ submitSaveElem.addEventListener("click", () => {
     habitatEng != "" &&
     diet != "" &&
     reproduction != "" &&
+    technicalScieName != "" &&
+    technicalConStatus != "" &&
+    technicalGeoDist != "" &&
+    technicalHabitatEng != "" &&
+    technicalDiet != "" &&
+    technicalReproduction != "" &&
+    referencesArray != "" &&
     keeper != ""
   ) {
     buttonSpinnerElem.removeAttribute("style");
@@ -136,6 +184,27 @@ submitSaveElem.addEventListener("click", () => {
       Reproduction: reproduction,
     };
 
+    //Ficha tecnica
+    const fichaTecnica = {
+      "Nombre científico": fichaNombreCient,
+      "Estado de conservación": fichaEstadoCon,
+      "Distribución geográfica": fichaDistGeo,
+      Hábitat: fichaHabitatEsp,
+      Dieta: fichaDieta,
+      Reproducción: fichaReproduccion,
+      Referencias: referencesArreglo,
+    };
+
+    const fichaTecnica_en = {
+      "Scientific name": technicalScieName,
+      "Estado de conservación": fichaEstadoCon,
+      "Geographical distribution": technicalGeoDist,
+      Habitat: technicalHabitatEng,
+      Diet: technicalDiet,
+      Reproduction: technicalReproduction,
+      References: referencesArray,
+    };
+
     const request = {
       name: apodo,
       name_en: nickname,
@@ -143,6 +212,8 @@ submitSaveElem.addEventListener("click", () => {
       about_en: about,
       characteristics: caracteristicas,
       characteristics_en: characteristics,
+      technicalData: fichaTecnica,
+      technicalData_en: fichaTecnica_en,
       species: especie,
       species_en: species,
       youtubeID: youtubeId,
