@@ -25,8 +25,6 @@ fetch(`/animals/${animalID}`)
       youtubeURL = animal.youtubeID;
       //console.log("youtubeURL");
       //console.log(youtubeURL);
-    } else if (animal.youtubeID.includes("verkada")) {
-      youtubeURL = "https://command.verkada.com/embed.html#%7B%22entityId%22%3A%20%2255054a74-f45b-40ec-b621-cf7efef51177%22%2C%20%22token%22%3A%20%22v2_8dcbc5e4e79f05b0c9c0a200d6451261%22%2C%20%22urlSD%22%3A%20%22https%3A//vstream.command.verkada.com/filter/transcode/v2_8dcbc5e4e79f05b0c9c0a200d6451261/55054a74-f45b-40ec-b621-cf7efef51177/low_res/livevideo.m3u8%22%2C%20%22urlHD%22%3A%20%22https%3A//vfilter.command.verkada.com/filter/transcode/v2_8dcbc5e4e79f05b0c9c0a200d6451261/55054a74-f45b-40ec-b621-cf7efef51177/high_res/livevideo.m3u8%22%7D";
     } else {
       youtubeURL = `https://www.youtube.com/embed/${animal.youtubeID}`;
       //console.log("youtubeURL");
