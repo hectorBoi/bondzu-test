@@ -31,6 +31,7 @@ fetch(`/animals/${animalID}`)
       //console.log(youtubeURL);
     }
     iframeElem.setAttribute("src", youtubeURL);
+    iframeElem.contentWindow.location.reload();
 
     let chars = "";
     for (let key in animal.characteristics) {
