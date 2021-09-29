@@ -12,6 +12,7 @@ const profile = require("./controllers/profile");
 const adoptions = require("./controllers/adoptions");
 const animals = require("./controllers/animals");
 const middlewares = require("./middlewares");
+const reports = require("./controllers/reports");
 // Controller functions
 const register = require("./controllers/register");
 const login = require("./controllers/login");
@@ -58,6 +59,7 @@ app.use("/admin", admin);
 app.use("/animals", animals);
 app.use("/adoptions", adoptions.router);
 app.use("/profile", profile);
+app.use("/reports", reports);
 // Controller functions for one type of execution
 const { Parse } = require("./database"); // This is only to pass the database
 // Manages the login for admins
