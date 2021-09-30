@@ -9,6 +9,7 @@ router.get("/users", async (req, res, next) => {
   try {
     const table = Parse.Object.extend("User");
     const query = new Parse.Query(table);
+    query.limit(10);
     const result = await query.find();
     res.json(result);
   } catch (err) {
@@ -16,6 +17,7 @@ router.get("/users", async (req, res, next) => {
   }
 });
 
+// Retrieve all animals from the db, with no filters
 router.get("/animals", async (req, res, next) => {
   try {
     const table = Parse.Object.extend("AnimalV2");
