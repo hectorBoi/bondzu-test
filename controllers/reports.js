@@ -10,6 +10,7 @@ router.get("/users", async (req, res, next) => {
     const table = Parse.Object.extend("User");
     const query = new Parse.Query(table);
     query.descending("createdAt");
+    query.limit(999999)
     const result = await query.find();
     res.json(result);
   } catch (err) {
@@ -23,7 +24,7 @@ router.get("/animals", async (req, res, next) => {
     const table = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(table);
     query.descending("adopters");
-    query.limit(5);
+    query.limit(999999)
     const result = await query.find();
     res.json(result);
   } catch (err) {
