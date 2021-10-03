@@ -22,6 +22,8 @@ router.get("/animals", async (req, res, next) => {
   try {
     const table = Parse.Object.extend("AnimalV2");
     const query = new Parse.Query(table);
+    query.descending("adopters");
+    query.limit(5);
     const result = await query.find();
     res.json(result);
   } catch (err) {
