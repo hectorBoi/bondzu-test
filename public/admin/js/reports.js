@@ -1,35 +1,140 @@
 const userNumber = document.getElementById("users-number");
-const userTable = document
-  .getElementById("users-table")
-  .getElementsByTagName("tbody")[0];
-const animalTable = document
-  .getElementById("animals-table")
-  .getElementsByTagName("tbody")[0];
+// const animalTable = document
+//   .getElementById("animals-table")
+//   .getElementsByTagName("tbody")[0];
+
+let userList
+var userTable = $("#users-table").DataTable({
+  responsive: true,
+  "columnDefs": [
+    { "width": "10%", "targets": 0 },
+    { "width": "11%", "targets": 3 }
+  ]
+});
+
+var animalTable = $("#animals-table").DataTable({
+  responsive: true,
+  "order": [[1, "desc"]],
+  "columnDefs": [
+    { "width": "30%", "targets": 1 }
+  ]
+});
+
+function getLastWeek() {
+  var today = new Date();
+  var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - 7);
+  return lastWeek;
+}
+
+function getLastMonth() {
+  var today = new Date();
+  var lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+  return lastMonth;
+}
+
+function getLastYear() {
+  var today = new Date();
+  var lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+  return lastYear;
+}
+
+function filterUsersWeek() {
+  let newUserList = userList.filter(user => new Date(user.createdAt) >= getLastWeek())
+
+  userTable.clear().draw();
+
+  newUserList.forEach(function callback(user, index) {
+    let date = new Date(user.createdAt);
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+
+    userTable.row.add([
+      index + 1,
+      `${user.name} ${user.lastname}`,
+      user.email,
+      `${day}/${month}/${year}`
+    ]).draw()
+  });
+}
+
+function filterUsersMonth() {
+  let newUserList = userList.filter(user => new Date(user.createdAt) >= getLastMonth())
+
+  userTable.clear().draw();
+
+  newUserList.forEach(function callback(user, index) {
+    let date = new Date(user.createdAt);
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+
+    userTable.row.add([
+      index + 1,
+      `${user.name} ${user.lastname}`,
+      user.email,
+      `${day}/${month}/${year}`
+    ]).draw()
+  });
+}
+
+function filterUsersYear() {
+  let newUserList = userList.filter(user => new Date(user.createdAt) >= getLastYear())
+
+  userTable.clear().draw();
+
+  newUserList.forEach(function callback(user, index) {
+    let date = new Date(user.createdAt);
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+
+    userTable.row.add([
+      index + 1,
+      `${user.name} ${user.lastname}`,
+      user.email,
+      `${day}/${month}/${year}`
+    ]).draw()
+  });
+}
+
+function showAllUsers() {
+  userTable.clear().draw();
+  userList.forEach(function callback(user, index) {
+    let date = new Date(user.createdAt);
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+
+    userTable.row.add([
+      index + 1,
+      `${user.name} ${user.lastname}`,
+      user.email,
+      `${day}/${month}/${year}`
+    ]).draw()
+  });
+}
 
 fetch("/reports/users")
   .then((res) => res.json())
   .then((users) => {
+    userList = users
+
     userNumber.innerHTML += users.length;
 
     users.forEach(function callback(user, index) {
-      // Variables for adding rows to users table
-      let newRow = userTable.insertRow();
-      // User id
-      let newCell = newRow.insertCell(0);
-      newCell.innerHTML = `${index + 1}`;
-      // User name
-      newCell = newRow.insertCell(1);
-      newCell.innerHTML = `${user.name} ${user.lastname}`;
-      // User email
-      newCell = newRow.insertCell(2);
-      newCell.innerHTML = `${user.email}`;
-      // User creation date
-      newCell = newRow.insertCell(3);
+
       let date = new Date(user.createdAt);
       let day = date.getDate();
       let year = date.getFullYear();
       let month = date.getMonth() + 1;
-      newCell.innerHTML = `${day}/${month}/${year}`;
+
+      userTable.row.add([
+        index + 1,
+        `${user.name} ${user.lastname}`,
+        user.email,
+        `${day}/${month}/${year}`
+      ]).draw()
     });
   })
   .catch("Error in the request");
@@ -38,14 +143,10 @@ fetch("/reports/animals")
   .then((res) => res.json())
   .then((animals) => {
     animals.forEach((animal) => {
-      // Variables for adding rows to animals table
-      let newRow = animalTable.insertRow();
-      // Animal name
-      let newCell = newRow.insertCell(0);
-      newCell.innerHTML = `${animal.name}`;
-      // Number of adoptions
-      newCell = newRow.insertCell(1);
-      newCell.innerHTML = `${animal.adopters}`;
+      animalTable.row.add([
+        animal.name,
+        animal.adopters,
+      ]).draw()
     });
   })
   .catch("Error in the request");
