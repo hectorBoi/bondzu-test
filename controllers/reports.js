@@ -4,7 +4,7 @@ const { Router } = require("express");
 // Initializes the router
 const router = Router();
 
-// Retrieve all users from the db, with no filters
+// Retrieve all users from the db, ordered by date of creation
 router.get("/users", async (req, res, next) => {
   try {
     const table = Parse.Object.extend("User");
@@ -17,7 +17,7 @@ router.get("/users", async (req, res, next) => {
   }
 });
 
-// Retrieve all animals from the db, with no filters
+// Retrieve all animals from the db, ordering by number of adopters
 router.get("/animals", async (req, res, next) => {
   try {
     const table = Parse.Object.extend("AnimalV2");
