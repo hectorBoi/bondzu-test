@@ -9,7 +9,7 @@ router.get("/users", async (req, res, next) => {
   try {
     const table = Parse.Object.extend("User");
     const query = new Parse.Query(table);
-    query.descending("createdAt");
+    query.ascending("createdAt");
     query.limit(999999)
     const result = await query.find();
     res.json(result);
