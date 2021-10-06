@@ -1,9 +1,4 @@
 const userNumber = document.getElementById("users-number");
-// const animalTable = document
-//   .getElementById("animals-table")
-//   .getElementsByTagName("tbody")[0];
-
-// TODO: Corregir orderin the fecha de registro
 
 let userList;
 var userTable = $("#users-table").DataTable({
@@ -65,7 +60,7 @@ function filterUsersWeek() {
     let month = date.getMonth() + 1;
     userTable.row
       .add([
-        index + 1,
+        userList.length - index,
         `${user.name} ${user.lastname}`,
         user.email,
         `${day}/${month}/${year}`,
@@ -89,7 +84,7 @@ function filterUsersMonth() {
 
     userTable.row
       .add([
-        index + 1,
+        userList.length - index,
         `${user.name} ${user.lastname}`,
         user.email,
         `${day}/${month}/${year}`,
@@ -113,7 +108,7 @@ function filterUsersYear() {
 
     userTable.row
       .add([
-        index + 1,
+        userList.length - index,
         `${user.name} ${user.lastname}`,
         user.email,
         `${day}/${month}/${year}`,
@@ -132,7 +127,7 @@ function showAllUsers() {
 
     userTable.row
       .add([
-        index + 1,
+        userList.length - index,
         `${user.name} ${user.lastname}`,
         user.email,
         `${day}/${month}/${year}`,
