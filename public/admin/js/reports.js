@@ -10,7 +10,8 @@ var userTable = $("#users-table").DataTable({
   ordering: false,
   columnDefs: [
     { width: "10%", targets: 0 },
-    { width: "11%", targets: 3 },
+    { visible: false, targets: 1 },
+    { width: "11%", targets: 4 },
   ],
 });
 
@@ -175,6 +176,7 @@ function showAllUsers() {
         userTable.row
           .add([
             users.length - index,
+            user.objectId,
             `${user.name} ${user.lastname}`,
             user.email,
             `${day}/${month}/${year}`,
