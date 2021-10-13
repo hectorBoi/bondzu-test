@@ -47,4 +47,17 @@ router.get("/animals", async (req, res, next) => {
   }
 });
 
+// Retrieve all messages from the db
+router.get("/messages", async (req, res, next) => {
+  try {
+    const table = Parse.Object.extend("Messages");
+    const query = new Parse.Query(table);
+    query.limit(999999);
+    const result = await query.find();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

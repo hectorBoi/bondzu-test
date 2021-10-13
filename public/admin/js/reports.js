@@ -20,6 +20,12 @@ var animalTable = $("#animals-table").DataTable({
   columnDefs: [{ width: "30%", targets: 1 }],
 });
 
+var messageTable = $("#messages-table").DataTable({
+  responsive: true,
+  order: [[1, "desc"]],
+  columnDefs: [{ width: "30%", targets: 1 }],
+});
+
 function toggleActiveFilter() {
   $("#week").addClass("btn-outline-primary").removeClass("btn-primary");
   $("#month").addClass("btn-outline-primary").removeClass("btn-primary");
@@ -181,6 +187,37 @@ fetch("/reports/animals")
   .then((animals) => {
     animals.forEach((animal) => {
       animalTable.row.add([animal.name, animal.adopters]).draw();
+    });
+  })
+  .catch("Error in the request");
+
+fetch("/reports/messages")
+  .then((res) => res.json())
+  .then((messages) => {
+    console.log(messages)
+    messages.forEach((message) => {
+
+      // Look for the current user's row
+      let rowData = messageTable.row(`#${message.id_user.objectId}`).data();
+
+      if (rowData) {
+        // If the row already exists, update its adoptions counter
+        let newData = [message.id_user.objectId, rowData[1] + 1]
+        messageTable.row(`#${message.id_user.objectId}`).data(newData).draw()
+
+      } else {
+        // Add new users to the table with their adoptions counter set to 1
+        let rowNode = messageTable.row
+          .add([message.id_user.objectId, 1])
+          .draw()
+          .node();
+
+        // Set the row ID to the user ID
+        $(rowNode)
+          .attr("id", message.id_user.objectId);
+
+      }
+
     });
   })
   .catch("Error in the request");
