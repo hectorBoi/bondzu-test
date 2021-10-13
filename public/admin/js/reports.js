@@ -37,6 +37,25 @@ function toggleActiveFilter() {
     .removeClass("btn-outline-primary");
 }
 
+function addUsers(users) {
+  users.forEach(function callback(user, index) {
+    let date = new Date(user.createdAt);
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+
+    userTable.row
+      .add([
+        userCount - index,
+        user.objectId,
+        `${user.name} ${user.lastname}`,
+        user.email,
+        `${day}/${month}/${year}`,
+      ])
+      .draw();
+  });
+}
+
 function getLastWeek() {
   var today = new Date();
   var lastWeek = new Date(
@@ -77,21 +96,7 @@ function filterUsersWeek() {
   fetch(`/reports/users/${getLastWeek()}`)
     .then((res) => res.json())
     .then((users) => {
-      users.forEach(function callback(user, index) {
-        let date = new Date(user.createdAt);
-        let day = date.getDate();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-
-        userTable.row
-          .add([
-            userCount - index,
-            `${user.name} ${user.lastname}`,
-            user.email,
-            `${day}/${month}/${year}`,
-          ])
-          .draw();
-      });
+      addUsers(users)
     })
     .catch("Error in the request");
 }
@@ -106,21 +111,7 @@ function filterUsersMonth() {
   fetch(`/reports/users/${getLastMonth()}`)
     .then((res) => res.json())
     .then((users) => {
-      users.forEach(function callback(user, index) {
-        let date = new Date(user.createdAt);
-        let day = date.getDate();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-
-        userTable.row
-          .add([
-            userCount - index,
-            `${user.name} ${user.lastname}`,
-            user.email,
-            `${day}/${month}/${year}`,
-          ])
-          .draw();
-      });
+      addUsers(users)
     })
     .catch("Error in the request");
 }
@@ -135,21 +126,7 @@ function filterUsersYear() {
   fetch(`/reports/users/${getLastYear()}`)
     .then((res) => res.json())
     .then((users) => {
-      users.forEach(function callback(user, index) {
-        let date = new Date(user.createdAt);
-        let day = date.getDate();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-
-        userTable.row
-          .add([
-            userCount - index,
-            `${user.name} ${user.lastname}`,
-            user.email,
-            `${day}/${month}/${year}`,
-          ])
-          .draw();
-      });
+      addUsers(users)
     })
     .catch("Error in the request");
 }
@@ -167,22 +144,7 @@ function showAllUsers() {
       // Updates numbers of users each time the function is called
       userNumber.innerHTML = "<strong>Número total de usuarios: </strong>";
       userNumber.innerHTML += users.length;
-      users.forEach(function callback(user, index) {
-        let date = new Date(user.createdAt);
-        let day = date.getDate();
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-
-        userTable.row
-          .add([
-            users.length - index,
-            user.objectId,
-            `${user.name} ${user.lastname}`,
-            user.email,
-            `${day}/${month}/${year}`,
-          ])
-          .draw();
-      });
+      addUsers(users)
     })
     .catch("Error in the request");
 }
@@ -199,7 +161,6 @@ fetch("/reports/animals")
 fetch("/reports/messages")
   .then((res) => res.json())
   .then((messages) => {
-    console.log(messages)
     messages.forEach((message) => {
 
       // Look for the current user's row
