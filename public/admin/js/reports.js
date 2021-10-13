@@ -157,6 +157,9 @@ function showAllUsers() {
     .then((res) => res.json())
     .then((users) => {
       userCount = users.length;
+      // Updates numbers of users each time the function is called
+      userNumber.innerHTML = "<strong>Número total de usuarios: </strong>";
+      userNumber.innerHTML += users.length;
       users.forEach(function callback(user, index) {
         let date = new Date(user.createdAt);
         let day = date.getDate();
