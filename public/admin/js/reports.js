@@ -167,12 +167,12 @@ fetch("/reports/messages")
       let rowData = messageTable.row(`#${message.id_user.objectId}`).data();
 
       if (rowData) {
-        // If the row already exists, update its adoptions counter
+        // If the row already exists, update its comments counter
         let newData = [message.id_user.objectId, rowData[1] + 1]
         messageTable.row(`#${message.id_user.objectId}`).data(newData).draw()
 
       } else {
-        // Add new users to the table with their adoptions counter set to 1
+        // Add new users to the table with their comments counter set to 1
         let rowNode = messageTable.row
           .add([message.id_user.objectId, 1])
           .draw()
