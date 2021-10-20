@@ -30,8 +30,8 @@
     </header>
 
     <div class="container-fluid">
-
-      <h3 style="margin-top: 10px;" id="users-number"></h3>
+      <h3>Usuarios</h3>
+      <h4 style="margin-top: 10px;" id="users-number"></h4>
 
       <div style="margin: 15px 0;">
         <button id="week" type="button" class="btn btn-outline-primary btn-sm" onclick="filterUsersWeek()">1
@@ -42,7 +42,6 @@
           año</button>
         <button id="all" type="button" class="btn btn-primary btn-sm" onclick="showAllUsers()">Todo</button>
       </div>
-
 
       <div style="margin-bottom: 75px;">
         <table id="users-table" class="ui table table-hover table-striped" width="100%">
@@ -60,6 +59,7 @@
         </table>
       </div>
 
+      <h3>Animales más adoptados</h3>
       <div style="margin-bottom: 75px;">
         <table id="animals-table" class="ui table table-hover table-striped" width="100%">
           <thead>
@@ -73,12 +73,13 @@
         </table>
       </div>
 
+      <h3>Personas que más comentan</h3>
       <div style="margin-bottom: 75px;">
         <table id="messages-table" class="ui table table-hover table-striped" width="100%">
           <thead>
             <tr>
               <th scope="col">ID de usuario</th>
-              <th scope="col">No. de adopciones</th>
+              <th scope="col">No. de comentarios</th>
             </tr>
           </thead>
           <tbody>
