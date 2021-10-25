@@ -21,7 +21,13 @@ var animalTable = $("#animals-table").DataTable({
   columnDefs: [{ width: "30%", targets: 1 }],
 });
 
-var messageTable = $("#messages-table").DataTable({
+var userMessagesTable = $("#user-messages-table").DataTable({
+  responsive: true,
+  order: [[1, "desc"]],
+  columnDefs: [{ width: "30%", targets: 1 }],
+});
+
+var animalMessagesTable = $("#animal-messages-table").DataTable({
   responsive: true,
   order: [[1, "desc"]],
   columnDefs: [{ width: "30%", targets: 1 }],
@@ -164,16 +170,19 @@ fetch("/reports/messages")
     messages.forEach((message) => {
 
       // Look for the current user's row
-      let rowData = messageTable.row(`#${message.id_user.objectId}`).data();
+      let userRowData = userMessagesTable.row(`#${message.id_user.objectId}`).data();
+      // Look for the current animal's row
+      let animalRowData = animalMessagesTable.row(`#${message.animal_Id.objectId}`).data();
 
-      if (rowData) {
+      // Handle user messages table
+      if (userRowData) {
         // If the row already exists, update its comments counter
-        let newData = [message.id_user.objectId, rowData[1] + 1]
-        messageTable.row(`#${message.id_user.objectId}`).data(newData).draw()
+        let newData = [message.id_user.objectId, userRowData[1] + 1]
+        userMessagesTable.row(`#${message.id_user.objectId}`).data(newData).draw()
 
       } else {
         // Add new users to the table with their comments counter set to 1
-        let rowNode = messageTable.row
+        let rowNode = userMessagesTable.row
           .add([message.id_user.objectId, 1])
           .draw()
           .node();
@@ -181,6 +190,25 @@ fetch("/reports/messages")
         // Set the row ID to the user ID
         $(rowNode)
           .attr("id", message.id_user.objectId);
+
+      }
+
+      // Handle animal messages table
+      if (animalRowData) {
+        // If the row already exists, update its comments counter
+        let newData = [message.animal_Id.objectId, animalRowData[1] + 1]
+        animalMessagesTable.row(`#${message.animal_Id.objectId}`).data(newData).draw()
+
+      } else {
+        // Add new animals to the table with their comments counter set to 1
+        let rowNode = animalMessagesTable.row
+          .add([message.animal_Id.objectId, 1])
+          .draw()
+          .node();
+
+        // Set the row ID to the animal ID
+        $(rowNode)
+          .attr("id", message.animal_Id.objectId);
 
       }
 
