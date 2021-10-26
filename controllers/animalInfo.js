@@ -28,7 +28,6 @@ const getVideo = async (id) => {
     if (filter[0]) {
       if(filter[0].get("youtube_ids")[0].toString().includes("verkada")){
         const patata = getAlternativeVideo(filter[0].get("youtube_ids")[0])
-        console.log(patata);
         return patata;
       }
       else {
@@ -51,7 +50,6 @@ const getAlternativeVideo = async(videoURL) => {
     //Open the original URL in a page of the scrapper
     const [page] = await browser.pages();
     await page.goto(videoURL);
-    console.log("Hola Marciano");
     //Return the launched url
     return page.url();
   } catch (err) {
