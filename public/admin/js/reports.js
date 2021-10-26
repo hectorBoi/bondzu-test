@@ -23,7 +23,7 @@ var animalTable = $("#animals-table").DataTable({
 
 var userMessagesTable = $("#user-messages-table").DataTable({
   responsive: true,
-  order: [[1, "desc"]],
+  order: [[2, "desc"]],
   columnDefs: [{ width: "30%", targets: 1 }],
 });
 
@@ -102,7 +102,7 @@ function filterUsersWeek() {
   fetch(`/reports/users/${getLastWeek()}`)
     .then((res) => res.json())
     .then((users) => {
-      addUsers(users)
+      addUsers(users);
     })
     .catch("Error in the request");
 }
@@ -117,7 +117,7 @@ function filterUsersMonth() {
   fetch(`/reports/users/${getLastMonth()}`)
     .then((res) => res.json())
     .then((users) => {
-      addUsers(users)
+      addUsers(users);
     })
     .catch("Error in the request");
 }
@@ -132,7 +132,7 @@ function filterUsersYear() {
   fetch(`/reports/users/${getLastYear()}`)
     .then((res) => res.json())
     .then((users) => {
-      addUsers(users)
+      addUsers(users);
     })
     .catch("Error in the request");
 }
@@ -150,7 +150,7 @@ function showAllUsers() {
       // Updates numbers of users each time the function is called
       userNumber.innerHTML = "<strong>Número total de usuarios: </strong>";
       userNumber.innerHTML += users.length;
-      addUsers(users)
+      addUsers(users);
     })
     .catch("Error in the request");
 }
@@ -168,50 +168,60 @@ fetch("/reports/messages")
   .then((res) => res.json())
   .then((messages) => {
     messages.forEach((message) => {
-
       // Look for the current user's row
-      let userRowData = userMessagesTable.row(`#${message.id_user.objectId}`).data();
+      let userRowData = userMessagesTable
+        .row(`#${message.id_user.objectId}`)
+        .data();
       // Look for the current animal's row
-      let animalRowData = animalMessagesTable.row(`#${message.animal_Id.objectId}`).data();
+      let animalRowData = animalMessagesTable
+        .row(`#${message.animal_Id.objectId}`)
+        .data();
 
       // Handle user messages table
       if (userRowData) {
         // If the row already exists, update its comments counter
-        let newData = [message.id_user.objectId, userRowData[1] + 1]
-        userMessagesTable.row(`#${message.id_user.objectId}`).data(newData).draw()
-
+        let newData = [
+          `${message.id_user.name} ${message.id_user.lastname}`,
+          message.id_user.username,
+          userRowData[2] + 1,
+        ];
+        userMessagesTable
+          .row(`#${message.id_user.objectId}`)
+          .data(newData)
+          .draw();
       } else {
         // Add new users to the table with their comments counter set to 1
         let rowNode = userMessagesTable.row
-          .add([message.id_user.objectId, 1])
+          .add([
+            `${message.id_user.name} ${message.id_user.lastname}`,
+            message.id_user.username,
+            1,
+          ])
           .draw()
           .node();
 
         // Set the row ID to the user ID
-        $(rowNode)
-          .attr("id", message.id_user.objectId);
-
+        $(rowNode).attr("id", message.id_user.objectId);
       }
 
       // Handle animal messages table
       if (animalRowData) {
         // If the row already exists, update its comments counter
-        let newData = [message.animal_Id.objectId, animalRowData[1] + 1]
-        animalMessagesTable.row(`#${message.animal_Id.objectId}`).data(newData).draw()
-
+        let newData = [message.animal_Id.name, animalRowData[1] + 1];
+        animalMessagesTable
+          .row(`#${message.animal_Id.objectId}`)
+          .data(newData)
+          .draw();
       } else {
         // Add new animals to the table with their comments counter set to 1
         let rowNode = animalMessagesTable.row
-          .add([message.animal_Id.objectId, 1])
+          .add([message.animal_Id.name, 1])
           .draw()
           .node();
 
         // Set the row ID to the animal ID
-        $(rowNode)
-          .attr("id", message.animal_Id.objectId);
-
+        $(rowNode).attr("id", message.animal_Id.objectId);
       }
-
     });
   })
   .catch("Error in the request");
