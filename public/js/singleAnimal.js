@@ -15,16 +15,6 @@ const loaderElements = document.getElementById("loaderElements");
 const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
-/////TO DO: This is a temporal solution. Modify this to reload the iframe correctly////////
-function reloadIFrame(){
-  promise = axios.get(iframeElem.src);
-
-  // Extract html source from response, then process it:
-  promise.then(function(response) {
-    iframeElem.src = response.data
-  });
-}
-
 fetch(`/animals/${animalID}`)
   .then((res) => res.json())
   .then((animal) => {
@@ -33,8 +23,6 @@ fetch(`/animals/${animalID}`)
     // Checks if the camera is from youtube or another page
     if (animal.youtubeID.includes("https")) {
       youtubeURL = animal.youtubeID;
-      //Reload the iframe to show the video (There is an error if it is not reloaded)
-        setTimeout(reloadIFrame, 1000);
       //console.log("youtubeURL");
       //console.log(youtubeURL);
     } else {
