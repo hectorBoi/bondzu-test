@@ -18,6 +18,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
       integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js">
+    </script>
   </head>
 
   <body class="d-flex flex-column min-vh-100">
@@ -25,6 +28,81 @@
       <div id="navBar"></div>
       <script src="./js/navBar.js"></script>
     </header>
+
+    <div class="container-fluid">
+      <h3>Usuarios</h3>
+      <h4 style="margin-top: 10px;" id="users-number"></h4>
+
+      <div style="margin: 15px 0;">
+        <button id="week" type="button" class="btn btn-outline-primary btn-sm" onclick="filterUsersWeek()">1
+          semana</button>
+        <button id="month" type="button" class="btn btn-outline-primary btn-sm" onclick="filterUsersMonth()">1
+          mes</button>
+        <button id="year" type="button" class="btn btn-outline-primary btn-sm" onclick="filterUsersYear()">1
+          año</button>
+        <button id="all" type="button" class="btn btn-primary btn-sm" onclick="showAllUsers()">Todo</button>
+      </div>
+
+      <div style="margin-bottom: 75px;">
+        <table id="users-table" class="ui table table-hover table-striped" width="100%">
+          <thead>
+            <tr>
+              <th scope="col">No. Usuario</th>
+              <th scope="col">ID</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Fecha Registro</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Animales más adoptados</h3>
+      <div style="margin-bottom: 75px;">
+        <table id="animals-table" class="ui table table-hover table-striped" width="100%">
+          <thead>
+            <tr>
+              <th scope="col">Nombre Animal</th>
+              <th scope="col">Número de adopciones</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Personas que más comentan</h3>
+      <div style="margin-bottom: 75px;">
+        <table id="user-messages-table" class="ui table table-hover table-striped" width="100%">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">Correo</th>
+              <th scope="col">No. de comentarios</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Animales más comentados</h3>
+      <div style="margin-bottom: 75px;">
+        <table id="animal-messages-table" class="ui table table-hover table-striped" width="100%">
+          <thead>
+            <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col">No. de comentarios</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
 
     <script src="./js/reports.js"></script>
     <script src="../js/logout.js"></script>
