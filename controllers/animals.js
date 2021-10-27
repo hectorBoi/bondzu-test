@@ -99,5 +99,4 @@ const filterAnimals = async (userType, animals) => {
   return filteredArray;
 };
 
-
 module.exports = router;

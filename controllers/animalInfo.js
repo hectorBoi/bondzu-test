@@ -1,5 +1,7 @@
 const { Parse } = require("../database");
 
+const puppeteer = require("puppeteer");
+
 // Get the name of the zoo in charge of a specific animal
 const getKeeper = async (id) => {
   try {
@@ -22,14 +24,38 @@ const getVideo = async (id) => {
     const filter = cameras.filter(
       (camara) => camara.get("animal_id").id === id
     );
+    //For verkada video: Get the URL of the video (The actual URL in database do not work in the webpage)
     if (filter[0]) {
-      return filter[0].get("youtube_ids")[0];
+      if(filter[0].get("youtube_ids")[0].toString().includes("verkada")){
+        const patata = getAlternativeVideo(filter[0].get("youtube_ids")[0])
+        return patata;
+      }
+      else {
+        return filter[0].get("youtube_ids")[0];
+      }
     }
     return "No url";
   } catch (err) {
     return err;
   }
 };
+
+// Get the video of the animals that their url is not working
+const getAlternativeVideo = async(videoURL) => {
+  try {
+    //Launch the scrapper
+    const browser = await puppeteer.launch({
+      headless: true
+    });
+    //Open the original URL in a page of the scrapper
+    const [page] = await browser.pages();
+    await page.goto(videoURL);
+    //Return the launched url
+    return page.url();
+  } catch (err) {
+      console.log(err);
+  }
+}
 
 // Transforms the array of Parse.Objects into Json
 const getAnimalInfo = async (animal, lang) => {
