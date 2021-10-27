@@ -25,7 +25,7 @@ router.get("/users/:date", async (req, res, next) => {
     const table = Parse.Object.extend("User");
     const query = new Parse.Query(table);
     query.descending("createdAt");
-    query.greaterThanOrEqualTo("createdAt", new Date(startDate))
+    query.greaterThanOrEqualTo("createdAt", new Date(startDate));
     const result = await query.find();
     res.json(result);
   } catch (err) {
@@ -47,12 +47,14 @@ router.get("/animals", async (req, res, next) => {
   }
 });
 
-// Retrieve all messages from the db
+// Retrieve all messages from the db along with the related users and animal
 router.get("/messages", async (req, res, next) => {
   try {
     const table = Parse.Object.extend("Messages");
     const query = new Parse.Query(table);
-    query.limit(999999);
+    // Includes the information of the ObjectId pointers
+    query.include("id_user");
+    query.include("animal_Id");
     const result = await query.find();
     res.json(result);
   } catch (err) {
