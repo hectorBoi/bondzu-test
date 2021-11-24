@@ -1,3 +1,4 @@
+const iframeDiv = document.getElementById("iframe-div");
 const iframeElem = document.getElementById("iframe");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const nameElem = document.getElementById("name");
@@ -45,6 +46,81 @@ fetch(`/animals/${animalID}`)
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
     keeperElem.innerText = animal.keeper;
+
+    //Colaboradores
+    if(aboutElem.innerText == "[DATOS]"){
+      aboutElem.innerText = "Este es el equipo de tecnologías de Bondzú.";
+      characteristicsElem.innerText = "Trabajando por un mejor pundo para todos.";
+      iframeDiv.innerHTML =  
+       `<div class="container">
+          <div class="row">
+            <div class="col-3">
+              <img class="img-thumbnail" src="../img/pinguino.jpg" alt="Foto de Colega" style="height: 100%;">
+            </div>
+            <div class="col-9">
+              <div class="card">              
+                <div class="card-body">
+                  <h5 class="card-title">Jose Mariano Portilla Landa</h5>
+                  <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
+                  <p class="card-text"><small class="text-muted">jose.portillala@udlap.mx</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
+              <img class="img-thumbnail" src="../img/aguilaPescadora.jpg" alt="Foto de Colega" style="height: 100%">
+            </div>
+            <div class="col-9">
+              <div class="card">              
+                <div class="card-body">
+                  <h5 class="card-title">Fernando López López</h5>
+                  <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
+                  <p class="card-text"><small class="text-muted">fernando.lopezlz@udlap.mx</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
+              <img class="img-thumbnail" src="../img/panda.jpg" alt="Foto de Colega" style="height: 100%">
+            </div>
+            <div class="col-9">
+              <div class="card">              
+                <div class="card-body">
+                  <h5 class="card-title">Fernando Nieto Morales</h5>
+                  <p class="card-text">Falta esta info.</p>
+                  <p class="card-text"><small class="text-muted">fernando.nietoms@udlap.mx</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
+              <img class="img-thumbnail" src="../img/tigre.jpg" alt="Foto de Colega" style="height: 100%">
+            </div>
+            <div class="col-9">
+              <div class="card">              
+                <div class="card-body">
+                  <h5 class="card-title">Santiago González Ángeles</h5>
+                  <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
+                  <p class="card-text"><small class="text-muted">santiago.gonzalezas@udlap.mx</small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        `;
+    }
 
     if (window.localStorage.getItem("lang") === "es") {
       popoverAdoptElem.setAttribute(
