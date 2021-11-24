@@ -62,4 +62,20 @@ router.get("/messages", async (req, res, next) => {
   }
 });
 
+// Retrieve all adoption from the db along with the related users and animal
+router.get("/adoptions", async (req, res, next) => {
+  try {
+    const table = Parse.Object.extend("Adoption");
+    const query = new Parse.Query(table);
+    // Includes the information of the ObjectId pointers
+    query.descending("adoptionDate");
+    query.include("adopter");
+    query.include("adopted");
+    const result = await query.find();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
 module.exports = router;

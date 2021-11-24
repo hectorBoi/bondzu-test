@@ -33,6 +33,12 @@ var animalMessagesTable = $("#animal-messages-table").DataTable({
   columnDefs: [{ width: "30%", targets: 1 }],
 });
 
+var adoptionTable = $("#adoption-table").DataTable({
+  responsive: true,
+  ordering: false,
+  columnDefs: [{ width: "30%", targets: 1 }],
+});
+
 function toggleActiveFilter() {
   $("#week").addClass("btn-outline-primary").removeClass("btn-primary");
   $("#month").addClass("btn-outline-primary").removeClass("btn-primary");
@@ -222,6 +228,33 @@ fetch("/reports/messages")
         // Set the row ID to the animal ID
         $(rowNode).attr("id", message.animal_Id.objectId);
       }
+    });
+  })
+  .catch("Error in the request");
+
+// Animals table
+fetch("/reports/animals")
+  .then((res) => res.json())
+  .then((animals) => {
+    animals.forEach((animal) => {
+      animalTable.row.add([animal.name, animal.adopters]).draw();
+    });
+  })
+  .catch("Error in the request");
+
+// Adoptions table
+fetch("/reports/adoptions")
+  .then((res) => res.json())
+  .then((adoptions) => {
+    console.log(adoptions);
+    adoptions.forEach((adoption) => {
+      adoptionTable.row
+        .add([
+          `${adoption.adopter.name} ${adoption.adopter.lastname}`,
+          adoption.adopter.username,
+          adoption.adopted.name,
+        ])
+        .draw();
     });
   })
   .catch("Error in the request");
