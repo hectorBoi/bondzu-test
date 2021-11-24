@@ -129,7 +129,7 @@ const createRow = () => {
 };
 
 const createCard = (object) => {
-  console.log(object);
+  //console.log(object);
   const col = createDiv("col-xl");
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
