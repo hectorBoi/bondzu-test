@@ -6,6 +6,36 @@ const { Router } = require("express");
 // Initializes the router
 const router = Router();
 
+router.get("/:username", async (req, res, next) => {
+  try {
+    //Recover user id
+    const { username, lang } = req.cookies;
+    const userTable = Parse.Object.extend("User");
+    const userInfoQuery = new Parse.Query(userTable);
+    userInfoQuery.equalTo("username", username);
+    const user = await userInfoQuery.find();
+    const userId = user[0].id;
+
+    // Search the animals adopted by the user
+    const table = Parse.Object.extend("Adoption");
+    const query = new Parse.Query(table);
+    // Include the adopted animal information
+    query.include("adopted");
+    // Adopter id must be equal to userId
+    query.equalTo("adopter", {
+      __type: "Pointer",
+      className: "_User",
+      objectId: userId,
+    });
+    const result = await query.find();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//LEGACY
+/*
 // Returns a list of all the adoptions for a specific user, the information is to show the catalog screen
 router.get('/:userID', async (req, res, next) => {
   try {
@@ -55,7 +85,7 @@ router.post('/:animalID', async (req, res, next) => {
     next(err)
   }
 });
-
+*/
 // Checks in the database if the animal is adopted by the user or not
 const isAdopted = async (req, res, animalID) => {
   try {
@@ -88,8 +118,10 @@ const isAdopted = async (req, res, animalID) => {
     res.status(400).json("Adoptions did not worked");
   }
 };
-
+/*
 module.exports = {
   isAdopted,
   router,
-}
+}*/
+
+module.exports = { router, isAdopted };

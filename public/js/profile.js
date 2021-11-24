@@ -129,17 +129,18 @@ const createRow = () => {
 };
 
 const createCard = (object) => {
+  console.log(object);
   const col = createDiv("col-xl");
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
   anchor.href = "singleAnimal.html";
   anchor.onclick = function () {
-    window.localStorage.setItem("currentAnimal", object.id);
+    window.localStorage.setItem("currentAnimal", object.objectId);
   };
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  const img = createImage(object.profilePhoto);
+  const img = createImage(object.profilePhoto.url);
   button.appendChild(img);
   const div = createDiv("card-img-overlay", object.id);
   const h5 = createTitle(object.name);
@@ -152,10 +153,11 @@ showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
   backTopElem.style.display = "";
   if (container.innerHTML === "") {
-    console.log(username);
-    fetch(`/adoptions/${username}`)
+    console.log(username.innerHTML);
+    fetch(`/adoptions/${username.innerHTML}`)
       .then((res) => res.json())
       .then((animals) => {
+        console.log(animals);
         if (animals.length !== 0) {
           let count = 0;
           let row = createRow();
@@ -173,7 +175,7 @@ showAdoptionsElem.addEventListener("click", () => {
           animals.sort(compareNames);
 
           for (animal of animals) {
-            let col = createCard(animal);
+            let col = createCard(animal.adopted);
             row.appendChild(col);
             count++;
             if (
