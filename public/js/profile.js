@@ -140,7 +140,7 @@ const createCard = (object) => {
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  const img = createImage(object.profilePhoto.url);
+  const img = createImage(object.profilePhoto);
   button.appendChild(img);
   const div = createDiv("card-img-overlay", object.id);
   const h5 = createTitle(object.name);
@@ -153,11 +153,10 @@ showAdoptionsElem.addEventListener("click", () => {
   adoptionsContainerElem.style.display = "";
   backTopElem.style.display = "";
   if (container.innerHTML === "") {
-    console.log(username.innerHTML);
+    //console.log(username.innerHTML);
     fetch(`/adoptions/${username.innerHTML}`)
       .then((res) => res.json())
       .then((animals) => {
-        console.log(animals);
         if (animals.length !== 0) {
           let count = 0;
           let row = createRow();
