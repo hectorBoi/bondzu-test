@@ -36,7 +36,7 @@ var animalMessagesTable = $("#animal-messages-table").DataTable({
 var adoptionTable = $("#adoption-table").DataTable({
   responsive: true,
   ordering: false,
-  columnDefs: [{ width: "30%", targets: 1 }],
+  columnDefs: [{ width: "25%", targets: 1 }],
 });
 
 function toggleActiveFilter() {
@@ -248,11 +248,16 @@ fetch("/reports/adoptions")
   .then((adoptions) => {
     console.log(adoptions);
     adoptions.forEach((adoption) => {
+      let date = new Date(adoption.createdAt);
+      let day = date.getDate();
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
       adoptionTable.row
         .add([
           `${adoption.adopter.name} ${adoption.adopter.lastname}`,
           adoption.adopter.username,
           adoption.adopted.name,
+          `${day}/${month}/${year}`,
         ])
         .draw();
     });
