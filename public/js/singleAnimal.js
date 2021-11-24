@@ -11,6 +11,8 @@ const animalID = window.localStorage.getItem("currentAnimal");
 const titleElem = document.getElementById("title");
 
 const popoverAdoptElem = document.getElementById("popoverAdopt");
+const showMoreElem = document.getElementById("moreinfo-btn");
+const leftSideElem = document.getElementById("left-side");
 
 const loaderElements = document.getElementById("loaderElements");
 const body = document.getElementById("body");
@@ -51,14 +53,18 @@ fetch(`/animals/${animalID}`)
     if(aboutElem.innerText == "[DATOS]"){
       aboutElem.innerText = "Este es el equipo de tecnologías de Bondzú.";
       characteristicsElem.innerText = "Trabajando por un mejor pundo para todos.";
-      iframeDiv.innerHTML =  
-       `<div class="container">
+      adoptElem.remove();
+      aboutElem.remove();
+      showMoreElem.remove();
+      iframeDiv.remove();
+      leftSideElem.innerHTML =  
+       `<div class="container" style="margin-top:18px;">
           <div class="row">
             <div class="col-3">
               <img class="img-thumbnail" src="../img/pinguino.jpg" alt="Foto de Colega" style="height: 100%;">
             </div>
             <div class="col-9">
-              <div class="card">              
+              <div class="card" style="height: 100%;">              
                 <div class="card-body">
                   <h5 class="card-title">Jose Mariano Portilla Landa</h5>
                   <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
@@ -75,7 +81,7 @@ fetch(`/animals/${animalID}`)
               <img class="img-thumbnail" src="../img/aguilaPescadora.jpg" alt="Foto de Colega" style="height: 100%">
             </div>
             <div class="col-9">
-              <div class="card">              
+              <div class="card" style="height: 100%;">              
                 <div class="card-body">
                   <h5 class="card-title">Fernando López López</h5>
                   <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
@@ -92,7 +98,7 @@ fetch(`/animals/${animalID}`)
               <img class="img-thumbnail" src="../img/panda.jpg" alt="Foto de Colega" style="height: 100%">
             </div>
             <div class="col-9">
-              <div class="card">              
+              <div class="card" style="height: 100%;">              
                 <div class="card-body">
                   <h5 class="card-title">Fernando Nieto Morales</h5>
                   <p class="card-text">Falta esta info.</p>
@@ -109,7 +115,7 @@ fetch(`/animals/${animalID}`)
               <img class="img-thumbnail" src="../img/tigre.jpg" alt="Foto de Colega" style="height: 100%">
             </div>
             <div class="col-9">
-              <div class="card">              
+              <div class="card" style="height: 100%;">              
                 <div class="card-body">
                   <h5 class="card-title">Santiago González Ángeles</h5>
                   <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
