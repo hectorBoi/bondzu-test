@@ -49,83 +49,88 @@ fetch(`/animals/${animalID}`)
     characteristicsElem.innerHTML = chars;
     keeperElem.innerText = animal.keeper;
 
-    //Colaboradores
+    //Member's cards
+    const createCard = (name, imageSource, description, email) => {
+      //General div of the card
+      let card= document.createElement("div");
+      card.className="container"
+      card.style="margin-top:18px;"
+      //Div to establish the division between image and text
+      let rows= document.createElement("div");
+      rows.className="row";
+      card.appendChild(rows);
+      //Div to create the image section column
+      let imageDiv= document.createElement("div");
+      imageDiv.className="col-3";
+      rows.appendChild(imageDiv);
+      //Div to create the text section column
+      let textDiv= document.createElement("div");
+      textDiv.className="col-9";
+      rows.appendChild(textDiv);
+      //Div's to set the text organization
+      let text= document.createElement("div");
+      text.className="card";
+      text.style="height: 100%;"
+      textDiv.appendChild(text);
+      let textBody= document.createElement("div");
+      textBody.className="card-body";
+      text.appendChild(textBody);
+
+      //Name
+      let nameText= document.createElement("h5");
+      nameText.className="card-title";
+      nameText.textContent=name;
+      textBody.appendChild(nameText);
+      //Description
+      let descriptionText= document.createElement("p");
+      descriptionText.className="card-text";
+      descriptionText.textContent=description;
+      textBody.appendChild(descriptionText);
+      //Email
+      let emailText= document.createElement("small");
+      emailText.className="text-muted";
+      emailText.textContent=email;
+      textBody.appendChild(emailText);
+      //Image
+      let image= document.createElement("img");
+      image.className="img-thumbnail";
+      image.style=style="height: 100%;"
+      image.src=imageSource;
+      imageDiv.appendChild(image)
+
+      return card
+    }
+
+    //Add the cards
     if(aboutElem.innerText == "[DATOS]"){
       aboutElem.innerText = "Este es el equipo de tecnologías de Bondzú.";
-      characteristicsElem.innerText = "Trabajando por un mejor pundo para todos.";
+      characteristicsElem.innerText = "";
       adoptElem.remove();
       aboutElem.remove();
       showMoreElem.remove();
       iframeDiv.remove();
-      leftSideElem.innerHTML =  
-       `<div class="container" style="margin-top:18px;">
-          <div class="row">
-            <div class="col-3">
-              <img class="img-thumbnail" src="../img/pinguino.jpg" alt="Foto de Colega" style="height: 100%;">
-            </div>
-            <div class="col-9">
-              <div class="card" style="height: 100%;">              
-                <div class="card-body">
-                  <h5 class="card-title">Jose Mariano Portilla Landa</h5>
-                  <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
-                  <p class="card-text"><small class="text-muted">jose.portillala@udlap.mx</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-3">
-              <img class="img-thumbnail" src="../img/aguilaPescadora.jpg" alt="Foto de Colega" style="height: 100%">
-            </div>
-            <div class="col-9">
-              <div class="card" style="height: 100%;">              
-                <div class="card-body">
-                  <h5 class="card-title">Fernando López López</h5>
-                  <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
-                  <p class="card-text"><small class="text-muted">fernando.lopezlz@udlap.mx</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-3">
-              <img class="img-thumbnail" src="../img/panda.jpg" alt="Foto de Colega" style="height: 100%">
-            </div>
-            <div class="col-9">
-              <div class="card" style="height: 100%;">              
-                <div class="card-body">
-                  <h5 class="card-title">Fernando Nieto Morales</h5>
-                  <p class="card-text">Falta esta info.</p>
-                  <p class="card-text"><small class="text-muted">fernando.nietoms@udlap.mx</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="row">
-            <div class="col-3">
-              <img class="img-thumbnail" src="../img/tigre.jpg" alt="Foto de Colega" style="height: 100%">
-            </div>
-            <div class="col-9">
-              <div class="card" style="height: 100%;">              
-                <div class="card-body">
-                  <h5 class="card-title">Santiago González Ángeles</h5>
-                  <p class="card-text">Aqui iría tu información, si tan solo me la pasaras.</p>
-                  <p class="card-text"><small class="text-muted">santiago.gonzalezas@udlap.mx</small></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        `;
+      
+      leftSideElem.innerHTML ="";
+      const card = createCard("Jose Mariano Portilla Landa",
+                            "../img/panda.jpg",
+                            "Desarrollo de la aplicación iOS.",
+                            "jose.portillala@udlap.mx");
+      leftSideElem.appendChild(card);
+      const card2 = createCard("Fernando López López",
+                            "../img/aguilaPescadora.jpg",
+                            "Registro en base de datos. Desarrollo de la página web.",
+                            "fernando.lopezlz@udlap.mx");
+      leftSideElem.appendChild(card2);
+      const card3 = createCard("Fernando Nieto Morales",
+                            "../img/pinguino.jpg",
+                            "Mantenimiento de la página web. Mantenimiento de la aplicación Android.",
+                            "fernando.nietoms@udlap.mx");
+      leftSideElem.appendChild(card3);
+      const card4 = createCard("Santiago González Ángeles",
+                            "../img/tigre.jpg",
+                            "Registro en base de datos. Desarrollo de la página web. Desarrollo de la aplicación Android",
+                            "santiago.gonzalezas@udlap.mx");
+      leftSideElem.appendChild(card4);
     }
 
     if (window.localStorage.getItem("lang") === "es") {
