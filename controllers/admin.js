@@ -463,6 +463,26 @@ router.get("/zoos/:zooID", async (req, res, next) => {
   }
 });
 
+// Returns all the members of Bondzu
+router.get("/members", async (req, res, next) => {
+  try {
+    let membersInfo = [];
+
+    const membersTable = Parse.Object.extend("Members");
+    const membersQuery = new Parse.Query(membersTable);
+    const resultMembers = await membersQuery.find();
+
+    for (let member of resultMembers) {
+      membersInfo.push({ name: member.get("name"), description: member.get("description"), email: member.get("email"), division: member.get("division"), animal: member.get("animal") });
+    }
+
+    //console.log(membersInfo)
+    res.json(membersInfo);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // === This are all the helpers functions used in the routes
 
 // Returns an array of all the zoo's so the admin can choose one instead of creating one

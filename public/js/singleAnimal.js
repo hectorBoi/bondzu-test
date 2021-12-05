@@ -109,29 +109,27 @@ fetch(`/animals/${animalID}`)
       aboutElem.remove();
       showMoreElem.remove();
       iframeDiv.remove();
-      
-      leftSideElem.innerHTML ="";
-      const card = createCard("Jose Mariano Portilla Landa",
-                            "../img/panda.jpg",
-                            "Desarrollo de la aplicación iOS.",
-                            "jose.portillala@udlap.mx");
-      leftSideElem.appendChild(card);
-      const card2 = createCard("Fernando López López",
-                            "../img/aguilaPescadora.jpg",
-                            "Registro en base de datos. Desarrollo de la página web.",
-                            "fernando.lopezlz@udlap.mx");
-      leftSideElem.appendChild(card2);
-      const card3 = createCard("Fernando Nieto Morales",
-                            "../img/pinguino.jpg",
-                            "Mantenimiento de la página web. Mantenimiento de la aplicación Android.",
-                            "fernando.nietoms@udlap.mx");
-      leftSideElem.appendChild(card3);
-      const card4 = createCard("Santiago González Ángeles",
-                            "../img/tigre.jpg",
-                            "Registro en base de datos. Desarrollo de la página web. Desarrollo de la aplicación Android",
-                            "santiago.gonzalezas@udlap.mx");
-      leftSideElem.appendChild(card4);
+
+      fetch("/admin/members")
+      .then((res) => res.json())
+      .then((membersInfo) => {
+        const members = [];
+        membersInfo.forEach((elem) => {
+            members.push(elem);
+        });
+        //console.log(membersInfo);
+
+        var i = 0;
+        for (member in members) {
+          const newCard = createCard(members[i].name, `../img/${members[i].animal}.jpg`, members[i].description, members[i].email);
+          i++;
+          leftSideElem.appendChild(newCard);
+        }
+      })
+      .catch("Error in the request");
     }
+
+
 
     if (window.localStorage.getItem("lang") === "es") {
       popoverAdoptElem.setAttribute(
