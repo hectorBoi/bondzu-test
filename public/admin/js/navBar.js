@@ -77,6 +77,16 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         >
       </li>
       <li class="nav-item">
+        <a href="newMember.html" style="text-decoration: none; color: white;">
+          <button
+            type="button"
+            class="btn btn-outline-light navbarBtnMargins"
+          >
+            Nuevo miembro
+          </button></a
+        >
+      </li>
+      <li class="nav-item">
         <a href="newZoo.html" style="text-decoration: none; color: white;">
           <button
             type="button"

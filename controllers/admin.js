@@ -483,6 +483,65 @@ router.get("/members", async (req, res, next) => {
   }
 });
 
+// Creates a new Bondzu member, returns to the index page
+router.post("/member", async (req, res, next) => {
+  try {
+    const { username, token } = req.cookies;
+
+    // Gets all the variables sent in the request
+    const {
+      name,
+      description,
+      description_en,
+      email,
+      division,
+      priority,
+    } = req.body;
+
+    // Verifies if the user making the request is an Admin
+    const user = await getUser(username);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    // Gets the priority reference for the members from the database
+    // The member is searched based on the provided ID
+    const userType = await getUserType(priority);
+
+    // Gets the reference for the member table in the database
+    const membersTable = Parse.Object.extend("Members");
+    let member = new membersTable();
+
+    // Updates all the fields of the animal with the new information sent in the request
+    if (name) {
+      member.set("name", name);
+    }
+
+    if (description) {
+      member.set("description", description);
+    }
+
+    if (description_en) {
+      member.set("description_en", description_en);
+    }
+
+    if (email) {
+      member.set("email", email);
+    }
+
+    if (division) {
+      member.set("division", division);
+    }
+
+    const updatedMember = await member.save(null, { sessionToken: token });
+
+    res.json(updatedMember);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // === This are all the helpers functions used in the routes
 
 // Returns an array of all the zoo's so the admin can choose one instead of creating one
