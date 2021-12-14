@@ -161,15 +161,6 @@ function showAllUsers() {
     .catch("Error in the request");
 }
 
-fetch("/reports/animals")
-  .then((res) => res.json())
-  .then((animals) => {
-    animals.forEach((animal) => {
-      animalTable.row.add([animal.name, animal.adopters]).draw();
-    });
-  })
-  .catch("Error in the request");
-
 fetch("/reports/messages")
   .then((res) => res.json())
   .then((messages) => {
