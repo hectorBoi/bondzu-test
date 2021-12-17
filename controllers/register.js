@@ -1,4 +1,4 @@
-const token = require("./token")
+const token = require("./token");
 
 // Creates "user" with users information
 const createUser = async (data, Parse) => {
@@ -10,6 +10,7 @@ const createUser = async (data, Parse) => {
     user.set("email", email);
     user.set("name", name);
     user.set("lastname", lastname);
+    user.set("platform", "Pagina web");
 
     // Creates the userType for the user
     let typeTable = Parse.Object.extend("UserType");
@@ -17,13 +18,11 @@ const createUser = async (data, Parse) => {
     query.equalTo("objectId", "mWm6R6DLFX");
     const results = await query.find();
     user.set("userType", results[0]);
-    return user
+    return user;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
-
-
+};
 
 // Performs the authentication of the users credential with the DB
 const handleRegister = async (req, res, Parse) => {
@@ -37,17 +36,20 @@ const handleRegister = async (req, res, Parse) => {
 
     const user = await createUser(req.body, Parse);
     await user.signUp();
-    const session = await Parse.User.logIn(email, password)
-    const username = session.get("username")
-    const typeID = session.get("userType")
-    const userSession = await token.createSession({ user: username, userType: typeID.id, sessiontoken: user.getSessionToken() })
+    const session = await Parse.User.logIn(email, password);
+    const username = session.get("username");
+    const typeID = session.get("userType");
+    const userSession = await token.createSession({
+      user: username,
+      userType: typeID.id,
+      sessiontoken: user.getSessionToken(),
+    });
     res.json(userSession);
   } catch (error) {
     res.status(400).json("Already registered");
   }
-}
-
+};
 
 module.exports = {
   handleRegister: handleRegister,
-}
+};
