@@ -483,6 +483,103 @@ router.get("/members", async (req, res, next) => {
   }
 });
 
+// Returns a specific member of Bondzu based on the given email
+router.get("/members/:email", async (req, res, next) => {
+  try {
+    const { username } = req.cookies;
+    const email = req.params.email;
+
+    const user = await getUser(username);
+
+    // Verifies that the user is an admin
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+    let membersInfo = [];
+
+    const membersTable = Parse.Object.extend("Members");
+    const membersQuery = new Parse.Query(membersTable);
+    const resultMembers = await membersQuery.find();
+
+    for (let member of resultMembers) {
+      if (member.get("email") == email){
+        membersInfo.push({ name: member.get("name"), description: member.get("description"), description_en: member.get("description_en"), email: member.get("email"), division: member.get("division"), animal: member.get("animal")});
+      }
+    }
+
+    //console.log(membersInfo)
+    res.json(membersInfo);
+  } catch (err) {
+    next(err);
+  }
+});
+
+// Updates a Bondzu member, returns to the index page
+router.post("/memberUpdate", async (req, res, next) => {
+  try {
+    const { username, token } = req.cookies;
+
+    // Gets all the variables sent in the request
+    const {
+      name,
+      description,
+      description_en,
+      email,
+      division,
+      memberRefEmail,
+      priority
+    } = req.body;
+
+    // Verifies if the user making the request is an Admin
+    const user = await getUser(username);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    // Gets the priority reference for the members from the database
+    // The member is searched based on the provided ID
+    const userType = await getUserType(priority);
+
+    // Gets the reference for the member table in the database
+    const membersTable = Parse.Object.extend("Members");
+    const membersQuery = new Parse.Query(membersTable);
+    const resultMembers = await membersQuery.find();
+
+    console.log(memberRefEmail);
+    //Find the member
+    for (let member of resultMembers) {
+      if (member.get("email") == memberRefEmail){
+        // Updates all the fields of the member with the new information sent in the request
+        if (name) {
+          member.set("name", name);
+        }
+      
+        if (description) {
+          member.set("description", description);
+        }
+      
+        if (description_en) {
+          member.set("description_en", description_en);
+        }
+      
+        if (email) {
+          member.set("email", email);
+        }
+      
+        if (division) {
+          member.set("division", division);
+        }
+
+        const updatedMember = await member.save(null, { sessionToken: token });
+        res.json(updatedMember);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Creates a new Bondzu member, returns to the index page
 router.post("/member", async (req, res, next) => {
   try {
@@ -506,7 +603,6 @@ router.post("/member", async (req, res, next) => {
     }
 
     // Gets the priority reference for the members from the database
-    // The member is searched based on the provided ID
     const userType = await getUserType(priority);
 
     // Gets the reference for the member table in the database
