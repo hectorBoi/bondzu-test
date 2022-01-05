@@ -24,7 +24,8 @@ fetch(`/animals/${animalID}`)
     let youtubeURL = "";
     //console.log("This is the animal id: ", animal.youtubeID);
     // Checks if the camera is from youtube or another page
-    if (animal.youtubeID.includes("youtube")) {
+    
+    if (animal.youtubeID.includes("http")) {
       youtubeURL = animal.youtubeID;
       //console.log("youtubeURL");
       //console.log(youtubeURL);
