@@ -140,7 +140,12 @@ const createCard = (object) => {
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  const img = createImage(object.profilePhoto);
+  console.log(object);
+  const photoUrl = object.profilePhoto.url.replace(
+    "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+    "https://d36skj58da74xm.cloudfront.net/"
+  );
+  const img = createImage(photoUrl);
   button.appendChild(img);
   const div = createDiv("card-img-overlay", object.id);
   const h5 = createTitle(object.name);
