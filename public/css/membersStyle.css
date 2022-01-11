@@ -1,0 +1,7 @@
+.editButton:hover {
+    stroke: #faa545;
+}
+
+.deleteButton:hover {
+    stroke: rgb(255, 47, 47);
+}
