@@ -580,6 +580,53 @@ router.post("/memberUpdate", async (req, res, next) => {
   }
 });
 
+// Removes a Bondzu member, returns to the index page
+router.post("/memberRemove", async (req, res, next) => {
+  try {
+    const { username, token } = req.cookies;
+
+    // Gets the email sent in the request
+    const {
+      memberRefEmail,
+      priority
+    } = req.body;
+
+    // Verifies if the user making the request is an Admin
+    const user = await getUser(username);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    // Gets the priority reference for the members from the database
+    // The member is searched based on the provided ID
+    const userType = await getUserType(priority);
+
+    // Gets the reference for the member table in the database
+    const membersTable = Parse.Object.extend("Members");
+    const membersQuery = new Parse.Query(membersTable);
+    const resultMembers = await membersQuery.find();
+
+    console.log(memberRefEmail);
+    //Find the member
+    for (let member of resultMembers) {
+      if (member.get("email") == memberRefEmail){
+        // Removes the member
+        member.destroy().then((member) => {
+          console.log("Member removed successfully.");
+        }, (error) => {
+          console.log("Error removing the member.");
+        });
+
+        const updatedMember = await member.save(null, { sessionToken: token });
+        res.json(updatedMember);
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Creates a new Bondzu member, returns to the index page
 router.post("/member", async (req, res, next) => {
   try {
