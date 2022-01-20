@@ -1,52 +1,55 @@
 // While loading, displays all users by default
 window.onload = showAllUsers;
-const userNumber = document.getElementById("users-number");
+const userNumber = document.getElementById('users-number');
+const userNumberWeb = document.getElementById('users-web-number');
+const userNumberiOS = document.getElementById('users-ios-number');
+const userNumberAndroid = document.getElementById('users-android-number');
 
 let userCount;
-let currentFilter = "";
+let currentFilter = '';
 
-var userTable = $("#users-table").DataTable({
+var userTable = $('#users-table').DataTable({
   responsive: true,
   ordering: false,
   columnDefs: [
-    { width: "10%", targets: 0 },
+    { width: '10%', targets: 0 },
     { visible: false, targets: 1 },
-    { width: "11%", targets: 4 },
+    { width: '11%', targets: 4 },
   ],
 });
 
-var animalTable = $("#animals-table").DataTable({
+var animalTable = $('#animals-table').DataTable({
   responsive: true,
-  order: [[1, "desc"]],
-  columnDefs: [{ width: "30%", targets: 1 }],
+  order: [[1, 'desc']],
+  columnDefs: [{ width: '30%', targets: 1 }],
 });
 
-var userMessagesTable = $("#user-messages-table").DataTable({
+var userMessagesTable = $('#user-messages-table').DataTable({
   responsive: true,
-  order: [[2, "desc"]],
-  columnDefs: [{ width: "30%", targets: 1 }],
+  order: [[2, 'desc']],
+  columnDefs: [{ width: '30%', targets: 1 }],
 });
 
-var animalMessagesTable = $("#animal-messages-table").DataTable({
+var animalMessagesTable = $('#animal-messages-table').DataTable({
   responsive: true,
-  order: [[1, "desc"]],
-  columnDefs: [{ width: "30%", targets: 1 }],
+  order: [[1, 'desc']],
+  columnDefs: [{ width: '30%', targets: 1 }],
 });
 
-var adoptionTable = $("#adoption-table").DataTable({
+var adoptionTable = $('#adoption-table').DataTable({
   responsive: true,
   ordering: false,
-  columnDefs: [{ width: "25%", targets: 1 }],
+  columnDefs: [{ width: '25%', targets: 1 }],
 });
 
 function toggleActiveFilter() {
-  $("#week").addClass("btn-outline-primary").removeClass("btn-primary");
-  $("#month").addClass("btn-outline-primary").removeClass("btn-primary");
-  $("#year").addClass("btn-outline-primary").removeClass("btn-primary");
-  $("#all").addClass("btn-outline-primary").removeClass("btn-primary");
+  $('#week').addClass('btn-outline-primary').removeClass('btn-primary');
+  $('#month').addClass('btn-outline-primary').removeClass('btn-primary');
+  $('#year').addClass('btn-outline-primary').removeClass('btn-primary');
+  $('#all').addClass('btn-outline-primary').removeClass('btn-primary');
   $(`#${currentFilter}`)
-    .addClass("btn-primary")
-    .removeClass("btn-outline-primary");
+    .addClass('btn-primary')
+    .removeClass('btn-outline-primary');
 }
 
 function addUsers(users) {
@@ -99,9 +102,9 @@ function getLastYear() {
 }
 
 function filterUsersWeek() {
-  if (currentFilter === "week") return;
+  if (currentFilter === 'week') return;
 
-  currentFilter = "week";
+  currentFilter = 'week';
   toggleActiveFilter();
 
   userTable.clear().draw();
@@ -110,13 +113,13 @@ function filterUsersWeek() {
     .then((users) => {
       addUsers(users);
     })
-    .catch("Error in the request");
+    .catch('Error in the request');
 }
 
 function filterUsersMonth() {
-  if (currentFilter === "month") return;
+  if (currentFilter === 'month') return;
 
-  currentFilter = "month";
+  currentFilter = 'month';
   toggleActiveFilter();
 
   userTable.clear().draw();
@@ -125,13 +128,13 @@ function filterUsersMonth() {
     .then((users) => {
       addUsers(users);
     })
-    .catch("Error in the request");
+    .catch('Error in the request');
 }
 
 function filterUsersYear() {
-  if (currentFilter === "year") return;
+  if (currentFilter === 'year') return;
 
-  currentFilter = "year";
+  currentFilter = 'year';
   toggleActiveFilter();
 
   userTable.clear().draw();
@@ -140,28 +143,52 @@ function filterUsersYear() {
     .then((users) => {
       addUsers(users);
     })
-    .catch("Error in the request");
+    .catch('Error in the request');
 }
 
 function showAllUsers() {
-  if (currentFilter === "all") return;
-  currentFilter = "all";
+  if (currentFilter === 'all') return;
+  currentFilter = 'all';
   toggleActiveFilter();
 
   userTable.clear().draw();
-  fetch("/reports/users")
+  fetch('/reports/users')
     .then((res) => res.json())
     .then((users) => {
       userCount = users.length;
+      const androidCount = users.reduce(
+        (counter, user) => (user.platform === 'Android' ? ++counter : counter),
+        0
+      );
+      const iosCount = users.reduce(
+        (counter, user) => (user.platform === 'iOS' ? ++counter : counter),
+        0
+      );
+      const webCount = users.reduce(
+        (counter, user) =>
+          user.platform === 'Pagina Web' ? ++counter : counter,
+        0
+      );
+      const androidPorcentage = (androidCount / userCount) * 100;
+      const iosPorcentage = (iosCount / userCount) * 100;
+      const webPorcentage = (webCount / userCount) * 100;
       // Updates numbers of users each time the function is called
-      userNumber.innerHTML = "<strong>Número total de usuarios: </strong>";
-      userNumber.innerHTML += users.length;
+      userNumber.innerHTML += `<strong>Número total de usuarios: </strong> ${users.length}`;
+      userNumberAndroid.innerHTML += `<strong>Usuarios Android: </strong> ${androidCount} (${androidPorcentage.toFixed(
+        2
+      )}%)`;
+      userNumberiOS.innerHTML += `<strong>Usuarios iOS: </strong> ${iosCount} (${iosPorcentage.toFixed(
+        2
+      )}%)`;
+      userNumberWeb.innerHTML += `<strong>Usuarios Web: </strong> ${webCount} (${webPorcentage.toFixed(
+        2
+      )}%)`;
       addUsers(users);
     })
-    .catch("Error in the request");
+    .catch('Error in the request');
 }
 
-fetch("/reports/messages")
+fetch('/reports/messages')
   .then((res) => res.json())
   .then((messages) => {
     messages.forEach((message) => {
@@ -198,7 +225,7 @@ fetch("/reports/messages")
           .node();
 
         // Set the row ID to the user ID
-        $(rowNode).attr("id", message.id_user.objectId);
+        $(rowNode).attr('id', message.id_user.objectId);
       }
 
       // Handle animal messages table
@@ -217,27 +244,26 @@ fetch("/reports/messages")
           .node();
 
         // Set the row ID to the animal ID
-        $(rowNode).attr("id", message.animal_Id.objectId);
+        $(rowNode).attr('id', message.animal_Id.objectId);
       }
     });
   })
-  .catch("Error in the request");
+  .catch('Error in the request');
 
 // Animals table
-fetch("/reports/animals")
+fetch('/reports/animals')
   .then((res) => res.json())
   .then((animals) => {
     animals.forEach((animal) => {
       animalTable.row.add([animal.name, animal.adopters]).draw();
     });
   })
-  .catch("Error in the request");
+  .catch('Error in the request');
 
 // Adoptions table
-fetch("/reports/adoptions")
+fetch('/reports/adoptions')
   .then((res) => res.json())
   .then((adoptions) => {
-    console.log(adoptions);
     adoptions.forEach((adoption) => {
       let date = new Date(adoption.createdAt);
       let day = date.getDate();
@@ -253,4 +279,4 @@ fetch("/reports/adoptions")
         .draw();
     });
   })
-  .catch("Error in the request");
+  .catch('Error in the request');
