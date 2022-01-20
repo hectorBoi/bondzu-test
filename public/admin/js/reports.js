@@ -42,6 +42,12 @@ var adoptionTable = $('#adoption-table').DataTable({
   columnDefs: [{ width: '25%', targets: 1 }],
 });
 
+var lastLoginsTable = $('#last-logins-table').DataTable({
+  responsive: true,
+  ordering: false,
+  columnDefs: [{ width: '16.666%', targets: 1 }],
+});
+
 function toggleActiveFilter() {
   $('#week').addClass('btn-outline-primary').removeClass('btn-primary');
   $('#month').addClass('btn-outline-primary').removeClass('btn-primary');
@@ -275,6 +281,53 @@ fetch('/reports/adoptions')
           adoption.adopter.username,
           adoption.adopted.name,
           `${day}/${month}/${year}`,
+        ])
+        .draw();
+    });
+  })
+  .catch('Error in the request');
+
+// Last logins table
+fetch('/reports/users')
+  .then((res) => res.json())
+  .then((users) => {
+    users.forEach((user) => {
+      let date, dateiOS, dateAndroid, dateWeb;
+      if (user.lastLogin !== undefined) {
+        date = new Date(user.lastLogin.iso);
+      }
+      if (user.lastLoginiOS !== undefined) {
+        dateiOS = new Date(user.lastLoginiOS.iso);
+      }
+      if (user.lastLoginAndroid !== undefined) {
+        dateAndroid = new Date(user.lastLoginAndroid.iso);
+      }
+      if (user.lastLoginWeb !== undefined) {
+        dateWeb = new Date(user.lastLoginWeb.iso);
+      }
+
+      lastLoginsTable.row
+        .add([
+          `${user.name} ${user.lastname}`,
+          user.email,
+          user.lastLogin === undefined
+            ? 'N/a'
+            : `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
+          user.lastLoginiOS === undefined
+            ? 'N/a'
+            : `${dateiOS.getDate()}/${
+                dateiOS.getMonth() + 1
+              }/${dateiOS.getFullYear()}`,
+          user.lastLoginAndroid === undefined
+            ? 'N/a'
+            : `${dateAndroid.getDate()}/${
+                dateAndroid.getMonth() + 1
+              }/${dateAndroid.getFullYear()}`,
+          user.lastLoginWeb === undefined
+            ? 'N/a'
+            : `${dateWeb.getDate()}/${
+                dateWeb.getMonth() + 1
+              }/${dateWeb.getFullYear()}`,
         ])
         .draw();
     });

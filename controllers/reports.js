@@ -14,6 +14,7 @@ router.post('/lastLoginWeb/', async (req, res, next) => {
 
     const today = new Date();
     user.set('lastLoginWeb', today);
+    user.set('lastLogin', today);
     const newUser = await user.save(null, { sessionToken: token });
     let resp = {
       message: 'Success',
