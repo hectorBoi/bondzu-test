@@ -1,18 +1,18 @@
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const submit = document.getElementById("submit");
-const invalidPassword = document.getElementById("invalidPassword");
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const submit = document.getElementById('submit');
+const invalidPassword = document.getElementById('invalidPassword');
 
-submit.addEventListener("click", () => {
+submit.addEventListener('click', () => {
   const us = email.value;
   const pw = password.value;
 
-  invalidPassword.style.display = "none";
+  invalidPassword.style.display = 'none';
 
-  fetch("/login", {
-    method: "post",
+  fetch('/login', {
+    method: 'post',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       email: us,
@@ -26,10 +26,24 @@ submit.addEventListener("click", () => {
         document.cookie = `username=${username}; path=/;`;
         document.cookie = `token=${token}; path=/`;
         document.cookie = `usertype=${userType}; path=/`;
-        location.replace("/");
+        // Sets last login date
+        fetch('/reports/lastLoginWeb/', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+          }),
+        })
+          .then((res) => res.json())
+          .catch((err) => {
+            console.log(err);
+          });
+        location.replace('/');
       }
-      if (res === "Incorrect") {
-        invalidPassword.removeAttribute("style");
+      if (res === 'Incorrect') {
+        invalidPassword.removeAttribute('style');
       }
     })
     .catch((err) => {
