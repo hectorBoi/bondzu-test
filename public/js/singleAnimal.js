@@ -120,11 +120,20 @@ fetch(`/animals/${animalID}`)
         });
         //console.log(membersInfo);
 
+        //Create each card (Based on the language)
         var i = 0;
-        for (member in members) {
-          const newCard = createCard(members[i].name, `../img/${members[i].animal}.jpg`, members[i].description, members[i].email);
-          i++;
-          leftSideElem.appendChild(newCard);
+        if (window.localStorage.getItem("lang") === "es") {
+          for (member in members) {
+            const newCard = createCard(members[i].name, `../img/${members[i].animal}.jpg`, members[i].description, members[i].email);
+            i++;
+            leftSideElem.appendChild(newCard);
+          }
+        } else if (window.localStorage.getItem("lang") === "en") {
+          for (member in members) {
+            const newCard = createCard(members[i].name, `../img/${members[i].animal}.jpg`, members[i].description_en, members[i].email);
+            i++;
+            leftSideElem.appendChild(newCard);
+          }
         }
       })
       .catch("Error in the request");

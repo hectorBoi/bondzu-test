@@ -473,7 +473,7 @@ router.get("/members", async (req, res, next) => {
     const resultMembers = await membersQuery.find();
 
     for (let member of resultMembers) {
-      membersInfo.push({ name: member.get("name"), description: member.get("description"), email: member.get("email"), division: member.get("division"), animal: member.get("animal") });
+      membersInfo.push({ name: member.get("name"), description: member.get("description"), description_en: member.get("description_en"), email: member.get("email"), division: member.get("division"), animal: member.get("animal") });
     }
 
     //console.log(membersInfo)
