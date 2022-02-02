@@ -1,12 +1,16 @@
 // While loading, displays all users by default
 window.onload = showAllUsers;
 const userNumber = document.getElementById('users-number');
-const userNumberWeb = document.getElementById('users-web-number');
-const userNumberiOS = document.getElementById('users-ios-number');
-const userNumberAndroid = document.getElementById('users-android-number');
 
 let userCount;
 let currentFilter = '';
+
+var numberUserTable = $('#number-users-table').DataTable({
+  responsive: true,
+  searching: false,
+  ordering: false,
+  columnDefs: [{ width: '33%', targets: 1 }],
+});
 
 var userTable = $('#users-table').DataTable({
   responsive: true,
@@ -178,17 +182,20 @@ function showAllUsers() {
       const androidPorcentage = (androidCount / userCount) * 100;
       const iosPorcentage = (iosCount / userCount) * 100;
       const webPorcentage = (webCount / userCount) * 100;
+
       // Updates numbers of users each time the function is called
-      userNumber.innerHTML += `<strong>Número total de usuarios: </strong> ${users.length}`;
-      userNumberAndroid.innerHTML += `<strong>Usuarios Android: </strong> ${androidCount} (${androidPorcentage.toFixed(
-        2
-      )}%)`;
-      userNumberiOS.innerHTML += `<strong>Usuarios iOS: </strong> ${iosCount} (${iosPorcentage.toFixed(
-        2
-      )}%)`;
-      userNumberWeb.innerHTML += `<strong>Usuarios Web: </strong> ${webCount} (${webPorcentage.toFixed(
-        2
-      )}%)`;
+      let rowNode = numberUserTable.row
+        .add(['Web', webCount, `${webPorcentage.toFixed(2)}`])
+        .draw()
+        .node();
+      rowNode = numberUserTable.row
+        .add(['iOS', iosCount, `${iosPorcentage.toFixed(2)}`])
+        .draw()
+        .node();
+      rowNode = numberUserTable.row
+        .add(['Android', androidCount, `${androidPorcentage.toFixed(2)}`])
+        .draw()
+        .node();
       addUsers(users);
     })
     .catch('Error in the request');
