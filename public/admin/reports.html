@@ -35,7 +35,7 @@
       <h1 class="text-center" style="color: blue">
         Reportes
       </h1>
-  
+
       <br />
       <div style="margin-left: auto; margin-right: auto; width: 100%; text-align: center;">
         <a href="#Usuarios" type="button" class="btn btn-outline-secondary btn-sm p-2 col-2">
@@ -60,9 +60,20 @@
       <a href="#Inicio" type="button" class="btn btn-outline-secondary btn-sm" style="margin-bottom: 5px;">
         Regresar</a>
       <h4 style="margin-top: 10px;" id="users-number"></h4>
-      <h4 style="margin-top: 10px;" id="users-web-number"></h4>
-      <h4 style="margin-top: 10px;" id="users-ios-number"></h4>
-      <h4 style="margin-top: 10px;" id="users-android-number"></h4>
+
+      <div style="margin-bottom: 75px;">
+        <table id="number-users-table" class="ui table table-hover table-striped" width="100%">
+          <thead>
+            <tr>
+              <th scope="col">Plataforma</th>
+              <th scope="col"># Usuarios</th>
+              <th scope="col">Porcentaje %</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
 
       <div style="margin: 15px 0;">
         <button id="week" type="button" class="btn btn-outline-primary btn-sm" onclick="filterUsersWeek()">1
@@ -107,7 +118,7 @@
           </tbody>
         </table>
       </div>
-      
+
       <a name="PersonasComentan"></a>
       <br>
       <h3 style="display: inline-block;">Personas que más comentan</h3>
@@ -164,7 +175,7 @@
           </tbody>
         </table>
       </div>
-      
+
       <a name="UltimaSesion"></a>
       <br>
       <h3 style="display: inline-block;">Últimas sesiones</h3>
