@@ -118,19 +118,27 @@ fetch(`/animals/${animalID}`)
         membersInfo.forEach((elem) => {
             members.push(elem);
         });
-        //console.log(membersInfo);
+        console.log(membersInfo);
 
         //Create each card (Based on the language)
         var i = 0;
         if (window.localStorage.getItem("lang") === "es") {
           for (member in members) {
-            const newCard = createCard(members[i].name, `../img/${members[i].animal}.jpg`, members[i].description, members[i].email);
+            const newCard = createCard( members[i].name, 
+                                        members[i].image, 
+                                        members[i].description, 
+                                        members[i].email
+                                      );
             i++;
             leftSideElem.appendChild(newCard);
           }
         } else if (window.localStorage.getItem("lang") === "en") {
           for (member in members) {
-            const newCard = createCard(members[i].name, `../img/${members[i].animal}.jpg`, members[i].description_en, members[i].email);
+            const newCard = createCard( members[i].name, 
+                                        members[i].image, 
+                                        members[i].description_en, 
+                                        members[i].email
+                                        );
             i++;
             leftSideElem.appendChild(newCard);
           }
