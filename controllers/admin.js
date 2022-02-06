@@ -2,6 +2,7 @@
 const animalInfo = require("./animalInfo");
 const { Parse } = require("../database");
 const { Router } = require("express");
+const { json } = require("body-parser");
 
 // Initializes the router
 const router = Router();
@@ -473,7 +474,22 @@ router.get("/members", async (req, res, next) => {
     const resultMembers = await membersQuery.find();
 
     for (let member of resultMembers) {
-      membersInfo.push({ name: member.get("name"), description: member.get("description"), description_en: member.get("description_en"), email: member.get("email"), division: member.get("division"), animal: member.get("animal") });
+      //Get the image
+      let image = "";
+      let imageURL = "";
+      image = member.get("image")._url;
+      imageURL = image.replace(
+        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+        "https://d36skj58da74xm.cloudfront.net/"
+      );
+      //Push the member
+      membersInfo.push({  name: member.get("name"), 
+                          description: member.get("description"), 
+                          description_en: member.get("description_en"), 
+                          email: member.get("email"), 
+                          division: member.get("division"), 
+                          image: imageURL
+                        });
     }
 
     //console.log(membersInfo)
@@ -503,7 +519,13 @@ router.get("/members/:email", async (req, res, next) => {
 
     for (let member of resultMembers) {
       if (member.get("email") == email){
-        membersInfo.push({ name: member.get("name"), description: member.get("description"), description_en: member.get("description_en"), email: member.get("email"), division: member.get("division"), animal: member.get("animal")});
+        membersInfo.push({  name: member.get("name"), 
+                            description: member.get("description"), 
+                            description_en: member.get("description_en"), 
+                            email: member.get("email"), 
+                            division: member.get("division"), 
+                            animal: member.get("animal")
+                          });
       }
     }
 
@@ -513,6 +535,44 @@ router.get("/members/:email", async (req, res, next) => {
     next(err);
   }
 });
+
+// Update image of a specific member of Bondzu based on the given email
+router.post("/memberUpdatePhoto/:email", async (req, res, next) => {
+  try {
+    const { username, token } = req.cookies;
+    const email = req.params.email;
+
+    const user = await getUser(username);
+
+    // Verifies that the user is an admin
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+    let membersInfo = [];
+
+    const membersTable = Parse.Object.extend("Members");
+    const membersQuery = new Parse.Query(membersTable);
+    const resultMembers = await membersQuery.find();
+
+    for (let member of resultMembers) {
+      console.log(`Looking for ${email}`)
+      if (member.get("email") == email){
+        console.log(`Found ${member.get("email")}`)
+        if (req.files) {
+          const photo = await createsPhotoFile(req);
+          member.set("image", photo);
+          const updatedMember = await member.save(null, { sessionToken: token });
+          console.log("Redirecting...");
+          res.redirect("/admin/updateMember.html");
+        }
+      }
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+    
+    
 
 // Updates a Bondzu member, returns to the index page
 router.post("/memberUpdate", async (req, res, next) => {

@@ -56,22 +56,28 @@
               <h4>Datos del Miembro</h4>
             </div>
             <div class="card-body">
-              <form class="was-validated">
-                <div class="form-group is-invalid text-center">
-                  <b><label>Estatus</label></b>
-                  <div class="custom-control custom-switch">
+              <form class="was-validated" method="POST" enctype="multipart/form-data" id="formTest">
+                <div class="form-group" style="margin-left: 5px">
+                  <div class="text-center mx-auto">
+                    <b><label>Imagen</label></b>
+                    <br />
                     <input
-                      type="checkbox"
-                      class="custom-control-input"
-                      id="status"
-                      required
+                      type="file"
+                      class="form-control-file"
+                      name="newProfilepic"
+                      id="newProfilepic"
+                      accept="image/*"
                     />
-                    <label
-                      class="custom-control-label"
-                      for="status"
-                      id="statusText"
-                    ></label>
+                    <br />
+                    <input
+                      type="submit"
+                      value="Ninguna foto seleccionada"
+                      id="submitPhoto"
+                      class="btn btn-dark"
+                      disabled
+                    />
                   </div>
+                </div>
 
                   <!-- Script para switch -->
                   <script>

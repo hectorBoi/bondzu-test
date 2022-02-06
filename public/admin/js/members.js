@@ -125,7 +125,11 @@ fetch("/admin/members")
 
   var i = 0;
   for (member in members) {
-    const newCard = createCard(members[i].name, `../img/${members[i].animal}.jpg`, members[i].description, members[i].email);
+    const newCard = createCard( members[i].name, 
+                                members[i].image, 
+                                members[i].description, 
+                                members[i].email
+                              );
     i++;
     container.appendChild(newCard);
   }

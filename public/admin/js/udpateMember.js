@@ -53,56 +53,87 @@ fetch(`/admin/members/${memberEmail}`)
   })
   .catch("Error in the request");
 
-  submitSaveElem.addEventListener("click", () => {
-    missingInfoElem.style.display = "none";
-    successfulSaveElem.style.display = "none";
-  
-    //Información única
-    const nombre = nombreElem.value;
-    const email = emailElem.value;
-    const division = divisionElem.value;
-  
-    //Información español
-    const description_esp = descripcionElem.value;
-  
-    //English information
-    const description_en = descriptionElem.value;
-  
-    if (
-      email != "" &&
-      nombre != "" &&
-      description_esp != "" &&
-      description_en != ""
-    ) {
-      buttonSpinnerElem.removeAttribute("style");
-  
-      const request = {
-        name: nombre,
-        description: description_esp,
-        description_en: description_en,
-        email: email,
-        division: division,
-        objectID: objectID,
-        memberRefEmail: memberEmail,
-        priority: "etDcoSci6K",
-      };
-      console.log(request);
-  
-      fetch("/admin/memberUpdate", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(request),
+submitSaveElem.addEventListener("click", () => {
+  missingInfoElem.style.display = "none";
+  successfulSaveElem.style.display = "none";
+
+  //Información única
+  const nombre = nombreElem.value;
+  const email = emailElem.value;
+  const division = divisionElem.value;
+
+  //Información español
+  const description_esp = descripcionElem.value;
+
+  //English information
+  const description_en = descriptionElem.value;
+
+  if (
+    email != "" &&
+    nombre != "" &&
+    description_esp != "" &&
+    description_en != ""
+  ) {
+    buttonSpinnerElem.removeAttribute("style");
+
+    const request = {
+      name: nombre,
+      description: description_esp,
+      description_en: description_en,
+      email: email,
+      division: division,
+      objectID: objectID,
+      memberRefEmail: memberEmail,
+      priority: "etDcoSci6K",
+    };
+    //console.log(request);
+
+    fetch("/admin/memberUpdate", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(request),
+    })
+      .then((res) => location.replace("/admin/member.html"))
+      .then((res) => {
+        location.replace("/admin/member.html");
+        successfulSaveElem.removeAttribute("style");
+        buttonSpinnerElem.style.display = "none";
       })
-        .then((res) => location.replace("/admin/index.html"))
-        .then((res) => {
-          location.replace("/admin/index.html");
-          successfulSaveElem.removeAttribute("style");
-          buttonSpinnerElem.style.display = "none";
-        })
-        .catch((err) => err);
-    } else {
-      missingInfoElem.removeAttribute("style");
-    }
-  });
+      .catch((err) => err);
+  } else {
+    missingInfoElem.removeAttribute("style");
+  }
+});
+
+const formTest = document.getElementById("formTest");
+formTest.setAttribute("action", `/admin/memberUpdatePhoto/${memberEmail}`);
+
+const submitPhoto = document.getElementById("newProfilepic");
+const formPhoto = document.getElementById("submitPhoto");
+submitPhoto.addEventListener("change", () => {
+  formPhoto.className = "btn btn-success";
+  formPhoto.disabled = false;
+  formPhoto.value = "Actualizar foto";
+});
+
+
+/*formPhoto.addEventListener("click", () => {
+  
+  const request = {email: memberEmail, image: submitPhoto};
+
+  fetch(`/admin/memberUpdatePhoto`, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(request)
+  })
+    .then((res) => {
+      location.replace("/admin/member.html");
+      successfulSaveElem.removeAttribute("style");
+      buttonSpinnerElem.style.display = "none";
+    })
+    .catch((err) => err);
+});*/
