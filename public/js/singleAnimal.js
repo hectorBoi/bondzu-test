@@ -124,23 +124,27 @@ fetch(`/animals/${animalID}`)
         var i = 0;
         if (window.localStorage.getItem("lang") === "es") {
           for (member in members) {
-            const newCard = createCard( members[i].name, 
-                                        members[i].image, 
-                                        members[i].description, 
-                                        members[i].email
-                                      );
+            if(members[i].status == true){
+              const newCard = createCard( members[i].name, 
+                                          members[i].image, 
+                                          members[i].description, 
+                                          members[i].email
+                                        );
+              leftSideElem.appendChild(newCard);
+            }
             i++;
-            leftSideElem.appendChild(newCard);
           }
         } else if (window.localStorage.getItem("lang") === "en") {
           for (member in members) {
-            const newCard = createCard( members[i].name, 
-                                        members[i].image, 
-                                        members[i].description_en, 
-                                        members[i].email
+            if(members[i].status == true){
+              const newCard = createCard( members[i].name, 
+                                          members[i].image, 
+                                          members[i].description_en, 
+                                          members[i].email
                                         );
+              leftSideElem.appendChild(newCard);
+            }
             i++;
-            leftSideElem.appendChild(newCard);
           }
         }
       })

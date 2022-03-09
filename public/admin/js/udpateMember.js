@@ -11,6 +11,7 @@ body.style.overflow = "hidden";
 const nombreElem = document.getElementById("nombre");
 const emailElem = document.getElementById("email");
 const statusElem = document.getElementById("status");
+const statusTextElem = document.getElementById("statusText");
 const divisionElem = document.getElementById("division");
 const objectID = "";
 
@@ -45,6 +46,14 @@ fetch(`/admin/members/${memberEmail}`)
     //English data
     descriptionElem.innerHTML = member_info[0].description_en;
 
+    //Status
+    statusElem.checked = member_info[0].status;
+    window.status = member_info[0].status
+    if(statusElem.checked) 
+      statusTextElem.innerText = "Activo";
+    else
+      statusTextElem.innerText = "Inactivo";
+
     //ID
     //objectID = member_info[0].objectID;
 
@@ -52,6 +61,10 @@ fetch(`/admin/members/${memberEmail}`)
     body.style.overflow = "auto";
   })
   .catch("Error in the request");
+
+statusElem.addEventListener("click", () => {
+  window.status = statusElem.checked.toString();
+})
 
 submitSaveElem.addEventListener("click", () => {
   missingInfoElem.style.display = "none";
@@ -61,6 +74,7 @@ submitSaveElem.addEventListener("click", () => {
   const nombre = nombreElem.value;
   const email = emailElem.value;
   const division = divisionElem.value;
+  const bStatus = window.status;
 
   //Información español
   const description_esp = descripcionElem.value;
@@ -78,6 +92,7 @@ submitSaveElem.addEventListener("click", () => {
 
     const request = {
       name: nombre,
+      status: bStatus,
       description: description_esp,
       description_en: description_en,
       email: email,
@@ -97,7 +112,6 @@ submitSaveElem.addEventListener("click", () => {
     })
       .then((res) => location.replace("/admin/member.html"))
       .then((res) => {
-        location.replace("/admin/member.html");
         successfulSaveElem.removeAttribute("style");
         buttonSpinnerElem.style.display = "none";
       })
