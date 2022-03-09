@@ -477,11 +477,16 @@ router.get("/members", async (req, res, next) => {
       //Get the image
       let image = "";
       let imageURL = "";
+      try {
       image = member.get("image")._url;
       imageURL = image.replace(
         "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
         "https://d36skj58da74xm.cloudfront.net/"
       );
+      }catch(err) {
+        imageURL = "../img/header.png"
+      }
+      
       //Push the member
       membersInfo.push({  name: member.get("name"), 
                           description: member.get("description"), 
