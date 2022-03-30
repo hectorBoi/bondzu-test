@@ -477,17 +477,23 @@ router.get("/members", async (req, res, next) => {
       //Get the image
       let image = "";
       let imageURL = "";
-      image = member.get("image")._url;
-      imageURL = image.replace(
-        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-        "https://d36skj58da74xm.cloudfront.net/"
-      );
+      try {
+        image = member.get("image")._url;
+        imageURL = image.replace(
+          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+          "https://d36skj58da74xm.cloudfront.net/"
+        );
+      }catch(err) {
+        imageURL = "../img/header.png"
+      }
+      
       //Push the member
       membersInfo.push({  name: member.get("name"), 
                           description: member.get("description"), 
                           description_en: member.get("description_en"), 
                           email: member.get("email"), 
-                          division: member.get("division"), 
+                          division: member.get("division"),
+                          status: member.get("status"),
                           image: imageURL
                         });
     }
@@ -523,7 +529,8 @@ router.get("/members/:email", async (req, res, next) => {
                             description: member.get("description"), 
                             description_en: member.get("description_en"), 
                             email: member.get("email"), 
-                            division: member.get("division"), 
+                            division: member.get("division"),
+                            status: member.get("status"),
                             animal: member.get("animal")
                           });
       }
@@ -582,6 +589,7 @@ router.post("/memberUpdate", async (req, res, next) => {
     // Gets all the variables sent in the request
     const {
       name,
+      status,
       description,
       description_en,
       email,
@@ -613,6 +621,15 @@ router.post("/memberUpdate", async (req, res, next) => {
         // Updates all the fields of the member with the new information sent in the request
         if (name) {
           member.set("name", name);
+        }
+
+        if(status == "true"){
+          console.log("true");
+          member.set("status", true);
+        }
+        else if(status == "false"){
+          console.log("false");
+          member.set("status", false);
         }
       
         if (description) {
@@ -720,6 +737,9 @@ router.post("/member", async (req, res, next) => {
     if (name) {
       member.set("name", name);
     }
+
+    
+    member.set("status", true);
 
     if (description) {
       member.set("description", description);
