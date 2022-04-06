@@ -77,6 +77,24 @@ updateProfileElem.addEventListener('click', () => {
 // To interact with the adoptions
 const adoptionsContainerElem = document.getElementById('adoptionsContainer');
 const showAdoptionsElem = document.getElementById('showAdoptions');
+
+const showAdoptionsTextEnglish = `Your adoptions and followed`;
+const hideAdoptionsTextEnglish = `Hide ${showAdoptionsTextEnglish.toLowerCase()}`;
+const showAdoptionsTextSpanish = `Tus adopciones y seguidos`;
+const hideAdoptionsTextSpanish = `Ocultar ${showAdoptionsTextSpanish.toLowerCase()}`;
+
+// Assigns text to "Your adoptions" button programatically
+switch(window.localStorage.getItem('lang'))
+{
+  case "en":
+    showAdoptionsElem.innerText = `${showAdoptionsTextEnglish}`;
+    break;
+  case "es":
+  default:
+      showAdoptionsElem.innerText = `${showAdoptionsTextSpanish}`;
+      break;
+}
+
 const container = document.getElementById('container');
 const headerAdoptions = document.getElementById('alertAdoptions');
 
@@ -169,9 +187,9 @@ showAdoptionsElem.addEventListener('click', () => {
           showAdoptionsElem.disable = true;
 
           if (window.localStorage.getItem('lang') === 'es') {
-            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Tus adopciones</h4>`;
+            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">${showAdoptionsTextSpanish}</h4>`;
           } else if (window.localStorage.getItem('lang') === 'en') {
-            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Your adoptions</h4>`;
+            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">${showAdoptionsTextEnglish}</h4>`;
           }
 
           headerAdoptions.className = 'alert alert-success';
@@ -191,9 +209,9 @@ showAdoptionsElem.addEventListener('click', () => {
           }
         } else {
           if (window.localStorage.getItem('lang') === 'es') {
-            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones. <a href="animals.html">¡Ve a adoptar! <a/></h4>`;
+            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">Aún no tienes adopciones o seguidos. <a href="animals.html">¡Ve a adoptar y seguir! <a/></h4>`;
           } else if (window.localStorage.getItem('lang') === 'en') {
-            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">You do not have adoptions yet. <a href="animals.html"> Go and adopt!<a/></h4>`;
+            headerAdoptions.innerHTML = `<h4 class="alert-heading text-center">You do not have adoptions or followed yet. <a href="animals.html"> Go adopt and follow!<a/></h4>`;
           }
 
           headerAdoptions.className = 'alert alert-danger';
@@ -212,18 +230,18 @@ showAdoptionsElem.addEventListener('click', () => {
     backTopElem.style.display = 'none';
 
     if (window.localStorage.getItem('lang') === 'es') {
-      showAdoptionsElem.innerText = 'Tus adopciones';
+      showAdoptionsElem.innerText = `${showAdoptionsTextSpanish}`;
     } else if (window.localStorage.getItem('lang') === 'en') {
-      showAdoptionsElem.innerText = 'Your adoptions';
+      showAdoptionsElem.innerText = `${showAdoptionsTextEnglish}`;
     }
   } else {
     showAdoptionsElem.className += 'btn btn-info';
     showAdoptionsElem.className += '  hide';
 
     if (window.localStorage.getItem('lang') === 'es') {
-      showAdoptionsElem.innerText = 'Ocultar tus adopciones';
+      showAdoptionsElem.innerText = `${hideAdoptionsTextSpanish}`;
     } else if (window.localStorage.getItem('lang') === 'en') {
-      showAdoptionsElem.innerText = 'Hide your adoptions';
+      showAdoptionsElem.innerText = `${hideAdoptionsTextEnglish}`;
     }
   }
 });
