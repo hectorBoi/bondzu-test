@@ -90,6 +90,19 @@ style="background-color: #f28f1d; border-color: #ffffff;"
           </button></a
         >
       </li>
+      <li class="nav-item">
+        <a
+          href="#"
+          style="text-decoration: none; color: white;"
+        >
+          <button
+            type="button"
+            class="btn btn-outline-light navbarBtnMargins"
+          >
+            Store
+          </button></a
+        >
+      </li>
     </ul>
     <ul class="navbar-nav ml-auto justify-content-end">
       <li class="nav-item" id="guest">
