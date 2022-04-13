@@ -46,7 +46,7 @@ document.getElementById("footer").innerHTML = `
                 </div>
                 <div class="col-sm" style="margin-top: 2px">
                   <a
-                    href="https://vm.tiktok.com/ZMervVtnA/"
+                    href="https://www.tiktok.com/@bondzutiktok"
                     style="text-decoration: none"
                     target="_blank"
                     rel="noopener noreferrer"

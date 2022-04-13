@@ -59,6 +59,20 @@ document.getElementById("footer").innerHTML = `
                 </div>
                 <div class="col-sm">
                   <a
+                    href="https://www.tiktok.com/@bondzutiktok"
+                    style="text-decoration: none;"
+                    target="_blank"
+                  >
+                    <img
+                      src="../img/tikTokIcon.png"
+                      alt="tiktokIcon"
+                      height="40"
+                      width="40"
+                    />
+                  </a>
+                </div>
+                <div class="col-sm">
+                  <a
                     href="https://www.instagram.com/bondzucubs/"
                     style="text-decoration: none;"
                     target="_blank"
