@@ -18,6 +18,67 @@ const loaderElements = document.getElementById("loaderElements");
 const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
+/**
+ * Translates the given element to English and Spanish
+ * @param {HTMLElement} element The HTML element whose innerText will be translated
+ * @param {string} englishTranslation The element's English translation
+ * @param {string} spanishTranslation The element's Spanish translation
+ */
+function translateElement(element, englishTranslation, spanishTranslation)
+{
+  const language = window.localStorage.getItem("lang");
+  switch (language)
+  {
+    case "en":
+      element.innerText = englishTranslation;
+      break;
+    
+    case "es":
+    default:
+      element.innerText = spanishTranslation;
+      break;
+  }
+}
+
+/**
+ * Translates a mutual HTML element between animals and colleagues to English and Spanish
+ * @param {string} distinguishingString String that indicates if the translation is targeted towards an animal or a colleague
+ * @param {HTMLElement} translatedElement The mutual HTML element between animals and colleagues, whose innerText will be translated
+ * @param {string} colleagueEnglishTranslation The element's English translation for colleagues
+ * @param {string} colleagueSpanishTranslation The element's Spanish translation for colleagues
+ * @param {string} animalEnglishTranslation The element's English translation for animals
+ * @param {string} animalSpanishTranslation The element's Spanish translation for animals
+ */
+function translateAnimalsAndColleagues(distinguishingString, 
+                                       translatedElement, 
+                                       colleagueEnglishTranslation, 
+                                       colleagueSpanishTranslation, 
+                                       animalEnglishTranslation, 
+                                       animalSpanishTranslation)
+{
+  switch (distinguishingString)
+  {
+    case "Colega":
+    case "Colleague":
+      translateElement(translatedElement, colleagueEnglishTranslation, colleagueSpanishTranslation);
+      break;
+    
+    default:
+      translateElement(translatedElement, animalEnglishTranslation, animalSpanishTranslation);
+      break;
+  }
+}
+
+const adoptAnimalSpanishText = "¡Adóptame!";
+const adoptAnimalEnglishText = "Adopt me!";
+const followColleagueSpanishText = "¡Sígueme!";
+const followColleagueEnglishText = "Follow me!";
+
+const adoptedAnimalSpanishText = "¡Ya me adoptaste!";
+const adoptedAnimalEnglishText = "You've already adopted me!";
+const followedColleagueSpanishText = "¡Ya me seguiste!";
+const followedColleagueEnglishText = "You've already followed me!";
+
 fetch(`/animals/${animalID}`)
   .then((res) => res.json())
   .then((animal) => {
@@ -168,14 +229,25 @@ fetch(`/animals/${animalID}`)
     loaderElements.className += " hidden";
     body.style.overflow = "auto";
 
-    if (animal.isAdopted) {
-      if (window.localStorage.getItem("lang") === "es") {
-        adoptElem.innerText = "¡Ya me adoptaste!";
-      } else if (window.localStorage.getItem("lang") === "en") {
-        adoptElem.innerText = "You already adopted me!";
-      }
+    if (animal.isAdopted)
+    {
+      translateAnimalsAndColleagues(animal.species, 
+                                    adoptElem, 
+                                    followedColleagueEnglishText, 
+                                    followedColleagueSpanishText, 
+                                    adoptedAnimalEnglishText, 
+                                    adoptedAnimalSpanishText);
 
       adoptElem.disabled = true;
+    }
+    else
+    {
+      translateAnimalsAndColleagues(animal.species, 
+                                    adoptElem, 
+                                    followColleagueEnglishText, 
+                                    followColleagueSpanishText, 
+                                    adoptAnimalEnglishText, 
+                                    adoptAnimalSpanishText);
     }
   })
   .catch("Error in the request");
@@ -191,11 +263,14 @@ adoptElem.addEventListener("click", () => {
     .then((res) => res.json())
     .then((res) => {
       if (res === "Worked") {
-        if (window.localStorage.getItem("lang") === "es") {
-          adoptElem.innerText = "¡Ya me adoptaste!";
-        } else if (window.localStorage.getItem("lang") === "en") {
-          adoptElem.innerText = "You already adopted me!";
-        }
+
+        translateAnimalsAndColleagues(speciesElem.innerText, 
+                                      adoptElem, 
+                                      followedColleagueEnglishText, 
+                                      followedColleagueSpanishText, 
+                                      adoptedAnimalEnglishText, 
+                                      adoptedAnimalSpanishText);
+        
         setTimeout(() => {
           adoptElem.disabled = true;
         }, 3000);
