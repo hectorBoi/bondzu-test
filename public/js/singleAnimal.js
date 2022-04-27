@@ -106,7 +106,23 @@ fetch(`/animals/${animalID}`)
     titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
     nameElem.innerText = animal.name;
-    speciesElem.innerText = animal.species;
+    
+    /* Colleagues are not animals.
+     * Therefore, the species card is not visible on their page.
+     */
+    switch (animal.species)
+    {
+      case "Colega":
+      case "Colleague":
+        const speciesCard = document.getElementsByClassName("list-group-item")[0];
+        speciesCard.style.display = "none";
+        break;
+      
+      default:
+        speciesElem.innerText = animal.species;
+        break;
+    }
+    
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
     keeperElem.innerText = animal.keeper;
