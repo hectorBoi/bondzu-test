@@ -1,3 +1,6 @@
+const currentDate = new Date();
+const currentYear = currentDate.getFullYear();
+
 document.getElementById("footer").innerHTML = `
 <footer>
       <div id="backTop">
@@ -106,11 +109,11 @@ document.getElementById("footer").innerHTML = `
           style="margin: 4px; font-size: 10px;"
         />
         <p style="color: #ffffff; display: inline;">
-          &copy 2020 Bondzù
+          &copy ${currentYear} Bondzù
         </p>
       </div>
       <div class="text-center" style="background-color: #cf6f00; margin: 0">
-        <a href="privacidad.html" style="color: white; font-size: 15px; ">
+        <a href="privacidad.html" style="color: white; font-size: 15px;  ">
           Aviso de privacidad
         </a>
         <br>
