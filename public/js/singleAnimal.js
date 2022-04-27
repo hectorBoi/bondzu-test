@@ -125,6 +125,19 @@ fetch(`/animals/${animalID}`)
     
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
+
+    /* Animals are under the custody of Keepers
+     * Colleagues are members of an Organization
+     */
+    const cardTitlesNumber = document.getElementsByClassName("card-title").length;
+    const keeperCardTitle = document.getElementsByClassName("card-title")[cardTitlesNumber - 1];
+    translateAnimalsAndColleagues(animal.species,
+                                  keeperCardTitle,
+                                  "Organization",
+                                  "Organización",
+                                  "Keeper",
+                                  "Cuidador");
+
     keeperElem.innerText = animal.keeper;
 
     //Member's cards
