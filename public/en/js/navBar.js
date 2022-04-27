@@ -140,8 +140,8 @@ style="background-color: #f28f1d; border-color: #ffffff;"
             <img
             src="../img/profileIcon.png"
             alt="profileIcon"
-            height="35"
-            width="35"
+            height="30"
+            width="30"
             />
           </button>
           <div class="dropdown-menu dropdown-menu-lg-right">
@@ -163,8 +163,8 @@ style="background-color: #f28f1d; border-color: #ffffff;"
             <img
             id="currLang"
             alt="Idioma"
-            height="45"
-            width="45"
+            height="50"
+            width="50"
             />
           </button>
           <div class="dropdown-menu dropdown-menu-lg-right">
@@ -185,8 +185,8 @@ style="background-color: #f28f1d; border-color: #ffffff;"
           <img
             src="../img/faqIcon.png"
             alt="faqIcon"
-            height="40"
-            width="40"
+            height="50"
+            width="50"
           />
         </button>
       </li>

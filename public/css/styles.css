@@ -71,11 +71,11 @@ h1 {
 }
 
 .navbarBtnMargins {
-  margin: 0px 18px 8px 18px;
+  margin: -5px 18px 8px 18px;
 }
 
 .navbarBtnProfile {
-  margin: 5px 18px 8px 18px;
+  margin: 8px 18px 8px 18px;
 }
 
 .navbarBtnLoginSignup {
@@ -88,4 +88,5 @@ h1 {
 
 .navbarBtnFlags {
   margin-left: 18px;
+  margin-top: -3px;
 }
