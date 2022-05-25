@@ -35,7 +35,30 @@ const handleRegister = async (req, res, Parse) => {
     if (!name || !lastname || !email || !password) {
       return res.status(400).json('Incorrect form submission');
     }
+    
+    //Request Email Verification
+    const verified = await Parse.User.requestEmailVerification(email, {
+      success: function() {
+        // Email Verification request was sent successfully
+        alert("email sent successfully");
+        return true;
+      },
+      error: function(error) {
+        // Show the error message somewhere
+        alert("Error: " + error.code + " " + error.message);
+        return false;
+      }
+    });
 
+    //Checks if it was sent or not
+    verified.then((result) => {
+      if(result) {
+        // true was sent
+      } else {
+        return res.status(400).json('Already registered');
+      }
+    })
+    
     const user = await createUser(req.body, Parse);
     await user.signUp();
     const session = await Parse.User.logIn(email, password);
@@ -49,6 +72,7 @@ const handleRegister = async (req, res, Parse) => {
     res.json(userSession);
   } catch (error) {
     res.status(400).json('Already registered');
+    console.log(error);
   }
 };
 
