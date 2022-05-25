@@ -51,13 +51,13 @@ const handleRegister = async (req, res, Parse) => {
     });
 
     //Checks if it was sent or not
-    verified.then((result) => {
+    /*verified.then((result) => {
       if(result) {
         // true was sent
       } else {
         return res.status(400).json('Already registered');
       }
-    })
+    })*/
     
     const user = await createUser(req.body, Parse);
     await user.signUp();
