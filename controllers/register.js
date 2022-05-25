@@ -37,7 +37,7 @@ const handleRegister = async (req, res, Parse) => {
     }
     
     //Request Email Verification
-    const verified = await Parse.User.requestEmailVerification(email, {
+    /*const verified = await Parse.User.requestEmailVerification(email, {
       success: function() {
         // Email Verification request was sent successfully
         alert("email sent successfully");
@@ -48,7 +48,7 @@ const handleRegister = async (req, res, Parse) => {
         alert("Error: " + error.code + " " + error.message);
         return false;
       }
-    });
+    });*/
 
     //Checks if it was sent or not
     /*verified.then((result) => {
