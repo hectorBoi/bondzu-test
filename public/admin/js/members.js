@@ -124,11 +124,11 @@ fetch("/admin/members")
   //console.log(membersInfo);
 
   var i = 0;
-  for (let member in members) {
-    const newCard = createCard( member[i].name,
-                                member[i].image,
-                                member[i].description,
-                                member[i].email
+  for (member in members) {
+    const newCard = createCard( members[i].name,
+                                members[i].image,
+                                members[i].description,
+                                members[i].email
                               );
     i++;
     container.appendChild(newCard);
