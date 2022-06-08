@@ -115,7 +115,9 @@ fetch("/admin/animals")
 
     loaderElements.className += " hidden";
   })
-  .catch("Error in the request");
+  .catch((error) => {
+    console.log(`ERROR when fetching data: ${error}`);
+  });
 
 window.onclick = (event) => {
   if (event.target.id) {

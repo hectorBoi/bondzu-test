@@ -125,9 +125,9 @@ fetch("/admin/members")
 
   var i = 0;
   for (member in members) {
-    const newCard = createCard( members[i].name, 
-                                members[i].image, 
-                                members[i].description, 
+    const newCard = createCard( members[i].name,
+                                members[i].image,
+                                members[i].description,
                                 members[i].email
                               );
     i++;

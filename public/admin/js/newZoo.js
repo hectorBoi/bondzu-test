@@ -13,6 +13,18 @@ const photoLinkElem = document.getElementById("photoLink");
 const pageElem = document.getElementById("page");
 const locationElem = document.getElementById("location");
 
+/* The 'Nuevo zoo' page does not strictly require this fetch call to work.
+   
+   However, it is included here in order to trigger the admin.js controller's
+   admin verification, and thus only show the page's contents if the user
+   is authorized as an admin.
+ */
+fetch("/admin/members")
+.then((res) => res.json())
+.then(() => {
+  loaderElements.classList.add("hidden");
+});
+
 submitSaveElem.addEventListener("click", () => {
   missingInfoElem.style.display = "none";
   successfulSaveElem.style.display = "none";

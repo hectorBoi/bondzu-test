@@ -1,6 +1,7 @@
 // While loading, displays all users by default
 window.onload = showAllUsers;
 const userNumber = document.getElementById('users-number');
+const loaderElements = document.getElementById("loaderElements");
 
 let userCount;
 let currentFilter = '';
@@ -282,17 +283,29 @@ fetch('/reports/adoptions')
       let day = date.getDate();
       let year = date.getFullYear();
       let month = date.getMonth() + 1;
-      adoptionTable.row
-        .add([
-          `${adoption.adopter.name} ${adoption.adopter.lastname}`,
-          adoption.adopter.username,
-          adoption.adopted.name,
-          `${day}/${month}/${year}`,
-        ])
-        .draw();
+
+      /* Some adopters have no data to display, which is why this condition
+         only takes existing adopters into consideration when populating the
+         adoption table.
+       */
+      if (adoption.adopter)
+      {
+        adoptionTable.row
+          .add([
+            `${adoption.adopter.name} ${adoption.adopter.lastname}`,
+            adoption.adopter.username,
+            adoption.adopted.name,
+            `${day}/${month}/${year}`,
+          ])
+          .draw();
+      }
     });
+
+    loaderElements.classList.add("hidden");
   })
-  .catch('Error in the request');
+  .catch((error) => {
+    console.error(`Error in the request: ${error}`);
+  });
 
 // Last logins table
 fetch('/reports/users')
