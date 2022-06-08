@@ -7,39 +7,62 @@ const { json } = require("body-parser");
 // Initializes the router
 const router = Router();
 
+/**
+ * Verifies if the user making the request to the server is an admin.
+ * Requires to be preceded by await when called, in order to avoid returning an incorrect value.
+ * @param {Request} req The HTTP request sent to the server
+ * @returns {Boolean} True if the user is an admin, false if not
+ */
+async function isAdmin(req)
+{
+  const { username } = req.cookies;
+  const user = await getUser(username);
+  return user.get("isAdmin");
+}
+
+/* If the requesting user is an admin, allow access to the controller's subroutes
+
+ * Despite not using the server response res within the function's body, it is still
+   required to include it as one of the function's parameters, as its dismissal produces
+   a TypeError when an admin user attempts to access /admin
+ */
+router.get("/*", async (req, res, next) => {
+  try
+  {
+    if (await isAdmin(req))
+      next();
+    else
+    {
+      console.log("Not an admin. Please login again with an admin account.");
+      
+      // Redirect to 401 Unauthorized page, or equivalent
+    }
+  }
+  catch(error)
+  {
+    console.error(`ERROR: ${error}`);
+
+    // Redirect to 500 Internal Server Error page, or equivalent
+  }
+});
+
 // Returns all the animals to show the catalog inside the admin console
 router.get("/animals", async (req, res, next) => {
   try {
-    // Verifies if the user making the request is an Admin
-    const { username } = req.cookies;
-    const user = await getUser(username);
-
-    if (!user.get("isAdmin")) {
-      throw { message: "No admin" };
-    }
-
     // Extracts all the animals from the database and responds with them
     const animalTable = Parse.Object.extend("AnimalV2");
     const queryAnimals = new Parse.Query(animalTable);
     const animals = await queryAnimals.find();
     const animalsInfo = await animalInfo.getAnimals(animals);
     res.json(animalsInfo);
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    console.error(`ERROR: ${error}`);
   }
 });
 
 // Returns all the zoos for the pages where the admin can select the new zoo for a given animal or colleague
 router.get("/animals/keepers", async (req, res, next) => {
   try {
-    // Verifies if the user making the request is an Admin
-    const { username } = req.cookies;
-    const user = await getUser(username);
-
-    if (!user.get("isAdmin")) {
-      throw { message: "No admin" };
-    }
-
     allKeepers = await getAllKeepers();
 
     const resp = {
