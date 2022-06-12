@@ -1,6 +1,6 @@
-const loaderElements = document.getElementById("loaderElementsB");
+const loaderElements = document.getElementById("loaderElements");
 
-const containerAnimals = document.getElementById("containerAnimalsB");
+const containerAnimals = document.getElementById("containerAnimals");
 
 const createDiv = (className, id) => {
   let div = document.createElement("div");
@@ -97,10 +97,9 @@ fetch("/animals/all")
   .then((res) => res.json())
   .then((animalsColleagues) => {
     const animals = [];
-    const colleagues = [];
     animalsColleagues.forEach((elem) => {
       if (elem.species === "Colega" || elem.species === "Colleague") {
-        colleagues.push(elem);
+        animals.pop(elem);
       } else {
         animals.push(elem);
       }
