@@ -47,6 +47,17 @@ style="background-color: #f28f1d; border-color: #ffffff;"
       >
     </li>
 
+    <li class="nav-item" id="navAnimals">
+      <a href="books.html" style="text-decoration: none; color: white;">
+        <button
+          type="button"
+          class="btn btn-outline-light navbarBtnMargins"
+        >
+          Libros
+        </button></a
+      >
+    </li>
+
     <li class="nav-item">
       <a href="quienes.html" style="text-decoration: none; color: white;">
         <button
