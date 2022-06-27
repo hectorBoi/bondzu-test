@@ -60,7 +60,21 @@
       </p>
       <a href="#">Let's Go</a>
   </div>
-  <script src="./js/popupAd.js"></script>
+  <script type="text/javascript">
+  window.addEventListener("load", function(){
+  setTimeout(
+      function open(event){
+          document.querySelector(".popup").style.display = "block";
+      },
+      2000
+  )
+  });
+
+
+  document.querySelector("#close").addEventListener("click", function(){
+  document.querySelector(".popup").style.display = "none";
+  });
+  </script>
 
     <!--Scripts para hacer autofocus en los modales de login y signup-->
     <script>
