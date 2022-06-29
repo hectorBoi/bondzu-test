@@ -1,7 +1,6 @@
 const loaderElements = document.getElementById("loaderElements");
 
 const containerAnimals = document.getElementById("containerAnimals");
-const containerColleagues = document.getElementById("containerColleagues");
 
 const createDiv = (className, id) => {
   let div = document.createElement("div");
@@ -99,10 +98,9 @@ fetch("/admin/animals")
   .then((res) => res.json())
   .then((animalsInfo) => {
     const animals = [];
-    const colleagues = [];
     animalsInfo.forEach((elem) => {
       if (elem.species === "Colega" || elem.species === "Colleague") {
-        colleagues.push(elem);
+        animals.pop(elem);
       } else {
         animals.push(elem);
       }
@@ -111,7 +109,6 @@ fetch("/admin/animals")
     animals.sort(compareNames);
 
     createCards(animals, containerAnimals, "animals");
-    createCards(colleagues, containerColleagues, "colleagues");
 
     loaderElements.className += " hidden";
   })
