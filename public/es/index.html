@@ -33,6 +33,7 @@
       window.addEventListener("load", function() {
         setTimeout(
           function open(event) {
+            document.querySelector(".popup button").style.display = "none";
             document.querySelector(".popup").style.display = "block";
           },
           0000
@@ -44,7 +45,6 @@
           3000
         )
       });
-
 
       document.querySelector("#close").addEventListener("click", function() {
         document.querySelector(".popup").style.display = "none";
