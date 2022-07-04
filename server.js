@@ -11,7 +11,7 @@ const admin = require("./controllers/admin");
 const profile = require("./controllers/profile");
 const adoptions = require("./controllers/adoptions");
 const animals = require("./controllers/animals");
-const books = requie("./controllers/books")
+const books = require("./controllers/books")
 const middlewares = require("./middlewares");
 const reports = require("./controllers/reports");
 // Controller functions
