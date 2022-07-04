@@ -98,11 +98,7 @@ fetch("/books/all")
   .then((booksColleagues) => {
     const books = [];
     booksColleagues.forEach((elem) => {
-      if (elem.species === "Colega" || elem.species === "Colleague") {
-        books.pop(elem);
-      } else {
-        books.push(elem);
-      }
+      books.pop(elem);
     });
 
     createCards(books, containerBooks);

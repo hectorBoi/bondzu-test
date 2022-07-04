@@ -50,3 +50,7 @@ const getBooks = async (array, lang) => {
     resizeBy.status(400).json("Couldnt get books");
   }
 };
+
+module.exports = {
+  getBooks: getBooks,
+};
