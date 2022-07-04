@@ -11,7 +11,7 @@ const admin = require("./controllers/admin");
 const profile = require("./controllers/profile");
 const adoptions = require("./controllers/adoptions");
 const animals = require("./controllers/animals");
-const books = require("./controllers/books")
+const books = require("./controllers/books");
 const middlewares = require("./middlewares");
 const reports = require("./controllers/reports");
 // Controller functions
@@ -58,7 +58,7 @@ app.get("/", (req, res) => {
 // Routers
 app.use("/admin", admin);
 app.use("/animals", animals);
-app.use("/books", books)
+app.use("/books", books);
 app.use("/adoptions", adoptions.router);
 app.use("/profile", profile);
 app.use("/reports", reports);
