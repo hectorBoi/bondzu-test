@@ -1,6 +1,6 @@
 const loaderElements = document.getElementById("loaderElements");
 
-const containerAnimals = document.getElementById("containerAnimals");
+const containerbooks = document.getElementById("containerBooks");
 
 const createDiv = (className, id) => {
   let div = document.createElement("div");
@@ -93,19 +93,19 @@ if (!document.cookie.includes("token")) {
   location.replace("/");
 }
 
-fetch("/animals/all")
+fetch("/books/all")
   .then((res) => res.json())
-  .then((animalsColleagues) => {
-    const animals = [];
-    animalsColleagues.forEach((elem) => {
+  .then((booksColleagues) => {
+    const books = [];
+    booksColleagues.forEach((elem) => {
       if (elem.species === "Colega" || elem.species === "Colleague") {
-        animals.pop(elem);
+        books.pop(elem);
       } else {
-        animals.push(elem);
+        books.push(elem);
       }
     });
 
-    createCards(animals, containerAnimals);
+    createCards(books, containerBooks);
 
     loaderElements.className += " hidden";
   })

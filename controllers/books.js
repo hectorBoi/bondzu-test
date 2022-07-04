@@ -1,4 +1,5 @@
 // Represents all the routes for the admin console
+const animalInfo = require("./bookInfo");
 const { Parse } = require("../database");
 const { Router } = require("express");
 
