@@ -75,80 +75,20 @@ style="background-color: #f28f1d; border-color: #ffffff;"
 
   <div class="collapse navbar-collapse" id="navbarToggler">
 
-    <ul class="navbar-nav ml-auto" id="loggedIn">
-      <li class="nav-item active">
-        <a href="index.html" style="text-decoration: none; color: #f28f1d;">
-          <button
-            type="button"
-            class="btn btn-light navbarBtnMargins"
-            style="color: #f28f1d;"
-          >
-            Inicio
-          </button></a
-        >
-      </li>
-      <li class="nav-item active">
-        <a href="zoos.html" style="text-decoration: none; color: #f28f1d;">
-          <button
-            type="button"
-            class="btn btn-primary navbarBtnMargins"
-          >
-            Ver zoos
-          </button></a
-        >
-      </li>
-      <li class="nav-item">
-        <a href="newAnimal.html" style="text-decoration: none; color: white;">
-          <button
-            type="button"
-            class="btn btn-outline-light navbarBtnMargins"
-          >
-            Nuevo animal
-          </button></a
-        >
-      </li>
-      <li class="nav-item">
-        <a href="newColleague.html" style="text-decoration: none; color: white;">
-          <button
-            type="button"
-            class="btn btn-outline-light navbarBtnMargins"
-          >
-            Nuevo colega
-          </button></a
-        >
-      </li>
-      <li class="nav-item">
-        <a href="member.html" style="text-decoration: none; color: white;">
-          <button
-            type="button"
-            class="btn btn-outline-light navbarBtnMargins"
-          >
-            Miembros Bondzú
-          </button></a
-        >
-      </li>
-      <li class="nav-item">
-        <a href="newZoo.html" style="text-decoration: none; color: white;">
-          <button
-            type="button"
-            class="btn btn-outline-light navbarBtnMargins"
-          >
-            Nuevo zoo
-          </button></a
-        >
-      </li>
-      <li class="nav-item">
-        <a href="reports.html" style="text-decoration: none; color: white;">
-          <button
-            type="button"
-            class="btn btn-outline-light navbarBtnMargins"
-          >
-            Reportes
-          </button></a
-        >
-      </li>
+    <ul class="navbar-nav ml-auto" id="loggedIn">`;
 
-    </ul>
+ // Items de la navbar de admin
+ navbarContents += navbarItem("index", "Inicio", true, "#f28f1d", "btn-light", "color: #f28f1d;");
+ navbarContents += navbarItem("zoos", "Ver zoos", true, "#f28f1d", "btn-primary");
+ navbarContents += navbarItem("newAnimal", "Nuevo animal");
+ navbarContents += navbarItem("newColleague", "Nuevo colega");
+ navbarContents += navbarItem("member", "Miembros Bondzù");
+ navbarContents += navbarItem("newZoo", "Nuevo zoo");
+ navbarContents += navbarItem("reports", "Reportes");
+ navbarContents += navbarItem("newBook", "Nuevo libro");
+
+ navbarContents +=
+    `</ul>
     <ul class="navbar-nav ml-auto justify-content-end" id="loggedIn2">
 
       <li class="nav-item">
