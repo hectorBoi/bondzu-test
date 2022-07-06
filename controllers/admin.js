@@ -804,12 +804,10 @@ router.post("/book", async (req, res, next) => {
       book.set(property, value);
     
     /* 
-      ? Desconozco si se requiere especificar el token del admin al
-      ? crear un nuevo libro, ya que no sé si sea necesario conocer
-      ? qué admin dio de alta cada libro, o si siquiera se puede a-
-      ? veriguar desde la base de datos
+      ? Se decidió especificar el token del admin al crear un nuevo
+      ? libro por fuerza del hábito, pero se desconoce si sea necesario
      */
-    book = await book.save(); //.save(null, { sessionToken: token });
+    book = await book.save(null, { sessionToken: token });
     
     /* Concluye el ciclo de solicitud-respuesta con status HTTP 200
      * De no ejecutarse, la solicitud fetch no se concluye.
