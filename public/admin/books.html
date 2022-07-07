@@ -1,52 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bondzù: Animales</title>
-  <link rel="icon" href="../img/favicon.png" />
-  <link rel="stylesheet" href="../css/styles.css" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <header style="z-index: 10">
-    <div data-spy="scroll" data-target="#navBar" data-offset="0" class="scrollspy-example">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bondzù: Administración</title>
+    <link rel="icon" href="../img/favicon.png" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="d-flex flex-column min-vh-100">
+    <header style="z-index: 10">
       <div id="navBar"></div>
       <script src="./js/navBar.js"></script>
+    </header>
+
+    <div id="loaderElements" class="loaderElements">
+      <div class="spinner spinner-border" role="status">
+        <span class="sr-only">Loading elements...</span>
+      </div>
     </div>
-  </header>
 
-  <div id="loader" class="loader">
-    <div class="spinner spinner-border" role="status">
-      <span class="sr-only">Loading page...</span>
-    </div>
-  </div>
+    <br />
+    <h1 class="text-center" style="color: blue">
+      Actualización de información
+    </h1>
 
-  <div id="loaderElements" class="loaderElements">
-    <div class="spinner spinner-border" role="status">
-      <span class="sr-only">Loading elements...</span>
-    </div>
-  </div>
+    <h3 class="text-center">
+      <small class="text-muted"
+        >Selecciona el Libro que deseas actualizar</small
+      >
+    </h3>
 
-  <br />
+    <br />
+    <h2 class="text-center" style="color: #f28f1d">Libros</h2>
+    <div class="container-fluid" id="containerAnimals"></div>
 
-  <br />
-  <div class="container-fluid" id="containerAnimals"></div>
+    <br />
 
+  </body>
 
-  <br />
-
-  <div id="footer" class="mt-auto" style="z-index: 10"></div>
-</body>
-
-
-<script src="./js/books.js"></script>
-<script src="../js/logout.js"></script>
-
-
+  <script src="./js/books.js"></script>
+  <script src="../js/logout.js"></script>
 </html>

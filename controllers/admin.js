@@ -1,5 +1,6 @@
 // Represents all the routes for the admin console
 const animalInfo = require("./animalInfo");
+const bookInfo = require("./bookInfo");
 const { Parse } = require("../database");
 const { Router } = require("express");
 const { json } = require("body-parser");
@@ -34,7 +35,7 @@ router.get("/*", async (req, res, next) => {
     else
     {
       console.log("Not an admin. Please login again with an admin account.");
-      
+
       // Redirect to 401 Unauthorized page, or equivalent
     }
   }
@@ -55,6 +56,20 @@ router.get("/animals", async (req, res, next) => {
     const animals = await queryAnimals.find();
     const animalsInfo = await animalInfo.getAnimals(animals);
     res.json(animalsInfo);
+  } catch (error) {
+    console.error(`ERROR: ${error}`);
+  }
+});
+
+// Returns all the animals to show the catalog inside the admin console
+router.get("/books", async (req, res, next) => {
+  try {
+    // Extracts all the animals from the database and responds with them
+    const bookTable = Parse.Object.extend("Book");
+    const queryBooks = new Parse.Query(bookTable);
+    const books = await queryBooks.find();
+    const booksInfo = await bookInfo.getBooks(books);
+    res.json(booksInfo);
   } catch (error) {
     console.error(`ERROR: ${error}`);
   }
@@ -354,6 +369,80 @@ router.post("/animals", async (req, res, next) => {
   }
 });
 
+// Creates an animal and video with info provided by the admin console, returns to the index page
+router.post("/books", async (req, res, next) => {
+  try {
+    const { username, token } = req.cookies;
+
+    // Gets all the variables sended in the request
+    const {
+      title,
+      illustrator,
+      description,
+      youtubeID,
+      isActive,
+    } = req.body;
+
+    // Verifies if the user making the request is an Admin
+    const user = await getUser(username);
+
+    if (!user.get("isAdmin")) {
+      throw { message: "No admin" };
+    }
+
+    // Gets the priority reference for the animal and the animal from the database
+    // The animal is searched based on the provided ID
+    const userType = await getUserType(priority);
+
+    // Gets the reference for the animal table in the database
+    const bookTable = Parse.Object.extend("Book");
+    let book = new bookTable();
+
+    // Creates the pointer for the keeper array
+    const keeperPointer = {
+      __type: "Pointer",
+      className: "Zoo",
+      objectId: keeper,
+    };
+
+    const keeperArray = [keeperPointer];
+
+    // Updates all the fields of the animal with the new information sent in the request
+    if (cover) {
+      animal.set("cover", cover);
+    }
+
+    if (illustrator) {
+      animal.set("description", illustrator);
+    }
+
+    animal.set("isActive", isActive);
+
+    // In case that the request is to update the animal photo, the request is treated differently
+    if (req.files) {
+      const photo = await createsPhotoFile(req);
+      animal.set("profilePhoto", photo);
+      const updatedAnimal = await animal.save(null, { sessionToken: token });
+      res.redirect("/admin/updateAnimal.html");
+    }
+
+    const updatedAnimal = await animal.save(null, { sessionToken: token });
+
+    // Creates the entry in the video table with the reference of the new animal
+    const videoTable = Parse.Object.extend("Video");
+    let video = new videoTable();
+    video.set("videoRequiredPriority", userType);
+    video.set("animal_id", updatedAnimal);
+    video.set("youtube_ids", [youtubeID]);
+
+    const newVideo = await video.save(null, { sessionToken: token });
+
+    res.json(updateAnimal);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // Creates a zoo with the info provided by the admin console, returns to the index page
 router.post("/zoo", async (req, res, next) => {
   try {
@@ -509,12 +598,12 @@ router.get("/members", async (req, res, next) => {
       }catch(err) {
         imageURL = "../img/header.png"
       }
-      
+
       //Push the member
-      membersInfo.push({  name: member.get("name"), 
-                          description: member.get("description"), 
-                          description_en: member.get("description_en"), 
-                          email: member.get("email"), 
+      membersInfo.push({  name: member.get("name"),
+                          description: member.get("description"),
+                          description_en: member.get("description_en"),
+                          email: member.get("email"),
                           division: member.get("division"),
                           status: member.get("status"),
                           image: imageURL
@@ -548,10 +637,10 @@ router.get("/members/:email", async (req, res, next) => {
 
     for (let member of resultMembers) {
       if (member.get("email") == email){
-        membersInfo.push({  name: member.get("name"), 
-                            description: member.get("description"), 
-                            description_en: member.get("description_en"), 
-                            email: member.get("email"), 
+        membersInfo.push({  name: member.get("name"),
+                            description: member.get("description"),
+                            description_en: member.get("description_en"),
+                            email: member.get("email"),
                             division: member.get("division"),
                             status: member.get("status"),
                             animal: member.get("animal")
@@ -601,8 +690,8 @@ router.post("/memberUpdatePhoto/:email", async (req, res, next) => {
     next(err);
   }
 });
-    
-    
+
+
 
 // Updates a Bondzu member, returns to the index page
 router.post("/memberUpdate", async (req, res, next) => {
@@ -654,19 +743,19 @@ router.post("/memberUpdate", async (req, res, next) => {
           console.log("false");
           member.set("status", false);
         }
-      
+
         if (description) {
           member.set("description", description);
         }
-      
+
         if (description_en) {
           member.set("description_en", description_en);
         }
-      
+
         if (email) {
           member.set("email", email);
         }
-      
+
         if (division) {
           member.set("division", division);
         }
@@ -761,7 +850,7 @@ router.post("/member", async (req, res, next) => {
       member.set("name", name);
     }
 
-    
+
     member.set("status", true);
 
     if (description) {

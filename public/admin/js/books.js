@@ -61,12 +61,12 @@ const createCard = (object, type) => {
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  if (object.profilePhoto) {
-    const img = createImage(object.profilePhoto);
+  if (object.cover) {
+    const img = createImage(object.cover);
     button.appendChild(img);
   }
   const div = createDiv("card-img-overlay", object.id);
-  const h5 = createTitle(object.name);
+  const h5 = createTitle(object.title);
   div.appendChild(h5);
   button.appendChild(div);
   return col;
@@ -94,21 +94,11 @@ if (!document.cookie.includes("token")) {
   location.replace("/");
 }
 
-fetch("/admin/animals")
+fetch("/admin/books")
   .then((res) => res.json())
-  .then((animalsInfo) => {
-    const animals = [];
-    animalsInfo.forEach((elem) => {
-      if (elem.species === "Colega" || elem.species === "Colleague") {
-        animals.pop(elem);
-      } else {
-        animals.push(elem);
-      }
-    });
+  .then((books) => {
 
-    animals.sort(compareNames);
-
-    createCards(animals, containerAnimals, "animals");
+    createCards(books, containerAnimals, "animals");
 
     loaderElements.className += " hidden";
   })
@@ -118,7 +108,7 @@ fetch("/admin/animals")
 
 window.onclick = (event) => {
   if (event.target.id) {
-    window.localStorage.setItem("currentAnimal", event.target.id);
+    window.localStorage.setItem("currentBook", event.target.id);
   }
 };
 
