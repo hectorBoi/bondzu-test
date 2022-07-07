@@ -23,7 +23,7 @@ const createImage = (url) => {
   let img = document.createElement("img");
   img.setAttribute("src", url);
   img.className = "card-img img-fluid";
-  img.setAttribute("alt", "animal");
+  img.setAttribute("alt", "book");
   //img.style.width = "500px";
   img.style.height = "300px";
   return img;
@@ -34,8 +34,8 @@ const createTitle = (title) => {
   h5.className = "card-title";
 
   let span = document.createElement("span");
-  span.className = "animalCardHeader";
-  span.innerHTML = title;
+  span.className = "bookCardHeader";
+  span.textContent = title;
 
   h5.appendChild(span);
   return h5;
@@ -51,21 +51,21 @@ const createCard = (object) => {
   const col = createDiv("col-xl");
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
-  anchor.href = "singleAnimal.html";
+  anchor.href = "index.html";
   anchor.onclick = function () {
-    window.localStorage.setItem("currentAnimal", object.id);
+    window.localStorage.setItem("currentBook", object.id);
   };
   col.appendChild(anchor);
   const button = createButton(object.id);
   anchor.appendChild(button);
-  // console.log("object.profilePhoto");
-  // console.log(object.profilePhoto);
-  if (object.profilePhoto) {
-    const img = createImage(object.profilePhoto);
+  // console.log("object.cover");
+  // console.log(object.cover);
+  if (object.cover) {
+    const img = createImage(object.cover);
     button.appendChild(img);
   }
   const div = createDiv("card-img-overlay", object.id);
-  const h5 = createTitle(object.name);
+  const h5 = createTitle(object.title);
   div.appendChild(h5);
   button.appendChild(div);
   return col;
@@ -95,11 +95,11 @@ if (!document.cookie.includes("token")) {
 
 fetch("/books/all")
   .then((res) => res.json())
-  .then((booksColleagues) => {
-    const books = [];
+  .then((books) => {
+    /*const books = [];
     booksColleagues.forEach((elem) => {
-      books.pop(elem);
-    });
+      books.push(elem);
+    });*/
 
     createCards(books, containerBooks);
 
@@ -109,6 +109,6 @@ fetch("/books/all")
 
 window.onclick = (event) => {
   if (event.target.id) {
-    window.localStorage.setItem("currentAnimal", event.target.id);
+    window.localStorage.setItem("currentBook", event.target.id);
   }
 };

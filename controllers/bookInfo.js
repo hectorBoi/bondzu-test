@@ -9,8 +9,8 @@ const getBooks = async (array, lang) => {
       let bookInfo = array.map((book) => {
         let photo = "";
         let photoUrl = "";
-        if (book.get("profilePhoto")) {
-          photo = book.get("profilePhoto")._url;
+        if (book.get("cover")) {
+          photo = book.get("cover")._url;
           photoUrl = photo.replace(
             "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
             "https://d36skj58da74xm.cloudfront.net/"
@@ -18,10 +18,10 @@ const getBooks = async (array, lang) => {
         }
         return (book = {
           id: book.id,
-          profilePhoto: photoUrl,
-          species: book.get("species_en"),
-          name: book.get("name_en"),
-          userType: book.get("bookRequiredPriority").id,
+          cover: photoUrl,
+          illustator: book.get("illustrator"),
+          description: book.get("description"),
+          title: book.get("title"),
         });
       });
       return bookInfo;
@@ -29,8 +29,8 @@ const getBooks = async (array, lang) => {
       let bookInfo = array.map((book) => {
         let photo = "";
         let photoUrl = "";
-        if (book.get("profilePhoto")) {
-          photo = book.get("profilePhoto")._url;
+        if (book.get("cover")) {
+          photo = book.get("cover")._url;
           photoUrl = photo.replace(
             "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
             "https://d36skj58da74xm.cloudfront.net/"
@@ -38,10 +38,10 @@ const getBooks = async (array, lang) => {
         }
         return (book = {
           id: book.id,
-          profilePhoto: photoUrl,
-          species: book.get("species"),
-          name: book.get("name"),
-          userType: book.get("bookRequiredPriority").id,
+          cover: photoUrl,
+          illustator: book.get("illustrator"),
+          description: book.get("description"),
+          title: book.get("title"),
         });
       });
       return bookInfo;

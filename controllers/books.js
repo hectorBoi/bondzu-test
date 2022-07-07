@@ -1,5 +1,5 @@
 // Represents all the routes for the admin console
-const animalInfo = require("./bookInfo");
+const bookInfo = require("./bookInfo");
 const { Parse } = require("../database");
 const { Router } = require("express");
 
@@ -16,10 +16,10 @@ router.get('/all', async (req, res, next) => {
     const activeBooks = await query.find();
 
     // Extracts the information for the animals and returns it for the catalog screen
-    const booksInfo = await booksInfo.getBooks(activeBooks, lang);
-    res.json(result);
+    const booksInfo = await bookInfo.getBooks(activeBooks, lang);
+    res.json(booksInfo);
   } catch (err) {
-    next(err)
+    console.error(`Error when attempting to recover books: ${err}`);
   }
 });
 
