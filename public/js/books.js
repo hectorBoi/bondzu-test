@@ -51,7 +51,7 @@ const createCard = (object) => {
   const col = createDiv("col-xl");
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
-  anchor.href = "index.html";
+  anchor.href = "singleBook.html";
   anchor.onclick = function () {
     window.localStorage.setItem("currentBook", object.id);
   };
