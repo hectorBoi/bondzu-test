@@ -9,17 +9,34 @@ const router = Router();
 router.get('/all', async (req, res, next) => {
   try {
     const { lang, usertype } = req.cookies;
-    // Gets the reference for the animal table
+    // Gets the reference for the book table
     const bookTable = Parse.Object.extend("Book");
     const query = new Parse.Query(bookTable);
     query.equalTo("isActive", true);
     const activeBooks = await query.find();
 
-    // Extracts the information for the animals and returns it for the catalog screen
+    // Extracts the information for the books and returns it for the catalog screen
     const booksInfo = await bookInfo.getBooks(activeBooks, lang);
     res.json(booksInfo);
   } catch (err) {
     console.error(`Error when attempting to recover books: ${err}`);
+  }
+});
+
+// Extracts the book from the database based on the provided ID
+router.get('/:bookID', async (req, res, next) => {
+  try {
+    const { lang } = req.cookies;
+    const bookID = req.params.booklID;
+    // Gets the reference for the book table
+    const bookTable = Parse.Object.extend("Book");
+    const query = new Parse.Query(bookTable);
+    const book = await query.get(bookID);
+    // Extracts the book and checks for the information
+    const book_info = await bookInfo.getbookInfo(book, lang);
+    res.json(book_info);
+  } catch (err) {
+    next(err)
   }
 });
 
