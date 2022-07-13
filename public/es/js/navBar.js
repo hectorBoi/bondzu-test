@@ -57,6 +57,17 @@ style="background-color: #f28f1d; border-color: #ffffff;"
         >
       </li>
 
+      <li class="nav-item" id="navAnimals">
+        <a href="books.html" style="text-decoration: none; color: white;">
+          <button
+            type="button"
+            class="btn btn-outline-light navbarBtnMargins"
+          >
+            Libros
+          </button></a
+        >
+      </li>
+
       <li class="nav-item">
         <a href="quienes.html" style="text-decoration: none; color: white;">
           <button
@@ -130,12 +141,12 @@ style="background-color: #f28f1d; border-color: #ffffff;"
 
       <li class="nav-item" id="loggedIn">
         <div class="btn-group">
-          <button type="button" 
-          id="dropdownProfile" 
-          class="btn btn-success dropdown-toggle navbarBtnProfile" 
-          data-toggle="dropdown" 
-          data-display="static" 
-          aria-haspopup="true" 
+          <button type="button"
+          id="dropdownProfile"
+          class="btn btn-success dropdown-toggle navbarBtnProfile"
+          data-toggle="dropdown"
+          data-display="static"
+          aria-haspopup="true"
           aria-expanded="false">
             <img
             src="../img/profileIcon.png"
@@ -153,12 +164,12 @@ style="background-color: #f28f1d; border-color: #ffffff;"
 
       <li class="nav-item">
         <div class="btn-group">
-          <button 
-          type="button" 
-          class="btn dropdown-toggle navbarBtnFlags" 
-          data-toggle="dropdown" 
-          data-display="static" 
-          aria-haspopup="true" 
+          <button
+          type="button"
+          class="btn dropdown-toggle navbarBtnFlags"
+          data-toggle="dropdown"
+          data-display="static"
+          aria-haspopup="true"
           aria-expanded="false">
             <img
             id="currLang"
@@ -175,8 +186,8 @@ style="background-color: #f28f1d; border-color: #ffffff;"
       </li>
 
       <li class="nav-item">
-        <button 
-        type="button" 
+        <button
+        type="button"
         class="btn navbarBtnMargins"
         data-toggle="modal"
         data-target="#faqModal"

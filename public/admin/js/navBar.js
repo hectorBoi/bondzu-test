@@ -12,9 +12,10 @@
      * @param {String} color Color del elemento \<a> del item
      * @param {String} additionalClass Clase, además de "btn" y "navbarBtnMargins", que se desee agregar al elemento \<button> del item
      * @param {String} additionalStyle Estilo que se le desee agregar al elemento \<button> del item
+     * @param {String} id Id del elemento \<li> del item
      * @returns {String} HTML del item a agregar a la navbar de admin
      */
-    function navbarItem(HTMLFile, text, activeClass = false, color = "white", additionalClass = "btn-outline-light", additionalStyle = "")
+    function navbarItem(HTMLFile, text, activeClass = false, color = "white", additionalClass = "btn-outline-light", additionalStyle = "", id)
     {
       /* Los siguientes dos placeholders no necesariamente necesitan estos valores
        * Solamente se tiene que asegurar que sean valores únicos (i.e, que no se encuentren
@@ -23,7 +24,7 @@
       const HTML_PLACEHOLDER = "HTML_PLACEHOLDER";
       const NAVBAR_ITEM_TEXT_PLACEHOLDER = "NAVBAR_ITEM_TEXT_PLACEHOLDER";
       
-      const NAVBAR_ITEM_TEMPLATE = `<li class="nav-item"` + ( (activeClass) ? " active" : "") + `>
+      const NAVBAR_ITEM_TEMPLATE = `<li class="nav-item"` + ( (activeClass) ? " active" : "") + ( (id) ? `id=${id}` : "") + `>
                                       <a href="${HTML_PLACEHOLDER}.html" style="text-decoration: none; color: ${color};">
                                         <button
                                           type="button"
@@ -82,6 +83,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
  navbarContents += navbarItem("zoos", "Ver zoos", true, "#f28f1d", "btn-primary");
  navbarContents += navbarItem("newAnimal", "Nuevo animal");
  navbarContents += navbarItem("newColleague", "Nuevo colega");
+ navbarContents += navbarItem("books", "Libros", false, "white", "btn-outline-light", "", "navAnimals");
  navbarContents += navbarItem("member", "Miembros Bondzù");
  navbarContents += navbarItem("newZoo", "Nuevo zoo");
  navbarContents += navbarItem("reports", "Reportes");
