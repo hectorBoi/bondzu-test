@@ -176,6 +176,14 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           campos.
                         </div>
                       </div>
+                      <div class="form-check">
+                        <input
+                          id="emailSubscriptionReg"
+                          type="checkbox"
+                          class="form-check-input"
+                        />
+                        <label for="emailSubscriptionReg">¿Te gustaría suscribirte al newsletter de Bondzù para recibir noticias y promociones?</label>
+                      </div>
                     </form>
                   </div>
                   <div class="modal-footer" id="submitReg">
