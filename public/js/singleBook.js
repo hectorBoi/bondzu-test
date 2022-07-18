@@ -79,13 +79,8 @@ fetch(`/books/${bookID}`)
       //console.log("youtubeURL");
       //console.log(youtubeURL);
     }
-    iframeElem.setAttribute("src", youtubeURL);
 
-    let chars = "";
-    for (let key in book.characteristics) {
-      let temp = `<b>${key}: </b>${book.characteristics[key]}<br>`;
-      chars = chars.concat(temp);
-    }
+    iframeElem.setAttribute("src", youtubeURL);
 
     titleElem.innerText = `Bondzù: ${book.title} | ${book.illustrator}`;
     bookCoverElem.setAttribute("src", book.cover);
@@ -102,57 +97,57 @@ fetch(`/books/${bookID}`)
     //Member's cards
     const createCard = (title, imageSource, description, email) => {
       //General div of the card
-      let card= document.createElement("div");
-      card.className="container"
-      card.style="margin-top:18px;"
+      let card = document.createElement("div");
+      card.className = "container"
+      card.style = "margin-top:18px;"
       //Div to establish the division between image and text
-      let rows= document.createElement("div");
-      rows.className="row";
+      let rows = document.createElement("div");
+      rows.className = "row";
       card.appendChild(rows);
       //Div to create the image section column
-      let imageDiv= document.createElement("div");
-      imageDiv.className="col-3";
+      let imageDiv = document.createElement("div");
+      imageDiv.className = "col-3";
       rows.appendChild(imageDiv);
       //Div to create the text section column
-      let textDiv= document.createElement("div");
-      textDiv.className="col-9";
+      let textDiv = document.createElement("div");
+      textDiv.className = "col-9";
       rows.appendChild(textDiv);
       //Div's to set the text organization
-      let text= document.createElement("div");
-      text.className="card";
-      text.style="height: 100%;"
+      let text = document.createElement("div");
+      text.className = "card";
+      text.style = "height: 100%;"
       textDiv.appendChild(text);
-      let textBody= document.createElement("div");
-      textBody.className="card-body";
+      let textBody = document.createElement("div");
+      textBody.className = "card-body";
       text.appendChild(textBody);
 
       //Name
-      let titleText= document.createElement("h5");
-      titleText.className="card-title";
-      titleText.textContent=title;
+      let titleText = document.createElement("h5");
+      titleText.className = "card-title";
+      titleText.textContent = title;
       textBody.appendChild(titleText);
       //Description
-      let descriptionText= document.createElement("p");
-      descriptionText.className="card-text";
-      descriptionText.textContent=description;
+      let descriptionText = document.createElement("p");
+      descriptionText.className = "card-text";
+      descriptionText.textContent = description;
       textBody.appendChild(descriptionText);
       //Email
-      let emailText= document.createElement("small");
-      emailText.className="text-muted";
-      emailText.textContent=email;
+      let emailText = document.createElement("small");
+      emailText.className = "text-muted";
+      emailText.textContent = email;
       textBody.appendChild(emailText);
       //Image
-      let image= document.createElement("img");
-      image.className="img-thumbnail";
-      image.style=style="height: 100%;"
-      image.src=imageSource;
+      let image = document.createElement("img");
+      image.className = "img-thumbnail";
+      image.style = style = "height: 100%;"
+      image.src = imageSource;
       imageDiv.appendChild(image)
 
       return card
     }
 
     //Add the cards
-    if(descriptionElem.innerText == "[DATOS]"){
+    if (descriptionElem.innerText == "[DATOS]") {
       descriptionElem.innerText = "Este es el equipo de tecnologías de Bondzú.";
       characteristicsElem.innerText = "";
       adoptElem.remove();
@@ -161,43 +156,43 @@ fetch(`/books/${bookID}`)
       iframeDiv.remove();
 
       fetch("/admin/members")
-      .then((res) => res.json())
-      .then((membersInfo) => {
-        const members = [];
-        membersInfo.forEach((elem) => {
+        .then((res) => res.json())
+        .then((membersInfo) => {
+          const members = [];
+          membersInfo.forEach((elem) => {
             members.push(elem);
-        });
-        console.log(membersInfo);
+          });
+          console.log(membersInfo);
 
-        //Create each card (Based on the language)
-        var i = 0;
-        if (window.localStorage.getItem("lang") === "es") {
-          for (member in members) {
-            if(members[i].status == true){
-              const newCard = createCard( members[i].title,
-                                          members[i].image,
-                                          members[i].description,
-                                          members[i].email
-                                        );
-              leftSideElem.appendChild(newCard);
+          //Create each card (Based on the language)
+          var i = 0;
+          if (window.localStorage.getItem("lang") === "es") {
+            for (member in members) {
+              if (members[i].status == true) {
+                const newCard = createCard(members[i].title,
+                  members[i].image,
+                  members[i].description,
+                  members[i].email
+                );
+                leftSideElem.appendChild(newCard);
+              }
+              i++;
             }
-            i++;
-          }
-        } else if (window.localStorage.getItem("lang") === "en") {
-          for (member in members) {
-            if(members[i].status == true){
-              const newCard = createCard( members[i].title,
-                                          members[i].image,
-                                          members[i].description_en,
-                                          members[i].email
-                                        );
-              leftSideElem.appendChild(newCard);
+          } else if (window.localStorage.getItem("lang") === "en") {
+            for (member in members) {
+              if (members[i].status == true) {
+                const newCard = createCard(members[i].title,
+                  members[i].image,
+                  members[i].description_en,
+                  members[i].email
+                );
+                leftSideElem.appendChild(newCard);
+              }
+              i++;
             }
-            i++;
           }
-        }
-      })
-      .catch("Error in the request");
+        })
+        .catch("Error in the request");
     }
 
     loaderElements.className += " hidden";
