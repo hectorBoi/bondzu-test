@@ -146,56 +146,8 @@ fetch(`/books/${bookID}`)
       return card
     }
 
-    //Add the cards
-    if (descriptionElem.innerText == "[DATOS]") {
-      descriptionElem.innerText = "Este es el equipo de tecnologías de Bondzú.";
-      characteristicsElem.innerText = "";
-      adoptElem.remove();
-      descriptionElem.remove();
-      showMoreElem.remove();
-      iframeDiv.remove();
-
-      fetch("/admin/members")
-        .then((res) => res.json())
-        .then((membersInfo) => {
-          const members = [];
-          membersInfo.forEach((elem) => {
-            members.push(elem);
-          });
-          console.log(membersInfo);
-
-          //Create each card (Based on the language)
-          var i = 0;
-          if (window.localStorage.getItem("lang") === "es") {
-            for (member in members) {
-              if (members[i].status == true) {
-                const newCard = createCard(members[i].title,
-                  members[i].image,
-                  members[i].description,
-                  members[i].email
-                );
-                leftSideElem.appendChild(newCard);
-              }
-              i++;
-            }
-          } else if (window.localStorage.getItem("lang") === "en") {
-            for (member in members) {
-              if (members[i].status == true) {
-                const newCard = createCard(members[i].title,
-                  members[i].image,
-                  members[i].description_en,
-                  members[i].email
-                );
-                leftSideElem.appendChild(newCard);
-              }
-              i++;
-            }
-          }
-        })
-        .catch("Error in the request");
-    }
-
     loaderElements.className += " hidden";
     body.style.overflow = "auto";
+
   })
   .catch("Error in the request");

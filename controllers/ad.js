@@ -1,4 +1,4 @@
-const animalInfo = require("./adInfo");
+const adInfo = require("./adInfo");
 const { Parse } = require("../database");
 const { Router } = require("express");
 
@@ -9,13 +9,13 @@ const router = Router();
 router.get('/image', async (req, res, next) => {
   try {
     const { lang, usertype } = req.cookies;
-    // Gets the reference for the animal table
+    // Gets the reference for the adl table
     const adTable = Parse.Object.extend("Ads");
     const query = new Parse.Query(adTable);
     query.equalTo('Platform', 'Web');
     const webAd = await query.find();
 
-    // Extracts the information for the animals and returns it for the catalog screen
+    // Extracts the information for the ads and returns it for the catalog screen
     const adInfo = await adInfo.getImage(webAd, lang);
     res.json(adInfo);
   } catch (err) {

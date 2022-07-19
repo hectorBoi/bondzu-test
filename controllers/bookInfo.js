@@ -1,4 +1,6 @@
-const { Parse } = require("../database");
+const {
+  Parse
+} = require("../database");
 
 const puppeteer = require("puppeteer");
 
@@ -13,11 +15,10 @@ const getVideo = async (id) => {
     );
     //For verkada video: Get the URL of the video (The actual URL in database do not work in the webpage)
     if (filter[0]) {
-      if(filter[0].get("youtube_ids")[0].toString().includes("verkada")){
+      if (filter[0].get("youtube_ids")[0].toString().includes("verkada")) {
         const patata = getAlternativeVideo(filter[0].get("youtube_ids")[0])
         return patata;
-      }
-      else {
+      } else {
         return filter[0].get("youtube_ids")[0];
       }
     }
@@ -67,25 +68,16 @@ const getBookInfo = async (book, lang) => {
         "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
         "https://d36skj58da74xm.cloudfront.net/"
       );
-    } else {
-      let photo = "";
-      let photoUrl = "";
-      if (book.get("cover")) {
-        photo = book.get("cover")._url;
-        photoUrl = photo.replace(
-          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-          "https://d36skj58da74xm.cloudfront.net/"
-        );
-      }
-      let bookInfo = {
-        title: book.get("title"),
-        description: book.get("description"),
-        illustrator: book.get("illustrator"),
-        cover: photoUrl,
-        youtubeID: book.get("youtubeID"),
-      };
-      return bookInfo;
     }
+    let bookInfo = {
+      title: book.get("title"),
+      description: book.get("description"),
+      illustrator: book.get("illustrator"),
+      cover: photoUrl,
+      youtubeID: book.get("youtubeID"),
+    };
+    return bookInfo;
+
   } catch (error) {
     console.log(error);
   }

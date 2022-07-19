@@ -1,10 +1,8 @@
-const {
-  Parse
-} = require("../database");
+const { Parse } = require("../database");
 
 const puppeteer = require("puppeteer");
 
-// Transforms the array of Parse.Objects into Json for the ads list
+// Transforms the array of Parse.Objects into Json
 const getImage = async (ad, lang) => {
   try {
     let photo = "";
@@ -25,10 +23,10 @@ const getImage = async (ad, lang) => {
           "https://d36skj58da74xm.cloudfront.net/"
         );
       }
-      let adImage = {
+      let adInfo = {
         Image: photoUrl,
       };
-      return adImage;
+      return adInfo;
     }
   } catch (error) {
     console.log(error);

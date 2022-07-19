@@ -9,6 +9,10 @@ const createImage = (url) => {
   return img;
 };
 
+if (!document.cookie.includes("token")) {
+  location.replace("/");
+}
+
 fetch("/ad/image")
   .then((res) => res.json())
   .then((ad) => {
