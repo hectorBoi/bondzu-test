@@ -31,26 +31,47 @@ const getVideo = async (id) => {
 // Transforms the array of Parse.Objects into Json for the books list
 const getBooks = async (array, lang) => {
   try {
-
-    let bookInfo = array.map((book) => {
-      let photo = "";
-      let photoUrl = "";
-      if (book.get("cover")) {
-        photo = book.get("cover")._url;
-        photoUrl = photo.replace(
-          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-          "https://d36skj58da74xm.cloudfront.net/"
-        );
-      }
-      return (book = {
-        id: book.id,
-        cover: photoUrl,
-        illustator: book.get("illustrator"),
-        description: book.get("description"),
-        title: book.get("title"),
+    if (lang == "en"){
+      let bookInfo = array.map((book) => {
+        let photo = "";
+        let photoUrl = "";
+        if (book.get("cover")) {
+          photo = book.get("cover")._url;
+          photoUrl = photo.replace(
+            "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+            "https://d36skj58da74xm.cloudfront.net/"
+          );
+        }
+        return (book = {
+          id: book.id,
+          cover: photoUrl,
+          illustator: book.get("illustrator"),
+          description: book.get("description_en"),
+          title: book.get("title_en"),
+        });
       });
-    });
-    return bookInfo;
+      return bookInfo;
+    } else {
+      let bookInfo = array.map((book) => {
+        let photo = "";
+        let photoUrl = "";
+        if (book.get("cover")) {
+          photo = book.get("cover")._url;
+          photoUrl = photo.replace(
+            "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+            "https://d36skj58da74xm.cloudfront.net/"
+          );
+        }
+        return (book = {
+          id: book.id,
+          cover: photoUrl,
+          illustator: book.get("illustrator"),
+          description: book.get("description"),
+          title: book.get("title"),
+        });
+      });
+      return bookInfo;
+    }
 
   } catch (error) {
     res.status(400).json("Couldnt get books");
@@ -60,24 +81,43 @@ const getBooks = async (array, lang) => {
 // Transforms the array of Parse.Objects into Json
 const getBookInfo = async (book, lang) => {
   try {
-    let photo = "";
-    let photoUrl = "";
-    if (book.get("cover")) {
-      photo = book.get("cover")._url;
-      photoUrl = photo.replace(
-        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-        "https://d36skj58da74xm.cloudfront.net/"
-      );
+    if (lang == "en"){
+      let photo = "";
+      let photoUrl = "";
+      if (book.get("cover")) {
+        photo = book.get("cover")._url;
+        photoUrl = photo.replace(
+          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+          "https://d36skj58da74xm.cloudfront.net/"
+        );
+      }
+      let bookInfo = {
+        title: book.get("title_en"),
+        description: book.get("description_en"),
+        illustrator: book.get("illustrator"),
+        cover: photoUrl,
+        youtubeID: book.get("youtubeID_en"),
+      };
+      return bookInfo;
+    } else{
+      let photo = "";
+      let photoUrl = "";
+      if (book.get("cover")) {
+        photo = book.get("cover")._url;
+        photoUrl = photo.replace(
+          "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
+          "https://d36skj58da74xm.cloudfront.net/"
+        );
+      }
+      let bookInfo = {
+        title: book.get("title"),
+        description: book.get("description"),
+        illustrator: book.get("illustrator"),
+        cover: photoUrl,
+        youtubeID: book.get("youtubeID"),
+      };
+      return bookInfo;
     }
-    let bookInfo = {
-      title: book.get("title"),
-      description: book.get("description"),
-      illustrator: book.get("illustrator"),
-      cover: photoUrl,
-      youtubeID: book.get("youtubeID"),
-    };
-    return bookInfo;
-
   } catch (error) {
     console.log(error);
   }
