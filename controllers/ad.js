@@ -12,14 +12,15 @@ router.get('/image', async (req, res, next) => {
     // Gets the reference for the adl table
     const adTable = Parse.Object.extend("Ads");
     const query = new Parse.Query(adTable);
-    query.equalTo('Platform', 'Web');
+    query.equalTo("Platform", "Web");
     const webAd = await query.find();
 
     // Extracts the information for the ads and returns it for the catalog screen
-    const adInfo = await adInfo.getImage(webAd, lang);
-    res.json(adInfo);
+    const adsInfo = await adInfo.getImage(webAd, lang);
+    res.json(adsInfo);
   } catch (err) {
-    next(err)
+    console.error(`Error when attempting to recover ad: ${err}`);
+    //next(err)
   }
 });
 

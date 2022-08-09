@@ -60,10 +60,11 @@ app.get("/", (req, res) => {
 app.use("/admin", admin);
 app.use("/animals", animals);
 app.use("/books", books);
+app.use("/ad", ad);
 app.use("/adoptions", adoptions.router);
 app.use("/profile", profile);
 app.use("/reports", reports);
-app.use("/ad", ad);
+
 // Controller functions for one type of execution
 const { Parse } = require("./database"); // This is only to pass the database
 // Manages the login for admins
