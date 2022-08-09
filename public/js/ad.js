@@ -1,5 +1,26 @@
 const popAd = document.getElementById("popAd");
 
+
+window.addEventListener("load", function() {
+  setTimeout(
+    function open(event) {
+      document.querySelector(".popup button").style.display = "none";
+      document.querySelector(".popup").style.display = "block";
+    },
+    0000
+  )
+  setTimeout(
+    function open(event) {
+      document.querySelector(".popup button").style.display = "block";
+    },
+    3000
+  )
+});
+
+document.querySelector("#close").addEventListener("click", function() {
+  document.querySelector(".popup").style.display = "none";
+});
+
 const createImage = (url, container) => {
   let img = document.createElement("img");
   console.log(url);
