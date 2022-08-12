@@ -1,11 +1,21 @@
 const popAd = document.getElementById("popAd");
 
+function disableScrolling(){
+    var x=window.scrollX;
+    var y=window.scrollY;
+    window.onscroll=function(){window.scrollTo(x, y);};
+}
 
+function enableScrolling(){
+    window.onscroll=function(){};
+}
+// Functions to pop the close button with a 2-3 sec. delay
 window.addEventListener("load", function() {
   setTimeout(
     function open(event) {
       document.querySelector(".popup button").style.display = "none";
       document.querySelector(".popup").style.display = "block";
+      disableScrolling();
     },
     0000
   )
@@ -19,11 +29,13 @@ window.addEventListener("load", function() {
 
 document.querySelector("#close").addEventListener("click", function() {
   document.querySelector(".popup").style.display = "none";
+  enableScrolling();
 });
 
+// Image creation data
 const createImage = (url, container) => {
   let img = document.createElement("img");
-  console.log(url);
+  //console.log(url);
   img.setAttribute("src", url);
   img.className = "img-fluid";
   img.setAttribute("alt", "ad");
@@ -43,7 +55,7 @@ fetch("/ad/image")
     adColleagues.forEach((elem) => {
       ad.push(elem);
     });*/
-    console.log(ad);
+    //console.log(ad);
     createImage(ad[0].Image, popAd);
 
   })
