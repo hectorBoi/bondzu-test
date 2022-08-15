@@ -54,10 +54,10 @@ const getbookInfo = async (book, lang) => {
       youtubeID: video,
     };
     return bookInfo;
+
+  } catch (error) {
+    console.log(error);
   }
-} catch (error) {
-  console.log(error);
-}
 };
 
 module.exports = {
