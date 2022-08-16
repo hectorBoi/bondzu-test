@@ -68,10 +68,13 @@
              */
             const requestBody = {
                 isActive: status,
-                title: title,
                 illustrator: illustrator,
-                description: description,
-                youtubeID: youtubeID
+                title: titulo,
+                description: descripcion,
+                youtubeID: [youtubeID_ES],        // De tipo Arreglo en Parse, por alguna razón
+                title_en: title,
+                description_en: description,
+                youtubeID_en: [youtubeID_EN]      // De tipo Arreglo en Parse, por alguna razón
             };
 
             const request = {
