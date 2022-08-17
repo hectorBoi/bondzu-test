@@ -11,7 +11,7 @@ const createDiv = (className, id) => {
   return div;
 };
 
-const createButton = (location) => {
+const createButton = () => {
   let div = createDiv("card bg-dark text-white");
   div.style.margin = "20px";
   return div;
@@ -44,39 +44,46 @@ const createRow = () => {
   return div;
 };
 
-const createCard = (object, type) => {
-  const col = createDiv("col-xl");
+const createCard = (object) => {
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
   anchor.href = "updateBook.html";
   anchor.onclick = function () {
     window.localStorage.setItem("currentBook", object.id);
   };
+
+  const col = createDiv("col-xl");
   col.appendChild(anchor);
+
   const button = createButton(object.id);
   anchor.appendChild(button);
+
   if (object.cover) {
     const img = createImage(object.cover);
     button.appendChild(img);
   }
+
   const div = createDiv("card-img-overlay", object.id);
   const h5 = createTitle(object.title);
   div.appendChild(h5);
   button.appendChild(div);
+
   return col;
 };
 
-const createCards = (array, container, type) => {
+const createCards = (array, container) => {
   let count = 0;
   let row = createRow();
 
+  const BOOKS_PER_ROW = 4;
+
   for (elem of array) {
-    let col = createCard(elem, type);
+    let col = createCard(elem);
     row.appendChild(col);
     count++;
     if (
-      (count > 0 && count % 4 === 0) ||
-      (count === array.length && array.length % 4 !== 0)
+      (count > 0 && count % BOOKS_PER_ROW === 0) ||
+      (count === array.length && array.length % BOOKS_PER_ROW !== 0)
     ) {
       container.appendChild(row);
       row = createRow();
@@ -105,13 +112,3 @@ window.onclick = (event) => {
     window.localStorage.setItem("currentBook", event.target.id);
   }
 };
-
-function compareNames(animal1, animal2) {
-  if (animal1.name < animal2.name) {
-    return -1;
-  }
-  if (animal1.name > animal2.name) {
-    return 1;
-  }
-  return 0;
-}
