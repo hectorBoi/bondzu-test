@@ -1,6 +1,6 @@
 const loaderElements = document.getElementById("loaderElements");
 
-const containerAnimals = document.getElementById("containerAnimals");
+const containerBooks = document.getElementById("containerBooks");
 
 const createDiv = (className, id) => {
   let div = document.createElement("div");
@@ -21,7 +21,7 @@ const createImage = (url) => {
   let img = document.createElement("img");
   img.setAttribute("src", url);
   img.className = "card-img img-fluid";
-  img.setAttribute("alt", "animal");
+  img.setAttribute("alt", "Book");
   img.style.height = "300px";
   return img;
 };
@@ -31,7 +31,7 @@ const createTitle = (title) => {
   h5.className = "card-title";
 
   let span = document.createElement("span");
-  span.className = "animalCardHeader";
+  span.className = "bookCardHeader";
   span.innerHTML = title;
 
   h5.appendChild(span);
@@ -48,15 +48,9 @@ const createCard = (object, type) => {
   const col = createDiv("col-xl");
   const anchor = document.createElement("a");
   anchor.setAttribute("id", object.id);
-
-  if (type === "animals") {
-    anchor.href = "updateAnimal.html";
-  } else if (type === "colleagues") {
-    anchor.href = "updateColleague.html";
-  }
-
+  anchor.href = "updateBook.html";
   anchor.onclick = function () {
-    window.localStorage.setItem("currentAnimal", object.id);
+    window.localStorage.setItem("currentBook", object.id);
   };
   col.appendChild(anchor);
   const button = createButton(object.id);
@@ -98,7 +92,7 @@ fetch("/admin/books")
   .then((res) => res.json())
   .then((books) => {
 
-    createCards(books, containerAnimals, "animals");
+    createCards(books, containerBooks);
 
     loaderElements.className += " hidden";
   })
