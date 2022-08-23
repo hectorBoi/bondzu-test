@@ -93,12 +93,12 @@ h1 {
 
 .popup{
     background-color: rgba(1, 1, 1, 0.5);
-    padding: 30px 40px;
+    padding: 60px 40px;
     position: absolute;
     transform: translate(-50%,-50%);
     left: 50%;
     top: 50%;
-    border-radius: 10px;
+    border-radius: 0px;
     font-family: "Poppins",sans-serif;
     display: none;
     text-align: center;
@@ -111,8 +111,8 @@ h1 {
     color: #ffffff;
     background: #f28f1d;
     border-radius: 100%;
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 70px;
     border: none;
     outline: none;
     cursor: pointer;
