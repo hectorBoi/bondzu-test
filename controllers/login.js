@@ -1,25 +1,27 @@
-const token = require("./token");
+const token = require('./token');
 
 // Performs the authentication of the users credential with the DB
 const handleLogin = async (req, res, Parse) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return Promise.reject("Some of the fields are empty!");
+      return Promise.reject('Some of the fields are empty!');
     }
 
     // Performs the authentication with the database, returns the result of the query if it has a match, err if not
     return Parse.User.logIn(email, password)
       .then((user) => {
         const token = user.getSessionToken();
-        const typeID = user.get("userType");
+        const typeID = user.get('userType');
+        const userID = user.id;
 
-        if (req.originalUrl === "/adminLogin" && user.get("isAdmin") !== true) {
-          throw "Not an admin";
+        if (req.originalUrl === '/adminLogin' && user.get('isAdmin') !== true) {
+          throw 'Not an admin';
         }
         return {
-          user: user.get("username"),
+          user: user.get('username'),
           userType: typeID.id,
+          userID: userID,
           sessiontoken: token,
         };
       })
@@ -36,7 +38,7 @@ const signinAuth = (Parse) => async (req, res) => {
       return data ? await token.createSession(data) : Promise.reject(data);
     })
     .then((session) => res.json(session))
-    .catch((err) => res.status(400).json("Incorrect"));
+    .catch((err) => res.status(400).json('Incorrect'));
 };
 
 module.exports = {
