@@ -11,12 +11,12 @@ const noMatchPasswords = document.getElementById('noMatchPasswords');
 const missingInputs = document.getElementById('missingInputs');
 
 submitElem.addEventListener('click', () => {
-  const name = nameElem.value;
-  const lastname = lastnameElem.value;
+  const name = dataCleaner(nameElem.value);
+  const lastname = dataCleaner(lastnameElem.value);
   //const usertype = usertypeElem.options[usertypeElem.selectedIndex].value;
-  const email = emailElem.value;
-  const password = passwordElem.value;
-  const passwordConf = passwordConfElem.value;
+  const email = dataCleaner(emailElem.value);
+  const password = dataCleaner(passwordElem.value);
+  const passwordConf = dataCleaner(passwordConfElem.value);
 
   existingUser.style.display = 'none';
   noMatchPasswords.style.display = 'none';

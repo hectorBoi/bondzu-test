@@ -4,8 +4,8 @@ const submit = document.getElementById('submit');
 const invalidPassword = document.getElementById('invalidPassword');
 
 submit.addEventListener('click', () => {
-  const us = email.value;
-  const pw = password.value;
+  const us = dataCleaner(email.value);
+  const pw = dataCleaner(password.value);
 
   invalidPassword.style.display = 'none';
 
