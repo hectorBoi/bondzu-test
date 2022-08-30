@@ -1,4 +1,4 @@
-document.getElementById("modalsLoginSignup").innerHTML = `
+document.getElementById('modalsLoginSignup').innerHTML = `
 <div
               class="modal fade"
               id="loginModal"
@@ -22,7 +22,7 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form class="was-validated">
+                    <form>
                       <div class="form-group is-invalid">
                         <label for="email">Correo electrónico</label>
                         <input
@@ -92,7 +92,7 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form class="was-validated">
+                    <form>
                       <div class="form-group is-invalid">
                         <label for="email">Nombre</label>
                         <input
@@ -105,7 +105,13 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           aria-label="Nombre"
                           autofocus
                         />
+                      <div class="invalid-feedback">
+                        Por favor introduzca un nombre válido
                       </div>
+                      <div class="valid-feedback">
+                        ¡Bien hecho!
+                      </div>
+                    </div>
                       <div class="form-group is-invalid">
                         <label for="email">Apellidos</label>
                         <input
@@ -117,7 +123,13 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           placeholder="Apellidos"
                           aria-label="Apellidos"
                         />
+                        <div class="invalid-feedback">
+                          Por favor introduzca un apellido válido
+                        </div>
+                        <div class="valid-feedback">
+                          ¡Excelente!
                       </div>
+                    </div>
                       <div class="form-group is-invalid">
                         <label for="email">Correo electrónico</label>
                         <input
@@ -129,6 +141,12 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           placeholder="correo@ejemplo.com"
                           aria-label="Correo"
                         />
+                        <div class="invalid-feedback">
+                            El correo electrónico debe ser una dirección válida, por ejemplo, me@mydomain.com
+                          </div>
+                          <div class="valid-feedback">
+                            ¡Perfecto!
+                        </div>
                         <div
                           id="existingUser"
                           class="invalid-feedback"
@@ -148,6 +166,12 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           placeholder="Contraseña"
                           aria-label="Contraseña"
                         />
+                        <div class="invalid-feedback">
+                          La contraseña debe contener como mínimo Mínimo ocho caracteres, al menos una letra, un número y un carácter especial
+                        </div>
+                        <div class="valid-feedback">
+                          ¡Buena contraseña!
+                        </div>
                       </div>
                       <div class="form-group is-invalid">
                         <label for="email">Confirmar contraseña</label>
@@ -160,6 +184,12 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           placeholder="Contraseña"
                           aria-label="Contraseña"
                         />
+                      <div class="invalid-feedback">
+                        Las contraseñas deben coincidir
+                      </div>
+                      <div class="valid-feedback">
+                        ¡Listo!
+                      </div>
                         <div
                           id="noMatchPasswords"
                           class="invalid-feedback"
@@ -185,3 +215,31 @@ document.getElementById("modalsLoginSignup").innerHTML = `
               </div>
             </div>
 `;
+
+const inputs = document.querySelectorAll('input');
+
+const patterns = {
+  nameReg: /^[a-z\d]{5,12}$/i,
+  lastnameReg: /^[a-z\d]{5,12}$/i,
+  emailReg: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+  email: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+  passwordReg: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  passwordRegConf:
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+};
+
+// Validation function
+
+function validation(field, regex) {
+  if (regex.test(field.value)) {
+    field.className = 'form-control is-valid';
+  } else {
+    field.className = 'form-control is-invalid';
+  }
+}
+
+inputs.forEach((input) => {
+  input.addEventListener('keyup', (e) => {
+    validation(e.target, patterns[e.target.id]);
+  });
+});

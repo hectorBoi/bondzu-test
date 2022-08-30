@@ -1,4 +1,4 @@
-document.getElementById("navBar").innerHTML = `
+document.getElementById('navBar').innerHTML = `
 <style>
       .dropdown-item.active,
       .dropdown-item:active {
@@ -92,7 +92,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
       </li>
       <li class="nav-item">
         <a
-          href="#"
+          href="https://bondzu.mercadoshops.com.mx"
           style="text-decoration: none; color: white;"
         >
           <button
