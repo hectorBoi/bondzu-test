@@ -37,7 +37,66 @@
     const youtubeID_EN_Element = document.querySelector("#youtubeIdEN");
 
     const TIMEOUT_MILLISECONDS = 3000;
+    const SERVER_ROUTE = `/admin/books/${bookID}`;
 
+    // Llenar los elementos de sus datos correspondientes
+    fetch(SERVER_ROUTE)
+    .then((res) => res.json())
+    .then((book) => {
+
+        // Meta
+        pageTitleElement.innerText += ` ${book.title}`;
+
+        // Portada y videos
+        bookCoverElement.setAttribute("src", book.cover);
+
+        const YOUTUBE_ROOT_URL = "https://www.youtube.com/embed/";
+        videoES_Element.setAttribute("src", `${YOUTUBE_ROOT_URL}${book.youtubeID[0]}`);
+        videoEN_Element.setAttribute("src", `${YOUTUBE_ROOT_URL}${book.youtubeID_en[0]}`);
+
+        // Datos únicos
+        statusElement.checked = book.isActive;
+        statusTextElement.innerText = (statusElement.checked) ? "Activo" : "Inactivo";
+
+        illustratorElement.value = book.illustrator;
+
+        // Datos en Español
+        tituloElement.value = book.title;
+        descripcionElement.value = book.description;
+        youtubeID_ES_Element.value = book.youtubeID[0];
+
+        // English data
+        titleElement.value = book.title_en;
+        descriptionElement.value = book.description_en;
+        youtubeID_EN_Element.value = book.youtubeID_en[0];
+
+    }); // End fetch
+
+
+    // Actualizar foto
+    const updateCoverForm = document.querySelector("#updateCoverForm");
+    updateCoverForm.setAttribute("action", SERVER_ROUTE + `/photo`);
+
+    const updatedCover = document.querySelector("#updatedCover");
+    updatedCover.addEventListener("change", () => {
+
+        const submitCoverButton = document.querySelector("#submitCover");
+        if (updatedCover.value)
+        {
+            submitCoverButton.className = "btn btn-success";
+            submitCoverButton.disabled = false;
+            submitCoverButton.value = "Actualizar foto";
+        }
+        else
+        {
+            submitCoverButton.className = "btn btn-dark";
+            submitCoverButton.disabled = true;
+            submitCoverButton.value = "Ninguna foto seleccionada";
+        }
+    });
+
+
+    // Guardar cambios del libro
     submitSaveElem.addEventListener("click", () => 
     {
         // Información de los elementos previos
