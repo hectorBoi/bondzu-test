@@ -1,6 +1,5 @@
-const {
-  Parse
-} = require("../database");
+const PARSE_CONNECTION_URL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/";
+const PARSE_SECURE_CONNECTION_URL = "https://d36skj58da74xm.cloudfront.net/";
 
 const puppeteer = require("puppeteer");
 
