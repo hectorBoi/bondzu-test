@@ -126,8 +126,8 @@
             missingInfoElem.style.display = "none";
 
             /* Especifica información a almacenar en la base de datos
-            * Cabe notar que los nombres de las propiedades (i.e., isActive,
-                title, illustrator, etc., corresponden con las columnas de la 
+             * Los nombres de las propiedades (i.e., isActive, title,
+                illustrator, etc., corresponden con las columnas de la
                 tabla "Book" de la base de datos.
             */
             const requestBody = {
@@ -151,19 +151,15 @@
             fetch("/admin/book", request)
             .then(() =>
             {
-                /* Notifica almacenamiento exitoso del libro en la base de datos
-                    y refresca la página
-                */
+                // Notifica almacenamiento exitoso del libro en la base de datos
                 successfulSaveElem.removeAttribute("style");
 
                 setTimeout(() => location.reload(), TIMEOUT_MILLISECONDS);
             })
             .catch((error) => 
             {
-                /* Me gustaría hacer estas notificaciones más obvias para el usuario final
-                    Quizás en lugar de notificarle por consola, usar una alerta prefabricada
-                    de Bootstrap, o algo similar
-                */
+                // TODO: Notificar al usuario final de una manera más obvia
+                // e.g., Alerta prefabricada de Bootstrap
                 if (error instanceof DOMException)
                     console.error(`La solicitud fue abortada debido al siguiente error: ${error}`);
                 
