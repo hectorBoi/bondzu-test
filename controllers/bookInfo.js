@@ -64,30 +64,30 @@ const getBooks = async (array, lang) => {
   }
 };
 
-// Transforms the array of Parse.Objects into Json
-const getbookInfo = async (book, lang) => {
-  try {
-    const video = await getVideo(book.id);
-    let photo = "";
-    let photoUrl = "";
-    if (book.get("cover")) {
-      photo = book.get("cover")._url;
-      photoUrl = photo.replace(
-        "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/",
-        "https://d36skj58da74xm.cloudfront.net/"
-      );
-    }
-    let bookInfo = {
-      title: book.get("title"),
-      description: book.get("description"),
-      illustrator: book.get("illustrator"),
-      cover: photoUrl,
-      youtubeID: video,
-    };
-    return bookInfo;
+/**
+ * Returns the information of a given book
+ * @param {Parse.Object} book The book who's information is sought
+ * @returns {Object} The given book's information in JSON format
+ */
+const getBookInfo = async (book) => {
+  try
+  {
+    const bookInformation = {id: book.id};
 
-  } catch (error) {
-    console.log(error);
+    for (attribute of BOOK_COLUMNS)
+      bookInformation[attribute] = book.get(attribute);
+
+    // If an error occurs when attempting to obtain the book's
+    // cover, an empty string is returned instead
+    const cover = getCoverURL(book) ?? "";
+    bookInformation["cover"] = cover;
+
+    return bookInformation;
+  }
+  catch (error)
+  {
+    console.error(`Error al intentar recuperar la información del libro:
+                  ${error}`);
   }
 };
 
