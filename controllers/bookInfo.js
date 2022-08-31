@@ -93,4 +93,5 @@ const getBookInfo = async (book) => {
 
 module.exports = {
   getBooks: getBooks,
+  getBookInfo
 };
