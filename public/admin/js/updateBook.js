@@ -12,23 +12,28 @@
     const loaderElements = document.getElementById("loaderElements");
     loaderElements.classList.add("hidden"); // Oculta ícono de cargando
 
-    const body = document.getElementById("body");
-    body.style.overflow = "hidden";
+    // Meta
+    const bookID = window.localStorage.getItem("currentBook");
+    const pageTitleElement = document.querySelector("#pageTitle");
+
+    // Portada y videos
+    const bookCoverElement = document.querySelector("#bookCover");
+    const videoES_Element = document.querySelector("#videoES");
+    const videoEN_Element = document.querySelector("#videoEN");
 
     // Datos únicos
     const statusElement = document.querySelector("#status");
+    const statusTextElement = document.querySelector("#statusText");
     const illustratorElement = document.querySelector("#ilustrador");
 
     // Datos en Español
     const tituloElement = document.querySelector("#titulo");
     const descripcionElement = document.querySelector("#descripcion");
-    descripcionElement.defaultValue = "";   // Necesario para evitar espacio en blanco que la descripción contiene por defecto
     const youtubeID_ES_Element = document.querySelector("#youtubeIdES");
 
     // English data
     const titleElement = document.querySelector("#title");
     const descriptionElement = document.querySelector("#description");
-    descriptionElement.defaultValue = "";   // Necesario para evitar espacio en blanco que la descripción contiene por defecto
     const youtubeID_EN_Element = document.querySelector("#youtubeIdEN");
 
     const TIMEOUT_MILLISECONDS = 3000;
