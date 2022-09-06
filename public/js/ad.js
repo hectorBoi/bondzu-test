@@ -44,9 +44,9 @@ const createImage = (url, container) => {
   container.appendChild(img)
 };
 
-if (!document.cookie.includes("token")) {
+/*if (!document.cookie.includes("token")) {
   location.replace("/");
-}
+}*/
 
 fetch("/ad/image")
   .then((res) => res.json())

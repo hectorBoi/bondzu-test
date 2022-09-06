@@ -105,14 +105,14 @@ h1 {
 }
 .popup button{
     display: block;
-    margin:  0 0 20px auto;
+    margin:  50px 0 20px auto;
     background-color: transparent;
     font-size: 30px;
     color: #ffffff;
     background: #f28f1d;
     border-radius: 100%;
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border: none;
     outline: none;
     cursor: pointer;
@@ -123,6 +123,6 @@ h1 {
 .popup p{
     font-size: 14px;
     text-align: justify;
-    margin: 20px 0;
+    margin: 25px 0;
     line-height: 25px;
 }
