@@ -1,4 +1,4 @@
-document.getElementById("modalsLoginSignup").innerHTML = `
+document.getElementById('modalsLoginSignup').innerHTML = `
 <div
               class="modal fade"
               id="loginModal"
@@ -10,7 +10,7 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="loginModalLabel">
-                      Log in
+                      Inicia sesión
                     </h5>
                     <button
                       type="button"
@@ -22,7 +22,7 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form class="was-validated">
+                    <form>
                       <div class="form-group is-invalid">
                         <label for="email">Email</label>
                         <input
@@ -31,8 +31,8 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
                           required
-                          placeholder="name@example.com"
-                          aria-label="Correo"
+                          placeholder="email@example.com"
+                          aria-label="Email"
                           autofocus
                         />
                       </div>
@@ -45,14 +45,14 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           aria-describedby="validatedInputGroupPrepend"
                           required
                           placeholder="Password"
-                          aria-label="Contraseña"
+                          aria-label="Password"
                         />
                         <div
                           id="invalidPassword"
                           class="invalid-feedback"
                           style="display: none;"
                         >
-                        Incorrect username or password. Try again.
+                        Incorrect username or password. Please try again.
                         </div>
                       </div>
                       <a class="form-text" href="passwordRecover.html"
@@ -61,7 +61,7 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                   </div>
                   <div class="modal-footer" id="submit">
                     <a class="btn btn-success btn-lg btn-block"
-                      >Log in</a
+                      >Login</a
                     >
                   </div>
                 </div>
@@ -92,32 +92,44 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form class="was-validated">
+                    <form>
                       <div class="form-group is-invalid">
-                        <label for="email">First name</label>
+                        <label for="email">Name</label>
                         <input
                           id="nameReg"
                           type="text"
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
                           required
-                          placeholder="First name"
-                          aria-label="Nombre"
+                          placeholder="Name"
+                          aria-label="Name"
                           autofocus
                         />
+                      <div class="invalid-feedback">
+                      Please enter a valid name
                       </div>
+                      <div class="valid-feedback">
+                        Well done!
+                      </div>
+                    </div>
                       <div class="form-group is-invalid">
-                        <label for="email">Last name</label>
+                        <label for="email">Lastname</label>
                         <input
                           id="lastnameReg"
                           type="text"
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
                           required
-                          placeholder="Last name"
-                          aria-label="Apellidos"
+                          placeholder="Lastname"
+                          aria-label="Lastname"
                         />
+                        <div class="invalid-feedback">
+                          Please enter a valid last name
+                        </div>
+                        <div class="valid-feedback">
+                          Excellent!
                       </div>
+                    </div>
                       <div class="form-group is-invalid">
                         <label for="email">Email</label>
                         <input
@@ -126,15 +138,21 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           class="form-control is-invalid"
                           aria-describedby="validatedInputGroupPrepend"
                           required
-                          placeholder="name@example.com"
-                          aria-label="Correo"
+                          placeholder="email@example.com"
+                          aria-label="Email"
                         />
+                        <div class="invalid-feedback">
+                            The Email must be a valid address, for example, me@mydomain.com.
+                          </div>
+                          <div class="valid-feedback">
+                            Perfect!
+                        </div>
                         <div
                           id="existingUser"
                           class="invalid-feedback"
                           style="display: none;"
                         >
-                          The username already exists. Try another one.
+                          That account already exists. Try another one.
                         </div>
                       </div>
                       <div class="form-group is-invalid">
@@ -146,8 +164,14 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           aria-describedby="validatedInputGroupPrepend"
                           required
                           placeholder="Password"
-                          aria-label="Contraseña"
+                          aria-label="Password"
                         />
+                        <div class="invalid-feedback">
+                          The password must contain at least eight characters, at least one letter, one number and one special character
+                        </div>
+                        <div class="valid-feedback">
+                          Good password!
+                        </div>
                       </div>
                       <div class="form-group is-invalid">
                         <label for="email">Confirm password</label>
@@ -158,14 +182,20 @@ document.getElementById("modalsLoginSignup").innerHTML = `
                           aria-describedby="validatedInputGroupPrepend"
                           required
                           placeholder="Password"
-                          aria-label="Contraseña"
+                          aria-label="Password"
                         />
+                      <div class="invalid-feedback">
+                        Passwords must match
+                      </div>
+                      <div class="valid-feedback">
+                        Done!
+                      </div>
                         <div
                           id="noMatchPasswords"
                           class="invalid-feedback"
                           style="display: none;"
                         >
-                          The password does not match. Try again.
+                          The password does not match. Please try again.
                         </div>
                         <div
                           id="missingInputs"
@@ -184,3 +214,31 @@ document.getElementById("modalsLoginSignup").innerHTML = `
               </div>
             </div>
 `;
+
+const inputs = document.querySelectorAll('input');
+
+const patterns = {
+  nameReg: /^[a-z\d]{5,12}$/i,
+  lastnameReg: /^[a-z\d]{5,12}$/i,
+  emailReg: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+  email: /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/,
+  passwordReg: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+  passwordRegConf:
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+};
+
+// Validation function
+
+function validation(field, regex) {
+  if (regex.test(field.value)) {
+    field.className = 'form-control is-valid';
+  } else {
+    field.className = 'form-control is-invalid';
+  }
+}
+
+inputs.forEach((input) => {
+  input.addEventListener('keyup', (e) => {
+    validation(e.target, patterns[e.target.id]);
+  });
+});

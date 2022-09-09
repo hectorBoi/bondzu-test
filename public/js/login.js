@@ -4,8 +4,8 @@ const submit = document.getElementById('submit');
 const invalidPassword = document.getElementById('invalidPassword');
 
 submit.addEventListener('click', () => {
-  const us = email.value;
-  const pw = password.value;
+  const us = dataCleaner(email.value);
+  const pw = dataCleaner(password.value);
 
   invalidPassword.style.display = 'none';
 
@@ -22,10 +22,11 @@ submit.addEventListener('click', () => {
     .then((res) => res.json())
     .then((res) => {
       if (res.token) {
-        const { token, userType, username } = res;
+        const { token, userType, username, userID } = res;
         document.cookie = `username=${username}; path=/;`;
         document.cookie = `token=${token}; path=/`;
         document.cookie = `usertype=${userType}; path=/`;
+        document.cookie = `userid=${userID}; path=/`;
         // Sets last login date
         fetch('/reports/lastLoginWeb/', {
           method: 'post',

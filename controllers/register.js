@@ -35,7 +35,7 @@ const handleRegister = async (req, res, Parse) => {
     if (!name || !lastname || !email || !password) {
       return res.status(400).json('Incorrect form submission');
     }
-    
+
     //Request Email Verification
     /*const verified = await Parse.User.requestEmailVerification(email, {
       success: function() {
@@ -58,15 +58,17 @@ const handleRegister = async (req, res, Parse) => {
         return res.status(400).json('Already registered');
       }
     })*/
-    
+
     const user = await createUser(req.body, Parse);
     await user.signUp();
     const session = await Parse.User.logIn(email, password);
     const username = session.get('username');
     const typeID = session.get('userType');
+    const userID = session._getId();
     const userSession = await token.createSession({
       user: username,
       userType: typeID.id,
+      userID: userID,
       sessiontoken: user.getSessionToken(),
     });
     res.json(userSession);
