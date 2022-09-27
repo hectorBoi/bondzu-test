@@ -120,35 +120,6 @@
 
             <div class="card-body">
 
-              <!-- Editar portada -->
-              <form action=""
-                    class="was-validated"
-                    method="post"
-                    enctype="multipart/form-data"
-                    id="updateCoverForm">
-
-                    <div class="form-group"
-                         style="margin-left: 5px;">
-
-                         <div class="text-center mx-auto">
-                            <strong><label for="updatedCover">Imagen</label></strong>
-                            <br>
-                            <input type="file"
-                                   id="updatedCover"
-                                   name="updatedCover"
-                                   class="form-control-file"
-                                   accept="image/*">
-                            <br>
-                            <input type="submit"
-                                   value="Ninguna foto seleccionada"
-                                   id="submitCover"
-                                   class="btn btn-dark"
-                                   disabled>
-                         </div>
-                    </div>
-                    <hr>
-              </form>
-
               <!-- Editar datos únicos -->
               <form class="was-validated">
 
@@ -210,6 +181,37 @@
             </div>
 
             <div class="card-body">
+
+              <!-- Editar portada -->
+              <form action=""
+                    class="was-validated"
+                    method="post"
+                    enctype="multipart/form-data"
+                    id="updateCoverFormES">
+
+                    <div class="form-group"
+                        style="margin-left: 5px;">
+
+                        <strong><label for="updatedCoverES">Portada</label></strong>
+                        <div class="text-center mx-auto">
+                            <br>
+                            <input type="file"
+                                   id="updatedCoverES"
+                                   name="updatedCoverES"
+                                   style="margin-bottom: 25px;"
+                                   accept="image/*">
+                            <br>
+                            <input type="submit"
+                                   value="Ninguna portada seleccionada"
+                                   id="submitCoverES"
+                                   class="btn btn-dark"
+                                   disabled>
+                        </div>
+                    </div>
+              </form>
+
+              <hr>
+
               <form class="was-validated">
 
                 <div class="form-group is-invalid">
@@ -260,6 +262,37 @@
             </div>
 
             <div class="card-body">
+
+              <!-- Editar portada -->
+              <form action=""
+                    class="was-validated"
+                    method="post"
+                    enctype="multipart/form-data"
+                    id="updateCoverFormEN">
+
+                    <div class="form-group"
+                        style="margin-left: 5px;">
+
+                        <strong><label for="updatedCoverEN">Cover</label></strong>
+                        <div class="text-center mx-auto">
+                            <br>
+                            <input type="file"
+                                   id="updatedCoverEN"
+                                   name="updatedCoverEN"
+                                   style="margin-bottom: 25px;"
+                                   accept="image/*">
+                            <br>
+                            <input type="submit"
+                                   value="No cover selected"
+                                   id="submitCoverEN"
+                                   class="btn btn-dark"
+                                   disabled>
+                        </div>
+                    </div>
+              </form>
+
+              <hr>
+
               <form class="was-validated">
 
                 <div class="form-group is-invalid">
