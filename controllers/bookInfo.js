@@ -10,7 +10,8 @@ const BOOK_COLUMNS = [
   "cover",
   "title_en",
   "description_en",
-  "youtubeID_en"
+  "youtubeID_en",
+  "cover_en"
 ];
 
 /**
