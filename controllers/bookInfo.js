@@ -18,12 +18,13 @@ const BOOK_COLUMNS = [
  * Returns the cover URL of a given book. If the book does not possess
  * a cover, an empty string is returned.
  * @param {Parse.Object} book The book who's cover is sought
- * @returns {String} The cover URL of the given book
+ * @param {String} coverColumn The column name in Parse's Book table whose cover is sought
+ * @returns {String} The URL of the given book's cover
  */
-const getCoverURL = (book) => {
+const getCoverURL = (book, coverColumn) => {
   try
   {
-    const coverFile = book.get("cover");
+    const coverFile = book.get(coverColumn);
     const coverFileURL = (coverFile) ? coverFile._url : "";
     const cover = coverFileURL.replace(PARSE_CONNECTION_URL,
                                        PARSE_SECURE_CONNECTION_URL);
