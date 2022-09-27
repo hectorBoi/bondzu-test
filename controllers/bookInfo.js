@@ -81,8 +81,11 @@ const getBookInfo = async (book) => {
 
     // If an error occurs when attempting to obtain the book's
     // cover, an empty string is returned instead
-    const cover = getCoverURL(book) ?? "";
+    const cover = getCoverURL(book, "cover") ?? "";
     bookInformation["cover"] = cover;
+
+    const cover_en = getCoverURL(book, "cover_en") ?? "";
+    bookInformation["cover_en"] = cover_en;
 
     return bookInformation;
   }
