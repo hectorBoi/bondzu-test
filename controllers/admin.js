@@ -1034,11 +1034,17 @@ const getAllKeepers = async () => {
   }
 };
 
-// Gets the photo file from the admin and transforms it into a parse file
-const createsPhotoFile = async (req) => {
-  const data = Array.from(Buffer.from(req.files.newProfilepic.data));
+/**
+ * Gets the photo file from the admin and transforms it into a PNG image
+ * @param {Request} req The HTTP request sent to the server
+ * @param {String} inputName Name of the file-type input HTMLElement from which the image is sent
+ * @param {String} imageName The name to be given to the resulting PNG image
+ * @returns {Parse.File} A PNG image to be uploaded to Parse
+ */
+const createsPhotoFile = async (req, inputName = 'newProfilepic', imageName = "testing.png") => {
+  const data = Array.from(Buffer.from(req.files[inputName].data));
   const contentType = req.headers["content-type"];
-  const file = new Parse.File("testing.png", data, contentType);
+  const file = new Parse.File(`${imageName}.png`, data, contentType);
   return file;
 };
 
