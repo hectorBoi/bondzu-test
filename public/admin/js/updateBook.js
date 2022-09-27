@@ -17,7 +17,9 @@
     const pageTitleElement = document.querySelector("#pageTitle");
 
     // Portada y videos
-    const bookCoverElement = document.querySelector("#bookCover");
+    const bookCoverES_Element = document.querySelector("#bookCoverES");
+    const bookCoverEN_Element = document.querySelector("#bookCoverEN");
+
     const videoES_Element = document.querySelector("#videoES");
     const videoEN_Element = document.querySelector("#videoEN");
 
@@ -47,8 +49,9 @@
         // Meta
         pageTitleElement.innerText += ` ${book.title}`;
 
-        // Portada y videos
-        bookCoverElement.setAttribute("src", book.cover);
+        // Portadas y videos
+        bookCoverES_Element.setAttribute("src", book.cover);
+        bookCoverEN_Element.setAttribute("src", book.cover_en);
 
         const YOUTUBE_ROOT_URL = "https://www.youtube.com/embed/";
         videoES_Element.setAttribute("src", `${YOUTUBE_ROOT_URL}${book.youtubeID[0]}`);
