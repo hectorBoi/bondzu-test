@@ -91,6 +91,92 @@ router.get("/books/:bookID", async (req, res, next) => {
   }
 });
 
+// Updates a single book's information by the ID given for the admin
+router.post("/books/:bookID", async (req, res, next) => {
+  try
+  {
+    // Autentica el usuario que haya realizado la solicitud
+    const { token } = req.cookies;
+
+    const bookID = req.params.bookID;
+    const book = await getBookDB(bookID);
+    const bookInformation = Object.entries(req.body);
+
+    for (const [property, value] of bookInformation)
+      book.set(property, value);
+
+    /*
+      ? Se decidió especificar el token del admin al crear un nuevo
+      ? libro por fuerza del hábito, pero se desconoce si sea necesario
+     */
+    await book.save(null, { sessionToken: token });
+
+    /* Concluye el ciclo de solicitud-respuesta con status HTTP 200
+     * De no ejecutarse, la solicitud fetch no se concluye.
+     */
+    res.status(200).end();
+  }
+  catch (error)
+  {
+    console.error(`Error al intentar actualizar información del libro en la base de datos:
+                  ${error}`);
+  }
+});
+
+// Updates a single book's Spanish cover by the ID given for the admin
+router.post("/books/:bookID/cover_es", async (req, res, next) => {
+  try
+  {
+    const { token } = req.cookies;
+
+    const bookID = req.params.bookID;
+    const book = await getBookDB(bookID);
+
+    if (req.files)
+    {
+      const newCover = await createsPhotoFile(req, 'updatedCoverES', 'Portada de Especies Mexicanas');
+      book.set("cover", newCover);
+      book.save(null, {sessionToken: token});
+    }
+    else
+      console.log("No se envío una imagen para actualizar la portada en español.");
+
+    res.redirect("/admin/updateBook.html");
+  }
+  catch (error)
+  {
+    console.error(`Error al intentar actualizar la portada en español en la base de datos:
+                  ${error}`);
+  }
+});
+
+// Updates a single book's English cover by the ID given for the admin
+router.post("/books/:bookID/cover_en", async (req, res, next) => {
+  try
+  {
+    const { token } = req.cookies;
+
+    const bookID = req.params.bookID;
+    const book = await getBookDB(bookID);
+
+    if (req.files)
+    {
+      const newCover = await createsPhotoFile(req, 'updatedCoverEN', 'Mexican Species Cover');
+      book.set("cover_en", newCover);
+      book.save(null, {sessionToken: token});
+    }
+    else
+      console.log("No se envío una imagen para actualizar la portada en inglés.");
+
+    res.redirect("/admin/updateBook.html");
+  }
+  catch (error)
+  {
+    console.error(`Error al intentar actualizar la portada en inglés en la base de datos:
+                  ${error}`);
+  }
+});
+
 // Returns all the zoos for the pages where the admin can select the new zoo for a given animal or colleague
 router.get("/animals/keepers", async (req, res, next) => {
   try {
