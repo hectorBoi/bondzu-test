@@ -175,7 +175,7 @@
             };
 
             // Envía dicha información al servidor
-            fetch("/admin/book", request)
+            fetch(SERVER_ROUTE, request)
             .then(() =>
             {
                 // Notifica almacenamiento exitoso del libro en la base de datos
