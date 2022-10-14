@@ -37,7 +37,66 @@
     const youtubeID_EN_Element = document.querySelector("#youtubeIdEN");
 
     const TIMEOUT_MILLISECONDS = 3000;
+    const SERVER_ROUTE = `/admin/books/${bookID}`;
 
+    // Llenar los elementos de sus datos correspondientes
+    fetch(SERVER_ROUTE)
+    .then((res) => res.json())
+    .then((book) => {
+
+        // Meta
+        pageTitleElement.innerText += ` ${book.title}`;
+
+        // Portada y videos
+        bookCoverElement.setAttribute("src", book.cover);
+
+        const YOUTUBE_ROOT_URL = "https://www.youtube.com/embed/";
+        videoES_Element.setAttribute("src", `${YOUTUBE_ROOT_URL}${book.youtubeID[0]}`);
+        videoEN_Element.setAttribute("src", `${YOUTUBE_ROOT_URL}${book.youtubeID_en[0]}`);
+
+        // Datos únicos
+        statusElement.checked = book.isActive;
+        statusTextElement.innerText = (statusElement.checked) ? "Activo" : "Inactivo";
+
+        illustratorElement.value = book.illustrator;
+
+        // Datos en Español
+        tituloElement.value = book.title;
+        descripcionElement.value = book.description;
+        youtubeID_ES_Element.value = book.youtubeID[0];
+
+        // English data
+        titleElement.value = book.title_en;
+        descriptionElement.value = book.description_en;
+        youtubeID_EN_Element.value = book.youtubeID_en[0];
+
+    }); // End fetch
+
+
+    // Actualizar foto
+    const updateCoverForm = document.querySelector("#updateCoverForm");
+    updateCoverForm.setAttribute("action", SERVER_ROUTE + `/photo`);
+
+    const updatedCover = document.querySelector("#updatedCover");
+    updatedCover.addEventListener("change", () => {
+
+        const submitCoverButton = document.querySelector("#submitCover");
+        if (updatedCover.value)
+        {
+            submitCoverButton.className = "btn btn-success";
+            submitCoverButton.disabled = false;
+            submitCoverButton.value = "Actualizar foto";
+        }
+        else
+        {
+            submitCoverButton.className = "btn btn-dark";
+            submitCoverButton.disabled = true;
+            submitCoverButton.value = "Ninguna foto seleccionada";
+        }
+    });
+
+
+    // Guardar cambios del libro
     submitSaveElem.addEventListener("click", () => 
     {
         // Información de los elementos previos
@@ -67,8 +126,8 @@
             missingInfoElem.style.display = "none";
 
             /* Especifica información a almacenar en la base de datos
-            * Cabe notar que los nombres de las propiedades (i.e., isActive,
-                title, illustrator, etc., corresponden con las columnas de la 
+             * Los nombres de las propiedades (i.e., isActive, title,
+                illustrator, etc., corresponden con las columnas de la
                 tabla "Book" de la base de datos.
             */
             const requestBody = {
@@ -92,19 +151,15 @@
             fetch("/admin/book", request)
             .then(() =>
             {
-                /* Notifica almacenamiento exitoso del libro en la base de datos
-                    y refresca la página
-                */
+                // Notifica almacenamiento exitoso del libro en la base de datos
                 successfulSaveElem.removeAttribute("style");
 
                 setTimeout(() => location.reload(), TIMEOUT_MILLISECONDS);
             })
             .catch((error) => 
             {
-                /* Me gustaría hacer estas notificaciones más obvias para el usuario final
-                    Quizás en lugar de notificarle por consola, usar una alerta prefabricada
-                    de Bootstrap, o algo similar
-                */
+                // TODO: Notificar al usuario final de una manera más obvia
+                // e.g., Alerta prefabricada de Bootstrap
                 if (error instanceof DOMException)
                     console.error(`La solicitud fue abortada debido al siguiente error: ${error}`);
                 
