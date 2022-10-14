@@ -1,7 +1,7 @@
 const PARSE_CONNECTION_URL = 'http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/';
 const PARSE_SECURE_CONNECTION_URL = 'https://d36skj58da74xm.cloudfront.net/';
 
-const BOOK_COLUMNS = ['isActive', 'title', 'illustrator', 'description', 'youtubeID', 'cover', 'title_en', 'description_en', 'youtubeID_en'];
+const BOOK_COLUMNS = ['isActive', 'title', 'illustrator', 'description', 'youtubeID', 'cover', 'title_en', 'description_en', 'youtubeID_en', 'cover_en'];
 
 /**
  * Returns the cover URL of a given book. If the book does not possess
