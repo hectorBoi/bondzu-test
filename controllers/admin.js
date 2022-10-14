@@ -877,6 +877,42 @@ router.post("/member", async (req, res, next) => {
   }
 });
 
+// Crea un nuevo libro en la base de datos
+router.post("/book", async (req, res, next) => {
+  try
+  {
+    // Autentica el usuario que haya realizado la solicitud
+    const { token } = req.cookies;
+    
+    // Almacena la información recibida en la base de datos
+    const Book = Parse.Object.extend("Book");
+    let book = new Book();
+    const bookInformation = Object.entries(req.body);
+
+    for (const [property, value] of bookInformation)
+      book.set(property, value);
+    
+    /* 
+      ? Desconozco si se requiere especificar el token del admin al
+      ? crear un nuevo libro, ya que no sé si sea necesario conocer
+      ? qué admin dio de alta cada libro, o si siquiera se puede a-
+      ? veriguar desde la base de datos
+     */
+    book = await book.save(); //.save(null, { sessionToken: token });
+    
+    /* Concluye el ciclo de solicitud-respuesta con status HTTP 200
+     * De no ejecutarse, la solicitud fetch no se concluye.
+     */
+    res.status(200).end();
+  
+  } // End try
+  
+  catch (error)
+  {
+    console.error(`Ha ocurrido un error: ${error}`);
+  }
+})
+
 // === This are all the helpers functions used in the routes
 
 // Returns an array of all the zoo's so the admin can choose one instead of creating one
