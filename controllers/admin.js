@@ -3,7 +3,6 @@ const animalInfo = require("./animalInfo");
 const bookInfo = require("./bookInfo");
 const { Parse } = require("../database");
 const { Router } = require("express");
-const { json } = require("body-parser");
 
 // Initializes the router
 const router = Router();
