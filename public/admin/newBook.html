@@ -52,14 +52,19 @@
 
     <br />
     <div class="container-fluid">
+
+      <!-- Datos únicos -->
       <div class="row">
         <div class="col">
           <div class="card mx-auto" style="width: 30rem; margin-bottom: 1rem">
+
             <div class="card-header text-center">
               <h4>Datos únicos</h4>
             </div>
+
             <div class="card-body">
               <form class="was-validated">
+
                 <div class="form-group is-invalid text-center">
                   <b><label for="status">Estatus</label></b>
                   <div class="custom-control custom-switch">
@@ -91,46 +96,9 @@
                 <hr />
 
                 <div class="form-group is-invalid">
-                  <b><label for="titulo">Título</label></b>
-                  <input
-                    id="titulo"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
                   <b><label for="ilustrador">Ilustrador</label></b>
                   <input
                     id="ilustrador"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  />
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label for="descripcion">Descripción</label></b>
-                  <textarea
-                    id="descripcion"
-                    class="form-control is-invalid"
-                    aria-describedby="validatedInputGroupPrepend"
-                    required
-                  >
-                  </textarea>
-                </div>
-
-                <hr />
-
-                <div class="form-group is-invalid">
-                  <b><label for="youtubeId">YouTube ID | URL de video</label></b>
-                  <input
-                    id="youtubeId"
                     class="form-control is-invalid"
                     aria-describedby="validatedInputGroupPrepend"
                     required
@@ -143,6 +111,112 @@
       </div>
       <br />
 
+      <!-- Datos en Español e Inglés -->
+      <div class="row">
+
+        <!-- Español -->
+        <div class="col-md">
+          <div class="card mx-auto" style="width: 100%">
+
+            <div class="card-header text-center">
+              <h4>Español</h4>
+            </div>
+
+            <div class="card-body">
+              <form class="was-validated">
+
+                <div class="form-group is-invalid">
+                  <strong><label for="titulo">Título</label></strong>
+                  <input
+                    id="titulo"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr>
+
+                <div class="form-group is-invalid">
+                  <strong><label for="descripcion">Descripción</label></strong>
+                  <textarea
+                    id="descripcion"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  >
+                  </textarea>
+                </div>
+
+                <hr>
+
+                <div class="form-group is-invalid">
+                  <b><label for="youtubeIdES">YouTube ID | URL de video</label></b>
+                  <input
+                    id="youtubeIdES"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inglés -->
+        <div class="col-md">
+          <div class="card mx-auto" style="width: 100%">
+
+            <div class="card-header text-center">
+              <h4>English</h4>
+            </div>
+
+            <div class="card-body">
+              <form class="was-validated">
+
+                <div class="form-group is-invalid">
+                  <strong><label for="title">Title</label></strong>
+                  <input
+                    id="title"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr>
+
+                <div class="form-group is-invalid">
+                  <strong><label for="description">Description</label></strong>
+                  <textarea
+                    id="description"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  >
+                  </textarea>
+                </div>
+
+                <hr>
+
+                <div class="form-group is-invalid">
+                  <b><label for="youtubeIdEN">YouTube ID | Video URL</label></b>
+                  <input
+                    id="youtubeIdEN"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guardar libro -->
       <div class="row">
         <div class="col mx-auto text-center">
           <h5>
