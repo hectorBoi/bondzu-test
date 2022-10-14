@@ -75,6 +75,23 @@ router.get("/books", async (req, res, next) => {
   }
 });
 
+// Returns a single book's information by the ID given for the admin
+router.get("/books/:bookID", async (req, res, next) => {
+  try
+  {
+    const bookID = req.params.bookID;
+    const book = await getBookDB(bookID);
+    const bookInformation = await bookInfo.getBookInfo(book);
+
+    res.status(200).json(bookInformation);
+  }
+  catch (error)
+  {
+    console.error(`Error al intentar obtener información de la base de datos:
+                  ${error}`);
+  }
+});
+
 // Returns all the zoos for the pages where the admin can select the new zoo for a given animal or colleague
 router.get("/animals/keepers", async (req, res, next) => {
   try {
@@ -955,6 +972,14 @@ const getAnimalDB = async (animalID) => {
   const queryAnimal = new Parse.Query(animalTable);
   const animal = await queryAnimal.get(animalID);
   return animal;
+};
+
+// Gets a specific book from the database
+const getBookDB = async (bookID) => {
+  const bookTable = Parse.Object.extend("Book");
+  const bookQuery = new Parse.Query(bookTable);
+  const book = await bookQuery.get(bookID);
+  return book;
 };
 
 // Gets a specific zoo from the database
