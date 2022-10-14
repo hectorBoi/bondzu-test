@@ -17,7 +17,9 @@
     const pageTitleElement = document.querySelector("#pageTitle");
 
     // Portada y videos
-    const bookCoverElement = document.querySelector("#bookCover");
+    const bookCoverES_Element = document.querySelector("#bookCoverES");
+    const bookCoverEN_Element = document.querySelector("#bookCoverEN");
+
     const videoES_Element = document.querySelector("#videoES");
     const videoEN_Element = document.querySelector("#videoEN");
 
@@ -47,8 +49,9 @@
         // Meta
         pageTitleElement.innerText += ` ${book.title}`;
 
-        // Portada y videos
-        bookCoverElement.setAttribute("src", book.cover);
+        // Portadas y videos
+        bookCoverES_Element.setAttribute("src", book.cover);
+        bookCoverEN_Element.setAttribute("src", book.cover_en);
 
         const YOUTUBE_ROOT_URL = "https://www.youtube.com/embed/";
         videoES_Element.setAttribute("src", `${YOUTUBE_ROOT_URL}${book.youtubeID[0]}`);
@@ -73,28 +76,52 @@
     }); // End fetch
 
 
-    // Actualizar foto
-    const updateCoverForm = document.querySelector("#updateCoverForm");
-    updateCoverForm.setAttribute("action", SERVER_ROUTE + `/photo`);
+    // Actualizar fotos
+    const COVER_ROUTE = SERVER_ROUTE + "/cover_";
+    const COVER_SELECTED_CLASSES = "btn btn-success";
+    const NO_COVER_SELECTED_CLASSES = "btn btn-dark";
 
-    const updatedCover = document.querySelector("#updatedCover");
-    updatedCover.addEventListener("change", () => {
+    const updateCoverFormES = document.querySelector("#updateCoverFormES");
+    updateCoverFormES.setAttribute("action", COVER_ROUTE + "es");
 
-        const submitCoverButton = document.querySelector("#submitCover");
-        if (updatedCover.value)
+    const updatedCoverES = document.querySelector("#updatedCoverES");
+    updatedCoverES.addEventListener("change", () => {
+
+        const submitCoverESButton = document.querySelector("#submitCoverES");
+        if (updatedCoverES.value)
         {
-            submitCoverButton.className = "btn btn-success";
-            submitCoverButton.disabled = false;
-            submitCoverButton.value = "Actualizar foto";
+            submitCoverESButton.className = COVER_SELECTED_CLASSES;
+            submitCoverESButton.disabled = false;
+            submitCoverESButton.value = "Actualizar portada";
         }
         else
         {
-            submitCoverButton.className = "btn btn-dark";
-            submitCoverButton.disabled = true;
-            submitCoverButton.value = "Ninguna foto seleccionada";
+            submitCoverESButton.className = NO_COVER_SELECTED_CLASSES;
+            submitCoverESButton.disabled = true;
+            submitCoverESButton.value = "Ninguna portada seleccionada";
         }
     });
 
+    const updateCoverFormEN = document.querySelector("#updateCoverFormEN");
+    updateCoverFormEN.setAttribute("action", COVER_ROUTE + "en");
+
+    const updatedCoverEN = document.querySelector("#updatedCoverEN");
+    updatedCoverEN.addEventListener("change", () => {
+
+        const submitCoverENButton = document.querySelector("#submitCoverEN");
+        if (updatedCoverEN.value)
+        {
+            submitCoverENButton.className = COVER_SELECTED_CLASSES;
+            submitCoverENButton.disabled = false;
+            submitCoverENButton.value = "Update cover";
+        }
+        else
+        {
+            submitCoverENButton.className = NO_COVER_SELECTED_CLASSES;
+            submitCoverENButton.disabled = true;
+            submitCoverENButton.value = "No cover selected";
+        }
+    });
 
     // Guardar cambios del libro
     submitSaveElem.addEventListener("click", () => 
