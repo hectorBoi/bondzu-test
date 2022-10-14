@@ -1,23 +1,34 @@
 const PARSE_CONNECTION_URL = 'http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/';
 const PARSE_SECURE_CONNECTION_URL = 'https://d36skj58da74xm.cloudfront.net/';
 
-const BOOK_COLUMNS = ['isActive', 'title', 'illustrator', 'description', 'youtubeID', 'cover', 'title_en', 'description_en', 'youtubeID_en', 'cover_en'];
+const BOOK_COLUMNS = [
+    'isActive',
+    'title',
+    'illustrator',
+    'description',
+    'youtubeID',
+    'cover',
+    'title_en',
+    'description_en',
+    'youtubeID_en',
+    'cover_en',
+];
 
 /**
  * Returns the cover URL of a given book. If the book does not possess
  * a cover, an empty string is returned.
  * @param {Parse.Object} book The book who's cover is sought
- * @returns {String} The cover URL of the given book
+ * @param {String} coverColumn The column name in Parse's Book table whose cover is sought
+ * @returns {String} The URL of the given book's cover
  */
-const getCoverURL = (book) => {
+const getCoverURL = (book, coverColumn) => {
     try {
-        const coverFile = book.get('cover');
+        const coverFile = book.get(coverColumn);
         const coverFileURL = coverFile ? coverFile._url : '';
         const cover = coverFileURL.replace(PARSE_CONNECTION_URL, PARSE_SECURE_CONNECTION_URL);
         return cover;
     } catch (error) {
-        console.error(`Error al intentar recuperar la portada del libro:
-                 ${error}`);
+        console.error(`Error al intentar recuperar la portada del libro: ${error}`);
     }
 };
 
