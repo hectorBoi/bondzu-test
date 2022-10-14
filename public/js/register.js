@@ -1,11 +1,14 @@
+// Registration form elements
 const nameElem = document.getElementById('nameReg');
 const lastnameElem = document.getElementById('lastnameReg');
 const usertypeElem = document.getElementById('usertypeReg');
 const emailElem = document.getElementById('emailReg');
 const passwordElem = document.getElementById('passwordReg');
 const passwordConfElem = document.getElementById('passwordRegConf');
+const emailSubscriptionElem = document.querySelector("#emailSubscriptionReg");
 const submitElem = document.getElementById('submitReg');
 
+// Error messages
 const existingUser = document.getElementById('existingUser');
 const noMatchPasswords = document.getElementById('noMatchPasswords');
 const missingInputs = document.getElementById('missingInputs');
@@ -17,30 +20,42 @@ submitElem.addEventListener('click', () => {
   const email = dataCleaner(emailElem.value);
   const password = dataCleaner(passwordElem.value);
   const passwordConf = dataCleaner(passwordConfElem.value);
+  const isEmailSubscribed = emailSubscriptionElem.checked;
 
   existingUser.style.display = 'none';
   noMatchPasswords.style.display = 'none';
   missingInputs.style.display = 'none';
 
-  if (
-    name != '' &&
-    lastname != '' &&
-    email != '' &&
-    password != '' &&
-    passwordConf != ''
-  ) {
+  // Registration form values
+  /* No se incluye el valor del checkbox para suscribirse al newsletter
+     porque es un campo opcional
+   */
+  const inputs = new Set();
+  inputs.add(name);
+  inputs.add(lastname);
+  inputs.add(email);
+  inputs.add(password);
+  inputs.add(passwordConf);
+
+  // Si todos los campos han sido llenados:
+  if (!inputs.has(""))
+  {
     if (passwordConf === password) {
       fetch('/register', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
         },
+        /* Información a almacenar en la base de datos
+           ! IMPORTANTE QUE LOS NOMBRES DE LAS PROPIEDADES COINCI-
+           ! DAN CON LOS NOMBRES DE LAS COLUMNAS DE LA TABLA User
+         */
         body: JSON.stringify({
           name: name,
           lastname: lastname,
           email: email,
-          // userType: usertype,
           password: password,
+          emailSubscriptionActive: isEmailSubscribed
         }),
       })
         .then((res) => res.json())
@@ -49,7 +64,7 @@ submitElem.addEventListener('click', () => {
             const { token, userType, username, userID } = res;
             document.cookie = `username=${username}; path=/;`;
             document.cookie = `token=${token}; path=/`;
-            document.cookie = `usertype=${userType}; path=/`;
+            document.cookie = `usertype=${userType}; path=/d`;
             document.cookie = `userid=${userID}; path=/`;
             location.replace('/');
           }
