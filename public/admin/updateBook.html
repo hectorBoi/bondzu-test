@@ -29,7 +29,7 @@
       crossorigin="anonymous"
     ></script>
     <script defer src="./js/index.js"></script>
-    <script defer src="./js/newBook.js"></script>
+    <script defer src="./js/updateBook.js"></script>
     <script defer src="../js/logout.js"></script>
   </head>
   <body id="body" class="d-flex flex-column min-vh-100">
@@ -129,6 +129,7 @@
                     <hr>
               </form>
 
+              <!-- Editar datos únicos -->
               <form class="was-validated">
 
                 <div class="form-group is-invalid text-center">
@@ -242,7 +243,7 @@
               <form class="was-validated">
 
                 <div class="form-group is-invalid">
-                  <strong><label for="title">Title</label></strong>
+                  <strong><label for="title">Actualizar libro: </label></strong>
                   <input
                     id="title"
                     class="form-control is-invalid"
@@ -293,11 +294,11 @@
               class="text-success"
               style="display: none"
               id="successfulSave"
-              >Libro guardado exitosamente</small
+              >Cambios guardado exitosamente</small
             >
           </h5>
           <button class="btn btn-success" id="save">
-            Guardar
+            Guardar cambios
             <span
               id="buttonSpinner"
               class="spinner-border spinner-border-sm"
