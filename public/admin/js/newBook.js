@@ -12,9 +12,6 @@
     const loaderElements = document.getElementById("loaderElements");
     loaderElements.classList.add("hidden"); // Oculta ícono de cargando
 
-    const body = document.getElementById("body");
-    body.style.overflow = "hidden";
-
     // Datos únicos
     const statusElement = document.querySelector("#status");
     const illustratorElement = document.querySelector("#ilustrador");
