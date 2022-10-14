@@ -1,7 +1,39 @@
 const PARSE_CONNECTION_URL = "http://ec2-52-42-248-230.us-west-2.compute.amazonaws.com:80/";
 const PARSE_SECURE_CONNECTION_URL = "https://d36skj58da74xm.cloudfront.net/";
 
-const puppeteer = require("puppeteer");
+const BOOK_COLUMNS = [
+  "isActive",
+  "title",
+  "illustrator",
+  "description",
+  "youtubeID",
+  "cover",
+  "title_en",
+  "description_en",
+  "youtubeID_en"
+];
+
+/**
+ * Returns the cover URL of a given book. If the book does not possess
+ * a cover, an empty string is returned.
+ * @param {Parse.Object} book The book who's cover is sought
+ * @returns {String} The cover URL of the given book
+ */
+const getCoverURL = (book) => {
+  try
+  {
+    const coverFile = book.get("cover");
+    const coverFileURL = (coverFile) ? coverFile._url : "";
+    const cover = coverFileURL.replace(PARSE_CONNECTION_URL,
+                                       PARSE_SECURE_CONNECTION_URL);
+    return cover;
+  }
+  catch (error)
+  {
+    console.error(`Error al intentar recuperar la portada del libro:
+                 ${error}`);
+  }
+};
 
 // Get the video of a specific animal based on the id
 const getVideo = async (id) => {
