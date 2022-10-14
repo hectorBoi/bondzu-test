@@ -149,6 +149,15 @@ const getImage = async (ad, lang) => {
       };
       return adInfo;
     }
+    let bookInfo = {
+      title: book.get("title"),
+      description: book.get("description"),
+      illustrator: book.get("illustrator"),
+      cover: photoUrl,
+      youtubeID: video,
+    };
+    return bookInfo;
+
   } catch (error) {
     console.log(error);
   }

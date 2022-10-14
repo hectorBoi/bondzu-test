@@ -1,4 +1,5 @@
 const token = require('./token');
+const mailchimp = require("../mailchimp");
 
 // Creates "user" with users information
 const createUser = async (data, Parse) => {
@@ -63,6 +64,11 @@ const handleRegister = async (req, res, Parse) => {
 
     const user = await createUser(req.body, Parse);
     await user.signUp();
+
+    // Add user to Mailchimp audience
+    if (req.body.emailSubscriptionActive)
+      mailchimp.subscribeUserToNewsletter(email, name, lastname);
+
     const session = await Parse.User.logIn(email, password);
     const username = session.get('username');
     const typeID = session.get('userType');
