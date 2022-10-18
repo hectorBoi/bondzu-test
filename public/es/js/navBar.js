@@ -74,7 +74,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
             type="button"
             class="btn btn-outline-light navbarBtnMargins"
           >
-            ¿Quiénes somos?
+            Sobre nosotros
           </button></a
         >
       </li>
