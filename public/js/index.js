@@ -1,11 +1,13 @@
 const guest = document.getElementById('guest');
 const animals = document.getElementById('navAnimals');
+const books = document.getElementById('navBooks');
 const loggedIn = document.getElementById('loggedIn');
 const cardLogin = document.getElementById('cardLogin');
 const conocenos = document.getElementById('conocenos');
 
 if (!document.cookie.includes('token')) {
   animals.style.display = 'none';
+  books.style.display = 'none';
   loggedIn.style.display = 'none';
 } else {
   guest.style.display = 'none';
