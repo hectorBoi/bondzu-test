@@ -32,7 +32,7 @@ function translateElement(element, englishTranslation, spanishTranslation)
     case "en":
       element.innerText = englishTranslation;
       break;
-    
+
     case "es":
     default:
       element.innerText = spanishTranslation;
@@ -49,11 +49,11 @@ function translateElement(element, englishTranslation, spanishTranslation)
  * @param {string} animalEnglishTranslation The element's English translation for animals
  * @param {string} animalSpanishTranslation The element's Spanish translation for animals
  */
-function translateAnimalsAndColleagues(distinguishingString, 
-                                       translatedElement, 
-                                       colleagueEnglishTranslation, 
-                                       colleagueSpanishTranslation, 
-                                       animalEnglishTranslation, 
+function translateAnimalsAndColleagues(distinguishingString,
+                                       translatedElement,
+                                       colleagueEnglishTranslation,
+                                       colleagueSpanishTranslation,
+                                       animalEnglishTranslation,
                                        animalSpanishTranslation)
 {
   switch (distinguishingString)
@@ -62,7 +62,7 @@ function translateAnimalsAndColleagues(distinguishingString,
     case "Colleague":
       translateElement(translatedElement, colleagueEnglishTranslation, colleagueSpanishTranslation);
       break;
-    
+
     default:
       translateElement(translatedElement, animalEnglishTranslation, animalSpanishTranslation);
       break;
@@ -85,7 +85,7 @@ fetch(`/animals/${animalID}`)
     let youtubeURL = "";
     //console.log("This is the animal id: ", animal.youtubeID);
     // Checks if the camera is from youtube or another page
-    
+
     if (animal.youtubeID.includes("http")) {
       youtubeURL = animal.youtubeID;
       //console.log("youtubeURL");
@@ -106,7 +106,7 @@ fetch(`/animals/${animalID}`)
     titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
     nameElem.innerText = animal.name;
-    
+
     /* Colleagues are not animals.
      * Therefore, the species card is not visible on their page.
      */
@@ -117,12 +117,12 @@ fetch(`/animals/${animalID}`)
         const speciesCard = document.getElementsByClassName("list-group-item")[0];
         speciesCard.style.display = "none";
         break;
-      
+
       default:
         speciesElem.innerText = animal.species;
         break;
     }
-    
+
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
 
@@ -215,9 +215,9 @@ fetch(`/animals/${animalID}`)
         if (window.localStorage.getItem("lang") === "es") {
           for (member in members) {
             if(members[i].status == true){
-              const newCard = createCard( members[i].name, 
-                                          members[i].image, 
-                                          members[i].description, 
+              const newCard = createCard( members[i].name,
+                                          members[i].image,
+                                          members[i].description,
                                           members[i].email
                                         );
               leftSideElem.appendChild(newCard);
@@ -227,9 +227,9 @@ fetch(`/animals/${animalID}`)
         } else if (window.localStorage.getItem("lang") === "en") {
           for (member in members) {
             if(members[i].status == true){
-              const newCard = createCard( members[i].name, 
-                                          members[i].image, 
-                                          members[i].description_en, 
+              const newCard = createCard( members[i].name,
+                                          members[i].image,
+                                          members[i].description_en,
                                           members[i].email
                                         );
               leftSideElem.appendChild(newCard);
@@ -243,7 +243,7 @@ fetch(`/animals/${animalID}`)
 
 
 
-    if (window.localStorage.getItem("lang") === "es") {
+    /*if (window.localStorage.getItem("lang") === "es") {
       popoverAdoptElem.setAttribute(
         "data-content",
         `Puedes verme en tus adopciones dentro de tu <a href="profile.html">perfil</a>.`
@@ -253,31 +253,31 @@ fetch(`/animals/${animalID}`)
         "data-content",
         `You can find me in your adoptions in your <a href="profile.html">profile</a>.`
       );
-    }
+    }*/
 
     loaderElements.className += " hidden";
     body.style.overflow = "auto";
 
-    if (animal.isAdopted)
+    /*if (animal.isAdopted)
     {
-      translateAnimalsAndColleagues(animal.species, 
-                                    adoptElem, 
-                                    followedColleagueEnglishText, 
-                                    followedColleagueSpanishText, 
-                                    adoptedAnimalEnglishText, 
+      translateAnimalsAndColleagues(animal.species,
+                                    adoptElem,
+                                    followedColleagueEnglishText,
+                                    followedColleagueSpanishText,
+                                    adoptedAnimalEnglishText,
                                     adoptedAnimalSpanishText);
 
-      adoptElem.disabled = true;
+      //adoptElem.disabled = true;
     }
     else
     {
-      translateAnimalsAndColleagues(animal.species, 
-                                    adoptElem, 
-                                    followColleagueEnglishText, 
-                                    followColleagueSpanishText, 
-                                    adoptAnimalEnglishText, 
+      translateAnimalsAndColleagues(animal.species,
+                                    adoptElem,
+                                    followColleagueEnglishText,
+                                    followColleagueSpanishText,
+                                    adoptAnimalEnglishText,
                                     adoptAnimalSpanishText);
-    }
+    }*/
   })
   .catch("Error in the request");
 
@@ -293,13 +293,13 @@ adoptElem.addEventListener("click", () => {
     .then((res) => {
       if (res === "Worked") {
 
-        translateAnimalsAndColleagues(speciesElem.innerText, 
-                                      adoptElem, 
-                                      followedColleagueEnglishText, 
-                                      followedColleagueSpanishText, 
-                                      adoptedAnimalEnglishText, 
+        translateAnimalsAndColleagues(speciesElem.innerText,
+                                      adoptElem,
+                                      followedColleagueEnglishText,
+                                      followedColleagueSpanishText,
+                                      adoptedAnimalEnglishText,
                                       adoptedAnimalSpanishText);
-        
+
         setTimeout(() => {
           adoptElem.disabled = true;
         }, 3000);

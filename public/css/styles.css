@@ -134,3 +134,18 @@ h1 {
 .btngre{
   background-color: #3a8169 !important;
 }
+
+.btn-outline-primary {
+  color:#f28f1d !important;
+  border-color:#f28f1d !important;
+}
+
+.btn-outline-primary:hover{
+  color:#fff !important;
+  background-color:#f28f1d !important;
+  border-color:#f28f1d !important;
+}
+
+.text-orange{
+  color: #f28f1d
+}
