@@ -2,6 +2,7 @@ const iframeDiv = document.getElementById("iframe-div");
 const iframeElem = document.getElementById("iframe");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const nameElem = document.getElementById("name");
+const nameElemTriv = document.getElementById("nameT");
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
@@ -106,6 +107,7 @@ fetch(`/animals/${animalID}`)
     titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
     nameElem.innerText = animal.name;
+    nameElemTriv.innerHTML = "<p> ¿Cual es el nombre cientifico del/la "+ animal.name + "?</p>";
 
     /* Colleagues are not animals.
      * Therefore, the species card is not visible on their page.
