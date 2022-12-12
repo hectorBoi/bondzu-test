@@ -3,6 +3,10 @@ const iframeElem = document.getElementById("iframe");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const nameElem = document.getElementById("name");
 const nameElemTriv = document.getElementById("nameT");
+const firstQuestion = document.getElementById("firstQuestion");
+const secondQuestion = document.getElementById("secondQuestion");
+const thirdQuestion = document.getElementById("thirdQuestion");
+const firstOption = document.getElementById("firstOption")
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
@@ -104,10 +108,28 @@ fetch(`/animals/${animalID}`)
       chars = chars.concat(temp);
     }
 
+    const allQ = [];
+    const oneQ = [];
+    for(let key in animal.questions){
+      allQ[key] = animal.questions[key];
+      //console.log(allQ[key]);
+      for(let elem in allQ[key]){
+        oneQ[elem] = allQ[key][elem];
+        //console.log(oneQ[elem]);
+      }
+    }
+    var questions = oneQ.map(item => item.question);
+    var options = oneQ.map(item => item.options);
+    var answers = oneQ.map(item => item.answers);
+    console.log(options)
+
     titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
     nameElem.innerText = animal.name;
-    nameElemTriv.innerHTML = "<p> ¿Cual es el nombre cientifico del/la "+ animal.name + "?</p>";
+    nameElemTriv.innerHTML = "<p> Antes de que puedas adoptar al animal "+ animal.name + " pondremos a prueba tu conocimiento sobre el.</p>";
+    firstQuestion.innerHTML = "<p>" + questions[0] + "</p>";
+    secondQuestion.innerHTML = "<p>" + questions[1] + "</p>";
+    thirdQuestion.innerHTML = "<p>" + questions[2] + "</p>";
 
     /* Colleagues are not animals.
      * Therefore, the species card is not visible on their page.

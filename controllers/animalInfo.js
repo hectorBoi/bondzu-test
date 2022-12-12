@@ -78,6 +78,7 @@ const getAnimalInfo = async (animal, lang) => {
         characteristics: animal.get("characteristics_en"),
         profilePhoto: photoUrl,
         species: animal.get("species_en"),
+        questions: animal.get("questionsEnglish"),
         youtubeID: video,
         keeper: keeper,
       };
@@ -100,6 +101,7 @@ const getAnimalInfo = async (animal, lang) => {
         characteristics: animal.get("characteristics"),
         profilePhoto: photoUrl,
         species: animal.get("species"),
+        questions: animal.get("questionsSpanish"),
         youtubeID: video,
         keeper: keeper,
       };
