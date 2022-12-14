@@ -545,6 +545,25 @@ router.post("/books", async (req, res, next) => {
   }
 });
 
+router.get("/cameras", async (req, res, next) => {
+  try
+  {
+    // Extracts every video from the database and returns them
+    const videoTable = Parse.Object.extend("Video");
+    const videoQuery = new Parse.Query(videoTable);
+    const cameras = await videoQuery.find();
+    const youtubeIDs = cameras.map((camera) => {
+      return (camera = camera.get("youtube_ids")[0]);
+    });
+
+    res.json(youtubeIDs);
+  }
+  catch (error)
+  {
+    console.error(`ERROR: ${error}`);
+  }
+});
+
 // Creates a zoo with the info provided by the admin console, returns to the index page
 router.post("/zoo", async (req, res, next) => {
   try {
