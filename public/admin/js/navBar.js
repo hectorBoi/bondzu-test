@@ -82,6 +82,7 @@ style="background-color: #f28f1d; border-color: #ffffff;"
  navbarContents += navbarItem("index", "Inicio", true, "#f28f1d", "btn-light", "color: #f28f1d;");
  navbarContents += navbarItem("zoos", "Ver zoos", true, "#f28f1d", "btn-primary");
  navbarContents += navbarItem("newAnimal", "Nuevo animal");
+ navbarContents += navbarItem("cameras", "Cámaras");
  navbarContents += navbarItem("newColleague", "Nuevo colega");
  navbarContents += navbarItem("books", "Libros", false, "white", "btn-outline-light", "", "navAnimals");
  navbarContents += navbarItem("member", "Miembros Bondzù");
