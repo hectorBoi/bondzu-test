@@ -7,6 +7,14 @@ const firstQuestion = document.getElementById("firstQuestion");
 const secondQuestion = document.getElementById("secondQuestion");
 const thirdQuestion = document.getElementById("thirdQuestion");
 const firstOption = document.getElementById("firstOption")
+const secondOption = document.getElementById("secondOption")
+const thirdOption = document.getElementById("thirdOption")
+const fourthOption = document.getElementById("fourthOption")
+const fifthOption = document.getElementById("fifthOption")
+const sixthOption = document.getElementById("sixthOption")
+const seventhOption = document.getElementById("seventhOption")
+const eightOption = document.getElementById("eightOption")
+const ninthOption = document.getElementById("ninthOption")
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
@@ -127,9 +135,21 @@ fetch(`/animals/${animalID}`)
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
     nameElem.innerText = animal.name;
     nameElemTriv.innerHTML = "<p> Antes de que puedas adoptar al animal "+ animal.name + " pondremos a prueba tu conocimiento sobre el.</p>";
+
     firstQuestion.innerHTML = "<p>" + questions[0] + "</p>";
+    firstOption.innerHTML = "<a>" + options[0][0] + "</a>";
+    secondOption.innerHTML = "<a>" + options[0][1] + "</a>";
+    thirdOption.innerHTML = "<a>" + options[0][2] + "</a>";
+
     secondQuestion.innerHTML = "<p>" + questions[1] + "</p>";
+    fourthOption.innerHTML = "<a>" + options[1][0] + "</a>";
+    fifthOption.innerHTML = "<a>" + options[1][1] + "</a>";
+    sixthOption.innerHTML = "<a>" + options[1][2] + "</a>";
+
     thirdQuestion.innerHTML = "<p>" + questions[2] + "</p>";
+    seventhOption.innerHTML = "<a>" + options[2][0] + "</a>";
+    eightOption.innerHTML = "<a>" + options[2][1] + "</a>";
+    ninthOption.innerHTML = "<a>" + options[2][2] + "</a>";
 
     /* Colleagues are not animals.
      * Therefore, the species card is not visible on their page.
