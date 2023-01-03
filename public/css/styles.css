@@ -149,3 +149,8 @@ h1 {
 .text-orange{
   color: #f28f1d
 }
+
+#map {
+            height: 400px;
+            width: 400px;
+}
