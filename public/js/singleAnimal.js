@@ -3,6 +3,7 @@ const iframeElem = document.getElementById("iframe");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const nameElem = document.getElementById("name");
 const nameElemTriv = document.getElementById("nameT");
+const nameElemTrivFin = document.getElementById("nameTF");
 const firstQuestion = document.getElementById("firstQuestion");
 const secondQuestion = document.getElementById("secondQuestion");
 const thirdQuestion = document.getElementById("thirdQuestion");
@@ -120,7 +121,7 @@ fetch(`/animals/${animalID}`)
       //console.log(allQ[key]);
       for (let elem in allQ[key]) {
         oneQ[elem] = allQ[key][elem];
-        //console.log(oneQ[elem]);
+        //jjconsole.log(oneQ[elem]);
       }
     }
     var questions = oneQ.map(item => item.question);
@@ -132,6 +133,7 @@ fetch(`/animals/${animalID}`)
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
     nameElem.innerText = animal.name;
     nameElemTriv.innerHTML = "<p> Antes de que puedas adoptar al animal " + animal.name + " pondremos a prueba tu conocimiento sobre el.</p>";
+    nameElemTrivFin.innerHTML = "<p class='mb-3'>Tras haber contestado correctamente, has adoptado a" + animal.name + "</p>";
 
     firstQuestion.innerHTML = "<p>" + questions[0] + "</p>";
     firstOption.innerHTML = "<a>" + options[0][0] + "</a>";
@@ -171,7 +173,26 @@ fetch(`/animals/${animalID}`)
         // Set the zoom of the map
         zoom: 17.56,
         center: zoo,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       });
+
+    var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+
+    for (i = 0; i < latitude.length; i++) {
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(latitude[i], longitude[i]),
+        map: map
+      });
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(latitude[i]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
 
     /* Colleagues are not animals.
      * Therefore, the species card is not visible on their page.
