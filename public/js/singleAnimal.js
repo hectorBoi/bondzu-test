@@ -16,6 +16,9 @@ const sixthOption = document.getElementById("sixthOption")
 const seventhOption = document.getElementById("seventhOption")
 const eightOption = document.getElementById("eightOption")
 const ninthOption = document.getElementById("ninthOption")
+const triviaSuccess = document.getElementById("triviaSuccess");
+const triviaRetry = document.getElementById("triviaRetry");
+const triviaElem = document.getElementById("triviaElem");
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
@@ -124,16 +127,18 @@ fetch(`/animals/${animalID}`)
         //jjconsole.log(oneQ[elem]);
       }
     }
+
+    // Questions for the trivia
     var questions = oneQ.map(item => item.question);
     var options = oneQ.map(item => item.options);
-    var answers = oneQ.map(item => item.answers);
-    //console.log(options)
+    var answers = oneQ.map(item => item.answer);
+    //console.log(answers);
 
     titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
     animalPhotoElem.setAttribute("src", animal.profilePhoto);
     nameElem.innerText = animal.name;
     nameElemTriv.innerHTML = "<p> Antes de que puedas adoptar al animal " + animal.name + " pondremos a prueba tu conocimiento sobre el.</p>";
-    nameElemTrivFin.innerHTML = "<p class='mb-3'>Tras haber contestado correctamente, has adoptado a" + animal.name + "</p>";
+    nameElemTrivFin.innerHTML = "<p class='mb-3'>Tras haber contestado correctamente, has adoptado a " + animal.name + "</p>";
 
     firstQuestion.innerHTML = "<p>" + questions[0] + "</p>";
     firstOption.innerHTML = "<a>" + options[0][0] + "</a>";
@@ -150,6 +155,98 @@ fetch(`/animals/${animalID}`)
     eightOption.innerHTML = "<a>" + options[2][1] + "</a>";
     ninthOption.innerHTML = "<a>" + options[2][2] + "</a>";
 
+    // Valdite answers
+    const submittedAnswers = [];
+
+    firstOption.addEventListener("click", function() {
+      submittedAnswers[0] = firstOption.textContent;
+    });
+    secondOption.addEventListener("click", function() {
+      submittedAnswers[0] = secondOption.textContent;
+    });
+    thirdOption.addEventListener("click", function() {
+      submittedAnswers[0] = thirdOption.textContent;
+    });
+    fourthOption.addEventListener("click", function() {
+      submittedAnswers[1] = fourthOption.textContent;
+    });
+    fifthOption.addEventListener("click", function() {
+      submittedAnswers[1] = fifthOption.textContent;
+    });
+    sixthOption.addEventListener("click", function() {
+      submittedAnswers[1] = sixthOption.textContent;
+    });
+    seventhOption.addEventListener("click", function() {
+      submittedAnswers[2] = seventhOption.textContent;
+      const result = checkAnswers();
+      if (result >= 2) {
+        translateAnimalsAndColleagues(speciesElem.innerText,
+          adoptElem,
+          followedColleagueEnglishText,
+          followedColleagueSpanishText,
+          adoptedAnimalEnglishText,
+          adoptedAnimalSpanishText);
+        seventhOption.href = "#triviaSuccess";
+        setTimeout(() => {
+          adoptElem.disabled = true;
+        }, 3000);
+      } else {
+        seventhOption.href = "#triviaRetry";
+      }
+    });
+    eightOption.addEventListener("click", function() {
+      submittedAnswers[2] = eightOption.textContent;
+      const result = checkAnswers();
+      if (result >= 2) {
+        translateAnimalsAndColleagues(speciesElem.innerText,
+          adoptElem,
+          followedColleagueEnglishText,
+          followedColleagueSpanishText,
+          adoptedAnimalEnglishText,
+          adoptedAnimalSpanishText);
+        eightOption.href = "#triviaSuccess";
+        setTimeout(() => {
+          adoptElem.disabled = true;
+        }, 3000);
+      } else {
+        eighthOption.href = "#triviaRetry";
+      }
+    });
+    ninthOption.addEventListener("click", function() {
+      submittedAnswers[2] = ninthOption.textContent;
+      const result = checkAnswers();
+      if (result >= 2) {
+        translateAnimalsAndColleagues(speciesElem.innerText,
+          adoptElem,
+          followedColleagueEnglishText,
+          followedColleagueSpanishText,
+          adoptedAnimalEnglishText,
+          adoptedAnimalSpanishText);
+        ninthOption.href = "#triviaSuccess";
+        setTimeout(() => {
+          adoptElem.disabled = true;
+        }, 3000);
+      }else {
+        ninthOption.href = "#triviaRetry";
+      }
+    });
+
+    function checkAnswers() {
+      const validateAnswers = (submittedAnswers) => {
+        let score = 0;
+        for (let i = 0; i < answers.length; i++) {
+          if (answers[i] === submittedAnswers[i]) {
+            score++;
+          }
+        }
+        return score;
+      };
+      const result = validateAnswers(submittedAnswers);
+      console.log(result);
+      return result;
+    }
+
+    // Map locations
     const allLoc = [];
     for (let key in animal.location) {
       allLoc[key] = animal.location[key];
@@ -327,9 +424,7 @@ fetch(`/animals/${animalID}`)
         .catch("Error in the request");
     }
 
-
-
-    /*if (window.localStorage.getItem("lang") === "es") {
+    if (window.localStorage.getItem("lang") === "es") {
       popoverAdoptElem.setAttribute(
         "data-content",
         `Puedes verme en tus adopciones dentro de tu <a href="profile.html">perfil</a>.`
@@ -339,12 +434,12 @@ fetch(`/animals/${animalID}`)
         "data-content",
         `You can find me in your adoptions in your <a href="profile.html">profile</a>.`
       );
-    }*/
+    }
 
     loaderElements.className += " hidden";
     body.style.overflow = "auto";
 
-    /*if (animal.isAdopted)
+    if (animal.isAdopted)
     {
       translateAnimalsAndColleagues(animal.species,
                                     adoptElem,
@@ -353,7 +448,7 @@ fetch(`/animals/${animalID}`)
                                     adoptedAnimalEnglishText,
                                     adoptedAnimalSpanishText);
 
-      //adoptElem.disabled = true;
+      adoptElem.disabled = true;
     }
     else
     {
@@ -363,7 +458,7 @@ fetch(`/animals/${animalID}`)
                                     followColleagueSpanishText,
                                     adoptAnimalEnglishText,
                                     adoptAnimalSpanishText);
-    }*/
+    }
   })
   .catch("Error in the request");
 
@@ -378,17 +473,18 @@ adoptElem.addEventListener("click", () => {
     .then((res) => res.json())
     .then((res) => {
       if (res === "Worked") {
+        /*if (result >= 2){
+          translateAnimalsAndColleagues(speciesElem.innerText,
+            adoptElem,
+            followedColleagueEnglishText,
+            followedColleagueSpanishText,
+            adoptedAnimalEnglishText,
+            adoptedAnimalSpanishText);
 
-        translateAnimalsAndColleagues(speciesElem.innerText,
-          adoptElem,
-          followedColleagueEnglishText,
-          followedColleagueSpanishText,
-          adoptedAnimalEnglishText,
-          adoptedAnimalSpanishText);
-
-        setTimeout(() => {
-          adoptElem.disabled = true;
-        }, 3000);
+          setTimeout(() => {
+            adoptElem.disabled = true;
+          }, 3000);
+        }*/
       }
     })
     .catch("Error in the request");
