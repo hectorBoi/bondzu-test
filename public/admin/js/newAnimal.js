@@ -7,6 +7,70 @@ const loaderElements = document.getElementById("loaderElements");
 const body = document.getElementById("body");
 body.style.overflow = "hidden";
 
+// Location dynamic
+const addFieldsButton = document.getElementById("addFieldsButton");
+const fieldsContainer = document.getElementById("fieldsContainer");
+
+let fieldsCounter = 0;
+addFieldsButton.addEventListener("click", function () {
+  fieldsCounter++;
+
+  const newFields = `
+    <div class="form-group">
+      <b><label>Latitud ${fieldsCounter}</label></b>
+      <input
+        id="latitude${fieldsCounter}"
+        class="form-control is-invalid"
+        aria-describedby="validatedInputGroupPrepend"
+        required
+      />
+      <b><label>Longitud ${fieldsCounter}</label></b>
+      <input
+        id="longitude${fieldsCounter}"
+        class="form-control is-invalid"
+        aria-describedby="validatedInputGroupPrepend"
+        required
+      />
+      <b><label>Tipo de lugar ${fieldsCounter}</label></b>
+      <input
+        id="type${fieldsCounter}"
+        class="form-control is-invalid"
+        aria-describedby="validatedInputGroupPrepend"
+        required
+      />
+      
+      ${fieldsContainer.childElementCount === fieldsCounter ? '<button type="button" class="btn btn-danger mt-1 deleteFieldsButton">Eliminar</button>' : ''}
+    </div>
+  `;
+
+  const newFieldsWrapper = document.createElement("div");
+  newFieldsWrapper.innerHTML = newFields.trim();
+  //fieldsContainer.appendChild(newFieldsWrapper.firstChild);
+
+
+   // Elimina los botones de eliminar de los bloques anteriores
+  const deleteButtons = document.querySelectorAll(".deleteFieldsButton");
+  deleteButtons.forEach(function (button) {
+    button.remove();
+  });
+
+  fieldsContainer.appendChild(newFieldsWrapper.firstChild);
+
+  const newDeleteButton = document.querySelector(".deleteFieldsButton");
+
+  newDeleteButton && newDeleteButton.addEventListener("click", function () {
+    fieldsCounter--;
+    newDeleteButton.parentElement.remove();
+  });
+});
+
+
+
+
+
+
+
+
 //Datos únicos
 const youtubeIdElem = document.getElementById("youtubeId");
 const animalPhotoElem = document.getElementById("animalPhoto");
@@ -50,6 +114,34 @@ const technicalReproductionElem = document.getElementById(
 );
 const referencesElem = document.getElementById("references");
 
+//Quiz Español
+const preguntaUnoElem = document.getElementById("preguntaUno");
+const preguntaUnoRespuestaUnoElem = document.getElementById("preguntaUnoRespuestaUno");
+const preguntaUnoRespuestaDosElem = document.getElementById("preguntaUnoRespuestaDos");
+const preguntaUnoRespuestaTresElem = document.getElementById("preguntaUnoRespuestaTres");
+const preguntaDosElem = document.getElementById("preguntaDos");
+const preguntaDosRespuestaUnoElem = document.getElementById("preguntaDosRespuestaUno");
+const preguntaDosRespuestaDosElem = document.getElementById("preguntaDosRespuestaDos");
+const preguntaDosRespuestaTresElem = document.getElementById("preguntaDosRespuestaTres");
+const preguntaTresElem = document.getElementById("preguntaTres");
+const preguntaTresRespuestaUnoElem = document.getElementById("preguntaTresRespuestaUno");
+const preguntaTresRespuestaDosElem = document.getElementById("preguntaTresRespuestaDos");
+const preguntaTresRespuestaTresElem = document.getElementById("preguntaTresRespuestaTres");
+
+//English Quiz
+const questionOneElem = document.getElementById("questionOne");
+const questionOneAnswerOneElem = document.getElementById("questionOneAnswerOne");
+const questionOneAnswerTwoElem = document.getElementById("questionOneAnswerTwo");
+const questionOneAnswerThreeElem = document.getElementById("questionOneAnswerThree");
+const questionTwoElem = document.getElementById("questionTwo");
+const questionTwoAnswerOneElem = document.getElementById("questionTwoAnswerOne");
+const questionTwoAnswerTwoElem = document.getElementById("questionTwoAnswerTwo");
+const questionTwoAnswerThreeElem = document.getElementById("questionTwoAnswerThree");
+const questionThreeElem = document.getElementById("questionThree");
+const questionThreeAnswerOneElem = document.getElementById("questionThreeAnswerOne");
+const questionThreeAnswerTwoElem = document.getElementById("questionThreeAnswerTwo");
+const questionThreeAnswerThreeElem = document.getElementById("questionThreeAnswerThree");
+
 //Keepers
 const allKeepersElem = document.getElementById("allKeepers");
 
@@ -66,6 +158,25 @@ const createSelectKeepers = (array, form) => {
   }
 };
 
+function obtenerValores() {
+  const data = [];
+
+  for (let i = 0; i <= fieldsCounter; i++) {
+    const preLatitude = document.getElementById(`latitude${i}`).value;
+    const preLongitude = document.getElementById(`longitude${i}`).value;
+    const type = document.getElementById(`type${i}`).value;
+    const latitude = parseFloat(preLatitude);
+    const longitude = parseFloat(preLongitude);
+
+    data.push({ latitude, longitude, type });
+  }
+
+  const jsonData = JSON.stringify(data);
+  return jsonData;
+  //console.log(jsonData);
+}
+
+
 // Get all the keepers for selection
 console.log("making the request");
 fetch("/admin/animals/keepers")
@@ -81,6 +192,8 @@ submitSaveElem.addEventListener("click", () => {
   missingInfoElem.style.display = "none";
   successfulSaveElem.style.display = "none";
 
+  //locations
+  const locationSelected = obtenerValores();
   //Información única
   const status = statusElem.checked;
   const youtubeId = youtubeIdElem.value;
@@ -126,6 +239,34 @@ submitSaveElem.addEventListener("click", () => {
   const referencesArray = references.split("\n");
   const referencesArreglo = referencias.split("\n");
 
+  //Quiz Español
+  const preguntaUno = preguntaUnoElem.value;
+  const preguntaUnoRespuestaUno = preguntaUnoRespuestaUnoElem.value;
+  const preguntaUnoRespuestaDos = preguntaUnoRespuestaDosElem.value;
+  const preguntaUnoRespuestaTres = preguntaUnoRespuestaTresElem.value;
+  const preguntaDos = preguntaDosElem.value;
+  const preguntaDosRespuestaUno = preguntaDosRespuestaUnoElem.value;
+  const preguntaDosRespuestaDos = preguntaDosRespuestaDosElem.value;
+  const preguntaDosRespuestaTres = preguntaDosRespuestaTresElem.value;
+  const preguntaTres = preguntaTresElem.value;
+  const preguntaTresRespuestaUno = preguntaTresRespuestaUnoElem.value;
+  const preguntaTresRespuestaDos = preguntaTresRespuestaDosElem.value;
+  const preguntaTresRespuestaTres = preguntaTresRespuestaTresElem.value;
+
+  //English Quiz
+  const questionOne = questionOneElem.value;
+  const questionOneAnswerOne = questionOneAnswerOneElem.value;
+  const questionOneAnswerTwo = questionOneAnswerTwoElem.value;
+  const questionOneAnswerThree = questionOneAnswerThreeElem.value;
+  const questionTwo = questionTwoElem.value;
+  const questionTwoAnswerOne = questionTwoAnswerOneElem.value;
+  const questionTwoAnswerTwo = questionTwoAnswerTwoElem.value;
+  const questionTwoAnswerThree = questionTwoAnswerThreeElem.value;
+  const questionThree = questionThreeElem.value;
+  const questionThreeAnswerOne = questionThreeAnswerOneElem.value;
+  const questionThreeAnswerTwo = questionThreeAnswerTwoElem.value;
+  const questionThreeAnswerThree = questionThreeAnswerThreeElem.value;
+
   if (
     youtubeId != "" &&
     apodo != "" &&
@@ -160,9 +301,36 @@ submitSaveElem.addEventListener("click", () => {
     technicalDiet != "" &&
     technicalReproduction != "" &&
     referencesArray != "" &&
-    keeper != ""
+    keeper != "" &&
+    preguntaUno != "" &&
+    preguntaUnoRespuestaUno != "" &&
+    preguntaUnoRespuestaDos != "" &&
+    preguntaUnoRespuestaTres != "" &&
+    preguntaDos != "" &&
+    preguntaDosRespuestaUno != "" &&
+    preguntaDosRespuestaDos != "" &&
+    preguntaDosRespuestaTres != "" &&
+    preguntaTres != "" &&
+    preguntaTresRespuestaUno != "" &&
+    preguntaTresRespuestaDos != "" &&
+    preguntaTresRespuestaTres != "" &&
+    questionOne != "" &&
+    questionOneAnswerOne != "" &&
+    questionOneAnswerTwo != "" &&
+    questionOneAnswerThree != "" &&
+    questionTwo != "" &&
+    questionTwoAnswerOne != "" &&
+    questionTwoAnswerTwo != "" &&
+    questionTwoAnswerThree != "" &&
+    questionThree != "" &&
+    questionThreeAnswerOne != "" &&
+    questionThreeAnswerTwo != "" &&
+    questionThreeAnswerThree != "" &&
+    location != ""
   ) {
     buttonSpinnerElem.removeAttribute("style");
+
+    
 
     //Características español
     const caracteristicas = {
@@ -205,6 +373,36 @@ submitSaveElem.addEventListener("click", () => {
       References: referencesArray,
     };
 
+    const quizEsp = {
+      PreguntaUno: preguntaUno,
+      PreguntaUnoRespuestaUno: preguntaUnoRespuestaUno,
+      PreguntaUnoRespuestaDos: preguntaUnoRespuestaDos,
+      PreguntaUnoRespuestaTres: preguntaUnoRespuestaTres,
+      PreguntaDos: preguntaDos,
+      PreguntaDosRespuestaUno: preguntaDosRespuestaUno,
+      PreguntaDosRespuestaDos: preguntaDosRespuestaDos,
+      PreguntaDosRespuestaTres: preguntaDosRespuestaTres,
+      PreguntaTres: preguntaTres,
+      PreguntaTresRespuestaUno: preguntaTresRespuestaUno,
+      PreguntaTresRespuestaDos: preguntaTresRespuestaDos,
+      PreguntaTresRespuestaTres: preguntaTresRespuestaTres,
+    };
+
+    const quizEng = {
+      QuestionOne: questionOne,
+      QuestionOneAnswerOne: questionOneAnswerOne,
+      QuestionOneAnswerTwo: questionOneAnswerTwo,
+      QuestionOneAnswerThree: questionOneAnswerThree,
+      QuestionTwo: questionTwo,
+      QuestionTwoAnswerOne: questionTwoAnswerOne,
+      QuestionTwoAnswerTwo: questionTwoAnswerTwo,
+      QuestionTwoAnswerThree: questionTwoAnswerThree,
+      QuestionThree: questionThree,
+      QuestionThreeAnswerOne: questionThreeAnswerOne,
+      QuestionThreeAnswerTwo: questionThreeAnswerTwo,
+      QuestionThreeAnswerThree: questionThreeAnswerThree,
+    };
+
     const request = {
       name: apodo,
       name_en: nickname,
@@ -216,6 +414,9 @@ submitSaveElem.addEventListener("click", () => {
       technicalData_en: fichaTecnica_en,
       species: especie,
       species_en: species,
+      quiz: quizEsp,
+      quiz_en: quizEng,
+      locations: locationSelected,
       youtubeID: youtubeId,
       keeper: keeper,
       isActive: status,

@@ -363,12 +363,16 @@ router.post("/animals", async (req, res, next) => {
       technicalData_en,
       species,
       species_en,
+      quiz,
+      quiz_en,
+      locations,
       youtubeID,
       keeper,
       isActive,
       priority,
     } = req.body;
 
+    console.log(req.body);
     // Verifies if the user making the request is an Admin
     const user = await getUser(username);
 
@@ -392,6 +396,50 @@ router.post("/animals", async (req, res, next) => {
     };
 
     const keeperArray = [keeperPointer];
+
+    // Create quiz object
+    const questions_es = {
+      "questions": [
+        {
+          "question": quiz.PreguntaUno,
+          "options": [quiz.PreguntaUnoRespuestaUno, quiz.PreguntaUnoRespuestaDos, quiz.PreguntaUnoRespuestaTres],
+          "answer": quiz.PreguntaUnoRespuestaUno
+        },
+        {
+          "question": quiz.PreguntaDos,
+          "options": [quiz.PreguntaDosRespuestaUno, quiz.PreguntaDosRespuestaDos, quiz.PreguntaDosRespuestaTres],
+          "answer": quiz.PreguntaDosRespuestaUno
+        },{
+          "question": quiz.PreguntaTres,
+          "options": [quiz.PreguntaTresRespuestaUno, quiz.PreguntaTresRespuestaDos, quiz.PreguntaTresRespuestaTres],
+          "answer": quiz.PreguntaTresRespuestaUno
+        }
+      ]
+    };
+
+    const questions_en = {
+      "questions": [
+        {
+          "question": quiz_en.QuestionOne,
+          "options": [quiz_en.QuestionOneAnswerOne, quiz_en.QuestionOneAnswerTwo, quiz_en.QuestionOneAnswerThree],
+          "answer": quiz_en.QuestionOneAnswerOne
+        },
+        {
+          "question": quiz_en.QuestionTwo,
+          "options": [quiz_en.QuestionTwoAnswerOne, quiz_en.QuestionTwoAnswerTwo, quiz_en.QuestionTwoAnswerThree],
+          "answer": quiz_en.QuestionTwoAnswerOne
+        },
+        {
+          "question": quiz_en.QuestionThree,
+          "options": [quiz_en.QuestionThreeAnswerOne, quiz_en.QuestionThreeAnswerTwo, quiz_en.QuestionThreeAnswerThree],
+          "answer": quiz_en.QuestionThreeAnswerOne
+        }
+      ]
+    }
+
+    const obj = JSON.parse(locations);
+    const locationsArr = Object.values(obj);
+    console.log(locationsArr);
 
     // Updates all the fields of the animal with the new information sent in the request
     if (name) {
@@ -444,6 +492,18 @@ router.post("/animals", async (req, res, next) => {
       animal.set("technicalData_en", technicalData_en);
     }
 
+    // Nuevo
+    if (quiz) {
+      animal.set("questionsSpanish", questions_es);
+    }
+
+    if (quiz_en) {
+      animal.set("questionsEnglish", questions_en);
+    }
+
+    if(locations){
+      animal.set("locations", locationsArr);
+    }
     animal.set("adopters", 0);
 
     // In case that the request is to update the animal photo, the request is treated differently
