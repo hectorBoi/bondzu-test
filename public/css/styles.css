@@ -126,3 +126,40 @@ h1 {
     margin: 25px 0;
     line-height: 25px;
 }
+
+.card-title{
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.card-container{
+    width: 80%;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.card{
+    padding: 2rem;
+    box-shadow: 0 0 .4rem .4rem rgba(0, 0, 0, 0.2);
+}
+
+.card:hover{
+    background: rgb(210, 210, 210);
+}
+
+.card-heading{
+    color: tomato;
+    margin-bottom: .5rem;
+}
+
+.card-body{
+    color: navy;
+}
+
+.dashboard-title{
+    text-align: center;
+
+}
