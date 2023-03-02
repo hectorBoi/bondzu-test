@@ -1,97 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="title"></title>
-    <link rel="icon" href="../img/favicon.png" />
-    <link rel="stylesheet" href="../css/styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7542269943797799"
-     crossorigin="anonymous"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  </head>
-  <body id="body" class="d-flex flex-column min-vh-100">
-    <header style="z-index: 10">
-      <div
-        data-spy="scroll"
-        data-target="#navBar"
-        data-offset="0"
-        class="scrollspy-example"
-      >
-        <div id="navBar"></div>
-        <script src="./js/navBar.js"></script>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="title"></title>
+  <link rel="icon" href="../img/favicon.png" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7542269943797799" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
 
-    <div id="faq"></div>
-    <script src="./js/faq.js"></script>
-
-    <div id="loader" class="loader">
-      <div class="spinner spinner-border" role="status">
-        <span class="sr-only">Loading page...</span>
-      </div>
+<body id="body" class="d-flex flex-column min-vh-100">
+  <header style="z-index: 10">
+    <div data-spy="scroll" data-target="#navBar" data-offset="0" class="scrollspy-example">
+      <div id="navBar"></div>
+      <script src="./js/navBar.js"></script>
     </div>
+  </header>
 
-    <div id="loaderElements" class="loaderElements">
-      <div class="spinner spinner-border" role="status">
-        <span class="sr-only">Loading elements...</span>
-      </div>
+  <div id="faq"></div>
+  <script src="./js/faq.js"></script>
+
+  <div id="loader" class="loader">
+    <div class="spinner spinner-border" role="status">
+      <span class="sr-only">Loading page...</span>
     </div>
+  </div>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-8" id="left-side">
-          <div
-            class="embed-responsive embed-responsive-16by9"
-            style="margin-top: 15px"
-            id="iframe-div"
-          >
-            <iframe
-              id="iframe"
-              class="embed-responsive-item"
-              src=""
-              allowfullscreen
-            ></iframe>
-          </div>
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7542269943797799" crossorigin="anonymous"></script>
+  <div id="loaderElements" class="loaderElements">
+    <div class="spinner spinner-border" role="status">
+      <span class="sr-only">Loading elements...</span>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-8" id="left-side">
+        <div class="embed-responsive embed-responsive-16by9" style="margin-top: 15px" id="iframe-div">
+          <iframe id="iframe" class="embed-responsive-item" src="" allowfullscreen></iframe>
+        </div>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7542269943797799" crossorigin="anonymous"></script>
         <ins class="adsbygoogle" style="display:block" data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86" data-ad-client="ca-pub-7542269943797799" data-ad-slot="7098057863"></ins>
         <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-        </div>
+      </div>
 
-        <div class="col-xl-4">
-          <div class="card" style="margin-top: 15px">
-            <img
-              id="animalPhoto"
-              src=""
-              class="card-img img-fluid"
-              alt="animal"
-              height="300"
-            />
-            <a
+      <div class="col-xl-4">
+        <div class="card" style="margin-top: 15px">
+          <img id="animalPhoto" src="" class="card-img img-fluid" alt="animal" height="300" />
+          <!--<a
               id="popoverAdopt"
               tabindex="0"
               role="button"
@@ -107,63 +70,206 @@
                 id="adoptButton"
               >
                 ¡Adóptame!
-              </button></a
-            >
-            <!-- Scripts para utilizar un dismiss popover-->
-            <script>
-              $(function () {
-                $('[data-toggle="popover"]').popover();
-              });
-              $(".popover-dismiss").popover({
-                trigger: "focus",
-              });
-            </script>
-            <div class="card-body">
-              <h4 class="card-title text-center" id="name"></h4>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                  <h5 class="card-title">Especie</h5>
-                  <div id="species"></div>
-                </li>
-                <li class="list-group-item">
-                  <h5 class="card-title">Acerca de</h5>
-                  <div id="about"></div>
-                </li>
-                <li class="list-group-item">
-                  <h5 class="card-title">Características</h5>
-                  <div id="characteristics"></div>
-                </li>
-                <li class="list-group-item">
-                  <h5 class="card-title">Cuidador</h5>
-                  <div id="keeper"></div>
-                </li>
-                <li class="list-group-item" id="moreinfo-btn">
-                  <a
-                    role="button"
-                    data-trigger="focus"
-                    data-placement="top"
-                    data-html="true"
-                    data-content=""
-                    class="btn btn-success btn-lg btn-block"
-                    href="animalCard.html"
-                  >
-                    ¡Conoce más!
-                  </a>
-                </li>
-              </ul>
+              </button>
+            </a>-->
+          <a id="popoverAdopt" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-html="true" title="¡Gracias por adoptarme!" data-content="">
+            <button type="button" class="btn btn-success btn-lg btn-block" id="adoptButton" data-toggle="modal" data-target="#exampleModalCenter">
+              ¡Adoptame!
+            </button>
+
+            <div id="triviaElem">
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content text-center">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-orange" id="exampleModalLongTitle">Trivia</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-orange" id="nameT">
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                      <a data-dismiss="modal" data-toggle="modal" type="button" class="btn btn-outline-primary" href="#firstQ">Comenzar trivia</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="firstQ" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content text-center">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-orange" id="exampleModalLongTitle">1/3</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-orange">
+                      <p class="mb-3" id="firstQuestion"></p> <!-- Pregunta 1-->
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#secondQ" id=firstOption></a>
+                      </div>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#secondQ" id=secondOption></a>
+                      </div>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#secondQ" id=thirdOption></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="secondQ" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content text-center">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-orange" id="exampleModalLongTitle">2/3</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-orange">
+                      <p class="mb-3" id="secondQuestion"></p>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#thirdQ" id=fourthOption></a>
+                      </div>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#thirdQ" id=fifthOption></a>
+                      </div>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#thirdQ" id=sixthOption></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="thirdQ" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content text-center">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-orange" id="exampleModalLongTitle">3/3</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-orange">
+                      <p class="mb-3" id="thirdQuestion"></p>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#triviaSuccess" id=seventhOption></a>
+                      </div>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#triviaRetry" id=eightOption></a>
+                      </div>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#triviaRetry" id=ninthOption></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="triviaSuccess" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content text-center">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-orange" id="exampleModalLongTitle">¡Felicitaciones!</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-orange" id="nameTF">
+                      <div class="mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                        </svg>
+                      </div>
+                      <p class="mb-3">Puedes descargar el certificado de adopción.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div id="triviaRetry" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content text-center">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-orange" id="exampleModalLongTitle">Intenta nuevamente</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-orange">
+                      <p class="mb-3">Lo sentimos, no has contestado todas las preguntas correctamente</p>
+                      <div class="mb-3">
+                        <a data-dismiss="modal" data-toggle="modal" class="btn btn-outline-primary" type="submit" href="#firstQ">Intentar de nuevo</a>
+                      </div>
+                      <div class="mb-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z" />
+                          <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </a>
+          <!-- Scripts para utilizar un dismiss popover-->
+          <script>
+            $(function() {
+              $('[data-toggle="popover"]').popover();
+            });
+            $(".popover-dismiss").popover({
+              trigger: "focus",
+            });
+          </script>
+          <div class="card-body">
+            <h4 class="card-title text-center" id="name"></h4>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <h5 class="card-title">Especie</h5>
+                <div id="species"></div>
+              </li>
+              <li class="list-group-item">
+                <h5 class="card-title">Acerca de</h5>
+                <div id="about"></div>
+              </li>
+              <li class="list-group-item">
+                <h5 class="card-title">Características</h5>
+                <div id="characteristics"></div>
+              </li>
+              <li class="list-group-item">
+                <h5 class="card-title">Ubicación y/o cuidador</h5>
+                <div id="keeper"></div>
+                <div id="map"></div>
+              </li>
+              <li class="list-group-item" id="moreinfo-btn">
+                <a role="button" data-trigger="focus" data-placement="top" data-html="true" data-content="" class="btn btn-success btn-lg btn-block" href="animalCard.html">
+                  ¡Conoce más!
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <br />
-    <div id="footer" class="mt-auto" style="z-index: 10"></div>
-    <script src="./js/footer.js"></script>
-  </body>
+  <br />
+  <div id="footer" class="mt-auto" style="z-index: 10"></div>
+  <script src="./js/footer.js"></script>
+</body>
 
-  <script src="../js/language.js"></script>
-  <script src="../js/singleAnimal.js"></script>
-  <script src="../js/logout.js"></script>
-  <script src="../js/index.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJwViF5zU__qXRCeJxaXeDc-eq4GF7gno&callback=&libraries=&v=weekly" async>
+</script>
+<script src="../js/language.js"></script>
+<script src="../js/singleAnimal.js"></script>
+<script src="../js/logout.js"></script>
+<script src="../js/index.js"></script>
+
 </html>

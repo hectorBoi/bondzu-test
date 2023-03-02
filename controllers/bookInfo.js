@@ -56,6 +56,7 @@ const getVideo = async (id) => {
 
 // Transforms the array of Parse.Objects into Json for the books list
 const getBooks = async (array, lang) => {
+
     try {
         if (lang == 'en') {
             let bookInfo = array.map((book) => {

@@ -2,6 +2,23 @@ const iframeDiv = document.getElementById("iframe-div");
 const iframeElem = document.getElementById("iframe");
 const animalPhotoElem = document.getElementById("animalPhoto");
 const nameElem = document.getElementById("name");
+const nameElemTriv = document.getElementById("nameT");
+const nameElemTrivFin = document.getElementById("nameTF");
+const firstQuestion = document.getElementById("firstQuestion");
+const secondQuestion = document.getElementById("secondQuestion");
+const thirdQuestion = document.getElementById("thirdQuestion");
+const firstOption = document.getElementById("firstOption")
+const secondOption = document.getElementById("secondOption")
+const thirdOption = document.getElementById("thirdOption")
+const fourthOption = document.getElementById("fourthOption")
+const fifthOption = document.getElementById("fifthOption")
+const sixthOption = document.getElementById("sixthOption")
+const seventhOption = document.getElementById("seventhOption")
+const eightOption = document.getElementById("eightOption")
+const ninthOption = document.getElementById("ninthOption")
+const triviaSuccess = document.getElementById("triviaSuccess");
+const triviaRetry = document.getElementById("triviaRetry");
+const triviaElem = document.getElementById("triviaElem");
 const speciesElem = document.getElementById("species");
 const aboutElem = document.getElementById("about");
 const characteristicsElem = document.getElementById("characteristics");
@@ -24,15 +41,14 @@ body.style.overflow = "hidden";
  * @param {string} englishTranslation The element's English translation
  * @param {string} spanishTranslation The element's Spanish translation
  */
-function translateElement(element, englishTranslation, spanishTranslation)
-{
+
+function translateElement(element, englishTranslation, spanishTranslation) {
   const language = window.localStorage.getItem("lang");
-  switch (language)
-  {
+  switch (language) {
     case "en":
       element.innerText = englishTranslation;
       break;
-    
+
     case "es":
     default:
       element.innerText = spanishTranslation;
@@ -49,20 +65,18 @@ function translateElement(element, englishTranslation, spanishTranslation)
  * @param {string} animalEnglishTranslation The element's English translation for animals
  * @param {string} animalSpanishTranslation The element's Spanish translation for animals
  */
-function translateAnimalsAndColleagues(distinguishingString, 
-                                       translatedElement, 
-                                       colleagueEnglishTranslation, 
-                                       colleagueSpanishTranslation, 
-                                       animalEnglishTranslation, 
-                                       animalSpanishTranslation)
-{
-  switch (distinguishingString)
-  {
+function translateAnimalsAndColleagues(distinguishingString,
+  translatedElement,
+  colleagueEnglishTranslation,
+  colleagueSpanishTranslation,
+  animalEnglishTranslation,
+  animalSpanishTranslation) {
+  switch (distinguishingString) {
     case "Colega":
     case "Colleague":
       translateElement(translatedElement, colleagueEnglishTranslation, colleagueSpanishTranslation);
       break;
-    
+
     default:
       translateElement(translatedElement, animalEnglishTranslation, animalSpanishTranslation);
       break;
@@ -85,7 +99,7 @@ fetch(`/animals/${animalID}`)
     let youtubeURL = "";
     //console.log("This is the animal id: ", animal.youtubeID);
     // Checks if the camera is from youtube or another page
-    
+
     if (animal.youtubeID.includes("http")) {
       youtubeURL = animal.youtubeID;
       //console.log("youtubeURL");
@@ -103,26 +117,203 @@ fetch(`/animals/${animalID}`)
       chars = chars.concat(temp);
     }
 
-    titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
-    animalPhotoElem.setAttribute("src", animal.profilePhoto);
-    nameElem.innerText = animal.name;
+    if (animal.species == "Humanos" || animal.species == "Colega"){
+      titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
+      animalPhotoElem.setAttribute("src", animal.profilePhoto);
+      nameElem.innerText = animal.name;
+      adoptElem.remove();
+    } else{
+      const allQ = [];
+      const oneQ = [];
+      for (let key in animal.questions) {
+        allQ[key] = animal.questions[key];
+        //console.log(allQ[key]);
+        for (let elem in allQ[key]) {
+          oneQ[elem] = allQ[key][elem];
+          //jjconsole.log(oneQ[elem]);
+        }
+      }
     
+      // Questions for the trivia
+      var questions = oneQ.map(item => item.question);
+      var options = oneQ.map(item => item.options);
+      var answers = oneQ.map(item => item.answer);
+      //console.log(answers);
+
+      titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
+      animalPhotoElem.setAttribute("src", animal.profilePhoto);
+      nameElem.innerText = animal.name;
+      nameElemTriv.innerHTML = "<p> Antes de que puedas adoptar al animal " + animal.name + " pondremos a prueba tu conocimiento sobre el.</p>";
+      nameElemTrivFin.innerHTML = "<p class='mb-3'>Tras haber contestado correctamente, has adoptado a " + animal.name + "</p>";
+
+      firstQuestion.innerHTML = "<p>" + questions[0] + "</p>";
+      firstOption.innerHTML = "<a>" + options[0][0] + "</a>";
+      secondOption.innerHTML = "<a>" + options[0][1] + "</a>";
+      thirdOption.innerHTML = "<a>" + options[0][2] + "</a>";
+
+      secondQuestion.innerHTML = "<p>" + questions[1] + "</p>";
+      fourthOption.innerHTML = "<a>" + options[1][0] + "</a>";
+      fifthOption.innerHTML = "<a>" + options[1][1] + "</a>";
+      sixthOption.innerHTML = "<a>" + options[1][2] + "</a>";
+
+      thirdQuestion.innerHTML = "<p>" + questions[2] + "</p>";
+      seventhOption.innerHTML = "<a>" + options[2][0] + "</a>";
+      eightOption.innerHTML = "<a>" + options[2][1] + "</a>";
+      ninthOption.innerHTML = "<a>" + options[2][2] + "</a>";
+
+      // Valdite answers
+      const submittedAnswers = [];
+
+      firstOption.addEventListener("click", function() {
+        submittedAnswers[0] = firstOption.textContent;
+      });
+      secondOption.addEventListener("click", function() {
+        submittedAnswers[0] = secondOption.textContent;
+      });
+      thirdOption.addEventListener("click", function() {
+        submittedAnswers[0] = thirdOption.textContent;
+      });
+      fourthOption.addEventListener("click", function() {
+        submittedAnswers[1] = fourthOption.textContent;
+      });
+      fifthOption.addEventListener("click", function() {
+        submittedAnswers[1] = fifthOption.textContent;
+      });
+      sixthOption.addEventListener("click", function() {
+        submittedAnswers[1] = sixthOption.textContent;
+      });
+      seventhOption.addEventListener("click", function() {
+        submittedAnswers[2] = seventhOption.textContent;
+        const result = checkAnswers();
+        if (result >= 2) {
+          translateAnimalsAndColleagues(speciesElem.innerText,
+            adoptElem,
+            followedColleagueEnglishText,
+            followedColleagueSpanishText,
+            adoptedAnimalEnglishText,
+            adoptedAnimalSpanishText);
+          seventhOption.href = "#triviaSuccess";
+          setTimeout(() => {
+            adoptElem.disabled = true;
+          }, 1000);
+        } else {
+          seventhOption.href = "#triviaRetry";
+        }
+      });
+      eightOption.addEventListener("click", function() {
+        submittedAnswers[2] = eightOption.textContent;
+        const result = checkAnswers();
+        if (result >= 2) {
+          translateAnimalsAndColleagues(speciesElem.innerText,
+            adoptElem,
+            followedColleagueEnglishText,
+            followedColleagueSpanishText,
+            adoptedAnimalEnglishText,
+            adoptedAnimalSpanishText);
+          eightOption.href = "#triviaSuccess";
+          setTimeout(() => {
+            adoptElem.disabled = true;
+          }, 1000);
+        } else {
+          eighthOption.href = "#triviaRetry";
+        }
+      });
+      ninthOption.addEventListener("click", function() {
+        submittedAnswers[2] = ninthOption.textContent;
+        const result = checkAnswers();
+        if (result >= 2) {
+          translateAnimalsAndColleagues(speciesElem.innerText,
+            adoptElem,
+            followedColleagueEnglishText,
+            followedColleagueSpanishText,
+            adoptedAnimalEnglishText,
+            adoptedAnimalSpanishText);
+          ninthOption.href = "#triviaSuccess";
+          setTimeout(() => {
+            adoptElem.disabled = true;
+          }, 1000);
+        }else {
+          ninthOption.href = "#triviaRetry";
+        }
+      });
+
+      function checkAnswers() {
+        const validateAnswers = (submittedAnswers) => {
+          let score = 0;
+          for (let i = 0; i < answers.length; i++) {
+            if (answers[i] === submittedAnswers[i]) {
+              score++;
+            }
+          }
+          return score;
+        };
+        const result = validateAnswers(submittedAnswers);
+        console.log(result);
+        return result;
+      }
+
+      // Map locations
+      const allLoc = [];
+      for (let key in animal.location) {
+        allLoc[key] = animal.location[key];
+        //console.log(allLoc[key]);
+      }
+
+      var latitude = allLoc.map(item => item.latitude);
+      var longitude = allLoc.map(item => item.longitude);
+      //console.log(latitude);
+
+      // The location of the animal
+      const zoo = {
+        lat: latitude[0],
+        lng: longitude[0]
+      };
+
+      // Create the map, centered at gfg_office
+      const map = new google.maps.Map(
+        document.getElementById("map"), {
+
+          // Set the zoom of the map
+          zoom: 17.56,
+          center: zoo,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+      var infowindow = new google.maps.InfoWindow();
+
+      var marker, i;
+
+      for (i = 0; i < latitude.length; i++) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(latitude[i], longitude[i]),
+          map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infowindow.setContent(latitude[i]);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
+    }
+    
+
     /* Colleagues are not animals.
      * Therefore, the species card is not visible on their page.
      */
-    switch (animal.species)
-    {
+    switch (animal.species) {
       case "Colega":
       case "Colleague":
         const speciesCard = document.getElementsByClassName("list-group-item")[0];
         speciesCard.style.display = "none";
         break;
-      
+
       default:
         speciesElem.innerText = animal.species;
         break;
     }
-    
+
     aboutElem.innerText = animal.about;
     characteristicsElem.innerHTML = chars;
 
@@ -132,68 +323,68 @@ fetch(`/animals/${animalID}`)
     const cardTitlesNumber = document.getElementsByClassName("card-title").length;
     const keeperCardTitle = document.getElementsByClassName("card-title")[cardTitlesNumber - 1];
     translateAnimalsAndColleagues(animal.species,
-                                  keeperCardTitle,
-                                  "Organization",
-                                  "Organización",
-                                  "Keeper",
-                                  "Cuidador");
+      keeperCardTitle,
+      "Organization",
+      "Organización",
+      "Keeper",
+      "Cuidador");
 
     keeperElem.innerText = animal.keeper;
 
     //Member's cards
     const createCard = (name, imageSource, description, email) => {
       //General div of the card
-      let card= document.createElement("div");
-      card.className="container"
-      card.style="margin-top:18px;"
+      let card = document.createElement("div");
+      card.className = "container"
+      card.style = "margin-top:18px;"
       //Div to establish the division between image and text
-      let rows= document.createElement("div");
-      rows.className="row";
+      let rows = document.createElement("div");
+      rows.className = "row";
       card.appendChild(rows);
       //Div to create the image section column
-      let imageDiv= document.createElement("div");
-      imageDiv.className="col-3";
+      let imageDiv = document.createElement("div");
+      imageDiv.className = "col-3";
       rows.appendChild(imageDiv);
       //Div to create the text section column
-      let textDiv= document.createElement("div");
-      textDiv.className="col-9";
+      let textDiv = document.createElement("div");
+      textDiv.className = "col-9";
       rows.appendChild(textDiv);
       //Div's to set the text organization
-      let text= document.createElement("div");
-      text.className="card";
-      text.style="height: 100%;"
+      let text = document.createElement("div");
+      text.className = "card";
+      text.style = "height: 100%;"
       textDiv.appendChild(text);
-      let textBody= document.createElement("div");
-      textBody.className="card-body";
+      let textBody = document.createElement("div");
+      textBody.className = "card-body";
       text.appendChild(textBody);
 
       //Name
-      let nameText= document.createElement("h5");
-      nameText.className="card-title";
-      nameText.textContent=name;
+      let nameText = document.createElement("h5");
+      nameText.className = "card-title";
+      nameText.textContent = name;
       textBody.appendChild(nameText);
       //Description
-      let descriptionText= document.createElement("p");
-      descriptionText.className="card-text";
-      descriptionText.textContent=description;
+      let descriptionText = document.createElement("p");
+      descriptionText.className = "card-text";
+      descriptionText.textContent = description;
       textBody.appendChild(descriptionText);
       //Email
-      let emailText= document.createElement("small");
-      emailText.className="text-muted";
-      emailText.textContent=email;
+      let emailText = document.createElement("small");
+      emailText.className = "text-muted";
+      emailText.textContent = email;
       textBody.appendChild(emailText);
       //Image
-      let image= document.createElement("img");
-      image.className="img-thumbnail";
-      image.style=style="height: 100%;"
-      image.src=imageSource;
+      let image = document.createElement("img");
+      image.className = "img-thumbnail";
+      image.style = style = "height: 100%;"
+      image.src = imageSource;
       imageDiv.appendChild(image)
 
       return card
     }
 
     //Add the cards
-    if(aboutElem.innerText == "[DATOS]"){
+    if (aboutElem.innerText == "[DATOS]") {
       aboutElem.innerText = "Este es el equipo de tecnologías de Bondzú.";
       characteristicsElem.innerText = "";
       adoptElem.remove();
@@ -202,46 +393,44 @@ fetch(`/animals/${animalID}`)
       iframeDiv.remove();
 
       fetch("/admin/members")
-      .then((res) => res.json())
-      .then((membersInfo) => {
-        const members = [];
-        membersInfo.forEach((elem) => {
+        .then((res) => res.json())
+        .then((membersInfo) => {
+          const members = [];
+          membersInfo.forEach((elem) => {
             members.push(elem);
-        });
-        console.log(membersInfo);
+          });
+          console.log(membersInfo);
 
-        //Create each card (Based on the language)
-        var i = 0;
-        if (window.localStorage.getItem("lang") === "es") {
-          for (member in members) {
-            if(members[i].status == true){
-              const newCard = createCard( members[i].name, 
-                                          members[i].image, 
-                                          members[i].description, 
-                                          members[i].email
-                                        );
-              leftSideElem.appendChild(newCard);
+          //Create each card (Based on the language)
+          var i = 0;
+          if (window.localStorage.getItem("lang") === "es") {
+            for (member in members) {
+              if (members[i].status == true) {
+                const newCard = createCard(members[i].name,
+                  members[i].image,
+                  members[i].description,
+                  members[i].email
+                );
+                leftSideElem.appendChild(newCard);
+              }
+              i++;
             }
-            i++;
-          }
-        } else if (window.localStorage.getItem("lang") === "en") {
-          for (member in members) {
-            if(members[i].status == true){
-              const newCard = createCard( members[i].name, 
-                                          members[i].image, 
-                                          members[i].description_en, 
-                                          members[i].email
-                                        );
-              leftSideElem.appendChild(newCard);
+          } else if (window.localStorage.getItem("lang") === "en") {
+            for (member in members) {
+              if (members[i].status == true) {
+                const newCard = createCard(members[i].name,
+                  members[i].image,
+                  members[i].description_en,
+                  members[i].email
+                );
+                leftSideElem.appendChild(newCard);
+              }
+              i++;
             }
-            i++;
           }
-        }
-      })
-      .catch("Error in the request");
+        })
+        .catch("Error in the request");
     }
-
-
 
     if (window.localStorage.getItem("lang") === "es") {
       popoverAdoptElem.setAttribute(
@@ -260,22 +449,22 @@ fetch(`/animals/${animalID}`)
 
     if (animal.isAdopted)
     {
-      translateAnimalsAndColleagues(animal.species, 
-                                    adoptElem, 
-                                    followedColleagueEnglishText, 
-                                    followedColleagueSpanishText, 
-                                    adoptedAnimalEnglishText, 
+      translateAnimalsAndColleagues(animal.species,
+                                    adoptElem,
+                                    followedColleagueEnglishText,
+                                    followedColleagueSpanishText,
+                                    adoptedAnimalEnglishText,
                                     adoptedAnimalSpanishText);
 
       adoptElem.disabled = true;
     }
     else
     {
-      translateAnimalsAndColleagues(animal.species, 
-                                    adoptElem, 
-                                    followColleagueEnglishText, 
-                                    followColleagueSpanishText, 
-                                    adoptAnimalEnglishText, 
+      translateAnimalsAndColleagues(animal.species,
+                                    adoptElem,
+                                    followColleagueEnglishText,
+                                    followColleagueSpanishText,
+                                    adoptAnimalEnglishText,
                                     adoptAnimalSpanishText);
     }
   })
@@ -284,25 +473,26 @@ fetch(`/animals/${animalID}`)
 adoptElem.addEventListener("click", () => {
   const url = `/adoptions/${animalID}`;
   fetch(url, {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
     .then((res) => res.json())
     .then((res) => {
       if (res === "Worked") {
+        /*if (result >= 2){
+          translateAnimalsAndColleagues(speciesElem.innerText,
+            adoptElem,
+            followedColleagueEnglishText,
+            followedColleagueSpanishText,
+            adoptedAnimalEnglishText,
+            adoptedAnimalSpanishText);
 
-        translateAnimalsAndColleagues(speciesElem.innerText, 
-                                      adoptElem, 
-                                      followedColleagueEnglishText, 
-                                      followedColleagueSpanishText, 
-                                      adoptedAnimalEnglishText, 
-                                      adoptedAnimalSpanishText);
-        
-        setTimeout(() => {
-          adoptElem.disabled = true;
-        }, 3000);
+          setTimeout(() => {
+            adoptElem.disabled = true;
+          }, 3000);
+        }*/
       }
     })
     .catch("Error in the request");

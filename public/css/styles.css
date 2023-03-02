@@ -127,6 +127,34 @@ h1 {
     line-height: 25px;
 }
 
+.btnora{
+  background-color: #f28f1d !important;
+}
+
+.btngre{
+  background-color: #3a8169 !important;
+}
+
+.btn-outline-primary {
+  color:#f28f1d !important;
+  border-color:#f28f1d !important;
+}
+
+.btn-outline-primary:hover{
+  color:#fff !important;
+  background-color:#f28f1d !important;
+  border-color:#f28f1d !important;
+}
+
+.text-orange{
+  color: #f28f1d
+}
+
+#map {
+            height: 400px;
+            width: 400px;
+}
+
 .card-title{
     text-align: center;
     font-size: 14px;
@@ -163,3 +191,4 @@ h1 {
     text-align: center;
 
 }
+
