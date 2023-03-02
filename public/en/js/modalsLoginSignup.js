@@ -205,6 +205,14 @@ document.getElementById('modalsLoginSignup').innerHTML = `
                           Incomplete information. Please complete all fields.
                         </div>
                       </div>
+                      <div class="form-check">
+                        <input
+                          id="emailSubscriptionReg"
+                          type="checkbox"
+                          class="form-check-input"
+                        />
+                        <label for="emailSubscriptionReg">Would you like to subscribe to the Bondzù newsletter to receive news and promotions?</label>
+                      </div>
                     </form>
                   </div>
                   <div class="modal-footer" id="submitReg">

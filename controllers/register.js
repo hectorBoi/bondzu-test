@@ -1,20 +1,23 @@
 const token = require('./token');
+const mailchimp = require("../mailchimp");
 
 // Creates "user" with users information
 const createUser = async (data, Parse) => {
   try {
-    const { name, lastname, email, password, userType } = data;
-    const today = new Date();
     let user = new Parse.User();
+    const userInformation = Object.entries(data);   // Name, last name, email, password, email subscription active
+    for (const [property, value] of userInformation)
+      user.set(property, value);
+    
+    const { email } = data;
     user.set('username', email);
-    user.set('password', password);
-    user.set('email', email);
-    user.set('name', name);
-    user.set('lastname', lastname);
-    user.set('platform', 'Pagina web');
+    
+    const today = new Date();
     user.set('lastLoginWeb', today);
+    user.set('platform', 'Pagina web');
 
     // Creates the userType for the user
+    // ! Deprecated feature; consider eliminating
     let typeTable = Parse.Object.extend('UserType');
     let query = new Parse.Query(typeTable);
     query.equalTo('objectId', 'mWm6R6DLFX');
@@ -61,6 +64,11 @@ const handleRegister = async (req, res, Parse) => {
 
     const user = await createUser(req.body, Parse);
     await user.signUp();
+
+    // Add user to Mailchimp audience
+    if (req.body.emailSubscriptionActive)
+      mailchimp.subscribeUserToNewsletter(email, name, lastname);
+
     const session = await Parse.User.logIn(email, password);
     const username = session.get('username');
     const typeID = session.get('userType');
@@ -73,8 +81,19 @@ const handleRegister = async (req, res, Parse) => {
     });
     res.json(userSession);
   } catch (error) {
-    res.status(400).json('Already registered');
-    console.log(error);
+    // FYI: https://docs.parseplatform.org/rest/guide/#error-codes
+    switch (error.code)
+    {
+      case 202:
+        console.log(`${error}`);
+        res.status(400).json('Already registered');
+        break;
+      default:
+        console.error(`An unexpected error has occurred. Please contact the Systems department.`);
+        res.status(500).end();
+        break;
+    }
+    
   }
 };
 

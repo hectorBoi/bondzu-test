@@ -150,6 +150,7 @@ const getAnimalTechnicalInfo = async (animal, lang) => {
 // Transforms the array of Parse.Objects into Json
 const getAnimalInfoAdmin = async (animal) => {
   try {
+    console.log(animal)
     const video = await getVideo(animal.id);
     const keeper = await getKeeper(animal.get("keepers")[0].id);
     let photo = "";
@@ -177,6 +178,9 @@ const getAnimalInfoAdmin = async (animal) => {
       isActive: animal.get("isActive"),
       technicalData: animal.get("technicalData"),
       technicalData_en: animal.get("technicalData_en"),
+      quiz: animal.get("quizEsp"),
+      quiz_en: animal.get("quizEng"),
+      locations: animal.get("locationSelected")
     };
     return animalInfo;
   } catch (error) {

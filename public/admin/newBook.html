@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bondzù: Nuevo libro</title>
+    <link rel="icon" href="../img/favicon.png" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="./js/index.js"></script>
+    <script defer src="./js/newBook.js"></script>
+    <script defer src="../js/logout.js"></script>
+  </head>
+  <body id="body" class="d-flex flex-column min-vh-100">
+    <header style="z-index: 10">
+      <div id="navBar"></div>
+      <script src="./js/navBar.js"></script>
+    </header>
+
+    <div id="loader" class="loader">
+      <div class="spinner spinner-border" role="status">
+        <span class="sr-only">Loading page...</span>
+      </div>
+    </div>
+
+    <div id="loaderElements" class="loaderElements">
+      <div class="spinner spinner-border" role="status">
+        <span class="sr-only">Loading elements...</span>
+      </div>
+    </div>
+
+    <br />
+    <div class="container-fluid">
+
+      <!-- Datos únicos -->
+      <div class="row">
+        <div class="col">
+          <div class="card mx-auto" style="width: 30rem; margin-bottom: 1rem">
+
+            <div class="card-header text-center">
+              <h4>Datos únicos</h4>
+            </div>
+
+            <div class="card-body">
+              <form class="was-validated">
+
+                <div class="form-group is-invalid text-center">
+                  <b><label for="status">Estatus</label></b>
+                  <div class="custom-control custom-switch">
+                    <input
+                      type="checkbox"
+                      class="custom-control-input"
+                      id="status"
+                      required
+                    />
+                    <label
+                      class="custom-control-label"
+                      for="status"
+                      id="statusText"
+                    ></label>
+                  </div>
+
+                  <!-- Script para switch -->
+                  <script>
+                    //Switch status
+                    $("#status").change(function () {
+                      $("#statusText").html("Inactivo");
+                      if ($(this).is(":checked")) {
+                        $("#statusText").html("Activo");
+                      }
+                    });
+                  </script>
+                </div>
+
+                <hr />
+
+                <div class="form-group is-invalid">
+                  <b><label for="ilustrador">Ilustrador</label></b>
+                  <input
+                    id="ilustrador"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <!-- Datos en Español e Inglés -->
+      <div class="row">
+
+        <!-- Español -->
+        <div class="col-md">
+          <div class="card mx-auto" style="width: 100%">
+
+            <div class="card-header text-center">
+              <h4>Español</h4>
+            </div>
+
+            <div class="card-body">
+              <form class="was-validated">
+
+                <div class="form-group is-invalid">
+                  <strong><label for="titulo">Título</label></strong>
+                  <input
+                    id="titulo"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr>
+
+                <div class="form-group is-invalid">
+                  <strong><label for="descripcion">Descripción</label></strong>
+                  <textarea
+                    id="descripcion"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  >
+                  </textarea>
+                </div>
+
+                <hr>
+
+                <div class="form-group is-invalid">
+                  <b><label for="youtubeIdES">YouTube ID | URL de video</label></b>
+                  <input
+                    id="youtubeIdES"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inglés -->
+        <div class="col-md">
+          <div class="card mx-auto" style="width: 100%">
+
+            <div class="card-header text-center">
+              <h4>English</h4>
+            </div>
+
+            <div class="card-body">
+              <form class="was-validated">
+
+                <div class="form-group is-invalid">
+                  <strong><label for="title">Title</label></strong>
+                  <input
+                    id="title"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+                <hr>
+
+                <div class="form-group is-invalid">
+                  <strong><label for="description">Description</label></strong>
+                  <textarea
+                    id="description"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  >
+                  </textarea>
+                </div>
+
+                <hr>
+
+                <div class="form-group is-invalid">
+                  <b><label for="youtubeIdEN">YouTube ID | Video URL</label></b>
+                  <input
+                    id="youtubeIdEN"
+                    class="form-control is-invalid"
+                    aria-describedby="validatedInputGroupPrepend"
+                    required
+                  />
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Guardar libro -->
+      <div class="row">
+        <div class="col mx-auto text-center">
+          <h5>
+            <small class="text-danger" style="display: none" id="missingInfo"
+              >Información incompleta. Por favor llene todos los campos.</small
+            >
+            <small
+              class="text-success"
+              style="display: none"
+              id="successfulSave"
+              >Libro guardado exitosamente</small
+            >
+          </h5>
+          <button class="btn btn-success" id="save">
+            Guardar
+            <span
+              id="buttonSpinner"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+              style="display: none"
+            ></span>
+            <span class="sr-only">Loading...</span>
+          </button>
+        </div>
+      </div>
+
+      <br />
+      <br />
+    </div>
+  </body>
+</html>
