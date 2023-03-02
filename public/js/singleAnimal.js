@@ -117,179 +117,187 @@ fetch(`/animals/${animalID}`)
       chars = chars.concat(temp);
     }
 
-    const allQ = [];
-    const oneQ = [];
-    for (let key in animal.questions) {
-      allQ[key] = animal.questions[key];
-      //console.log(allQ[key]);
-      for (let elem in allQ[key]) {
-        oneQ[elem] = allQ[key][elem];
-        //jjconsole.log(oneQ[elem]);
+    if (animal.species == "Humanos" || animal.species == "Colega"){
+      titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
+      animalPhotoElem.setAttribute("src", animal.profilePhoto);
+      nameElem.innerText = animal.name;
+      adoptElem.remove();
+    } else{
+      const allQ = [];
+      const oneQ = [];
+      for (let key in animal.questions) {
+        allQ[key] = animal.questions[key];
+        //console.log(allQ[key]);
+        for (let elem in allQ[key]) {
+          oneQ[elem] = allQ[key][elem];
+          //jjconsole.log(oneQ[elem]);
+        }
       }
-    }
+    
+      // Questions for the trivia
+      var questions = oneQ.map(item => item.question);
+      var options = oneQ.map(item => item.options);
+      var answers = oneQ.map(item => item.answer);
+      //console.log(answers);
 
-    // Questions for the trivia
-    var questions = oneQ.map(item => item.question);
-    var options = oneQ.map(item => item.options);
-    var answers = oneQ.map(item => item.answer);
-    //console.log(answers);
+      titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
+      animalPhotoElem.setAttribute("src", animal.profilePhoto);
+      nameElem.innerText = animal.name;
+      nameElemTriv.innerHTML = "<p> Antes de que puedas adoptar al animal " + animal.name + " pondremos a prueba tu conocimiento sobre el.</p>";
+      nameElemTrivFin.innerHTML = "<p class='mb-3'>Tras haber contestado correctamente, has adoptado a " + animal.name + "</p>";
 
-    titleElem.innerText = `Bondzù: ${animal.name} | ${animal.species}`;
-    animalPhotoElem.setAttribute("src", animal.profilePhoto);
-    nameElem.innerText = animal.name;
-    nameElemTriv.innerHTML = "<p> Antes de que puedas adoptar al animal " + animal.name + " pondremos a prueba tu conocimiento sobre el.</p>";
-    nameElemTrivFin.innerHTML = "<p class='mb-3'>Tras haber contestado correctamente, has adoptado a " + animal.name + "</p>";
+      firstQuestion.innerHTML = "<p>" + questions[0] + "</p>";
+      firstOption.innerHTML = "<a>" + options[0][0] + "</a>";
+      secondOption.innerHTML = "<a>" + options[0][1] + "</a>";
+      thirdOption.innerHTML = "<a>" + options[0][2] + "</a>";
 
-    firstQuestion.innerHTML = "<p>" + questions[0] + "</p>";
-    firstOption.innerHTML = "<a>" + options[0][0] + "</a>";
-    secondOption.innerHTML = "<a>" + options[0][1] + "</a>";
-    thirdOption.innerHTML = "<a>" + options[0][2] + "</a>";
+      secondQuestion.innerHTML = "<p>" + questions[1] + "</p>";
+      fourthOption.innerHTML = "<a>" + options[1][0] + "</a>";
+      fifthOption.innerHTML = "<a>" + options[1][1] + "</a>";
+      sixthOption.innerHTML = "<a>" + options[1][2] + "</a>";
 
-    secondQuestion.innerHTML = "<p>" + questions[1] + "</p>";
-    fourthOption.innerHTML = "<a>" + options[1][0] + "</a>";
-    fifthOption.innerHTML = "<a>" + options[1][1] + "</a>";
-    sixthOption.innerHTML = "<a>" + options[1][2] + "</a>";
+      thirdQuestion.innerHTML = "<p>" + questions[2] + "</p>";
+      seventhOption.innerHTML = "<a>" + options[2][0] + "</a>";
+      eightOption.innerHTML = "<a>" + options[2][1] + "</a>";
+      ninthOption.innerHTML = "<a>" + options[2][2] + "</a>";
 
-    thirdQuestion.innerHTML = "<p>" + questions[2] + "</p>";
-    seventhOption.innerHTML = "<a>" + options[2][0] + "</a>";
-    eightOption.innerHTML = "<a>" + options[2][1] + "</a>";
-    ninthOption.innerHTML = "<a>" + options[2][2] + "</a>";
+      // Valdite answers
+      const submittedAnswers = [];
 
-    // Valdite answers
-    const submittedAnswers = [];
+      firstOption.addEventListener("click", function() {
+        submittedAnswers[0] = firstOption.textContent;
+      });
+      secondOption.addEventListener("click", function() {
+        submittedAnswers[0] = secondOption.textContent;
+      });
+      thirdOption.addEventListener("click", function() {
+        submittedAnswers[0] = thirdOption.textContent;
+      });
+      fourthOption.addEventListener("click", function() {
+        submittedAnswers[1] = fourthOption.textContent;
+      });
+      fifthOption.addEventListener("click", function() {
+        submittedAnswers[1] = fifthOption.textContent;
+      });
+      sixthOption.addEventListener("click", function() {
+        submittedAnswers[1] = sixthOption.textContent;
+      });
+      seventhOption.addEventListener("click", function() {
+        submittedAnswers[2] = seventhOption.textContent;
+        const result = checkAnswers();
+        if (result >= 2) {
+          translateAnimalsAndColleagues(speciesElem.innerText,
+            adoptElem,
+            followedColleagueEnglishText,
+            followedColleagueSpanishText,
+            adoptedAnimalEnglishText,
+            adoptedAnimalSpanishText);
+          seventhOption.href = "#triviaSuccess";
+          setTimeout(() => {
+            adoptElem.disabled = true;
+          }, 1000);
+        } else {
+          seventhOption.href = "#triviaRetry";
+        }
+      });
+      eightOption.addEventListener("click", function() {
+        submittedAnswers[2] = eightOption.textContent;
+        const result = checkAnswers();
+        if (result >= 2) {
+          translateAnimalsAndColleagues(speciesElem.innerText,
+            adoptElem,
+            followedColleagueEnglishText,
+            followedColleagueSpanishText,
+            adoptedAnimalEnglishText,
+            adoptedAnimalSpanishText);
+          eightOption.href = "#triviaSuccess";
+          setTimeout(() => {
+            adoptElem.disabled = true;
+          }, 1000);
+        } else {
+          eighthOption.href = "#triviaRetry";
+        }
+      });
+      ninthOption.addEventListener("click", function() {
+        submittedAnswers[2] = ninthOption.textContent;
+        const result = checkAnswers();
+        if (result >= 2) {
+          translateAnimalsAndColleagues(speciesElem.innerText,
+            adoptElem,
+            followedColleagueEnglishText,
+            followedColleagueSpanishText,
+            adoptedAnimalEnglishText,
+            adoptedAnimalSpanishText);
+          ninthOption.href = "#triviaSuccess";
+          setTimeout(() => {
+            adoptElem.disabled = true;
+          }, 1000);
+        }else {
+          ninthOption.href = "#triviaRetry";
+        }
+      });
 
-    firstOption.addEventListener("click", function() {
-      submittedAnswers[0] = firstOption.textContent;
-    });
-    secondOption.addEventListener("click", function() {
-      submittedAnswers[0] = secondOption.textContent;
-    });
-    thirdOption.addEventListener("click", function() {
-      submittedAnswers[0] = thirdOption.textContent;
-    });
-    fourthOption.addEventListener("click", function() {
-      submittedAnswers[1] = fourthOption.textContent;
-    });
-    fifthOption.addEventListener("click", function() {
-      submittedAnswers[1] = fifthOption.textContent;
-    });
-    sixthOption.addEventListener("click", function() {
-      submittedAnswers[1] = sixthOption.textContent;
-    });
-    seventhOption.addEventListener("click", function() {
-      submittedAnswers[2] = seventhOption.textContent;
-      const result = checkAnswers();
-      if (result >= 2) {
-        translateAnimalsAndColleagues(speciesElem.innerText,
-          adoptElem,
-          followedColleagueEnglishText,
-          followedColleagueSpanishText,
-          adoptedAnimalEnglishText,
-          adoptedAnimalSpanishText);
-        seventhOption.href = "#triviaSuccess";
-        setTimeout(() => {
-          adoptElem.disabled = true;
-        }, 3000);
-      } else {
-        seventhOption.href = "#triviaRetry";
-      }
-    });
-    eightOption.addEventListener("click", function() {
-      submittedAnswers[2] = eightOption.textContent;
-      const result = checkAnswers();
-      if (result >= 2) {
-        translateAnimalsAndColleagues(speciesElem.innerText,
-          adoptElem,
-          followedColleagueEnglishText,
-          followedColleagueSpanishText,
-          adoptedAnimalEnglishText,
-          adoptedAnimalSpanishText);
-        eightOption.href = "#triviaSuccess";
-        setTimeout(() => {
-          adoptElem.disabled = true;
-        }, 3000);
-      } else {
-        eighthOption.href = "#triviaRetry";
-      }
-    });
-    ninthOption.addEventListener("click", function() {
-      submittedAnswers[2] = ninthOption.textContent;
-      const result = checkAnswers();
-      if (result >= 2) {
-        translateAnimalsAndColleagues(speciesElem.innerText,
-          adoptElem,
-          followedColleagueEnglishText,
-          followedColleagueSpanishText,
-          adoptedAnimalEnglishText,
-          adoptedAnimalSpanishText);
-        ninthOption.href = "#triviaSuccess";
-        setTimeout(() => {
-          adoptElem.disabled = true;
-        }, 3000);
-      }else {
-        ninthOption.href = "#triviaRetry";
-      }
-    });
-
-    function checkAnswers() {
-      const validateAnswers = (submittedAnswers) => {
-        let score = 0;
-        for (let i = 0; i < answers.length; i++) {
-          if (answers[i] === submittedAnswers[i]) {
-            score++;
+      function checkAnswers() {
+        const validateAnswers = (submittedAnswers) => {
+          let score = 0;
+          for (let i = 0; i < answers.length; i++) {
+            if (answers[i] === submittedAnswers[i]) {
+              score++;
+            }
           }
-        }
-        return score;
+          return score;
+        };
+        const result = validateAnswers(submittedAnswers);
+        console.log(result);
+        return result;
+      }
+
+      // Map locations
+      const allLoc = [];
+      for (let key in animal.location) {
+        allLoc[key] = animal.location[key];
+        //console.log(allLoc[key]);
+      }
+
+      var latitude = allLoc.map(item => item.latitude);
+      var longitude = allLoc.map(item => item.longitude);
+      //console.log(latitude);
+
+      // The location of the animal
+      const zoo = {
+        lat: latitude[0],
+        lng: longitude[0]
       };
-      const result = validateAnswers(submittedAnswers);
-      console.log(result);
-      return result;
+
+      // Create the map, centered at gfg_office
+      const map = new google.maps.Map(
+        document.getElementById("map"), {
+
+          // Set the zoom of the map
+          zoom: 17.56,
+          center: zoo,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+      var infowindow = new google.maps.InfoWindow();
+
+      var marker, i;
+
+      for (i = 0; i < latitude.length; i++) {
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(latitude[i], longitude[i]),
+          map: map
+        });
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infowindow.setContent(latitude[i]);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
     }
-
-    // Map locations
-    const allLoc = [];
-    for (let key in animal.location) {
-      allLoc[key] = animal.location[key];
-      //console.log(allLoc[key]);
-    }
-
-    var latitude = allLoc.map(item => item.latitude);
-    var longitude = allLoc.map(item => item.longitude);
-    //console.log(latitude);
-
-    // The location of the animal
-    const zoo = {
-      lat: latitude[0],
-      lng: longitude[0]
-    };
-
-    // Create the map, centered at gfg_office
-    const map = new google.maps.Map(
-      document.getElementById("map"), {
-
-        // Set the zoom of the map
-        zoom: 17.56,
-        center: zoo,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-
-    var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
-
-    for (i = 0; i < latitude.length; i++) {
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(latitude[i], longitude[i]),
-        map: map
-      });
-
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(latitude[i]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
-    }
+    
 
     /* Colleagues are not animals.
      * Therefore, the species card is not visible on their page.
