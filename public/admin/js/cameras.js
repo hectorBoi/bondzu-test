@@ -19,11 +19,11 @@ const createCard = (finalDataElements) => {
 
     let cameraURL = '';
     if (cardData.url.includes('http')) cameraURL = cardData.url;
-    else cameraURL = `https://www.youtube.com/embed/${cardData.url}`;
+    else cameraURL = `https://www.youtube.com/embed/${cardData.url}?autoplay=1`;
 
     camera.setAttribute('src', cameraURL);
     camera.setAttribute('allowfullscreen', '');
-
+    camera.setAttribute('allow', 'autoplay');
     postCard.appendChild(camera);
 
     cardContainer.appendChild(postCard);
