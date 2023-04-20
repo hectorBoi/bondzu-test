@@ -11,6 +11,7 @@ const admin = require("./controllers/admin");
 const profile = require("./controllers/profile");
 const adoptions = require("./controllers/adoptions");
 const animals = require("./controllers/animals");
+const wallpapers = require("./controllers/wallpapers");
 const books = require("./controllers/books");
 const ad = require("./controllers/ad");
 const middlewares = require("./middlewares");
@@ -64,6 +65,7 @@ app.use("/ad", ad);
 app.use("/adoptions", adoptions.router);
 app.use("/profile", profile);
 app.use("/reports", reports);
+app.use("/wallpapers", wallpapers);
 
 // Controller functions for one type of execution
 const { Parse } = require("./database"); // This is only to pass the database
