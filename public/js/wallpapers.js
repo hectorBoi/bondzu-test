@@ -1,4 +1,5 @@
 // Only allows access to users which have a session
+
 if (!document.cookie.includes('token')) {
     location.replace('/');
   }
@@ -8,8 +9,7 @@ const wallpapersContainer = document.getElementById("wallpaper-container");
 fetch("/wallpapers")
   .then((res) => res.json())
   .then((wallpapers) => {
-    let allWallpapers = wallpapers.response.results;
-
+    let allWallpapers = wallpapers.results;
     const rows = document.createElement("div");
     rows.setAttribute("class", "row row-cols-3");
     wallpapersContainer.appendChild(rows);
