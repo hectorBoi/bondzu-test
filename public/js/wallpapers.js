@@ -11,13 +11,13 @@ fetch("/wallpapers")
   .then((wallpapers) => {
     let allWallpapers = wallpapers.results;
     const rows = document.createElement("div");
-    rows.setAttribute("class", "row row-cols-3");
+    rows.setAttribute("class", "row row-cols");
     wallpapersContainer.appendChild(rows);
 
     // Creating the cards for each wallpaper
     allWallpapers.forEach(element => {
         const col = document.createElement("div");
-        col.setAttribute("class", "col-4");
+        col.setAttribute("class", "col-xs-12 col-sm-12 col-md-6 col-lg-4");
         col.setAttribute("style", "margin-bottom: 20px");
 
         const card = document.createElement("div");
