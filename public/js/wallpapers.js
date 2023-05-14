@@ -1,8 +1,8 @@
 // Only allows access to users which have a session
 
-if (!document.cookie.includes('token')) {
-    location.replace('/');
-  }
+// if (!document.cookie.includes('token')) {
+//     location.replace('/');
+//   }
 const wallpapersContainer = document.getElementById("wallpaper-container");
 
 // Fetching wallpapers from Unsplash API
