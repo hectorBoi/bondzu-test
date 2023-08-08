@@ -6,13 +6,7 @@ h1 {
     padding: 25px;
     margin: 10px;
 }
-.animalCardHeader {
-    background-color: hsla(0, 0%, 100%, 0.6);
-    font-size: 0.85rem;
-    color: #000000;
-    padding: 12px;
-    border-radius: 15px;
-}
+
 
 .spinner {
     width: 3rem;
@@ -155,40 +149,14 @@ h1 {
             width: 400px;
 }
 
-.card-title{
-    text-align: center;
-    font-size: 14px;
-}
-
-
-.card-container{
-    width: 80%;
-    margin: 4rem auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-}
-
-.card{
-    padding: 2rem;
-    box-shadow: 0 0 .4rem .4rem rgba(0, 0, 0, 0.2);
-}
-
-.card:hover{
-    background: rgb(210, 210, 210);
-}
-
-.card-heading{
-    color: tomato;
-    margin-bottom: .5rem;
-}
-
-.card-body{
-    color: navy;
-}
-
 .dashboard-title{
     text-align: center;
 
 }
 
+.modal-fullscreen {
+    width: 90vw !important;
+    max-width: none !important;
+    height: 100% !important;
+    margin: 0 5vw!important;
+}

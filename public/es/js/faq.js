@@ -7,7 +7,7 @@ document.getElementById("faq").innerHTML = `
     aria-labelledby="faqModalLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="faqModalLabel">
@@ -22,7 +22,7 @@ document.getElementById("faq").innerHTML = `
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body mx-auto">
+        <div class="modal-body">
           <div class="container-fluid">
             <div class="accordion" id="accordionFAQ">
               <div class="card">

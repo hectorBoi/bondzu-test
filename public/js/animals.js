@@ -13,7 +13,7 @@ const createDiv = (className, id) => {
 };
 
 const createButton = (location) => {
-  let div = createDiv("card bg-dark text-white");
+  let div = createDiv("card bg-gradient text-white");
   //div.setAttribute("type", "button");
   div.style.margin = "20px";
   //div.setAttribute("onclick", `window.location.href='singleAnimal.html'`);
@@ -25,7 +25,7 @@ const createImage = (url) => {
   img.setAttribute("src", url);
   img.className = "card-img img-fluid";
   img.setAttribute("alt", "animal");
-  //img.style.width = "500px";
+  img.style.paddingBottom = "30px";
   img.style.height = "300px";
   return img;
 };
