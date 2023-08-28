@@ -35,15 +35,13 @@ style="background-color: #f28f1d; border-color: #ffffff;"
   <div class="collapse navbar-collapse" id="navbarToggler">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a href="index.html" style="text-decoration: none; color: #f28f1d;">
+        <a href="index.html" style="text-decoration: none; color: white;">
           <button
             type="button"
-            class="btn btn-light navbarBtnMargins"
-            style="color: #f28f1d;"
+            class="btn btn-outline-light navbarBtnMargins"
           >
             Inicio
-          </button></a
-        >
+          </button>
       </li>
 
       <li class="nav-item" id="navAnimals">
