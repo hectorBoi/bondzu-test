@@ -322,7 +322,7 @@ h1 + p{
     transition: all .5s linear;
   }
   .front{
-    background-image:url('https://i.imgur.com/W3tra4F.gif');
+    /* background-image:url('https://i.imgur.com/W3tra4F.gif'); */
     z-index:1;
     /* box-shadow: 5px 5px 5px #aaa; */
   }
