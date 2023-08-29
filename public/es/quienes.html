@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bondzù: Sobre nosotros</title>
   <link rel="icon" href="../img/favicon.png" />
-  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/quienesStyles.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -39,13 +39,20 @@
     </div>
   </div>
 
-  <h1 style="color: #3a8169" class="text-center">¿Quiénes somos?</h1>
-  <div class="jumbotron">
-    <div class="container text-center">
-      <img src="../img/banner.png" alt="banner" class="img-fluid" />
+  <h1 style="color: #3a8169; display: none;" class="text-center">¿Quiénes somos?</h1>
+  <div class="col-xl-12 jumbotron">
+    <div class=" col-sm-1 col-xl-12 container" style="padding: 4rem;" >
+      <div id="cardHolder"  style="background-color:  rgba(44, 128, 10, 0.5); width: 40rem; height: 21rem; float: right; display: inline-block; transform: translateX(18%); border-radius: 15px;max-width: fit-content;">
+        <h1 id="cardHeader" style="color: white;">¿Quiénes somos?</h1>
+        <p id="QuienesSomos">Bondzù es una iniciativa de educación y concientización utilizando
+          los nuevos medios de comunicación que permite internet. Hace uso
+          intensivo de las redes sociales, aplicaciones para teléfonos
+          inteligentes y páginas web. Lo que buscamos es darle vida digna a
+          los animales en cautiverio. <br> <br></p>
+        </div>      
     </div>
   </div>
-  <div class="container-xl">
+  <!-- <div class="container-xl" style="display: none;">
     <ul class="list-unstyled">
       <li class="media">
         <img src="../img/pinguino.jpg" class="mr-3 align-self-end" alt="pinguino" height="150" width="150" />
@@ -94,33 +101,84 @@
         <img src="../img/aguilaPescadora.jpg" class="ml-3" alt="aguilaPescadora" height="150" width="150" />
       </li>
     </ul>
-  </div>
+  </div> -->
   <br />
   <br />
-  <div class="jumbotron" style="background: #f28f1d9a !important; margin-bottom: 0">
-    <div class="container text-center">
-      <div class="row">
-        <div class="col-md">
-          <div class="embed-responsive embed-responsive-16by9" style="margin-bottom: 15px">
-            <iframe src="https://youtube.com/embed/Z0XCFs1Rbz8" class="embed-responsive-item" allowfullscreen></iframe>
+  <div class="jumbotron" style="background: #f28f1d!important; margin-bottom: 0; padding: 8% !important; text-align: center;">
+    <div class="container text-center" id="cardsContainer">
+      <div class="card hovercard" style="margin-right: 5rem;background-color:gainsboro; border-radius: 2%;">
+        <div class="col-md front face">
+          <h2>Nuestra Lucha</h2>
+          <img src="../img/mariposa.jpg" style="height: 90%;width: 100%;" alt="">
+          <!-- <div class="embed-responsive embed-responsive-16by9" style="margin-bottom: 15px">
+            <iframe src="https://youtube.com/embed/Z0XCFs1Rbz8" class="embed-responsive-item" style="scale: 0.5;" allowfullscreen></iframe>
           </div>
+          <p>En nuestra lucha por la protección de los animales, reconocemos que algunos deben
+            permanecer en cautiverio debido a su incapacidad para adaptarse al medio salvaje.
+            Nuestra contribución se enfoca en informar y despertar el amor por la naturaleza 
+            en las personas. Apoyamos a instituciones que cuidan a estos animales cautivos, 
+            asegurándonos de difundir sus esfuerzos para obtener el apoyo necesario. En Bondzù,
+            trabajamos para proporcionar imágenes en vivo de los animales y desarrollar dispositivos
+            robóticos y juguetes que enriquezcan su entorno y promuevan su actividad física. Nuestra
+            misión es fomentar el amor y el respeto hacia todas las formas de vida..</p> -->
         </div>
-
-        <div class="col-md">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe src="https://youtube.com/embed/pHV51jA2VMY" class="embed-responsive-item" allowfullscreen></iframe>
+        <div class="back face">
+          <h2 style="padding: 2rem;">Nuestra Lucha</h2>
+          <!-- <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="https://youtube.com/embed/pHV51jA2VMY" class="embed-responsive-item" style="scale: 0.5;" allowfullscreen></iframe>
+          </div> -->
+          <p style="text-align: justify; padding: 2rem; font-weight: bold;">
+            En nuestra lucha por la protección de los animales, reconocemos que algunos deben
+            permanecer en cautiverio debido a su incapacidad para adaptarse al medio salvaje.
+            Nuestra contribución se enfoca en informar y despertar el amor por la naturaleza 
+            en las personas. Apoyamos a instituciones que cuidan a estos animales cautivos, 
+            asegurándonos de difundir sus esfuerzos para obtener el apoyo necesario. En Bondzù,
+            trabajamos para proporcionar imágenes en vivo de los animales y desarrollar dispositivos
+            robóticos y juguetes que enriquezcan su entorno y promuevan su actividad física. Nuestra
+            misión es fomentar el amor y el respeto hacia todas las formas de vida.</p>
+        </div>
+      </div>
+      <div class="card hovercard" style="margin-left: 5rem;background-color:gainsboro; border-radius: 2%;">
+        <div class="col-md front face">
+          <h2>Nuestro Enemigo</h2>
+          <img src="../img/elEnemigo.jpeg" style="height: 90%;width: 100%;" alt="">
+          <!-- <div class="embed-responsive embed-responsive-16by9" style="margin-bottom: 15px">
+            <iframe src="https://youtube.com/embed/Z0XCFs1Rbz8" class="embed-responsive-item" style="scale: 0.5;" allowfullscreen></iframe>
           </div>
+          <p>En nuestra lucha por la protección de los animales, reconocemos que algunos deben
+            permanecer en cautiverio debido a su incapacidad para adaptarse al medio salvaje.
+            Nuestra contribución se enfoca en informar y despertar el amor por la naturaleza 
+            en las personas. Apoyamos a instituciones que cuidan a estos animales cautivos, 
+            asegurándonos de difundir sus esfuerzos para obtener el apoyo necesario. En Bondzù,
+            trabajamos para proporcionar imágenes en vivo de los animales y desarrollar dispositivos
+            robóticos y juguetes que enriquezcan su entorno y promuevan su actividad física. Nuestra
+            misión es fomentar el amor y el respeto hacia todas las formas de vida..</p> -->
         </div>
-        <br />
+        <div class="back face">
+          <h2 style="padding: 2rem;">Nuestro Enemigo</h2>
+          <!-- <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="https://youtube.com/embed/pHV51jA2VMY" class="embed-responsive-item" style="scale: 0.5;" allowfullscreen></iframe>
+          </div> -->
+          <p style="text-align: justify; padding: 2rem; font-weight: bold;">
+            El mundo enfrenta una extinción masiva causada por la actividad humana, llevando a
+            casi una de cada cinco especies conocidas al borde de la extinción, según la UICN.
+            El cambio climático y la deforestación, con la destrucción estimada de todas las selvas 
+            tropicales para 2030, son factores principales. Esto afecta gravemente la biodiversidad, 
+            pues muchas especies dependen de los bosques para sobrevivir. Además, el comercio ilegal 
+            de animales salvajes, impulsado por tradiciones culturales, estética y ganancias económicas,
+            amenaza la existencia de más de la mitad de las especies del mundo. La captura y venta 
+            de animales en el mercado negro, incluso especies en peligro, agravan la situación, poniendo
+            en riesgo la supervivencia de la vida silvestre.</p>
+        </div>
       </div>
     </div>
   </div>
 
   <br></br>
-  <h2 style="color: #3a8169" class="text-center">Nuestro enemigo</h2>
+  <!-- <h2 style="color: #3a8169; display: none;" class="text-center">Nuestro enemigo</h2> -->
   <br></br>
-  <div class="container-xl">
-    <div class="row">
+  <div class="container-xl" >
+    <!-- <div class="row" style="display: none;">
       <div class="jumbotron" id="enemy">
         <div class="row">
           <div class="col-xl-12 text-center">
@@ -142,9 +200,9 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <br></br>
-    <ul class="list-unstyled">
+    <!-- <ul class="list-unstyled" style="display: none;">
       <li class="media">
         <img src="../img/cclimatico.jpeg" class="mr-3 align-self-end" alt="cclimatico" height="150" width="200" />
         <div class="media-body align-self-center" style="text-align: justify">
@@ -187,29 +245,24 @@
         </div>
       </li>
       <br />
-    </ul>
+    </ul> -->
     <h3 style="color: #f28f1d" class="text-center"> Combatiendo la extinción con educación</h3>
     <br></br>
-    <div class="jumbotron" id="enemy">
+    <div class="jumbotron" style="padding: 4% !important;" id="enemy">
     <div class="row">
       <div class="col-xl-12">
         <div class="mx-auto">
           <p style="color: #3a8169; text-align: justify">
-            Las extinciones que se están produciendo actualmente no son
-            cíclicas. No son un fenómeno natural que ocurra periódicamente,
-            y no son inevitables. Son el resultado de actividades humanas
-            destructivas, y pueden detenerse. Todavía estamos a tiempo de
-            invertir esta tendencia, pero sólo si actuamos ahora. La mejor
-            manera de combatir la actual crisis de extinción es reducir
-            nuestra dependencia de los combustibles fósiles, lo que reducirá
-            en gran medida la cantidad de emisiones de carbono en la
-            atmósfera, frenando así el calentamiento global. Otra forma de
-            combatir la crisis de extinción es proteger los hábitats de los
-            animales en la naturaleza y asegurarnos de que tienen
-            suficiente espacio para crecer y prosperar. También podemos
-            ayudar a las especies en peligro de extinción criándolas en
-            cautividad y devolviéndolas a sus hábitats naturales cuando
-            sean lo suficientemente fuertes para sobrevivir por sí mismas.
+            Aún hay esperanza para detener las extinciones actuales, ya que no son 
+            inevitables y están impulsadas por actividades humanas destructivas.
+            Actuando ahora, podemos revertir esta tendencia. Para lograrlo, debemos 
+            reducir nuestra dependencia de los combustibles fósiles para disminuir las 
+            emisiones de carbono y frenar el calentamiento global. Proteger los hábitats 
+            naturales de los animales y asegurarles suficiente espacio para prosperar es 
+            otra estrategia vital. Además, criando especies en peligro de extinción en 
+            cautiverio y reintroduciéndolas en su entorno natural cuando estén preparadas, 
+            podemos ayudar a su supervivencia. Con educación y acción, podemos combatir la 
+            crisis de extinción y preservar la biodiversidad para las generaciones futuras.
           </p>
         </div>
       </div>

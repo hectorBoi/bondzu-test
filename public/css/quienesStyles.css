@@ -1,0 +1,386 @@
+body {
+    overflow: auto;
+}
+
+h1 {
+    padding: 25px;
+    padding-right: 6rem;
+    /* margin: 10px; */
+    text-align: center;
+}
+.animalCardHeader {
+    background-color: hsla(0, 0%, 100%, 0.6);
+    font-size: 0.85rem;
+    color: #000000;
+    padding: 12px;
+    border-radius: 15px;
+}
+
+.spinner {
+    width: 3rem;
+    height: 3rem;
+    color: #f28f1d;
+}
+
+.loader {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader.hidden {
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.loaderElements {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loaderElements.hidden {
+    animation: fadeOut 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+    100% {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.navbarBtnMargins {
+    margin: -5px 18px 8px 18px;
+}
+
+.navbarBtnProfile {
+    margin: 8px 18px 8px 18px;
+}
+
+.navbarBtnLoginSignup {
+    margin: 10px 18px 5px 18px;
+}
+
+.navbarBtnFAQ {
+    margin: 5px 0px 8px 8px;
+}
+
+.navbarBtnFlags {
+    margin-left: 18px;
+    margin-top: -3px;
+}
+
+.popup {
+    background-color: rgba(1, 1, 1, 0.5);
+    padding: 60px 40px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    border-radius: 0px;
+    font-family: 'Poppins', sans-serif;
+    display: none;
+    text-align: center;
+}
+.popup button {
+    display: block;
+    margin: 0.2em 0 20px auto;
+    background-color: transparent;
+    font-size: 30px;
+    color: #ffffff;
+    background: #f28f1d;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.popup h2 {
+    margin-top: -20px;
+}
+.popup p {
+    font-size: 14px;
+    text-align: justify;
+    margin: 25px 0;
+    line-height: 25px;
+}
+
+.btnora{
+  background-color: #f28f1d !important;
+}
+
+.btngre{
+  background-color: #3a8169 !important;
+}
+
+.btn-outline-primary {
+  color:#f28f1d !important;
+  border-color:#f28f1d !important;
+}
+
+.btn-outline-primary:hover{
+  color:#fff !important;
+  background-color:#f28f1d !important;
+  border-color:#f28f1d !important;
+}
+
+.text-orange{
+  color: #f28f1d
+}
+
+#map {
+            height: 400px;
+            width: 400px;
+}
+
+.card-title{
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.card-container{
+    width: 80%;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.card{
+    padding: 2rem;
+    box-shadow: 0 0 .4rem .4rem rgba(0, 0, 0, 0.2);
+}
+
+.card:hover{
+    background: rgb(210, 210, 210);
+}
+
+.card-heading{
+    color: tomato;
+    margin-bottom: .5rem;
+}
+
+.card-body{
+    color: navy;
+}
+
+.dashboard-title{
+    text-align: center;
+
+}
+
+.jumbotron{
+    /* background-color: transparent!important; */
+    background-image:  url('../img/jaguar.jpg');
+    background-size: cover;
+    background-position: 0% 50%;
+    padding: 12rem !important;
+    padding-bottom: 15rem!important;
+}
+@media(max-width: 1200px){
+  #QuienesSomos{
+    background-color:  rgba(44, 128, 10, 0.5);
+    padding-bottom: 10px;
+  }
+  #cardHolder{
+    background-color: rgba(44, 128, 10, 0) !important;
+  }
+  #cardHeader{
+    background-color: rgba(44, 128, 10, 0.5) !important;
+  }
+  .face > p{
+    font-size: xx-small;
+    padding-top: 0 !important;
+  }
+}
+@media(min-width: 840px) and (max-width:1200px){
+  #cardHolder{
+    transform: translateX(128%) !important;
+  }
+  .face > p{
+    font-size: xx-small;
+    padding-top: 0 !important;
+  }
+  .hovercard{
+    margin-right: 4rem;
+  }
+  .face > h2{
+    font-size: small;
+    padding-bottom: 0;
+  }
+  .back{
+    height: fit-content !important;
+  }
+}
+@media(width:1200px){
+  #cardHolder{
+    transform: translateX(18%) !important;
+  }
+}
+@media(max-width:840px){
+  .face > p{
+    font-size: xx-small;
+    padding-top: 0 !important;
+  }
+  .hovercard{
+    margin-right: 4rem;
+    margin-bottom: 14rem !important;
+    margin-left: 5rem !important;
+  }
+  .face > h2{
+    font-size: small;
+    padding-bottom: 0;
+  }
+  .back{
+    height: fit-content !important;
+    width: 17rem !important;
+  }
+  #cardsContainer{
+    display: block !important;
+  }
+}
+
+h1 + p{
+    color:white;
+    text-align: justify;
+    padding: 3rem;
+
+}
+
+#enemy{
+    background-image: none !important;
+}
+
+.card{
+    width:50%;
+    height:50%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+    border-radius:10px;
+  }
+  .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    background-color:gainsboro;
+    background: rgb(131,211,146);
+    background: radial-gradient(circle, rgba(131,211,146,1) 33%, rgba(131,211,146,1) 62%, rgba(219,121,40,1) 80%);
+    border-radius:10px;
+  }
+  .back {
+    overflow:hidden;
+    z-index:-1;
+    display: block;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    box-sizing: border-box;
+    &:before{
+      content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      background-size:100% 100%;
+        background: url('https://i.imgur.com/W3tra4F.gif');
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+  }
+  .front, .back{
+    transition: all .5s linear;
+  }
+  .front{
+    background-image:url('https://i.imgur.com/W3tra4F.gif');
+    z-index:1;
+    /* box-shadow: 5px 5px 5px #aaa; */
+  }
+  .back{
+    box-shadow: 0 0 0 #aaa;
+  }
+  .hovercard:hover{
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    .front{
+      box-shadow:0 0 0 #aaa;
+    }
+    .back{
+      box-shadow: 5px 5px 5px #aaa;
+    }
+  }
+  
+  .front{
+    h2, h3{
+      text-align:center;
+      color:whitesmoke;
+    }
+  }
+  
+  .back{
+    h2{
+      margin:0;
+      border-radius:10px 10px 0 0;
+      padding:10px;
+      text-align:center;
+      color:whitesmoke;
+    }
+    ul{
+      text-align:center;
+      list-style:none;
+      padding:10px;
+      margin:0;
+      li{
+        margin-top:15px;
+        color:whitesmoke;
+      }
+    }
+  }
+  #cardsContainer{
+    display: inline-flex;
+    margin-left: 4rem !important;
+  }
+  #conoceMas{
+    width: 8rem; 
+    height: 2.5rem;
+    margin-left: 14rem;
+    border:1px solid #dcdcdc;
+    border-radius: 7px;
+    background-color:#ffffff;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #ffffff;
+  }
+  #conoceMas:hover{
+    background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+    background-color:#f6f6f6;
+  }
