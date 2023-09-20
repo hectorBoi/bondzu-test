@@ -211,6 +211,7 @@ document.getElementById('modalsLoginSignup').innerHTML = `
                           id="emailSubscriptionReg"
                           type="checkbox"
                           class="form-check-input"
+                          checked
                         />
                         <label for="emailSubscriptionReg">¿Te gustaría suscribirte al newsletter de Bondzù para recibir noticias y promociones?</label>
                       </div>
