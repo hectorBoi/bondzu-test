@@ -177,9 +177,10 @@ function showAllUsers() {
       );
       const webCount = users.reduce(
         (counter, user) =>
-          user.platform === 'Pagina Web' ? ++counter : counter,
+        user.platform.toLowerCase() === 'Pagina Web' ? ++counter : counter,
         0
       );
+      
       const androidPorcentage = (androidCount / userCount) * 100;
       const iosPorcentage = (iosCount / userCount) * 100;
       const webPorcentage = (webCount / userCount) * 100;
