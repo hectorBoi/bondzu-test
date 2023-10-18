@@ -177,7 +177,7 @@ function showAllUsers() {
       );
       const webCount = users.reduce(
         (counter, user) =>
-        user.platform.toLowerCase() === 'Pagina Web' ? ++counter : counter,
+        user.platform.toLowerCase() === 'pagina web' ? ++counter : counter,
         0
       );
       
