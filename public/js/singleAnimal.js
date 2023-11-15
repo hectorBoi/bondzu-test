@@ -369,9 +369,17 @@ fetch(`/animals/${animalID}`)
 			var marker, i;
 
 			for (i = 0; i < latitude.length; i++) {
+				var markerColor = i === 0 ? "#2690ff" : "red";
 				marker = new google.maps.Marker({
 					position: new google.maps.LatLng(latitude[i], longitude[i]),
 					map: map,
+					icon: {
+						path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+						fillColor: markerColor,
+						fillOpacity: 1,
+						strokeWeight: 0,
+						scale: 8,
+					},
 				});
 
 				google.maps.event.addListener(
