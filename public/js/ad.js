@@ -36,7 +36,7 @@ const createImage = (url, container) => {
     img.className = 'img-fluid';
     img.setAttribute('alt', 'ad');
     //img.style.width = "500px";
-    img.style.height = '700px';
+    img.style.height = '300px';
     container.appendChild(img);
 };
 

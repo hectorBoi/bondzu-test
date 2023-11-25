@@ -370,6 +370,7 @@ fetch(`/animals/${animalID}`)
 
 			for (i = 0; i < latitude.length; i++) {
 				var markerColor = i === 0 ? "#2690ff" : "red";
+				var label = i === 0 ? 'Zoo' : 'Habitat';
 				marker = new google.maps.Marker({
 					position: new google.maps.LatLng(latitude[i], longitude[i]),
 					map: map,
@@ -380,6 +381,10 @@ fetch(`/animals/${animalID}`)
 						strokeWeight: 0,
 						scale: 8,
 					},
+					label: {
+						text: label,
+						color: 'white', // Puedes ajustar el color del texto según tus preferencias
+					  },
 				});
 
 				google.maps.event.addListener(
